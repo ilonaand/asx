@@ -1,0 +1,1976 @@
+%YAML 1.1
+--- 
+StructureVersion: "1.0"
+Properties: 
+  RUID: 1368996857_1691301355
+  Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
+  Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
+  Version: "1.0.0.18"
+  Optional: False
+  Internal: True
+  MD5: 2E4FA5803ABC1E28798B227982355759
+Uses: 
+  - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
+  - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
+Objects: 
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1368995649_1691301355
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_CreateMove2"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-03-22T18:18:56+03:00
+      DISPLAYSCRIPT: | 
+        WEB_CREATEMOVE2
+        FINALIZATIONMOVE2
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAATVNHUEFSQU1TCQAAAE1TR1BBUkFNUwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABVU0VSS0VZBwAAAFVTRVJLRVkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QLAAAAVFJBTlNBQ1RJT04LAAAAVFJBTlNBQ1RJT04AAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        Function web_CreateMove2(msgParams, userkey, transaction)
+          dim fromDepartKey, toDepartKey, documentdate, contactkey
+          dim Creator, ibsql, isSklad, errorMessage, takenOrder
+          dim otherHead, typeError, terminalCode
+          errorMessage = ""
+          otherHead = ""
+          typeError = 0
+           'объект для работы с типами данных
+          dim Enc
+          set Enc = new TVB_xml_EncodingFunctions
+        
+          documentdate = Enc.DecodeDate(msgParams.SimpleValue("documentDate", ""))
+          terminalCode = msgParams.SimpleValue("id", "")
+          if Assigned(msgParams.Value("head").Value("fromDepart")) then
+            fromDepartKey = CDbl(msgParams.Value("head").Value("fromDepart").SimpleValue("id", ""))
+          else
+            fromDepartKey = 0
+          end if
+        
+           if Assigned(msgParams.Value("head").Value("toDepart")) then
+            toDepartKey = CDbl(msgParams.Value("head").Value("toDepart").SimpleValue("id", ""))
+          else
+            toDepartKey = 0
+          end if
+        
+          set Creator = new TCreator
+        
+          dim gdcObject
+          set gdcObject = Creator.GetObject(nil, "TgdcInvDocument", "")
+          gdcObject.SubType = "147180477_1234867257"
+          gdcObject.Transaction = Transaction
+          gdcObject.ExtraConditions.Clear
+          gdcObject.ExtraConditions.Add("Z.DOCUMENTDATE = '" & documentdate & "'")
+          gdcObject.Open
+        
+          dim Master
+          set Master = Creator.GetObject(nil, "TDataSource", "")
+          Master.DataSet = gdcObject
+        
+          dim gdcDetail, countList, k, q, goodkey, workDate, numReceived, AttrUdk
+          set gdcDetail = Creator.GetObject(nil, "TgdcInvDocumentLine", "")
+          gdcDetail.SubType = "147180477_1234867257"
+          gdcDetail.DetailField = "parent"
+          gdcDetail.MasterField = "id"
+          gdcDetail.MasterSource = Master
+          gdcDetail.SubSet = "ByParent"
+          gdcDetail.Transaction = gdcObject.Transaction
+          gdcDetail.Open
+          dim DS
+          set DS = Creator.GetObject(nil, "TDataSource","")
+          set AttrUdk = Creator.GetObject(nil, "TgdcAttrUserDefined", "")
+          AttrUdk.SubType = "USR$VBPF_DATEPRODUCT"
+          AttrUdk.MasterSource = DS
+          AttrUdk.MasterField = "ID"
+          AttrUdk.DetailField = "ID"
+          AttrUdk.ExtraConditions.Text = " Z.USR$PARENT = :id "
+          AttrUdk.Transaction = Transaction
+          AttrUdk.Open
+          
+          dim objLines
+          set objLines = msgParams.Value("lines")
+           'кол-во записей
+          countList = objLines.ObjectItemsCount
+          set ibsql = Creator.GetObject(nil,"TIBSQL","")
+          ibsql.Transaction = gdcBaseManager.ReadTransaction
+        
+          if fromDepartKey <> 0 and toDepartKey <> 0 then
+            on error resume next
+            gdcObject.Insert
+            gdcObject.FieldByName("DOCUMENTDATE").AsDateTime = documentdate
+            gdcObject.FieldByName("USR$FROMCONTACTKEY").AsVariant = fromDepartKey
+            gdcObject.FieldByName("USR$TOCONTACTKEY").AsVariant = toDepartKey
+            gdcObject.FieldByName("DESCRIPTION").AsVariant = terminalCode
+            gdcObject.Post
+            if Err.Number <> 0 then
+              typeError = 2
+              errorMessage = " Ошибка при создании шапки документа 04. Перемещение сырья"
+              web_CreateMove2 = finalizationMove2(errorMessage, typeError, otherHead)
+              exit function
+            end if
+            on error goto 0
+            'Позиции
+            for k = 0 to countList - 1
+              q = Replace(objLines.ObjectItem(k).simpleValue("weight", 0), ".", Application.DecimalSeparatorSys)
+              if  Assigned(objLines.ObjectItem(k).Value("good")) then
+                goodkey = CDbl(objLines.ObjectItem(k).Value("good").simpleValue("id", ""))
+                numReceived = objLines.ObjectItem(k).simpleValue("numReceived", 0)
+                workDate = Enc.DecodeDate(objLines.ObjectItem(k).simpleValue("workDate", ""))
+                if q > 0 then
+                  on error resume next
+                  if gdcDetail.Locate("GOODKEY;USR$NUMRECEIVE", Array(goodkey, numReceived) ,"")  then
+                    gdcDetail.Edit
+                    gdcDetail.FieldByName("quantity").AsCurrency = _
+                      gdcDetail.FieldByName("quantity").AsCurrency + q
+                    gdcDetail.Post
+                  else
+                    gdcDetail.Insert
+                    gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
+                    gdcDetail.FieldByName("QUANTITY").AsVariant = q
+                    if numReceived <> "" then
+                      gdcDetail.FieldByName("USR$NUMRECEIVE").AsVariant = numReceived
+                    end if
+                    gdcDetail.Post
+                  end if
+                  if not AttrUdk.Locate("usr$parent;usr$goodkey;usr$vmk_numreceive;usr$datework1", _
+                    Array(gdcDetail.FieldByName("parent").AsInteger, _
+                     goodkey, numReceived, workDate),"")  then
+                    AttrUdk.Append
+                    AttrUdk.FieldByName("usr$documentkey").AsInteger = gdcDetail.FieldByName("id").AsInteger
+                    AttrUdk.FieldByName("usr$goodkey").AsInteger = gdcDetail.FieldByName("goodkey").AsInteger
+                    AttrUdk.FieldByName("usr$datebill").AsDateTime = gdcDetail.FieldByName("documentdate").AsDateTime
+                    AttrUdk.FieldByName("usr$parent").AsInteger = gdcDetail.FieldByName("parent").AsInteger
+                    AttrUdk.FieldByName("usr$vmk_numreceive").AsVariant = numReceived
+                    AttrUdk.FieldByName("usr$quantity").AsCurrency =  q
+                    AttrUdk.FieldByName("usr$datework1").AsVariant = workDate
+                    AttrUdk.Post
+                  else
+                    AttrUdk.Edit
+                    AttrUdk.FieldByName("usr$quantity").AsCurrency = _
+                      AttrUdk.FieldByName("usr$quantity").AsCurrency + q
+                    AttrUdk.Post
+                  end if
+                  if Err.Number <> 0 then
+                    typeError = 2
+                    errorMessage = " Ошибка при создании позиций документа 04. Перемещение сырья"
+                    web_CreateMove2 = finalizationMove2(errorMessage, typeError, otherHead)
+                    exit function
+                  end if
+                  on error goto 0
+                end if
+              end if
+            next
+          end if
+          web_CreateMove2 = finalizationMove2(errorMessage, typeError, otherHead)
+        End Function
+        
+        
+        function finalizationMove2(errorMessage, typeError, otherHead)
+          dim a(2)
+          a(0) = errorMessage
+          a(1) = typeError
+          a(2) = otherHead
+          finalizationMove2 = a
+        end function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1368993459_1691301355
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_getOrders"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-03-09T15:06:17+03:00
+      DISPLAYSCRIPT: | 
+        WEB_GETORDERS
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAAREFURUJFR0lOCQAAAERBVEVCRUdJTgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABEQVRFRU5EBwAAAERBVEVFTkQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QHAAAAVkVSU0lPTgcAAABWRVJTSU9OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZO
+        U1RQUlNUCgAAAENPTlRBQ1RLRVkKAAAAQ09OVEFDVEtFWQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAsAAABUUkFOU0FDVElPTgsAAABUUkFOU0FDVElPTgAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAABGTlNURkxQUg==
+      SCRIPT: | 
+        '#include web_formatDate
+        '#include web_cur_replace
+        '#include web_JSonString
+        Option Explicit
+        Function web_getOrders(dateBegin, dateEnd, version, contactkey, transaction)
+          web_getOrders = false
+          dim Json
+          dim ibsql, Creator, ibsqlPos, documenttypeAlias
+          set Creator = new TCreator
+          dim ibsqldepart
+          set ibsqldepart  = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqldepart.Transaction = Transaction
+          ibsqldepart.SQL.Text = _
+            " SELECT distinct " & _
+            "   gg.usr$vbpf_departkey, con.USR$SHCODE " & _
+            " FROM usr$ber_claim c " & _
+            "   left join usr$ber_claimline cl on cl.MASTERKEY = c.DOCUMENTKEY " & _
+            "   left join gd_good g on g.ID = cl.USR$GOODKEY " & _
+            "   LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+            "   LEFT JOIN GD_CONTACT con ON gg.usr$vbpf_departkey = con.id " & _
+            "WHERE  c.USR$ONDATE >= :datebegin " & _
+            "  and c.USR$ONDATE <= :dateend " & _
+            "  and coalesce(USR$SH_MOVED, 0) = 1 " & _
+            "  and not  gg.usr$vbpf_departkey is null "
+          ibsqldepart.ParamByName("datebegin").AsDateTime = datebegin
+          ibsqldepart.ParamByName("dateend").AsDateTime = dateend
+          ibsqldepart.ExecQuery
+          set Json = Creator.GetObject(nil, "TStringList", "")
+          set ibsql =  Creator.GetObject(nil,"TIBSQL","")
+          ibsql.Transaction = Transaction
+          dim d, m, ORD_NO, depcode, p
+          while not  ibsqldepart.EOF
+            depcode = ibsqlDepart.FieldByName("USR$SHCODE").AsString
+            p = len(depcode)
+            while (p < 3)
+              depcode = "0" & depcode
+              p = p + 1
+            wend
+            ibsql.Close
+            ibsql.SQL.Text = _
+              "SELECT distinct " & _
+              "  doc.DOCUMENTDATE, " & _
+              "  doc.id, " & _
+              "  doc.NUMBER, " & _
+              "  cast('" & depcode & "' as varchar(3)) || doc.number as code, " & _
+              "  dt.id as documenttypeKey, " & _
+              "  dt.name as documenttypeName, " & _
+              "  gdoc.USR$MOBILEALIAS as documenttypeAlias, " & _
+              "  b.USR$ONDATE, " & _
+              "  headcompany.ID as headcompanyKey, " & _
+              "  headcompany.NAME as headcompanyName, " & _
+              "  headcompany.USR$SHCODE as headcompanyShcode, " & _
+              "  outlet.ID as outletKey, " & _
+              "  outlet.NAME as outletName, " & _
+              "  outlet.USR$SHCODE as outletShcode " & _
+              "FROM " & _
+              "  usr$ber_claim  b " & _
+              "  left join gd_contact headcompany on headcompany.ID = b.USR$HEADCOMPANYKEY " & _
+              "  left join gd_contact outlet on outlet.ID = b.USR$CONTACTKEY " & _
+              "  join gd_document doc on doc.ID = b.DOCUMENTKEY " & _
+              "  left join gd_documenttype dt on dt.ID = doc.DOCUMENTTYPEKEY " & _
+              "  left join USR$GDMN_DOCUMENTS gdoc on gdoc.USR$DOCUMENTTYPE = dt.ID " & _
+              "    and gdoc.USR$VERSION = :ver " & _
+              "  join usr$ber_claimline bl on bl.MASTERKEY = b.DOCUMENTKEY and bl.USR$QUANTITY > 0 " & _
+              "  left join gd_good g on g.ID = bl.USR$GOODKEY " & _
+              "  left join gd_goodgroup gg ON g.groupkey = gg.id " & _
+              "  left join gd_contact con1 ON gg.usr$vbpf_departkey = con1.id " & _
+              "WHERE " & _
+              "  b.USR$ONDATE >= :datebegin " & _
+              "  and b.USR$ONDATE <= :dateend " & _
+              "  and coalesce(USR$SH_MOVED, 0) = 1 " & _
+              "  and (con1.id = :depart or con1.parent = :depart ) " & _
+              "ORDER BY 1 "
+            ibsql.ParamByName("ver").AsInteger = version
+            ibsql.ParamByName("datebegin").AsDateTime = datebegin
+            ibsql.ParamByName("dateend").AsDateTime = dateend
+            ibsql.ParamByName("depart").AsInteger = ibsqlDepart.FieldByName("usr$vbpf_departkey").AsInteger
+            ibsql.ExecQuery
+            set ibsqlPos = Creator.GetObject(nil,"TIBSQL","")
+            ibsqlPos.Transaction = Transaction
+            ibsqlPos.SQL.Text = _
+              "select " & _
+              "  bl.DOCUMENTKEY as id, " & _
+              "  g.ID as goodkey, " & _
+              "  g.name as goodname, " & _
+              "  bl.USR$QUANTITY as quantity, " & _
+              "  bl.USR$PACKAGETYPE as packagekey, " & _
+              "  p.USR$NAME as packagename " & _
+              "from  usr$ber_claimline bl " & _
+              "  left join gd_good g on g.ID = bl.USR$GOODKEY " & _
+              "  left join  USR$SB_PACKAGETYPE p ON p.ID  =  bl.USR$PACKAGETYPE " & _
+              "  left join GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+              "  left join GD_CONTACT con1 ON gg.usr$vbpf_departkey = con1.id " & _
+              "where bl.MASTERKEY = :masterkey " & _
+               " and (con1.id = :depart or con1.parent = :depart ) " & _
+              "order by 3 "
+            dim id, number, documentdate, documenttypeName, status, documenttypekey, _
+              ondate, headcompanyKey, headcompanyName, headcompanyShcode, _
+              outletKey, outletName, outletShcode, shcode
+        
+            while not ibsql.EOF
+              id = ibsql.FieldByName("id").AsString
+              number = ibsql.FieldByName("number").AsString
+              documentdate = web_formatDate(ibsql.FieldByName("DOCUMENTDATE").AsDateTime)
+              documenttypeKey = ibsql.FieldByName("documenttypeKey").AsString
+              documenttypeName = ibsql.FieldByName("documenttypeName").AsString
+              documenttypeAlias = ibsql.FieldByName("documenttypeAlias").AsString
+              headcompanyKey =  ibsql.FieldByName("headcompanyKey").AsString
+              headcompanyName = ibsql.FieldByName("headcompanyName").AsString
+              headcompanyShcode = ibsql.FieldByName("headcompanyShcode").AsString
+              outletKey =  ibsql.FieldByName("outletKey").AsString
+              outletName = ibsql.FieldByName("outletName").AsString
+              outletShcode = ibsql.FieldByName("outletShcode").AsString
+              ondate = web_formatDate(ibsql.FieldByName("USR$ONDATE").AsDateTime)
+              status = "DRAFT"
+              if len(CStr(day(ondate))) > 1 then
+                d = CStr(day(ondate))
+              else
+                d = "0" & CStr(day(ondate))
+              end if
+              if len(CStr(month(ondate))) > 1 then
+                m = CStr(month(ondate))
+              else
+                m = "0" & CStr(month(ondate))
+              end if
+              ORD_NO =  d & m & CStr(year(ondate))
+              shcode = ORD_NO &  ibsql.FieldByName("code").AsString
+              Json.Add ( _
+               "{" & _
+                """id"":""" & id & ""","  & _
+                """number"":""" & number & """," & _
+                """documentDate"":""" & documentdate & """," & _
+                """documentType"":" & _
+                "{""id"":""" & documenttypeKey & """," & _
+                """name"":""" & documenttypeAlias & """," & _
+                """description"":""" & documenttypeName & """}," & _
+                """status"":""" & status & """, ")
+              Json.Add ("""head"":{")
+              Json.Add ( _
+                """contact"": { " & _
+                """id"":""" & headcompanyKey & """," & _
+                """name"":" & web_JSonString(headcompanyName) & ","  & _
+                """shcode"":""" & headcompanyShcode & """" & _
+                "},"  )
+              Json.Add ( _
+                """outlet"": { " & _
+                """id"":""" & outletKey & """," & _
+                """name"":" & web_JSonString(outletName) & ","  & _
+                """shcode"":""" & outletShcode & """" & _
+                "},"  )
+              Json.Add ( _
+                """onDate"":""" & ondate & """," )
+              Json.Add ( _
+                """barcode"":""" & shcode & """" )
+              Json.Add ("},")
+              'Позиции
+              ibsqlPos.Close
+              ibsqlPos.ParamByName("masterkey").AsInteger = ibsql.FieldByName("id").AsString
+              ibsqlPos.ParamByName("depart").AsInteger = ibsqlDepart.FieldByName("usr$vbpf_departkey").AsInteger
+              ibsqlPos.ExecQuery
+              Json.Add ("""lines"":[")
+              dim package
+              while not ibsqlPos.EOF
+                if ibsqlPos.FieldByName("packagekey").IsNull then
+                  package = ""
+                else
+                  package = """packagekey"":" & _
+                    "{""id"":" & web_JSonString(ibsqlPos.FieldByName("packageKey").AsString) & "," & _
+                    """name"":" & web_JSonString(ibsqlPos.FieldByName("packageName").AsString) & "},"
+                end if
+                Json.Add ("{" & _
+                  """id"":""" & ibsqlPos.FieldByName("id").AsString & ""","  & _
+                  """weight"":" & ibsqlPos.FieldByName("quantity").AsString & ","  & _
+                  package & _
+                  """good"":" & _
+                  "{""id"":" & web_JSonString(ibsqlPos.FieldByName("goodKey").AsString) & "," & _
+                  """name"":" & web_JSonString(ibsqlPos.FieldByName("goodName").AsString) & "}" )
+                ibsqlPos.Next
+                if not ibsqlPos.EOF then
+                  Json.Add ("},")
+                else
+                  Json.Add ("}")
+                end if
+              wend
+              Json.Add ("]")
+              ibsql.Next
+              if not ibsql.EOF then
+                 Json.Add ("},")
+              else
+                 Json.Add ("}")
+              end if
+            wend
+            ibsqldepart.Next
+            if not  ibsqldepart.EOF then
+              Json.Add (",")
+            end if
+          wend
+         ' 'Пока для формирования файла, потом убрать
+        '  Dim fs, f, LocalPath, JSONFileName
+        '  LocalPath = "c:\d\"
+        '  JSONFileName = "request.json"
+        '  Set fs = CreateObject("Scripting.FileSystemObject")
+        '  Set f = fs.CreateTextFile(LocalPath & JSONFileName, True)
+        '  f.Write Json.Text
+        '  f.Close
+          web_getOrders = Json.text
+          Json.Clear
+          if Assigned(Json) then
+            Creator.DestroyObject(Json)
+          end if
+        End Function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "147040220_1730903579 web_formatDate"
+          - 
+            ADDFUNCTIONKEY: "147040222_1730903579 web_cur_replace"
+          - 
+            ADDFUNCTIONKEY: "147040221_1730903579 web_JSonString"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 651131805_1871619887
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 1368997778_1691301355
+    Fields: 
+      NAME: "vbpf_getdepotinformation"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2013-04-25T08:38:08+03:00
+      DISPLAYSCRIPT: | 
+        VBPF_GETDEPOTINFORMATION
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QIAAAAREVQT1RLRVkIAAAAREVQT1RLRVkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QKAAAATUFOQUdFUktFWQoAAABNQU5BR0VSS0VZAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAEZOU1RQUlNUCQAAAExPQURQT0lOVAkAAABMT0FEUE9JTlQAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVFBSU1QLAAAAS0xBRE9WU0NISUsLAAAAS0xBRE9WU0NISUsAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        Function vbpf_getdepotinformation(ByRef depotkey, ByRef managerkey, ByRef loadpoint, ByRef KLADOVSCHIK)
+          dim Res(), Result
+          Result = False
+          call gdcBaseManager.ExecSingleQueryResult(_
+            "select usr$depotkey, usr$permitkey, USR$LOADPOINT, USR$KLADOVSCHIK from usr$vbpf_optdepotoption o " & _
+            " join usr$vbpf_optdepotline l ON o.id = l.USR$OPTDEPOTOPTIONKEY where l.usr$userkey = :id ", _
+            IBLogin.UserKey, Res, gdcBaseManager.ReadTransaction)
+        
+          if not IsEmpty(Res) then
+            if not IsNull(Res(0, 0)) then
+              Result = True
+              depotkey = Res(0, 0)
+              managerkey = Res(1, 0)
+              loadpoint = Res(2, 0)
+              KLADOVSCHIK = Res(3, 0)
+            end if
+          end if
+          
+          vbpf_getdepotinformation = Result
+        End function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1368997778_1691301355
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "WEB_MAKE_HEADER_OTVES"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2022-07-18T16:04:13+03:00
+      DISPLAYSCRIPT: | 
+        WEB_MAKE_HEADER_OTVES
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QLAAAAR0RDRE9DVU1FTlQLAAAAR0RDRE9DVU1FTlQAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVFBSU1QPAAAAR0RDRE9DVU1FTlRBVFRSDwAAAEdEQ0RPQ1VNRU5UQVRUUgAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAABGTlNUUFJTVAcAAABPUkRFUklEBwAAAE9SREVSSUQAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAARk5TVFBSU1QMAAAAT1JERVJCQVJDT0RFDAAAAE9SREVSQkFSQ09E
+        RQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNUUFJTVAwAAABET0NVTUVOVERBVEUMAAAARE9D
+        VU1FTlREQVRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUCgAAAENPTlRBQ1RLRVkK
+        AAAAQ09OVEFDVEtFWQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNUUFJTVAkAAABERVBPUlRL
+        RVkJAAAAREVQT1JUS0VZAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAEZOU1RQUlNUDAAAAERPQ1VN
+        RU5UVFlQRQwAAABET0NVTUVOVFRZUEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        '#include VBPF_GETDEPOTINFORMATION
+        function WEB_MAKE_HEADER_OTVES(gdcDocument, gdcDocumentAttr, orderId, orderBarcode, documentdate, contactkey, deportkey, documenttype)
+          dim Creator, ibsql, ibsqlContract, ibsqlPrice, Path, Managerkey, _
+             USRCONTACTKEY, DOCUMENTKEY, USRHEADCOMPANYKEY, USREXPEDITOR, billdate, orderNumber
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = gdcbaseManager.ReadTransaction
+          ibsql.Close
+          ibsql.SQL.Text = _
+           "select " & _
+           "  b.DOCUMENTKEY, " & _
+           "  b.USR$CONTACTKEY, " & _
+           "  b.USR$HEADCOMPANYKEY, " & _
+           "  b.USR$EXPEDITOR, b.USR$VBPF_BILLDATE, doc.number " & _
+           "from  USR$BER_CLAIM b " & _
+           "  left join gd_document  doc on doc.ID = b.DOCUMENTKEY " & _
+           "where b.DOCUMENTKEY = :orderId "
+          ibsql.ParamByName("orderId").AsVariant = orderId
+          ibsql.ExecQuery
+          if  orderId = "" or ibsql.RecordCount = 0 then
+            USRCONTACTKEY = gdcBaseManager.GetIDByRUIDString("472307400_1716733059")
+            DOCUMENTKEY =  null
+            USRHEADCOMPANYKEY = gdcBaseManager.GetIDByRUIDString("472307398_1716733059")
+            USREXPEDITOR = null
+            billdate = documentdate
+            orderNumber = ""
+          else
+            USRCONTACTKEY = ibsql.FieldByName("USR$CONTACTKEY").AsVariant
+            DOCUMENTKEY =  ibsql.FieldByName("DOCUMENTKEY").AsInteger
+            USRHEADCOMPANYKEY = ibsql.FieldByName("USR$HEADCOMPANYKEY").AsVariant
+            USREXPEDITOR =  ibsql.FieldByName("USR$EXPEDITOR").AsVariant
+            if not ibsql.FieldByName("USR$VBPF_BILLDATE").isNull and _
+              documentdate <= ibsql.FieldByName("USR$VBPF_BILLDATE").AsDateTime then
+              billdate = ibsql.FieldByName("USR$VBPF_BILLDATE").AsDateTime
+            else
+              billdate = documentdate
+            end if
+            orderNumber = ibsql.FieldByName("number").AsVariant
+          end if
+          set ibsqlContract = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqlContract.Transaction = gdcBaseManager.ReadTransaction
+          ibsqlContract.SQL.Text = _
+            " SELECT FIRST(1) doc.id, doc.number, doc.documentdate, pur.id AS Pur " & _
+            " FROM USR$INV_CONTRACT v " & _
+            "   JOIN gd_document doc ON v.documentkey  = doc.id " & _
+            "   LEFT JOIN GD_V_COMPANY cf ON doc.companykey = cf.id " & _
+            "   LEFT JOIN USR$INV_PURPOSE pur ON v.usr$purposekey = pur.id " & _
+            " WHERE  v.usr$contactkey = :BER_COMPANYKEY and v.USR$VMK_TYPECONTRACT is null  " & _
+            "  AND (V.USR$DATEEND >= :ONDATE OR V.USR$DATEEND IS NULL) and doc.disabled = 0 " & _
+            " ORDER BY doc.documentdate DESC "
+          ibsqlContract.ParamByName("ondate").AsDateTime = documentdate
+            'прайс
+          set ibsqlPrice = Creator.GetObject(nil,"TIBSQL","")
+          ibsqlPrice.Transaction = gdcBaseManager.ReadTransaction
+          ibsqlPrice.SQL.Text = _
+            " SELECT FIRST(1) doc.id AS price, doc.documentdate, p.name " & _
+            " FROM gd_document doc  " & _
+            " LEFT JOIN inv_price p ON p.documentkey = doc.id " & _
+            " WHERE doc.DOCUMENTTYPEKEY = :dt  " & _
+            " AND doc.documentdate <= :datedoc  " & _
+            " AND p.RELEVANCEDATE <= :datedoc AND p.usr$vbpf_pricekey is null " & _
+            " ORDER BY 2 DESC "
+          Path = "dlgInvDocument171879511_242962778(TdlgInvDocument)"
+          if UserStorage.ReadInteger (Path, "USR$MANAGERKEY", 0) <> 0 then
+            Managerkey  =  UserStorage.ReadInteger(Path, "USR$MANAGERKEY", 0)
+          else
+            Managerkey  = 0
+          end if
+          ibsqlPrice.Close
+          ibsqlPrice.ParamByName("dt").AsInteger = gdcBaseManager.GetIDByRUIDString("147040135_536200041")
+          ibsqlPrice.ParamByName("datedoc").AsDateTime = billdate
+          ibsqlPrice.ExecQuery
+        
+          gdcDocument.Insert
+          gdcDocument.FieldByName("number").AsString = "б\н_terminal"
+          gdcDocument.FieldByName("documentdate").AsDateTime = billdate
+          gdcDocument.FieldByName("usr$vmk_headcompany").AsVariant = USRHEADCOMPANYKEY
+        
+        
+          gdcDocument.FieldByName("USR$BER_COMPANYKEY").AsVariant = USRCONTACTKEY
+          if  Managerkey > 0 then
+            gdcDocument.FieldByName("USR$MANAGERKEY").AsVariant = Managerkey
+          end if
+          'Экспедитор
+          if not IsNull(USREXPEDITOR)  then
+            gdcDocument.FieldByName("USR$CONTACTKEY").AsInteger = USREXPEDITOR
+            gdcDocument.FieldByName("USR$BER_FORWARDER").AsInteger = USREXPEDITOR
+          end if
+          'Подразделение
+          gdcDocument.FieldByName("USR$MAINDEPOTKEY").AsInteger = deportkey
+          if not ibsqlPrice.FieldbyName("price").IsNull   then
+            gdcDocument.FieldByName("USR$BER_PRICE").AsInteger = ibsqlPrice.Fieldbyname("price").AsInteger
+          end if
+          if documenttype =  "173635888_267203489" then
+            'Транспортировка ставим автоматом самовывоз
+            gdcDocument.FieldByName("USR$BER_TYPETRANS").AsString = "S"
+            gdcDocument.FieldByName("USR$VMK_TIPPER").AsString  = "1"
+            'Тип цены ставим автоматом ФСН
+            gdcDocument.FieldByName("USR$BER_TYPECOST").AsVariant = gdcBaseManager.GetIDByRUIDString("147115797_667727569")
+            '''
+          else
+            'Транспортировка ставим автоматом центровывоз   oc
+            gdcDocument.FieldByName("USR$BER_TYPETRANS").AsString = "C"
+            gdcDocument.FieldByName("USR$VMK_TIPPER").AsString  = "1"
+            'Тип цены ставим автоматом ФСН
+            gdcDocument.FieldByName("USR$BER_TYPECOST").AsVariant = gdcBaseManager.GetIDByRUIDString("147140606_671837098")
+            '''
+          end if
+          dim MyDockey, CompanyKey
+          MyDockey = gdcDocument.FieldByName("DOCUMENTKEY").AsInteger
+          CompanyKey = USRHEADCOMPANYKEY
+          ibsqlContract.Close
+          ibsqlContract.ParamByName("BER_COMPANYKEY").AsInteger = CompanyKey
+          ibsqlContract.ExecQuery
+          if ibsqlContract.FieldByName("id").AsInteger <> 0 then
+            gdcDocument.FieldByName("USR$BER_CONTRACT").AsInteger = ibsqlContract.FieldByName("id").AsInteger
+            gdcDocument.FieldByName("USR$PURPOSE").AsVariant = ibsqlContract.FieldByName("pur").AsVariant
+          end if
+        
+           ' Если все равно пусто подставляем Розничная торговля
+          if gdcDocument.FieldByName("USR$PURPOSE").IsNull  then
+            gdcDocument.FieldByName("USR$PURPOSE").AsInteger = gdcBaseManager.GetIDByRUIDString("147140616_675972908")
+          end if
+        
+          gdcDocument.FieldByName("usr$orderkey").AsVariant = documentkey
+          gdcDocument.FieldByName("usr$ordernumber").AsVariant = orderNumber
+          gdcDocument.FieldByName("usr$maindepotkey").AsVariant =  deportkey
+          gdcDocument.FieldByName("USR$VMK_KLADOVSCHIK").AsInteger =  contactkey
+          gdcDocument.FieldByName("delayed").AsInteger = 0
+          gdcDocument.FieldByName("usr$terminalcode").AsString = orderId & "_" & orderBarcode
+          gdcDocument.Post
+          'Атрибуты
+          gdcDocumentAttr.Insert
+          dim  isDepotUser, KLADOVSCHIK, loadpoint,  depotkey
+          isDepotUser = vbpf_getdepotinformation(depotkey, managerkey, loadpoint, KLADOVSCHIK)
+          ibsql.Close
+          ibsql.SQL.Text =   " SELECT con.country as country ,con.city as city,con.address as address" & _
+                             " FROM gd_contact con " & _
+                             " where con.id = " & gdcBaseManager.GetIDByRUIDString("147016180_111470144")
+          ibsql.ExecQuery
+          if not isDepotUser then
+            gdcDocumentAttr.FieldByName("USR$LOADINGPOINT").AsString = "д.Тригубцы, д.1а"
+          else
+            gdcDocumentAttr.FieldByName("USR$LOADINGPOINT").AsString = loadpoint
+          end if
+        
+          if not gdcDocument.FieldByName("USR$BER_COMPANYKEY").IsNull then
+            ibsql.Close
+            ibsql.SQL.Text =   " SELECT con.country as country ,con.city as city,con.address as address" & _
+                               " FROM gd_contact con " & _
+                               " where con.id = " &  gdcDocument.FieldByName("USR$BER_COMPANYKEY").AsInteger
+        
+            ibsql.ExecQuery
+            dim  addressunload
+            addressunload = ""
+            if not ibsql.FieldByName("country").IsNull then
+              addressunload = addressunload & ibsql.FieldByName("country").AsString & ", "
+            end if
+            if not ibsql.FieldByName("city").IsNull then
+              addressunload = addressunload & ibsql.FieldByName("city").AsString & ", "
+            end if
+            if not ibsql.FieldByName("address").IsNull then
+              addressunload = addressunload & ibsql.FieldByName("address").AsString
+            end if
+            gdcDocumentAttr.FieldByName("USR$UNLOADINGPOINT").AsString = addressunload
+          end if
+          gdcDocumentAttr.FieldByName("USR$CUSTOMERKEY").AsInteger = gdcDocument.FieldByName("companykey").AsInteger
+          gdcDocumentAttr.FieldByName("USR$SENDERKEY").AsVariant = gdcDocument.FieldByName("USR$VMK_KLADOVSCHIK").AsVariant
+          gdcDocumentAttr.FieldByName("USR$CAROWNERKEY").AsInteger = gdcDocumentAttr.FieldByName("USR$CUSTOMERKEY").AsInteger
+          gdcDocumentAttr.Post
+        
+        End function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "651131805_1871619887 vbpf_getdepotinformation"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1368999968_1691301355
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "WEB_IS_EXISTS"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2022-07-18T15:33:32+03:00
+      DISPLAYSCRIPT: | 
+        WEB_IS_EXISTS
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QHAAAARE9DVFlQRQcAAABET0NUWVBFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZO
+        U1RQUlNUBwAAAE9SREVSSUQHAAAAT1JERVJJRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNU
+        UFJTVAwAAABPUkRFUkJBUkNPREUMAAAAT1JERVJCQVJDT0RFAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAEZOU1RQUlNUCwAAAFRSQU5TQUNUSU9OCwAAAFRSQU5TQUNUSU9OAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAEZOU1RQUlNUBgAAAE9OREFURQYAAABPTkRBVEUAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        function WEB_IS_EXISTS(ByVal doctype, ByVal orderId, ByVal orderBarcode, ByVal Transaction, ondate)
+          WEB_IS_EXISTS = 0
+          dim   Creator, ibsql, terminalcode
+          terminalcode = orderId & "_" & orderBarcode
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = Transaction
+          ibsql.Close
+          if  doctype =  "171879511_242962778" or doctype = "173635888_267203489" then
+            ibsql.SQL.Text = _
+              "select  doc.ID, b.USR$TERMINALCODE " & _
+              "from gd_document  doc " & _
+              "  left join usr$inv_sellbill b on b.DOCUMENTKEY = doc.ID " & _
+              "where  doc.DOCUMENTTYPEKEY = :dt " & _
+              "  and doc.PARENT + 0 is null " & _
+              "  and b.USR$TERMINALCODE = '" & terminalcode & "'" & _
+              "  and doc.DOCUMENTDATE >= :datebegin " & _
+              "  and doc.DOCUMENTDATE <= :dateend "
+          end if
+          ibsql.ParamByName("datebegin").AsDateTime = ondate - 30
+          ibsql.ParamByName("dateEnd").AsDateTime = ondate + 30
+          ibsql.ParamByName("dt").AsInteger = gdcBaseManager.GetIDByRUIDString(doctype)
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0 then
+              WEB_IS_EXISTS = 1
+          end if
+        End function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1368999622_1691301355
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_CreateOtves"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2022-07-19T19:21:24+03:00
+      DISPLAYSCRIPT: | 
+        WEB_CREATEOTVES
+        FINALIZATIONOTVES
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAATVNHUEFSQU1TCQAAAE1TR1BBUkFNUwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABVU0VSS0VZBwAAAFVTRVJLRVkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QLAAAAVFJBTlNBQ1RJT04LAAAAVFJBTlNBQ1RJT04AAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        '#include WEB_MAKE_HEADER_OTVES
+        '#include SHCODE_MAKE_DETAIL_OTVES
+        '#include WEB_IS_EXISTS
+        '#include SHCODE_PREPARE_DETAIL_OTVES
+        Function web_CreateOtves(msgParams, userkey, transaction)
+          dim documentdate, headCompanykey, outletKey, deportKey, onDate, contactkey
+          dim Creator, ibsql,  errorMessage, orderId, orderBarcode
+          dim otherHead, typeError
+          errorMessage = ""
+          otherHead = ""
+          typeError = 0
+           'объект для работы с типами данных
+          dim Enc
+          set Enc = new TVB_xml_EncodingFunctions
+        
+          ondate = Enc.DecodeDate(msgParams.SimpleValue("documentDate", ""))
+          orderId = msgParams.Value("head").SimpleValue("orderId", "")
+          if orderId <> "" then
+            orderBarcode = msgParams.Value("head").SimpleValue("barcode", "")
+          else
+            orderBarcode = msgParams.SimpleValue("id", "")
+          end if
+          if Assigned(msgParams.Value("head").Value("depart")) then
+            deportKey = CDbl(msgParams.Value("head").Value("depart").SimpleValue("id", ""))
+          else
+            deportKey = 0
+          end if
+        
+          if Assigned(msgParams.Value("head").Value("outlet")) then
+            outletKey = CDbl(msgParams.Value("head").Value("outlet").SimpleValue("id", ""))
+          else
+            outletKey = 0
+          end if
+          
+          if Assigned(msgParams.Value("head").Value("contact")) then
+            headCompanykey = CDbl(msgParams.Value("head").Value("contact").SimpleValue("id", ""))
+          else
+            headCompanykey = 0
+          end if
+          dim documenttypeKey
+          documenttypeKey = CDbl(msgParams.Value("documentType").SimpleValue("id", ""))
+        
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = Transaction
+          ibsql.Close
+          ibsql.SQL.Text = _
+            "select r.XID, r.DBID " & _
+            "from gd_ruid r " & _
+            "where r.ID = :dt "
+          ibsql.ParamByName("dt").AsVariant = documenttypeKey
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0  then
+            documenttype = ibsql.FieldByName("XID").AsString & "_" &  ibsql.FieldByName("DBID").AsString
+          else
+            '01. Накладная на реализацию готовой продукции
+            documenttype =  "171879511_242962778"
+          end if
+         ' Шапка
+          dim InvDocument, gdcInvDocument, gdcInvDocumentLine, documenttype
+        
+        
+          set InvDocument = new TVBInvDocument
+          call InvDocument.InitDocument(documenttype, Transaction, Transaction)
+          set gdcInvDocument = InvDocument.gdcInvDocument
+          set gdcInvDocumentLine = InvDocument.gdcInvDocumentLine
+          set gdcDocumentAttr =  Creator.GetObject(nil, "TgdcAttrUserDefined", "")
+          dim DS, gdcDocumentAttr, AttrUdk
+          set DS = Creator.GetObject(nil, "TDataSource","")
+          DS.DataSet = gdcInvDocument
+          gdcDocumentAttr.SubType = "USR$INV_ADDINFO"
+          gdcDocumentAttr.MasterSource = DS
+          gdcDocumentAttr.MasterField = "ID"
+          gdcDocumentAttr.DetailField = "ID"
+          gdcDocumentAttr.ExtraConditions.Text = " z.id = :id "
+          gdcDocumentAttr.Transaction = Transaction
+          gdcDocumentAttr.Open
+          gdcInvDocument.Open
+          gdcInvDocumentLine.Open
+          set AttrUdk = Creator.GetObject(nil, "TgdcAttrUserDefined", "")
+          AttrUdk.SubType = "USR$VBPF_DATEPRODUCT"
+          AttrUdk.MasterSource = DS
+          AttrUdk.MasterField = "ID"
+          AttrUdk.DetailField = "ID"
+          AttrUdk.ExtraConditions.Text = " Z.USR$PARENT = :id "
+          AttrUdk.Transaction = Transaction
+          AttrUdk.Open
+        
+          dim objLines, countList
+          set objLines = msgParams.Value("lines")
+           'кол-во записей
+          countList = objLines.ObjectItemsCount
+        
+          ibsql.Close
+          ibsql.SQL.Text = _
+            "select u.USR$CONTACTKEY " & _
+            "from USR$GDMN_USERS u " & _
+            "where u.USR$MOBILEID = :userkey "
+          ibsql.ParamByName("userkey").AsVariant = userkey
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0  then
+            contactkey = ibsql.FieldByName("USR$CONTACTKEY").AsInteger
+          else
+            contactkey = IBLogin.Contactkey
+          end if
+          if (headCompanykey <> 0 and outletKey <> 0 and orderId <> "") or (orderId = "") then
+            if WEB_IS_EXISTS(documenttype, orderId, orderBarcode, Transaction, ondate) = 0 then
+              on error resume next
+              call WEB_MAKE_HEADER_OTVES(gdcInvDocument, gdcDocumentAttr, orderId, orderBarcode, ondate, contactkey, deportkey, documenttype)
+              if Err.Number <> 0 then
+                typeError = 2
+                errorMessage = " Ошибка при создании шапки документа 01. Накладная на реализацию готовой продукции"
+                web_CreateOtves = finalizationOtves(errorMessage, typeError, otherHead)
+                exit function
+              end if
+              on error goto 0
+              ' Позиции
+              dim k, q, goodkey, numReceived,  workDate, quantPack
+              dim ibsqlDelete
+              set ibsqlDelete = Creator.GetObject(nil, "TIBSQL", "")
+              ibsqlDelete.Transaction = Transaction
+              ibsqlDelete.SQl.Text = _
+                " delete from USR$SHCODE_OTVESLINE "
+              ibsqlDelete.ExecQuery
+              for k = 0 to countList - 1
+                q = Replace(objLines.ObjectItem(k).simpleValue("weight", 0), ".", Application.DecimalSeparatorSys)
+                if  Assigned(objLines.ObjectItem(k).Value("good")) then
+                  goodkey = CDbl(objLines.ObjectItem(k).Value("good").simpleValue("id", ""))
+                  numReceived = objLines.ObjectItem(k).simpleValue("numReceived", "")
+                  workDate = Enc.DecodeDate(objLines.ObjectItem(k).simpleValue("workDate", ""))
+                  quantPack = objLines.ObjectItem(k).simpleValue("quantPack", 0)
+                end if
+                if q > 0 then
+                  call SHCODE_PREPARE_DETAIL_OTVES(goodkey, q, workDate, quantPack, numReceived, Transaction, k + 1)
+                end if
+              next
+              call SHCODE_MAKE_DETAIL_OTVES(gdcInvDocumentLine, AttrUdk, Transaction)
+              if Err.Number <> 0 then
+                typeError = 2
+                errorMessage = " Ошибка при создании позиций документа 01. Накладная на реализацию готовой продукции"
+                web_CreateOtves = finalizationOtves(errorMessage, typeError, otherHead)
+                exit function
+              end if
+              on error goto 0
+            end if
+          end if
+          web_CreateOtves = finalizationOtves(errorMessage, typeError, otherHead)
+        End Function
+        
+        
+        function finalizationOtves(errorMessage, typeError, otherHead)
+          dim a(2)
+          a(0) = errorMessage
+          a(1) = typeError
+          a(2) = otherHead
+          finalizationOtves = a
+        end function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "1368997778_1691301355 WEB_MAKE_HEADER_OTVES"
+          - 
+            ADDFUNCTIONKEY: "1368999968_1691301355 WEB_IS_EXISTS"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147023193_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_CreateMoveAsx"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-03-27T19:04:56+03:00
+      DISPLAYSCRIPT: | 
+        WEB_CREATEMOVEASX
+        FINALIZATIONMOVEASX
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAATVNHUEFSQU1TCQAAAE1TR1BBUkFNUwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABVU0VSS0VZBwAAAFVTRVJLRVkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QLAAAAVFJBTlNBQ1RJT04LAAAAVFJBTlNBQ1RJT04AAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        Function web_CreateMoveAsx(msgParams, userkey, transaction)
+          dim fromDepartKey, toDepartKey, documentdate, contactkey
+          dim Creator, ibsql, isSklad, errorMessage, takenOrder
+          dim otherHead, typeError, terminalCode
+          dim barcode, fromCell, toCell
+          errorMessage = ""
+          otherHead = ""
+          typeError = 0
+           'объект для работы с типами данных
+          dim Enc
+          set Enc = new TVB_xml_EncodingFunctions
+        
+          documentdate = Enc.DecodeDate(msgParams.SimpleValue("documentDate", ""))
+          terminalCode = msgParams.SimpleValue("id", "")
+          if Assigned(msgParams.Value("head").Value("fromDepart")) then
+            fromDepartKey = CDbl(msgParams.Value("head").Value("fromDepart").SimpleValue("id", ""))
+          else
+            fromDepartKey = 0
+          end if
+        
+           if Assigned(msgParams.Value("head").Value("toDepart")) then
+            toDepartKey = CDbl(msgParams.Value("head").Value("toDepart").SimpleValue("id", ""))
+          else
+            toDepartKey = 0
+          end if
+        
+          set Creator = new TCreator
+        
+          dim gdcObject
+          set gdcObject = Creator.GetObject(nil, "TgdcInvDocument", "")
+          gdcObject.SubType = "147016233_2053437193"
+          gdcObject.Transaction = Transaction
+          gdcObject.ExtraConditions.Clear
+          gdcObject.ExtraConditions.Add("Z.DOCUMENTDATE = '" & documentdate & "'")
+          gdcObject.Open
+        
+          dim Master
+          set Master = Creator.GetObject(nil, "TDataSource", "")
+          Master.DataSet = gdcObject
+        
+          dim gdcDetail, countList, k, q, goodkey, workDate, numReceived, qw
+          set gdcDetail = Creator.GetObject(nil, "TgdcInvDocumentLine", "")
+          gdcDetail.SubType = "147016233_2053437193"
+          gdcDetail.DetailField = "parent"
+          gdcDetail.MasterField = "id"
+          gdcDetail.MasterSource = Master
+          gdcDetail.SubSet = "ByParent"
+          gdcDetail.Transaction = gdcObject.Transaction
+          gdcDetail.Open
+          
+          dim objLines
+          set objLines = msgParams.Value("lines")
+           'кол-во записей
+          countList = objLines.ObjectItemsCount
+          set ibsql = Creator.GetObject(nil,"TIBSQL","")
+          ibsql.Transaction = gdcBaseManager.ReadTransaction
+        
+          if fromDepartKey <> 0 and toDepartKey <> 0 then
+            on error resume next
+            gdcObject.Insert
+            gdcObject.FieldByName("DOCUMENTDATE").AsDateTime = documentdate
+            gdcObject.FieldByName("USR$FROMCONTACTKEY").AsVariant = fromDepartKey
+            gdcObject.FieldByName("USR$TOCONTACTKEY").AsVariant = toDepartKey
+            gdcObject.FieldByName("DESCRIPTION").AsVariant = terminalCode
+            gdcObject.Post
+            if Err.Number <> 0 then
+              typeError = 2
+              errorMessage = " Ошибка при создании шапки документа Перемещение продукции и сырья"
+              web_CreateMoveAsx = finalizationMoveAsx(errorMessage, typeError, otherHead)
+              exit function
+            end if
+            on error goto 0
+            'Позиции
+            for k = 0 to countList - 1
+              q = Replace(objLines.ObjectItem(k).simpleValue("weight", 0), ".", Application.DecimalSeparatorSys)
+        
+              if  Assigned(objLines.ObjectItem(k).Value("good")) then
+                goodkey = CDbl(objLines.ObjectItem(k).Value("good").simpleValue("id", ""))
+                numReceived = trim(objLines.ObjectItem(k).simpleValue("numReceived", ""))
+                if (objLines.ObjectItem(k).simpleValue("workDate", "")) <> "" then
+                  workDate = Enc.DecodeDate(objLines.ObjectItem(k).simpleValue("workDate", ""))
+                else
+                  workDate = date
+                end if
+                barcode = trim(objLines.ObjectItem(k).simpleValue("barcode", ""))
+                fromCell = trim(objLines.ObjectItem(k).simpleValue("fromCell", ""))
+                toCell = trim(objLines.ObjectItem(k).simpleValue("toCell", ""))
+        
+                if q > 0 then
+                  if numReceived = "" then
+                    typeError = 1
+                    errorMessage = " Ошибка при создании позиции документа - не указан номер партии"
+                    web_CreateMoveAsx = finalizationMoveAsx(errorMessage, typeError, otherHead)
+                    exit function
+                  end if
+                  on error resume next
+                  qw = q
+                  ibsql.Close
+                  ibsql.SQL.Text = _
+                    " select g.VALUEKEY, coalesce(g.usr$inv_weight, 1) as scale " & _
+                    " from gd_good g " & _
+                    " where g.id = "  & goodkey
+                  ibsql.ExecQuery
+                  if  (ibsql.FieldByName("VALUEKEY").AsVariant <> 2) and (ibsql.FieldByName("scale").AsVariant > 0) then
+                    qw = q / ibsql.FieldByName("scale").AsCurrency
+                  end if
+                  dim isFromRemains
+                  isFromRemains = false
+                  'если есть from ячейка, проверяем остатки по ней
+                  if fromCell <> "" and barcode <> "" then
+                    ibsql.Close
+                    ibsql.SQL.Text = _
+                      "SELECT " & vbCrLf & _
+                      "    MIN ( M.CARDKEY ) AS ID, " & vbCrLf & _
+                      "    G.ID AS GOODKEY, " & vbCrLf & _
+                      "    SUM ( M.BALANCE ) AS REMAINS " & vbCrLf & _
+                      "  FROM " & vbCrLf & _
+                      "    ( SELECT " & vbCrLf & _
+                      "      M.CARDKEY, " & vbCrLf & _
+                      "      M.CONTACTKEY, " & vbCrLf & _
+                      "      M.BALANCE " & vbCrLf & _
+                      "    FROM " & vbCrLf & _
+                      "      INV_BALANCE M " & vbCrLf & _
+                      "        JOIN " & vbCrLf & _
+                      "          GD_GOOD G " & vbCrLf & _
+                      "        ON " & vbCrLf & _
+                      "          ( G.ID  =  M.GOODKEY ) " & vbCrLf & _
+                      "    WHERE " & vbCrLf & _
+                      "      M.BALANCE  <>  0 " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      G.ID = :goodkey " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      M.CONTACTKEY  =  :DepartmentKey " & vbCrLf & _
+                      "  UNION ALL " & vbCrLf & _
+                      "  SELECT " & vbCrLf & _
+                      "      M.CARDKEY, " & vbCrLf & _
+                      "      M.CONTACTKEY, " & vbCrLf & _
+                      "      SUM ( M.CREDIT - M.DEBIT ) AS BALANCE " & vbCrLf & _
+                      "    FROM " & vbCrLf & _
+                      "      INV_MOVEMENT M " & vbCrLf & _
+                      "        JOIN " & vbCrLf & _
+                      "          GD_CONTACT CON " & vbCrLf & _
+                      "        ON " & vbCrLf & _
+                      "          M.CONTACTKEY  =  CON.ID " & vbCrLf & _
+                      "        JOIN " & vbCrLf & _
+                      "          GD_GOOD G " & vbCrLf & _
+                      "        ON " & vbCrLf & _
+                      "          ( G.ID  =  M.GOODKEY ) " & vbCrLf & _
+                      "    WHERE " & vbCrLf & _
+                      "      M.DISABLED  =  0 " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      M.MOVEMENTDATE  >  :ONDATE " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      G.ID = :goodkey " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      M.CONTACTKEY  =  :DepartmentKey " & vbCrLf & _
+                      "  GROUP BY " & vbCrLf & _
+                      "    1, " & vbCrLf & _
+                      "    2 ) M " & vbCrLf & _
+                      "      LEFT JOIN " & vbCrLf & _
+                      "        INV_CARD C " & vbCrLf & _
+                      "      ON " & vbCrLf & _
+                      "        C.ID  =  M.CARDKEY " & vbCrLf & _
+                      "      LEFT JOIN " & vbCrLf & _
+                      "        GD_GOOD G " & vbCrLf & _
+                      "      ON " & vbCrLf & _
+                      "        ( G.ID  =  C.GOODKEY ) " & vbCrLf & _
+                      "  WHERE " & vbCrLf & _
+                      "          C.COMPANYKEY + 0 = :companykey " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    M.BALANCE  <>  0 " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    G.ID = :goodkey " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    C.USR$ASX_NUMBER_PLACE = :NUMBER_PLACE " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    C.USR$ASX_PODDON_CODE = :PODDON_CODE " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    C.USR$ASX_NUMBER_PART = :NUMBER_PART " & vbCrLf & _
+                      "  GROUP BY 2 " & vbCrLf & _
+                      "  HAVING " & vbCrLf & _
+                      "    SUM ( M.BALANCE )  >  0 "
+                    ibsql.ParamByName("NUMBER_PLACE").AsVariant = fromCell
+                    ibsql.ParamByName("PODDON_CODE").AsVariant = barcode
+                    ibsql.ParamByName("NUMBER_PART").AsVariant = numReceived
+                    ibsql.ParamByName("companykey").AsVariant = IBLogin.CompanyKey
+                    ibsql.ParamByName("ondate").AsVariant = documentdate
+                    ibsql.ParamByName("DepartmentKey").AsVariant = fromDepartKey
+                    ibsql.ParamByName("goodkey").AsVariant = goodkey
+                    ibsql.ExecQuery
+                    if ibsql.RecordCount = 0 then
+                      typeError = 2
+                      errorMessage = " Ошибка при создании позиций документа - недостаточно остатков "
+                    else
+                      if ibsql.FieldByName("REMAINS").AsCurrency < qw then
+                        typeError = 2
+                        errorMessage = " Ошибка при создании позиций документа - недостаточно остатков "
+                      else
+                        isFromRemains = true
+                      end if
+                    end if
+                    if errorMessage <> "" then
+                      web_CreateMoveAsx = finalizationMoveAsx(errorMessage, typeError, otherHead)
+                      exit function
+                    end if
+                  end if
+                  ' Eсли из ячейки
+                  if isFromRemains then
+                    gdcDetail.Insert
+                    gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
+                    gdcDetail.FieldByName("QUANTITY").AsVariant = qw
+        
+                    gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                    gdcDetail.FieldByName("FROM_USR$ASX_PODDON_CODE").AsVariant = barcode
+                    gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PLACE").AsVariant = fromCell
+                    gdcDetail.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
+                    
+                    gdcDetail.FieldByName("TO_USR$ASX_DATERECEIVED").AsVariant = workDate
+                    gdcDetail.FieldByName("TO_USR$ASX_NUMBER_PART").AsVariant = numReceived
+        
+                    if toCell <> "" then
+                      gdcDetail.FieldByName("TO_USR$ASX_PODDON_CODE").AsVariant = barcode
+                      gdcDetail.FieldByName("TO_USR$ASX_NUMBER_PLACE").AsVariant = toCell
+                    end if
+                    gdcDetail.Post
+                    'Если не из ячейки
+                  else
+                    if gdcDetail.Locate("GOODKEY;FROM_USR$ASX_NUMBER_PART;FROM_USR$ASX_DATERECEIVED", _
+                      Array(goodkey, numReceived, workDate) ,"") and toCell = ""  then
+                      gdcDetail.Edit
+                      gdcDetail.FieldByName("quantity").AsCurrency = _
+                        gdcDetail.FieldByName("quantity").AsCurrency + qw
+                      gdcDetail.Post
+                    else
+                      gdcDetail.Insert
+                      gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
+                      gdcDetail.FieldByName("QUANTITY").AsVariant = qw
+                      gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                      gdcDetail.FieldByName("TO_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                      gdcDetail.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
+                      gdcDetail.FieldByName("TO_USR$ASX_DATERECEIVED").AsVariant = workDate
+        
+                      ' Если в ячейку
+                      if toCell <> "" and barcode <> "" then
+                        gdcDetail.FieldByName("TO_USR$ASX_PODDON_CODE").AsVariant = barcode
+                        gdcDetail.FieldByName("TO_USR$ASX_NUMBER_PLACE").AsVariant = toCell
+                      end if
+                      gdcDetail.Post
+                    end if
+                  end if
+                  if Err.Number <> 0 then
+                    typeError = 2
+                    errorMessage = " Ошибка при создании позиций документа Перемещение продукции и сырья"
+                    web_CreateMoveAsx = finalizationMoveAsx(errorMessage, typeError, otherHead)
+                    exit function
+                  end if
+                  on error goto 0
+                end if
+              end if
+            next
+          end if
+          web_CreateMoveAsx = finalizationMoveAsx(errorMessage, typeError, otherHead)
+        End Function
+        
+        
+        function finalizationMoveAsx(errorMessage, typeError, otherHead)
+          dim a(2)
+          a(0) = errorMessage
+          a(1) = typeError
+          a(2) = otherHead
+          finalizationMoveAsx = a
+        end function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147030602_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_getOrdersAsx"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-03-22T16:46:48+03:00
+      DISPLAYSCRIPT: | 
+        WEB_GETORDERSASX
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAAREFURUJFR0lOCQAAAERBVEVCRUdJTgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABEQVRFRU5EBwAAAERBVEVFTkQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QHAAAAVkVSU0lPTgcAAABWRVJTSU9OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZO
+        U1RQUlNUCgAAAENPTlRBQ1RLRVkKAAAAQ09OVEFDVEtFWQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAsAAABUUkFOU0FDVElPTgsAAABUUkFOU0FDVElPTgAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAABGTlNURkxQUg==
+      SCRIPT: | 
+        '#include web_formatDate
+        '#include web_cur_replace
+        '#include web_JSonString
+        Option Explicit
+        Function web_getOrdersAsx(dateBegin, dateEnd, version, contactkey, transaction)
+          web_getOrdersAsx = false
+          dim Json
+          dim ibsql, Creator, ibsqlPos, documenttypeAlias
+          set Creator = new TCreator
+          dim ibsqldepart
+          set ibsqldepart  = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqldepart.Transaction = Transaction
+          ibsqldepart.SQL.Text = _
+            " SELECT distinct " & _
+            "   gg.usr$vbpf_departkey, con.USR$SHCODE " & _
+            " FROM usr$ber_claim c " & _
+            "   left join usr$ber_claimline cl on cl.MASTERKEY = c.DOCUMENTKEY " & _
+            "   left join gd_good g on g.ID = cl.USR$GOODKEY " & _
+            "   LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+            "   LEFT JOIN GD_CONTACT con ON gg.usr$vbpf_departkey = con.id " & _
+            "WHERE  c.USR$ONDATE >= :datebegin " & _
+            "  and c.USR$ONDATE <= :dateend " & _
+            "  and not  gg.usr$vbpf_departkey is null "
+          ibsqldepart.ParamByName("datebegin").AsDateTime = datebegin
+          ibsqldepart.ParamByName("dateend").AsDateTime = dateend
+          ibsqldepart.ExecQuery
+          set Json = Creator.GetObject(nil, "TStringList", "")
+          set ibsql =  Creator.GetObject(nil,"TIBSQL","")
+          ibsql.Transaction = Transaction
+          dim d, m, ORD_NO, depcode, p
+          while not  ibsqldepart.EOF
+            depcode = ibsqlDepart.FieldByName("USR$SHCODE").AsString
+            p = len(depcode)
+            while (p < 3)
+              depcode = "0" & depcode
+              p = p + 1
+            wend
+            ibsql.Close
+            ibsql.SQL.Text = _
+              "SELECT distinct " & _
+              "  doc.DOCUMENTDATE, " & _
+              "  doc.id, " & _
+              "  doc.NUMBER, " & _
+              "  cast('" & depcode & "' as varchar(3)) || doc.number as code, " & _
+              "  dt.id as documenttypeKey, " & _
+              "  dt.name as documenttypeName, " & _
+              "  gdoc.USR$MOBILEALIAS as documenttypeAlias, " & _
+              "  b.USR$ONDATE, " & _
+              "  headcompany.ID as headcompanyKey, " & _
+              "  headcompany.NAME as headcompanyName, " & _
+              "  headcompany.USR$SHCODE as headcompanyShcode, " & _
+              "  outlet.ID as outletKey, " & _
+              "  outlet.NAME as outletName, " & _
+              "  outlet.USR$SHCODE as outletShcode " & _
+              "FROM " & _
+              "  usr$ber_claim  b " & _
+              "  left join gd_contact headcompany on headcompany.ID = b.USR$HEADCOMPANYKEY " & _
+              "  left join gd_contact outlet on outlet.ID = b.USR$CONTACTKEY " & _
+              "  join gd_document doc on doc.ID = b.DOCUMENTKEY " & _
+              "  left join gd_documenttype dt on dt.ID = doc.DOCUMENTTYPEKEY " & _
+              "  left join USR$GDMN_DOCUMENTS gdoc on gdoc.USR$DOCUMENTTYPE = dt.ID " & _
+              "    and gdoc.USR$VERSION = :ver " & _
+              "  join usr$ber_claimline bl on bl.MASTERKEY = b.DOCUMENTKEY and bl.USR$QUANTITY > 0 " & _
+              "  left join gd_good g on g.ID = bl.USR$GOODKEY " & _
+              "  left join gd_goodgroup gg ON g.groupkey = gg.id " & _
+              "  left join gd_contact con1 ON gg.usr$vbpf_departkey = con1.id " & _
+              "WHERE " & _
+              "  b.USR$ONDATE >= :datebegin " & _
+              "  and b.USR$ONDATE <= :dateend " & _
+              "  and (con1.id = :depart or con1.parent = :depart ) " & _
+              "ORDER BY 1 "
+            ibsql.ParamByName("ver").AsInteger = version
+            ibsql.ParamByName("datebegin").AsDateTime = datebegin
+            ibsql.ParamByName("dateend").AsDateTime = dateend
+            ibsql.ParamByName("depart").AsInteger = ibsqlDepart.FieldByName("usr$vbpf_departkey").AsInteger
+            ibsql.ExecQuery
+            set ibsqlPos = Creator.GetObject(nil,"TIBSQL","")
+            ibsqlPos.Transaction = Transaction
+            ibsqlPos.SQL.Text = _
+              "select " & _
+              "  bl.DOCUMENTKEY as id, " & _
+              "  g.ID as goodkey, " & _
+              "  g.name as goodname, " & _
+              "  bl.USR$QUANTITY as quantity, " & _
+              "  bl.USR$PACKAGETYPE as packagekey, " & _
+              "  p.USR$NAME as packagename " & _
+              "from  usr$ber_claimline bl " & _
+              "  left join gd_good g on g.ID = bl.USR$GOODKEY " & _
+              "  left join  USR$SB_PACKAGETYPE p ON p.ID  =  bl.USR$PACKAGETYPE " & _
+              "  left join GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+              "  left join GD_CONTACT con1 ON gg.usr$vbpf_departkey = con1.id " & _
+              "where bl.MASTERKEY = :masterkey " & _
+               " and (con1.id = :depart or con1.parent = :depart ) " & _
+              "order by 3 "
+            dim id, number, documentdate, documenttypeName, status, documenttypekey, _
+              ondate, headcompanyKey, headcompanyName, headcompanyShcode, _
+              outletKey, outletName, outletShcode, shcode
+        
+            while not ibsql.EOF
+              id = ibsql.FieldByName("id").AsString
+              number = ibsql.FieldByName("number").AsString
+              documentdate = web_formatDate(ibsql.FieldByName("DOCUMENTDATE").AsDateTime)
+              documenttypeKey = ibsql.FieldByName("documenttypeKey").AsString
+              documenttypeName = ibsql.FieldByName("documenttypeName").AsString
+              documenttypeAlias = ibsql.FieldByName("documenttypeAlias").AsString
+              headcompanyKey =  ibsql.FieldByName("headcompanyKey").AsString
+              headcompanyName = ibsql.FieldByName("headcompanyName").AsString
+              headcompanyShcode = ibsql.FieldByName("headcompanyShcode").AsString
+              outletKey =  ibsql.FieldByName("outletKey").AsString
+              outletName = ibsql.FieldByName("outletName").AsString
+              outletShcode = ibsql.FieldByName("outletShcode").AsString
+              ondate = web_formatDate(ibsql.FieldByName("USR$ONDATE").AsDateTime)
+              status = "DRAFT"
+              if len(CStr(day(ondate))) > 1 then
+                d = CStr(day(ondate))
+              else
+                d = "0" & CStr(day(ondate))
+              end if
+              if len(CStr(month(ondate))) > 1 then
+                m = CStr(month(ondate))
+              else
+                m = "0" & CStr(month(ondate))
+              end if
+              ORD_NO =  d & m & CStr(year(ondate))
+              shcode = ORD_NO &  ibsql.FieldByName("code").AsString
+              Json.Add ( _
+               "{" & _
+                """id"":""" & id & ""","  & _
+                """number"":""" & number & """," & _
+                """documentDate"":""" & documentdate & """," & _
+                """documentType"":" & _
+                "{""id"":""" & documenttypeKey & """," & _
+                """name"":""" & documenttypeAlias & """," & _
+                """description"":""" & documenttypeName & """}," & _
+                """status"":""" & status & """, ")
+              Json.Add ("""head"":{")
+              Json.Add ( _
+                """contact"": { " & _
+                """id"":""" & headcompanyKey & """," & _
+                """name"":" & web_JSonString(headcompanyName) & ","  & _
+                """shcode"":""" & headcompanyShcode & """" & _
+                "},"  )
+              Json.Add ( _
+                """outlet"": { " & _
+                """id"":""" & outletKey & """," & _
+                """name"":" & web_JSonString(outletName) & ","  & _
+                """shcode"":""" & outletShcode & """" & _
+                "},"  )
+              Json.Add ( _
+                """onDate"":""" & ondate & """," )
+              Json.Add ( _
+                """barcode"":""" & shcode & """" )
+              Json.Add ("},")
+              'Позиции
+              ibsqlPos.Close
+              ibsqlPos.ParamByName("masterkey").AsInteger = ibsql.FieldByName("id").AsString
+              ibsqlPos.ParamByName("depart").AsInteger = ibsqlDepart.FieldByName("usr$vbpf_departkey").AsInteger
+              ibsqlPos.ExecQuery
+              Json.Add ("""lines"":[")
+              dim package
+              while not ibsqlPos.EOF
+                if ibsqlPos.FieldByName("packagekey").IsNull then
+                  package = ""
+                else
+                  package = """packagekey"":" & _
+                    "{""id"":" & web_JSonString(ibsqlPos.FieldByName("packageKey").AsString) & "," & _
+                    """name"":" & web_JSonString(ibsqlPos.FieldByName("packageName").AsString) & "},"
+                end if
+                Json.Add ("{" & _
+                  """id"":""" & ibsqlPos.FieldByName("id").AsString & ""","  & _
+                  """weight"":" & ibsqlPos.FieldByName("quantity").AsString & ","  & _
+                  package & _
+                  """good"":" & _
+                  "{""id"":" & web_JSonString(ibsqlPos.FieldByName("goodKey").AsString) & "," & _
+                  """name"":" & web_JSonString(ibsqlPos.FieldByName("goodName").AsString) & "}" )
+                ibsqlPos.Next
+                if not ibsqlPos.EOF then
+                  Json.Add ("},")
+                else
+                  Json.Add ("}")
+                end if
+              wend
+              Json.Add ("]")
+              ibsql.Next
+              if not ibsql.EOF then
+                 Json.Add ("},")
+              else
+                 Json.Add ("}")
+              end if
+            wend
+            ibsqldepart.Next
+            if not  ibsqldepart.EOF then
+              Json.Add (",")
+            end if
+          wend
+         ' 'Пока для формирования файла, потом убрать
+        '  Dim fs, f, LocalPath, JSONFileName
+        '  LocalPath = "c:\d\"
+        '  JSONFileName = "request.json"
+        '  Set fs = CreateObject("Scripting.FileSystemObject")
+        '  Set f = fs.CreateTextFile(LocalPath & JSONFileName, True)
+        '  f.Write Json.Text
+        '  f.Close
+          web_getOrdersAsx = Json.text
+          Json.Clear
+          if Assigned(Json) then
+            Creator.DestroyObject(Json)
+          end if
+        End Function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "147040220_1730903579 web_formatDate"
+          - 
+            ADDFUNCTIONKEY: "147040222_1730903579 web_cur_replace"
+          - 
+            ADDFUNCTIONKEY: "147040221_1730903579 web_JSonString"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147037247_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "ASX_IS_EXISTS"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-03-23T18:30:54+03:00
+      DISPLAYSCRIPT: | 
+        ASX_IS_EXISTS
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QHAAAARE9DVFlQRQcAAABET0NUWVBFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZO
+        U1RQUlNUBwAAAE9SREVSSUQHAAAAT1JERVJJRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNU
+        UFJTVAwAAABPUkRFUkJBUkNPREUMAAAAT1JERVJCQVJDT0RFAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAEZOU1RQUlNUCwAAAFRSQU5TQUNUSU9OCwAAAFRSQU5TQUNUSU9OAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAEZOU1RQUlNUBgAAAE9OREFURQYAAABPTkRBVEUAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        function ASX_IS_EXISTS(ByVal doctype, ByVal orderId, ByVal orderBarcode, ByVal Transaction, ondate)
+          ASX_IS_EXISTS = 0
+          dim   Creator, ibsql, terminalcode
+          terminalcode = orderId & "_" & orderBarcode
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = Transaction
+          ibsql.Close
+          if  doctype =  "147016267_2053437193"  then
+            ibsql.SQL.Text = _
+              "select  doc.ID, b.USR$TERMINALCODE " & _
+              "from gd_document  doc " & _
+              "  left join USR$ASX_OTVES b on b.DOCUMENTKEY = doc.ID " & _
+              "where  doc.DOCUMENTTYPEKEY = :dt " & _
+              "  and doc.PARENT + 0 is null " & _
+              "  and b.USR$TERMINALCODE = '" & terminalcode & "'" & _
+              "  and doc.DOCUMENTDATE >= :datebegin " & _
+              "  and doc.DOCUMENTDATE <= :dateend "
+          end if
+          ibsql.ParamByName("datebegin").AsDateTime = ondate - 30
+          ibsql.ParamByName("dateEnd").AsDateTime = ondate + 30
+          ibsql.ParamByName("dt").AsInteger = gdcBaseManager.GetIDByRUIDString(doctype)
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0 then
+              ASX_IS_EXISTS = 1
+          end if
+        End function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147037141_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_CreateOtvesAsx"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-03-27T19:03:31+03:00
+      DISPLAYSCRIPT: | 
+        WEB_CREATEOTVESASX
+        FINALIZATIONOTVESASX
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAATVNHUEFSQU1TCQAAAE1TR1BBUkFNUwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABVU0VSS0VZBwAAAFVTRVJLRVkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QLAAAAVFJBTlNBQ1RJT04LAAAAVFJBTlNBQ1RJT04AAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        '#include ASX_IS_EXISTS
+        Function web_CreateOtvesAsx(msgParams, userkey, transaction)
+          dim documentdate, headCompanykey, outletKey, deportKey, onDate, contactkey
+          dim Creator, ibsql,  errorMessage, orderId, orderBarcode
+          dim otherHead, typeError
+          errorMessage = ""
+          otherHead = ""
+          typeError = 0
+           'объект для работы с типами данных
+          dim Enc
+          set Enc = new TVB_xml_EncodingFunctions
+        
+          ondate = Enc.DecodeDate(msgParams.SimpleValue("documentDate", ""))
+          orderId = msgParams.Value("head").SimpleValue("orderId", "")
+          if orderId <> "" then
+            orderBarcode = msgParams.Value("head").SimpleValue("barcode", "")
+          else
+            orderBarcode = msgParams.SimpleValue("id", "")
+          end if
+          if Assigned(msgParams.Value("head").Value("depart")) then
+            deportKey = CDbl(msgParams.Value("head").Value("depart").SimpleValue("id", ""))
+          else
+            deportKey = 0
+          end if
+        
+          if Assigned(msgParams.Value("head").Value("outlet")) then
+            outletKey = CDbl(msgParams.Value("head").Value("outlet").SimpleValue("id", ""))
+          else
+            outletKey = 0
+          end if
+          
+          if Assigned(msgParams.Value("head").Value("contact")) then
+            headCompanykey = CDbl(msgParams.Value("head").Value("contact").SimpleValue("id", ""))
+          else
+            headCompanykey = 0
+          end if
+          dim documenttypeKey
+          documenttypeKey = CDbl(msgParams.Value("documentType").SimpleValue("id", ""))
+        
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = Transaction
+          ibsql.Close
+          ibsql.SQL.Text = _
+            "select r.XID, r.DBID " & _
+            "from gd_ruid r " & _
+            "where r.ID = :dt "
+          ibsql.ParamByName("dt").AsVariant = documenttypeKey
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0  then
+            documenttype = ibsql.FieldByName("XID").AsString & "_" &  ibsql.FieldByName("DBID").AsString
+          else
+            'Отвес накладная
+            documenttype =  "147016267_2053437193"
+          end if
+         ' Шапка
+          dim InvDocument, gdcInvDocument, gdcInvDocumentLine, documenttype
+        
+          set InvDocument = new TVBInvDocument
+          call InvDocument.InitDocument(documenttype, Transaction, Transaction)
+          set gdcInvDocument = InvDocument.gdcInvDocument
+          set gdcInvDocumentLine = InvDocument.gdcInvDocumentLine
+        
+          gdcInvDocument.Open
+          gdcInvDocumentLine.Open
+        
+          dim objLines, countList
+          set objLines = msgParams.Value("lines")
+           'кол-во записей
+          countList = objLines.ObjectItemsCount
+        
+          ibsql.Close
+          ibsql.SQL.Text = _
+            "select u.USR$CONTACTKEY " & _
+            "from USR$GDMN_USERS u " & _
+            "where u.USR$MOBILEID = :userkey "
+          ibsql.ParamByName("userkey").AsVariant = userkey
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0  then
+            contactkey = ibsql.FieldByName("USR$CONTACTKEY").AsInteger
+          else
+            contactkey = IBLogin.Contactkey
+          end if
+          if (headCompanykey <> 0 and outletKey <> 0 and orderId <> "") or (orderId = "") then
+            if WEB_IS_EXISTS(documenttype, orderId, orderBarcode, Transaction, ondate) = 0 then
+              on error resume next
+              gdcInvDocument.Insert
+              gdcInvDocument.FieldByName("DOCUMENTDATE").AsDateTime = ondate
+              gdcInvDocument.FieldByName("USR$MAINDEPOTKEY").AsVariant = deportKey
+              gdcInvDocument.FieldByName("USR$CUSTOMERKEY").AsVariant = headCompanykey
+              gdcInvDocument.FieldByName("USR$SHOPKEY").AsVariant = outletKey
+              gdcInvDocument.FieldByName("USR$TERMINALCODE").AsVariant = orderBarcode
+              gdcInvDocument.FieldByName("USR$STOREKEEPER").AsVariant = contactkey
+              gdcInvDocument.Post
+              if Err.Number <> 0 then
+                typeError = 2
+                errorMessage = " Ошибка при создании шапки документа Отвес накладная"
+                web_CreateOtvesAsx = finalizationOtvesAsx(errorMessage, typeError, otherHead)
+                exit function
+              end if
+              on error goto 0
+              ' Позиции
+              dim k, q, goodkey, numReceived,  workDate, quantPack, fromCell, qw, qPack
+        
+              for k = 0 to countList - 1
+                q = Replace(objLines.ObjectItem(k).simpleValue("weight", 0), ".", Application.DecimalSeparatorSys)
+                if  Assigned(objLines.ObjectItem(k).Value("good")) then
+                  goodkey = CDbl(objLines.ObjectItem(k).Value("good").simpleValue("id", ""))
+                  numReceived = objLines.ObjectItem(k).simpleValue("numReceived", "")
+                  if (objLines.ObjectItem(k).simpleValue("workDate", "")) <> "" then
+                    workDate = Enc.DecodeDate(objLines.ObjectItem(k).simpleValue("workDate", ""))
+                  else
+                    workDate = date
+                  end if
+                  quantPack = objLines.ObjectItem(k).simpleValue("quantPack", 0)
+                  fromCell = trim(objLines.ObjectItem(k).simpleValue("fromCell", ""))
+                end if
+                if q > 0 then
+                  if numReceived = "" then
+                    typeError = 1
+                    errorMessage = " Ошибка при создании позиции документа - не указан номер партии"
+                    web_CreateOtvesAsx = finalizationOtvesAsx(errorMessage, typeError, otherHead)
+                    exit function
+                  end if
+                  qw = q
+                  ibsql.Close
+                  ibsql.SQL.Text = _
+                    " select g.VALUEKEY, coalesce(g.usr$inv_weight, 1) as scale " & _
+                    " from gd_good g " & _
+                    " where g.id = "  & goodkey
+                  ibsql.ExecQuery
+                  if  (ibsql.FieldByName("VALUEKEY").AsVariant <> 2) and (ibsql.FieldByName("scale").AsVariant > 0) then
+                    qw = q / ibsql.FieldByName("scale").AsCurrency
+                  end if
+                  if q >= 35 then
+                    qPack = quantPack
+                  else
+                    if quantPack > 0 then
+                      qPack = 1
+                    else
+                      qPack = 0
+                    end if
+                  end if
+                  on error resume next
+                  dim isFromRemains
+                  isFromRemains = false
+                  'если есть from ячейка, проверяем остатки по ней
+                  if fromCell <> "" and barcode <> "" then
+                    ibsql.Close
+                    ibsql.SQL.Text = _
+                      "SELECT " & vbCrLf & _
+                      "    MIN ( M.CARDKEY ) AS ID, " & vbCrLf & _
+                      "    G.ID AS GOODKEY, " & vbCrLf & _
+                      "    SUM ( M.BALANCE ) AS REMAINS " & vbCrLf & _
+                      "  FROM " & vbCrLf & _
+                      "    ( SELECT " & vbCrLf & _
+                      "      M.CARDKEY, " & vbCrLf & _
+                      "      M.CONTACTKEY, " & vbCrLf & _
+                      "      M.BALANCE " & vbCrLf & _
+                      "    FROM " & vbCrLf & _
+                      "      INV_BALANCE M " & vbCrLf & _
+                      "        JOIN " & vbCrLf & _
+                      "          GD_GOOD G " & vbCrLf & _
+                      "        ON " & vbCrLf & _
+                      "          ( G.ID  =  M.GOODKEY ) " & vbCrLf & _
+                      "    WHERE " & vbCrLf & _
+                      "      M.BALANCE  <>  0 " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      G.ID = :goodkey " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      M.CONTACTKEY  =  :DepartmentKey " & vbCrLf & _
+                      "  UNION ALL " & vbCrLf & _
+                      "  SELECT " & vbCrLf & _
+                      "      M.CARDKEY, " & vbCrLf & _
+                      "      M.CONTACTKEY, " & vbCrLf & _
+                      "      SUM ( M.CREDIT - M.DEBIT ) AS BALANCE " & vbCrLf & _
+                      "    FROM " & vbCrLf & _
+                      "      INV_MOVEMENT M " & vbCrLf & _
+                      "        JOIN " & vbCrLf & _
+                      "          GD_CONTACT CON " & vbCrLf & _
+                      "        ON " & vbCrLf & _
+                      "          M.CONTACTKEY  =  CON.ID " & vbCrLf & _
+                      "        JOIN " & vbCrLf & _
+                      "          GD_GOOD G " & vbCrLf & _
+                      "        ON " & vbCrLf & _
+                      "          ( G.ID  =  M.GOODKEY ) " & vbCrLf & _
+                      "    WHERE " & vbCrLf & _
+                      "      M.DISABLED  =  0 " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      M.MOVEMENTDATE  >  :ONDATE " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      G.ID = :goodkey " & vbCrLf & _
+                      "         AND " & vbCrLf & _
+                      "      M.CONTACTKEY  =  :DepartmentKey " & vbCrLf & _
+                      "  GROUP BY " & vbCrLf & _
+                      "    1, " & vbCrLf & _
+                      "    2 ) M " & vbCrLf & _
+                      "      LEFT JOIN " & vbCrLf & _
+                      "        INV_CARD C " & vbCrLf & _
+                      "      ON " & vbCrLf & _
+                      "        C.ID  =  M.CARDKEY " & vbCrLf & _
+                      "      LEFT JOIN " & vbCrLf & _
+                      "        GD_GOOD G " & vbCrLf & _
+                      "      ON " & vbCrLf & _
+                      "        ( G.ID  =  C.GOODKEY ) " & vbCrLf & _
+                      "  WHERE " & vbCrLf & _
+                      "          C.COMPANYKEY + 0 = :companykey " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    M.BALANCE  <>  0 " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    G.ID = :goodkey " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    C.USR$ASX_NUMBER_PLACE = :NUMBER_PLACE " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    C.USR$ASX_PODDON_CODE = :PODDON_CODE " & vbCrLf & _
+                      "      AND " & vbCrLf & _
+                      "    C.USR$ASX_NUMBER_PART = :NUMBER_PART " & vbCrLf & _
+                      "  GROUP BY 2 " & vbCrLf & _
+                      "  HAVING " & vbCrLf & _
+                      "    SUM ( M.BALANCE )  >  0 "
+                    ibsql.ParamByName("NUMBER_PLACE").AsVariant = fromCell
+                    ibsql.ParamByName("PODDON_CODE").AsVariant = barcode
+                    ibsql.ParamByName("NUMBER_PART").AsVariant = numReceived
+                    ibsql.ParamByName("companykey").AsVariant = IBLogin.CompanyKey
+                    ibsql.ParamByName("ondate").AsVariant = ondate
+                    ibsql.ParamByName("DepartmentKey").AsVariant = deportKey
+                    ibsql.ParamByName("goodkey").AsVariant = goodkey
+                    ibsql.ExecQuery
+                    if ibsql.RecordCount = 0 then
+                      typeError = 2
+                      errorMessage = " Ошибка при создании позиций документа - недостаточно остатков "
+                    else
+                      if ibsql.FieldByName("REMAINS").AsCurrency < qw then
+                        typeError = 2
+                        errorMessage = " Ошибка при создании позиций документа - недостаточно остатков "
+                      else
+                        isFromRemains = true
+                      end if
+                    end if
+                    if errorMessage <> "" then
+                      web_CreateOtvesAsx = finalizationOtvesAsx(errorMessage, typeError, otherHead)
+                      exit function
+                    end if
+                  end if
+                  ' Eсли из ячейки
+                  if isFromRemains then
+                    gdcDetail.Insert
+                    gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
+                    gdcDetail.FieldByName("QUANTITY").AsVariant = qw
+                    gdcDetail.FieldByName("USR$QUANTPACK").AsVariant = qPack
+                    gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                    gdcDetail.FieldByName("FROM_USR$ASX_PODDON_CODE").AsVariant = barcode
+                    gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PLACE").AsVariant = fromCell
+                    gdcDetail.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
+                    gdcDetail.Post
+                    'Если не из ячейки
+                  else
+                    if gdcDetail.Locate("GOODKEY;FROM_USR$ASX_NUMBER_PART;FROM_USR$ASX_DATERECEIVED", _
+                      Array(goodkey, numReceived, workDate) ,"") and toCell = ""  then
+                      gdcDetail.Edit
+                      gdcDetail.FieldByName("quantity").AsCurrency = _
+                        gdcDetail.FieldByName("quantity").AsCurrency + qw
+                      gdcDetail.FieldByName("USR$QUANTPACK").AsCurrency = _
+                        gdcDetail.FieldByName("USR$QUANTPACK").AsCurrency + qPack
+                      gdcDetail.Post
+                    else
+                      gdcDetail.Insert
+                      gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
+                      gdcDetail.FieldByName("QUANTITY").AsVariant = qw
+                      gdcDetail.FieldByName("USR$QUANTPACK").AsVariant = qPack
+                      gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                      gdcDetail.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
+                      gdcDetail.Post
+                    end if
+                  end if
+                  if Err.Number <> 0 then
+                    typeError = 2
+                    errorMessage = " Ошибка при создании позиций документа Перемещение продукции и сырья"
+                    web_CreateOtvesAsx = finalizationOtvesAsx(errorMessage, typeError, otherHead)
+                    exit function
+                  end if
+                  on error goto 0
+                end if
+              next
+        
+              if Err.Number <> 0 then
+                typeError = 2
+                errorMessage = " Ошибка при создании позиций документа Отвес накладная"
+                web_CreateOtvesAsx = finalizationOtvesAsx(errorMessage, typeError, otherHead)
+                exit function
+              end if
+              on error goto 0
+            end if
+          end if
+          web_CreateOtvesAsx = finalizationOtvesasx(errorMessage, typeError, otherHead)
+        End Function
+        
+        
+        function finalizationOtvesAsx(errorMessage, typeError, otherHead)
+          dim a(2)
+          a(0) = errorMessage
+          a(1) = typeError
+          a(2) = otherHead
+          finalizationOtvesAsx = a
+        end function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "147037247_2053483706 ASX_IS_EXISTS"
