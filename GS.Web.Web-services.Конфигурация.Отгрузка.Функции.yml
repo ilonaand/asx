@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.18"
+  Version: "1.0.0.19"
   Optional: False
   Internal: True
-  MD5: 2E4FA5803ABC1E28798B227982355759
+  MD5: F665CF97340D2C4038A8F99D132E9CFE
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -1974,3 +1974,131 @@ Objects:
         Items: 
           - 
             ADDFUNCTIONKEY: "147037247_2053483706 ASX_IS_EXISTS"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147039244_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_getOneRef2_0_0"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-04-06T18:48:02+03:00
+      DISPLAYSCRIPT: | 
+        WEB_GETONEREF2_0_0
+        FINALIZATION_GETONEREF2_0_0
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QFAAAATVNHSUQFAAAATVNHSUQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVFBS
+        U1QIAAAAQ09OU1VNRVIIAAAAQ09OU1VNRVIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVFBS
+        U1QLAAAAQ09OU1VNRVJLRVkLAAAAQ09OU1VNRVJLRVkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QIAAAAUFJPRFVDRVIIAAAAUFJPRFVDRVIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QLAAAAUFJPRFVDRVJLRVkLAAAAUFJPRFVDRVJLRVkAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVFBSU1QHAAAAQ09NUEFOWQcAAABDT01QQU5ZAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAEZOU1RQUlNUCgAAAENPTVBBTllLRVkKAAAAQ09NUEFOWUtFWQAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAABGTlNUUFJTVAkAAABBUFBTWVNURU0JAAAAQVBQU1lTVEVNAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAEZOU1RQUlNUCwAAAEFQUFNZU1RFTUlECwAAAEFQUFNZU1RFTUlEAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUDAAAAEFQUFNZU1RFTUtFWQwAAABBUFBTWVNURU1LRVkA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVFBSU1QJAAAAT0JKUEFSQU1TCQAAAE9CSlBBUkFN
+        UwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNUUFJTVAcAAABWRVJTSU9OBwAAAFZFUlNJT04A
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVFBSU1QKAAAAQ09OVEFDVEtFWQoAAABDT05UQUNU
+        S0VZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUBQAAAE9SREVSBQAAAE9SREVSAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUCwAAAFRSQU5TQUNUSU9OCwAAAFRSQU5TQUNU
+        SU9OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUCAAAAERFVklDRUlECAAAAERFVklD
+        RUlEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUCwAAAFNUQVRVU0VSUk9SCwAAAFNU
+        QVRVU0VSUk9SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUBwAAAFJFRk5BTUUHAAAA
+        UkVGTkFNRQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNURkxQUg==
+      SCRIPT: | 
+        '#include web_formatDate
+        '#include web_JSonString
+        '#include web_process_error_ref_2_0_0
+        '#include web_process_ready_ref_2_0_0
+        Option Explicit
+        Function web_getOneRef2_0_0(msgID, consumer, consumerkey, producer, producerkey, Company, Companykey, AppSystem, AppSystemId, AppSystemkey, objParams, version, contactkey, order, transaction, deviceId, statusError, refName)
+          web_getOneRef2_0_0 = false
+          dim  hasError, AError, message
+          hasError = false
+          AError = ""
+          dim Creator, SS, ibsql
+          set Creator = new TCreator
+          Set SS = Creator.GetObject(Array(""), "TStringStream", "")
+          dim  contactId, errMessage
+          errMessage = ""
+          on error resume next
+         'Подготавливаем StringStream, в котором будет содержаться массив справочников
+          SS.WriteLn("{""status"": ""READY""," )
+          SS.WriteLn("""head"":{" )
+          SS.WriteLn("""appSystem"":{")
+          SS.WriteLn("""id"":""" & AppSystemId & """, ")
+          SS.WriteLn("""name"":" & web_JSonString(AppSystem) & "},")
+          SS.WriteLn("""company"":{")
+          SS.WriteLn("""id"":""" & Companykey & """, ")
+          SS.WriteLn("""name"":" & web_JSonString(Company) & "},")
+          SS.WriteLn("""producer"":{")
+          SS.WriteLn("""id"":""" & producerkey & """, ")
+          SS.WriteLn("""name"":""" & producer & """},")
+          SS.WriteLn("""consumer"":{")
+          SS.WriteLn("""id"":""" & consumerkey & """, ")
+          SS.WriteLn("""name"":""" & consumer & """},")
+          if msgID <> "" then
+            SS.WriteLn("""replyTo"":""" & msgID & """, ")
+          end if
+          SS.WriteLn("""order"":" & order & ", ")
+          SS.WriteLn("""deviceId"":""" & deviceId & """, ")
+          SS.WriteLn("""dateTime"":""" & web_formatDate(Date) & """")
+          SS.WriteLn("}, ")
+          SS.WriteLn("""body"":{")
+          SS.WriteLn("""type"":""ONE_REF"",")
+          SS.WriteLn("""version"":" & version & ", ")
+          SS.WriteLn("""payload"": {" )
+          dim ssTemp, jsonText, jsonFooter
+          jsonText = SS.DataString
+          jsonFooter = "}}}"
+        
+          jsonText = web_process_ready_ref_2_0_0(contactkey, consumer, consumerkey, Companykey, AppSystemkey, _
+            AppSystemId, AppSystem, Company, producerkey, producer, msgID, deviceId, version, _
+            hasError, AError, statusError, refName, jsonFooter )
+          if err.Number <> 0 then
+            errMessage = "Не удалось получить данные по стравочнику " & refName & ". Повторите запрос позже."
+            web_getOneRef2_0_0 = web_process_error_ref_2_0_0(msgID, consumer, consumerkey,  _
+              producer, producerkey,Company, Companykey, AppSystem, AppSystemId, AppSystemkey, _
+              version, contactkey, order, transaction, deviceId, errMessage)
+            exit function
+          end if
+          on error goto 0
+          web_getOneRef2_0_0 =  finalization_getOneRef2_0_0(errMessage, jsonText)
+        End Function
+        function finalization_getOneRef2_0_0(errorMessage, json)
+          dim a(1)
+          a(0) = errorMessage
+          a(1) = json
+          finalization_getOneRef2_0_0 = a
+        end function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "147040220_1730903579 web_formatDate"
+          - 
+            ADDFUNCTIONKEY: "147040221_1730903579 web_JSonString"
+          - 
+            ADDFUNCTIONKEY: "241111139_1971205439 web_process_error_ref_2_0_0"
+          - 
+            ADDFUNCTIONKEY: "241111152_1971205439 web_process_ready_ref_2_0_0"
