@@ -5,10 +5,10 @@ Properties:
   RUID: 147030622_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
-  Version: "1.0.0.3"
+  Version: "1.0.0.4"
   Optional: False
   Internal: True
-  MD5: E0240C7E407FB4D808B69114E5381D0F
+  MD5: 0AEA177F4833DADAE39BEFE6854731CC
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "147024092_1677413867 GS.Web.Web-services.Конфигурация.Данные"
@@ -145,7 +145,7 @@ Objects:
     Fields: 
       USR$COUNTDAYS: 0
       USR$DOCUMENTTYPE: "147016267_2053437193 Складские документы\\ASX.Склад\\Отвес накладная"
-      USR$FUNCTIONKEY: "1368999622_1691301355 web_CreateOtves"
+      USR$FUNCTIONKEY: "147037141_2053483706 web_CreateOtvesAsx"
       USR$MOBILEALIAS: "currShipment"
       USR$SENDFUNCTION: ~
       USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
@@ -153,10 +153,10 @@ Objects:
       USR$VERSION: 1
       USR$WITHRESPONSE: 1
       Z_USR$DOCUMENTTYPE_NAME: "Отвес накладная"
-      Z_USR$FUNCTIONKEY_NAME: "web_CreateOtves"
+      Z_USR$FUNCTIONKEY_NAME: "web_CreateOtvesAsx"
       Z_USR$SENDFUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
-      EDITIONDATE: 2023-03-07T13:05:24+03:00
+      EDITIONDATE: 2023-04-10T18:20:03+03:00
   - 
     Properties: 
       Class: "TgdcAttrUserDefined"
@@ -499,7 +499,7 @@ Objects:
     Fields: 
       USR$COUNTDAYS: 0
       USR$DOCUMENTTYPE: "147016267_2053437193 Складские документы\\ASX.Склад\\Отвес накладная"
-      USR$FUNCTIONKEY: "1368999622_1691301355 web_CreateOtves"
+      USR$FUNCTIONKEY: "147037141_2053483706 web_CreateOtvesAsx"
       USR$MOBILEALIAS: "freeShipment"
       USR$SENDFUNCTION: ~
       USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
@@ -507,10 +507,10 @@ Objects:
       USR$VERSION: 1
       USR$WITHRESPONSE: 1
       Z_USR$DOCUMENTTYPE_NAME: "Отвес накладная"
-      Z_USR$FUNCTIONKEY_NAME: "web_CreateOtves"
+      Z_USR$FUNCTIONKEY_NAME: "web_CreateOtvesAsx"
       Z_USR$SENDFUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
-      EDITIONDATE: 2023-03-07T12:57:19+03:00
+      EDITIONDATE: 2023-04-10T18:19:47+03:00
   - 
     Properties: 
       Class: "TgdcAttrUserDefined"
@@ -522,7 +522,7 @@ Objects:
     Fields: 
       USR$COUNTDAYS: 0
       USR$DOCUMENTTYPE: "147016267_2053437193 Складские документы\\ASX.Склад\\Отвес накладная"
-      USR$FUNCTIONKEY: "1368999622_1691301355 web_CreateOtves"
+      USR$FUNCTIONKEY: "147037141_2053483706 web_CreateOtvesAsx"
       USR$MOBILEALIAS: "shipment"
       USR$SENDFUNCTION: ~
       USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
@@ -530,7 +530,7 @@ Objects:
       USR$VERSION: 1
       USR$WITHRESPONSE: 1
       Z_USR$DOCUMENTTYPE_NAME: "Отвес накладная"
-      Z_USR$FUNCTIONKEY_NAME: "web_CreateOtves"
+      Z_USR$FUNCTIONKEY_NAME: "web_CreateOtvesAsx"
       Z_USR$SENDFUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
-      EDITIONDATE: 2023-03-07T12:59:46+03:00
+      EDITIONDATE: 2023-04-10T18:19:57+03:00

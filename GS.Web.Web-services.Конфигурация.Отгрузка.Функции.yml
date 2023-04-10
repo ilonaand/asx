@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.20"
+  Version: "1.0.0.21"
   Optional: False
   Internal: True
-  MD5: 102F5539912410DA8A50C68B0DA5AA94
+  MD5: 9697379200620A135E9F874406E7E935
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -1650,7 +1650,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-03-27T19:03:31+03:00
+      EDITIONDATE: 2023-04-10T18:41:12+03:00
       DISPLAYSCRIPT: | 
         WEB_CREATEOTVESASX
         FINALIZATIONOTVESASX
@@ -1718,17 +1718,30 @@ Objects:
             documenttype =  "147016267_2053437193"
           end if
          ' Шапка
-          dim InvDocument, gdcInvDocument, gdcInvDocumentLine, documenttype
+          dim gdcInvDocument, gdcInvDocumentLine, documenttype
         
-          set InvDocument = new TVBInvDocument
-          call InvDocument.InitDocument(documenttype, Transaction, Transaction)
-          set gdcInvDocument = InvDocument.gdcInvDocument
-          set gdcInvDocumentLine = InvDocument.gdcInvDocumentLine
-        
+          set gdcInvDocument = Creator.GetObject(nil, "TgdcInvDocument", "")
+          gdcInvDocument.SubType = documenttype
+          gdcInvDocument.Transaction = Transaction
+          gdcInvDocument.ExtraConditions.Clear
+          gdcInvDocument.ExtraConditions.Add("Z.DOCUMENTDATE = '" & ondate & "'")
           gdcInvDocument.Open
+        
+          dim Master
+          set Master = Creator.GetObject(nil, "TDataSource", "")
+          Master.DataSet = gdcInvDocument
+        
+          dim  countList, k, q, goodkey, workDate, numReceived, qw
+          set gdcInvDocumentLine = Creator.GetObject(nil, "TgdcInvDocumentLine", "")
+          gdcInvDocumentLine.SubType = documenttype
+          gdcInvDocumentLine.DetailField = "parent"
+          gdcInvDocumentLine.MasterField = "id"
+          gdcInvDocumentLine.MasterSource = Master
+          gdcInvDocumentLine.SubSet = "ByParent"
+          gdcInvDocumentLine.Transaction = gdcInvDocument.Transaction
           gdcInvDocumentLine.Open
         
-          dim objLines, countList
+          dim objLines
           set objLines = msgParams.Value("lines")
            'кол-во записей
           countList = objLines.ObjectItemsCount
@@ -1746,7 +1759,7 @@ Objects:
             contactkey = IBLogin.Contactkey
           end if
           if (headCompanykey <> 0 and outletKey <> 0 and orderId <> "") or (orderId = "") then
-            if WEB_IS_EXISTS(documenttype, orderId, orderBarcode, Transaction, ondate) = 0 then
+            if ASX_IS_EXISTS(documenttype, orderId, orderBarcode, Transaction, ondate) = 0 then
               on error resume next
               gdcInvDocument.Insert
               gdcInvDocument.FieldByName("DOCUMENTDATE").AsDateTime = ondate
@@ -1764,7 +1777,7 @@ Objects:
               end if
               on error goto 0
               ' Позиции
-              dim k, q, goodkey, numReceived,  workDate, quantPack, fromCell, qw, qPack
+              dim fromCell, qPack
         
               for k = 0 to countList - 1
                 q = Replace(objLines.ObjectItem(k).simpleValue("weight", 0), ".", Application.DecimalSeparatorSys)
