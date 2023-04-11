@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.21"
+  Version: "1.0.0.22"
   Optional: False
   Internal: True
-  MD5: 9697379200620A135E9F874406E7E935
+  MD5: 87575E9A1B9EBD0687C4D2EE84DAABDA
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -1329,7 +1329,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-03-22T16:46:48+03:00
+      EDITIONDATE: 2023-04-11T18:39:36+03:00
       DISPLAYSCRIPT: | 
         WEB_GETORDERSASX
         
@@ -1385,6 +1385,8 @@ Objects:
               "  doc.id, " & _
               "  doc.NUMBER, " & _
               "  cast('" & depcode & "' as varchar(3)) || doc.number as code, " & _
+              "  con1.NAME as departName, " & vbCrLf & _
+              "  con1.id as departKey, "  & vbCrLf & _
               "  dt.id as documenttypeKey, " & _
               "  dt.name as documenttypeName, " & _
               "  gdoc.USR$MOBILEALIAS as documenttypeAlias, " & _
@@ -1437,7 +1439,7 @@ Objects:
               "order by 3 "
             dim id, number, documentdate, documenttypeName, status, documenttypekey, _
               ondate, headcompanyKey, headcompanyName, headcompanyShcode, _
-              outletKey, outletName, outletShcode, shcode
+              outletKey, outletName, outletShcode, shcode, departKey, departName, departShcode
         
             while not ibsql.EOF
               id = ibsql.FieldByName("id").AsString
@@ -1452,6 +1454,9 @@ Objects:
               outletKey =  ibsql.FieldByName("outletKey").AsString
               outletName = ibsql.FieldByName("outletName").AsString
               outletShcode = ibsql.FieldByName("outletShcode").AsString
+              departKey = ibsql.FieldByName("departKey").AsString
+              departName = ibsql.FieldByName("departName").AsString
+              departShcode = ibsqlDepart.FieldByName("USR$SHCODE").AsString
               ondate = web_formatDate(ibsql.FieldByName("USR$ONDATE").AsDateTime)
               status = "DRAFT"
               if len(CStr(day(ondate))) > 1 then
@@ -1488,6 +1493,12 @@ Objects:
                 """id"":""" & outletKey & """," & _
                 """name"":" & web_JSonString(outletName) & ","  & _
                 """shcode"":""" & outletShcode & """" & _
+                "},"  )
+               Json.Add ( _
+                """depart"": { " & _
+                """id"":""" & departKey & """," & _
+                """name"":" & web_JSonString(departName) & ","  & _
+                """shcode"":""" & departShcode & """" & _
                 "},"  )
               Json.Add ( _
                 """onDate"":""" & ondate & """," )
@@ -1650,7 +1661,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-10T18:41:12+03:00
+      EDITIONDATE: 2023-04-11T19:32:03+03:00
       DISPLAYSCRIPT: | 
         WEB_CREATEOTVESASX
         FINALIZATIONOTVESASX
@@ -1761,6 +1772,13 @@ Objects:
           if (headCompanykey <> 0 and outletKey <> 0 and orderId <> "") or (orderId = "") then
             if ASX_IS_EXISTS(documenttype, orderId, orderBarcode, Transaction, ondate) = 0 then
               on error resume next
+              if deportKey = 0 then
+                typeError = 2
+                errorMessage = " Ошибка при создании шапки документа. Отсутствует подразделение-склад"
+                web_CreateOtvesAsx = finalizationOtvesAsx(errorMessage, typeError, otherHead)
+                exit function
+                ' deportKey = 147023737
+              end if
               gdcInvDocument.Insert
               gdcInvDocument.FieldByName("DOCUMENTDATE").AsDateTime = ondate
               gdcInvDocument.FieldByName("USR$MAINDEPOTKEY").AsVariant = deportKey
@@ -1777,7 +1795,7 @@ Objects:
               end if
               on error goto 0
               ' Позиции
-              dim fromCell, qPack
+              dim fromCell, qPack, quantPack, barcode
         
               for k = 0 to countList - 1
                 q = Replace(objLines.ObjectItem(k).simpleValue("weight", 0), ".", Application.DecimalSeparatorSys)
@@ -1791,6 +1809,7 @@ Objects:
                   end if
                   quantPack = objLines.ObjectItem(k).simpleValue("quantPack", 0)
                   fromCell = trim(objLines.ObjectItem(k).simpleValue("fromCell", ""))
+                  barcode = trim(objLines.ObjectItem(k).simpleValue("barcode", ""))
                 end if
                 if q > 0 then
                   if numReceived = "" then
@@ -1921,33 +1940,33 @@ Objects:
                   end if
                   ' Eсли из ячейки
                   if isFromRemains then
-                    gdcDetail.Insert
-                    gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
-                    gdcDetail.FieldByName("QUANTITY").AsVariant = qw
-                    gdcDetail.FieldByName("USR$QUANTPACK").AsVariant = qPack
-                    gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
-                    gdcDetail.FieldByName("FROM_USR$ASX_PODDON_CODE").AsVariant = barcode
-                    gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PLACE").AsVariant = fromCell
-                    gdcDetail.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
-                    gdcDetail.Post
+                    gdcInvDocumentLine.Insert
+                    gdcInvDocumentLine.FieldByName("GOODKEY").AsInteger = goodkey
+                    gdcInvDocumentLine.FieldByName("QUANTITY").AsVariant = qw
+                    gdcInvDocumentLine.FieldByName("USR$QUANTPACK").AsVariant = qPack
+                    gdcInvDocumentLine.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                    gdcInvDocumentLine.FieldByName("FROM_USR$ASX_PODDON_CODE").AsVariant = barcode
+                    gdcInvDocumentLine.FieldByName("FROM_USR$ASX_NUMBER_PLACE").AsVariant = fromCell
+                    gdcInvDocumentLine.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
+                    gdcInvDocumentLine.Post
                     'Если не из ячейки
                   else
-                    if gdcDetail.Locate("GOODKEY;FROM_USR$ASX_NUMBER_PART;FROM_USR$ASX_DATERECEIVED", _
-                      Array(goodkey, numReceived, workDate) ,"") and toCell = ""  then
-                      gdcDetail.Edit
-                      gdcDetail.FieldByName("quantity").AsCurrency = _
+                    if gdcInvDocumentLine.Locate("GOODKEY;FROM_USR$ASX_NUMBER_PART;FROM_USR$ASX_DATERECEIVED", _
+                      Array(goodkey, numReceived, workDate) ,"") then
+                      gdcInvDocumentLine.Edit
+                      gdcInvDocumentLine.FieldByName("quantity").AsCurrency = _
                         gdcDetail.FieldByName("quantity").AsCurrency + qw
-                      gdcDetail.FieldByName("USR$QUANTPACK").AsCurrency = _
+                      gdcInvDocumentLine.FieldByName("USR$QUANTPACK").AsCurrency = _
                         gdcDetail.FieldByName("USR$QUANTPACK").AsCurrency + qPack
-                      gdcDetail.Post
+                      gdcInvDocumentLine.Post
                     else
-                      gdcDetail.Insert
-                      gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
-                      gdcDetail.FieldByName("QUANTITY").AsVariant = qw
-                      gdcDetail.FieldByName("USR$QUANTPACK").AsVariant = qPack
-                      gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
-                      gdcDetail.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
-                      gdcDetail.Post
+                      gdcInvDocumentLine.Insert
+                      gdcInvDocumentLine.FieldByName("GOODKEY").AsInteger = goodkey
+                      gdcInvDocumentLine.FieldByName("QUANTITY").AsVariant = qw
+                      gdcInvDocumentLine.FieldByName("USR$QUANTPACK").AsVariant = qPack
+                      gdcInvDocumentLine.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                      gdcInvDocumentLine.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
+                      gdcInvDocumentLine.Post
                     end if
                   end if
                   if Err.Number <> 0 then
