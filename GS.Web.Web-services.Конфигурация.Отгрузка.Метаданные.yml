@@ -5,14 +5,15 @@ Properties:
   RUID: 147016954_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Метаданные"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Метаданные"
-  Version: "1.0.0.1"
+  Version: "1.0.0.2"
   Optional: False
   Internal: True
-  MD5: 1E2DE690B6D1566E72B0B3BE533B99A9
+  MD5: EB83521EECC307802E15491256481B9F
 Uses: 
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
   - "147753353_73094925 GS.Общие.Метаданные.Таблицы"
   - "147728891_43451302 Общие данные"
+  - "472939156_1549072347 GS.Отдел сбыта. Заявка1 (организация)"
 Objects: 
   - 
     Properties: 
@@ -100,63 +101,6 @@ Objects:
       OBJECTS: ~
   - 
     Properties: 
-      Class: "TgdcGenerator"
-      RUID: 472283377_1716733059
-      AlwaysOverwrite: False
-      DontRemove: False
-      IncludeSiblings: False
-    Fields: 
-      GENERATORNAME: "USR$GD_GOOD_CODE"
-      RDB$GENERATOR_ID: 25
-      RDB$GENERATOR_INCREMENT: 1
-      RDB$GENERATOR_NAME: "USR$GD_GOOD_CODE               "
-      RDB$INITIAL_VALUE: 0
-      EDITIONDATE: 2012-01-25T14:47:21+03:00
-      RDB$DESCRIPTION: ~
-  - 
-    Properties: 
-      Class: "TgdcTrigger"
-      RUID: 147017016_2053483706
-      AlwaysOverwrite: False
-      DontRemove: False
-      IncludeSiblings: False
-    Fields: 
-      RDB$FLAGS: 1
-      RDB$TRIGGER_INACTIVE: 0
-      RDB$TRIGGER_NAME: "USR$GD_BI_GOOD                 "
-      RDB$TRIGGER_SEQUENCE: 6
-      RDB$TRIGGER_TYPE: 1
-      RELATIONKEY: "147000531_31587988 Справочник ТМЦ, GD_GOOD"
-      RELATIONNAME: "GD_GOOD"
-      TRIGGERNAME: "USR$GD_BI_GOOD"
-      TRIGGER_INACTIVE: 0
-      EDITIONDATE: 2023-03-07T17:26:11+03:00
-      RDB$DESCRIPTION: ~
-      RDB$TRIGGER_SOURCE: | 
-        AS
-        DECLARE VARIABLE GOODGROUP INTEGER;
-        DECLARE VARIABLE g1 INTEGER;
-        BEGIN
-        /*Тело триггера*/
-           select  r.ID
-           from gd_ruid r
-           where r.XID = 147005904 and r.DBID = 63934951
-           into  :g1;
-        
-           GOODGROUP = null;
-           select gg.id
-           from gd_goodgroup gg
-             join gd_goodgroup gg1 on gg1.RB >= gg.rb and gg1.LB <= gg.lb
-           where gg1.ID in (:g1)
-            and  gg.ID = NEW.groupkey
-           into :GOODGROUP;
-           if (not GOODGROUP is null) then
-             begin
-               NEW.USR$SHCODE = GEN_ID(usr$gd_good_code, 1);
-             end
-        END
-  - 
-    Properties: 
       Class: "TgdcTableField"
       RUID: 147957777_1106147832
       AlwaysOverwrite: False
@@ -194,6 +138,48 @@ Objects:
       STRINGLENGTH: ~
       VISIBLE: 1
       EDITIONDATE: 2008-09-30T22:30:52+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147054040_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Код для терминала"
+      FIELDNAME: "USR$SHCODE"
+      FIELDSOURCE: "DTEXT10"
+      FIELDSOURCEKEY: "147000107_486813904 Текст (10), DTEXT10"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Код для терминала"
+      LSHORTNAME: "Код для терминала"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "195454821_468602752 Заявка (организация), USR$BER_CLAIM"
+      RELATIONNAME: "USR$BER_CLAIM"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 10
+      VISIBLE: 1
+      EDITIONDATE: 2023-04-18T16:29:10+03:00
       COMPUTED_VALUE: ~
       DEFSOURCE: ~
       OBJECTS: ~

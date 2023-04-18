@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.22"
+  Version: "1.0.0.23"
   Optional: False
   Internal: True
-  MD5: 87575E9A1B9EBD0687C4D2EE84DAABDA
+  MD5: B4BF72FC4A47E2DDCE1CC617259E695D
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -1329,7 +1329,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-11T18:39:36+03:00
+      EDITIONDATE: 2023-04-18T17:02:56+03:00
       DISPLAYSCRIPT: | 
         WEB_GETORDERSASX
         
@@ -1350,203 +1350,177 @@ Objects:
           dim Json
           dim ibsql, Creator, ibsqlPos, documenttypeAlias
           set Creator = new TCreator
-          dim ibsqldepart
-          set ibsqldepart  = Creator.GetObject(nil, "TIBSQL", "")
-          ibsqldepart.Transaction = Transaction
-          ibsqldepart.SQL.Text = _
-            " SELECT distinct " & _
-            "   gg.usr$vbpf_departkey, con.USR$SHCODE " & _
-            " FROM usr$ber_claim c " & _
-            "   left join usr$ber_claimline cl on cl.MASTERKEY = c.DOCUMENTKEY " & _
-            "   left join gd_good g on g.ID = cl.USR$GOODKEY " & _
-            "   LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
-            "   LEFT JOIN GD_CONTACT con ON gg.usr$vbpf_departkey = con.id " & _
-            "WHERE  c.USR$ONDATE >= :datebegin " & _
-            "  and c.USR$ONDATE <= :dateend " & _
-            "  and not  gg.usr$vbpf_departkey is null "
-          ibsqldepart.ParamByName("datebegin").AsDateTime = datebegin
-          ibsqldepart.ParamByName("dateend").AsDateTime = dateend
-          ibsqldepart.ExecQuery
           set Json = Creator.GetObject(nil, "TStringList", "")
           set ibsql =  Creator.GetObject(nil,"TIBSQL","")
           ibsql.Transaction = Transaction
           dim d, m, ORD_NO, depcode, p
-          while not  ibsqldepart.EOF
-            depcode = ibsqlDepart.FieldByName("USR$SHCODE").AsString
+          
+          ibsql.Close
+          ibsql.SQL.Text = _
+           "SELECT distinct " & vbCrLf & _
+           "  doc.DOCUMENTDATE, " & vbCrLf & _
+           "  doc.id, " & vbCrLf & _
+           "  doc.NUMBER, " & vbCrLf & _
+           "  con1.USR$SHCODE, " & vbCrLf & _
+           "  con1.NAME as departName, " & vbCrLf & _
+           "  con1.id as departKey, " & vbCrLf & _
+           "  dt.id as documenttypeKey, " & vbCrLf & _
+           "  dt.name as documenttypeName, " & vbCrLf & _
+           "  gdoc.USR$MOBILEALIAS as documenttypeAlias, " & vbCrLf & _
+           "  b.USR$ONDATE, " & vbCrLf & _
+           "  headcompany.ID as headcompanyKey, " & vbCrLf & _
+           "  headcompany.NAME as headcompanyName, " & vbCrLf & _
+           "  headcompany.USR$SHCODE as headcompanyShcode, " & vbCrLf & _
+           "  outlet.ID as outletKey, " & vbCrLf & _
+           "  outlet.NAME as outletName, " & vbCrLf & _
+           "  outlet.USR$SHCODE as outletShcode " & vbCrLf & _
+           "FROM " & vbCrLf & _
+           "  usr$ber_claim  b " & vbCrLf & _
+           "  left join gd_contact headcompany on headcompany.ID = b.USR$HEADCOMPANYKEY " & vbCrLf & _
+           "  left join gd_contact outlet on outlet.ID = b.USR$CONTACTKEY " & vbCrLf & _
+           "  join gd_document doc on doc.ID = b.DOCUMENTKEY " & vbCrLf & _
+           "  left join gd_documenttype dt on dt.ID = doc.DOCUMENTTYPEKEY " & vbCrLf & _
+           "  left join USR$GDMN_DOCUMENTS gdoc on gdoc.USR$DOCUMENTTYPE = dt.ID " & vbCrLf & _
+           "    and gdoc.USR$VERSION = :ver " & vbCrLf & _
+           "  join usr$ber_claimline bl on bl.MASTERKEY = b.DOCUMENTKEY and bl.USR$QUANTITY > 0 " & vbCrLf & _
+           "  left join gd_good g on g.ID = bl.USR$GOODKEY " & vbCrLf & _
+           "  left join gd_goodgroup gg ON g.groupkey = gg.id " & vbCrLf & _
+           "  left join gd_contact con1 ON b.USR$SHCODE = con1.USR$SHCODE " & vbCrLf & _
+           "WHERE " & vbCrLf & _
+           "  b.USR$ONDATE >= :datebegin " & vbCrLf & _
+           "  and b.USR$ONDATE <= :dateend " & vbCrLf & _
+           "ORDER BY 1 "
+        
+          ibsql.ParamByName("ver").AsInteger = version
+          ibsql.ParamByName("datebegin").AsDateTime = datebegin
+          ibsql.ParamByName("dateend").AsDateTime = dateend
+          ibsql.ExecQuery
+          set ibsqlPos = Creator.GetObject(nil,"TIBSQL","")
+          ibsqlPos.Transaction = Transaction
+          ibsqlPos.SQL.Text = _
+            "select " & _
+            "  bl.DOCUMENTKEY as id, " & _
+            "  g.ID as goodkey, " & _
+            "  g.name as goodname, " & _
+            "  bl.USR$QUANTITY as quantity, " & _
+            "  bl.USR$PACKAGETYPE as packagekey, " & _
+            "  p.USR$NAME as packagename " & _
+            "from  usr$ber_claimline bl " & _
+            "  left join gd_good g on g.ID = bl.USR$GOODKEY " & _
+            "  left join  USR$SB_PACKAGETYPE p ON p.ID  =  bl.USR$PACKAGETYPE " & _
+            "where bl.MASTERKEY = :masterkey " & _
+            "order by 3 "
+          dim id, number, documentdate, documenttypeName, status, documenttypekey, _
+            ondate, headcompanyKey, headcompanyName, headcompanyShcode, _
+            outletKey, outletName, outletShcode, shcode, departKey, departName, departShcode
+        
+          while not ibsql.EOF
+            depcode = ibsql.FieldByName("USR$SHCODE").AsString
             p = len(depcode)
             while (p < 3)
               depcode = "0" & depcode
               p = p + 1
             wend
-            ibsql.Close
-            ibsql.SQL.Text = _
-              "SELECT distinct " & _
-              "  doc.DOCUMENTDATE, " & _
-              "  doc.id, " & _
-              "  doc.NUMBER, " & _
-              "  cast('" & depcode & "' as varchar(3)) || doc.number as code, " & _
-              "  con1.NAME as departName, " & vbCrLf & _
-              "  con1.id as departKey, "  & vbCrLf & _
-              "  dt.id as documenttypeKey, " & _
-              "  dt.name as documenttypeName, " & _
-              "  gdoc.USR$MOBILEALIAS as documenttypeAlias, " & _
-              "  b.USR$ONDATE, " & _
-              "  headcompany.ID as headcompanyKey, " & _
-              "  headcompany.NAME as headcompanyName, " & _
-              "  headcompany.USR$SHCODE as headcompanyShcode, " & _
-              "  outlet.ID as outletKey, " & _
-              "  outlet.NAME as outletName, " & _
-              "  outlet.USR$SHCODE as outletShcode " & _
-              "FROM " & _
-              "  usr$ber_claim  b " & _
-              "  left join gd_contact headcompany on headcompany.ID = b.USR$HEADCOMPANYKEY " & _
-              "  left join gd_contact outlet on outlet.ID = b.USR$CONTACTKEY " & _
-              "  join gd_document doc on doc.ID = b.DOCUMENTKEY " & _
-              "  left join gd_documenttype dt on dt.ID = doc.DOCUMENTTYPEKEY " & _
-              "  left join USR$GDMN_DOCUMENTS gdoc on gdoc.USR$DOCUMENTTYPE = dt.ID " & _
-              "    and gdoc.USR$VERSION = :ver " & _
-              "  join usr$ber_claimline bl on bl.MASTERKEY = b.DOCUMENTKEY and bl.USR$QUANTITY > 0 " & _
-              "  left join gd_good g on g.ID = bl.USR$GOODKEY " & _
-              "  left join gd_goodgroup gg ON g.groupkey = gg.id " & _
-              "  left join gd_contact con1 ON gg.usr$vbpf_departkey = con1.id " & _
-              "WHERE " & _
-              "  b.USR$ONDATE >= :datebegin " & _
-              "  and b.USR$ONDATE <= :dateend " & _
-              "  and (con1.id = :depart or con1.parent = :depart ) " & _
-              "ORDER BY 1 "
-            ibsql.ParamByName("ver").AsInteger = version
-            ibsql.ParamByName("datebegin").AsDateTime = datebegin
-            ibsql.ParamByName("dateend").AsDateTime = dateend
-            ibsql.ParamByName("depart").AsInteger = ibsqlDepart.FieldByName("usr$vbpf_departkey").AsInteger
-            ibsql.ExecQuery
-            set ibsqlPos = Creator.GetObject(nil,"TIBSQL","")
-            ibsqlPos.Transaction = Transaction
-            ibsqlPos.SQL.Text = _
-              "select " & _
-              "  bl.DOCUMENTKEY as id, " & _
-              "  g.ID as goodkey, " & _
-              "  g.name as goodname, " & _
-              "  bl.USR$QUANTITY as quantity, " & _
-              "  bl.USR$PACKAGETYPE as packagekey, " & _
-              "  p.USR$NAME as packagename " & _
-              "from  usr$ber_claimline bl " & _
-              "  left join gd_good g on g.ID = bl.USR$GOODKEY " & _
-              "  left join  USR$SB_PACKAGETYPE p ON p.ID  =  bl.USR$PACKAGETYPE " & _
-              "  left join GD_GOODGROUP gg ON g.groupkey = gg.id " & _
-              "  left join GD_CONTACT con1 ON gg.usr$vbpf_departkey = con1.id " & _
-              "where bl.MASTERKEY = :masterkey " & _
-               " and (con1.id = :depart or con1.parent = :depart ) " & _
-              "order by 3 "
-            dim id, number, documentdate, documenttypeName, status, documenttypekey, _
-              ondate, headcompanyKey, headcompanyName, headcompanyShcode, _
-              outletKey, outletName, outletShcode, shcode, departKey, departName, departShcode
-        
-            while not ibsql.EOF
-              id = ibsql.FieldByName("id").AsString
-              number = ibsql.FieldByName("number").AsString
-              documentdate = web_formatDate(ibsql.FieldByName("DOCUMENTDATE").AsDateTime)
-              documenttypeKey = ibsql.FieldByName("documenttypeKey").AsString
-              documenttypeName = ibsql.FieldByName("documenttypeName").AsString
-              documenttypeAlias = ibsql.FieldByName("documenttypeAlias").AsString
-              headcompanyKey =  ibsql.FieldByName("headcompanyKey").AsString
-              headcompanyName = ibsql.FieldByName("headcompanyName").AsString
-              headcompanyShcode = ibsql.FieldByName("headcompanyShcode").AsString
-              outletKey =  ibsql.FieldByName("outletKey").AsString
-              outletName = ibsql.FieldByName("outletName").AsString
-              outletShcode = ibsql.FieldByName("outletShcode").AsString
-              departKey = ibsql.FieldByName("departKey").AsString
-              departName = ibsql.FieldByName("departName").AsString
-              departShcode = ibsqlDepart.FieldByName("USR$SHCODE").AsString
-              ondate = web_formatDate(ibsql.FieldByName("USR$ONDATE").AsDateTime)
-              status = "DRAFT"
-              if len(CStr(day(ondate))) > 1 then
-                d = CStr(day(ondate))
+            id = ibsql.FieldByName("id").AsString
+            number = ibsql.FieldByName("number").AsString
+            documentdate = web_formatDate(ibsql.FieldByName("DOCUMENTDATE").AsDateTime)
+            documenttypeKey = ibsql.FieldByName("documenttypeKey").AsString
+            documenttypeName = ibsql.FieldByName("documenttypeName").AsString
+            documenttypeAlias = ibsql.FieldByName("documenttypeAlias").AsString
+            headcompanyKey =  ibsql.FieldByName("headcompanyKey").AsString
+            headcompanyName = ibsql.FieldByName("headcompanyName").AsString
+            headcompanyShcode = ibsql.FieldByName("headcompanyShcode").AsString
+            outletKey =  ibsql.FieldByName("outletKey").AsString
+            outletName = ibsql.FieldByName("outletName").AsString
+            outletShcode = ibsql.FieldByName("outletShcode").AsString
+            departKey = ibsql.FieldByName("departKey").AsString
+            departName = ibsql.FieldByName("departName").AsString
+            departShcode = ibsql.FieldByName("USR$SHCODE").AsString
+            ondate = web_formatDate(ibsql.FieldByName("USR$ONDATE").AsDateTime)
+            status = "DRAFT"
+            if len(CStr(day(ondate))) > 1 then
+              d = CStr(day(ondate))
+            else
+              d = "0" & CStr(day(ondate))
+            end if
+            if len(CStr(month(ondate))) > 1 then
+              m = CStr(month(ondate))
+            else
+              m = "0" & CStr(month(ondate))
+            end if
+            ORD_NO =  d & m & CStr(year(ondate))
+            shcode = ORD_NO &  depcode & number
+            Json.Add ( _
+             "{" & _
+              """id"":""" & id & ""","  & _
+              """number"":""" & number & """," & _
+              """documentDate"":""" & documentdate & """," & _
+              """documentType"":" & _
+              "{""id"":""" & documenttypeKey & """," & _
+              """name"":""" & documenttypeAlias & """," & _
+              """description"":""" & documenttypeName & """}," & _
+              """status"":""" & status & """, ")
+            Json.Add ("""head"":{")
+            Json.Add ( _
+              """contact"": { " & _
+              """id"":""" & headcompanyKey & """," & _
+              """name"":" & web_JSonString(headcompanyName) & ","  & _
+              """shcode"":""" & headcompanyShcode & """" & _
+              "},"  )
+            Json.Add ( _
+              """outlet"": { " & _
+              """id"":""" & outletKey & """," & _
+              """name"":" & web_JSonString(outletName) & ","  & _
+              """shcode"":""" & outletShcode & """" & _
+              "},"  )
+             Json.Add ( _
+              """depart"": { " & _
+              """id"":""" & departKey & """," & _
+              """name"":" & web_JSonString(departName) & ","  & _
+              """shcode"":""" & departShcode & """" & _
+              "},"  )
+            Json.Add ( _
+              """onDate"":""" & ondate & """," )
+            Json.Add ( _
+              """barcode"":""" & shcode & """" )
+            Json.Add ("},")
+            'Позиции
+            ibsqlPos.Close
+            ibsqlPos.ParamByName("masterkey").AsInteger = ibsql.FieldByName("id").AsString
+            ibsqlPos.ExecQuery
+            Json.Add ("""lines"":[")
+            dim package
+            while not ibsqlPos.EOF
+              if ibsqlPos.FieldByName("packagekey").IsNull then
+                package = ""
               else
-                d = "0" & CStr(day(ondate))
+                package = """packagekey"":" & _
+                  "{""id"":" & web_JSonString(ibsqlPos.FieldByName("packageKey").AsString) & "," & _
+                  """name"":" & web_JSonString(ibsqlPos.FieldByName("packageName").AsString) & "},"
               end if
-              if len(CStr(month(ondate))) > 1 then
-                m = CStr(month(ondate))
+              Json.Add ("{" & _
+                """id"":""" & ibsqlPos.FieldByName("id").AsString & ""","  & _
+                """weight"":" & ibsqlPos.FieldByName("quantity").AsString & ","  & _
+                package & _
+                """good"":" & _
+                "{""id"":" & web_JSonString(ibsqlPos.FieldByName("goodKey").AsString) & "," & _
+                """name"":" & web_JSonString(ibsqlPos.FieldByName("goodName").AsString) & "}" )
+              ibsqlPos.Next
+              if not ibsqlPos.EOF then
+                Json.Add ("},")
               else
-                m = "0" & CStr(month(ondate))
-              end if
-              ORD_NO =  d & m & CStr(year(ondate))
-              shcode = ORD_NO &  ibsql.FieldByName("code").AsString
-              Json.Add ( _
-               "{" & _
-                """id"":""" & id & ""","  & _
-                """number"":""" & number & """," & _
-                """documentDate"":""" & documentdate & """," & _
-                """documentType"":" & _
-                "{""id"":""" & documenttypeKey & """," & _
-                """name"":""" & documenttypeAlias & """," & _
-                """description"":""" & documenttypeName & """}," & _
-                """status"":""" & status & """, ")
-              Json.Add ("""head"":{")
-              Json.Add ( _
-                """contact"": { " & _
-                """id"":""" & headcompanyKey & """," & _
-                """name"":" & web_JSonString(headcompanyName) & ","  & _
-                """shcode"":""" & headcompanyShcode & """" & _
-                "},"  )
-              Json.Add ( _
-                """outlet"": { " & _
-                """id"":""" & outletKey & """," & _
-                """name"":" & web_JSonString(outletName) & ","  & _
-                """shcode"":""" & outletShcode & """" & _
-                "},"  )
-               Json.Add ( _
-                """depart"": { " & _
-                """id"":""" & departKey & """," & _
-                """name"":" & web_JSonString(departName) & ","  & _
-                """shcode"":""" & departShcode & """" & _
-                "},"  )
-              Json.Add ( _
-                """onDate"":""" & ondate & """," )
-              Json.Add ( _
-                """barcode"":""" & shcode & """" )
-              Json.Add ("},")
-              'Позиции
-              ibsqlPos.Close
-              ibsqlPos.ParamByName("masterkey").AsInteger = ibsql.FieldByName("id").AsString
-              ibsqlPos.ParamByName("depart").AsInteger = ibsqlDepart.FieldByName("usr$vbpf_departkey").AsInteger
-              ibsqlPos.ExecQuery
-              Json.Add ("""lines"":[")
-              dim package
-              while not ibsqlPos.EOF
-                if ibsqlPos.FieldByName("packagekey").IsNull then
-                  package = ""
-                else
-                  package = """packagekey"":" & _
-                    "{""id"":" & web_JSonString(ibsqlPos.FieldByName("packageKey").AsString) & "," & _
-                    """name"":" & web_JSonString(ibsqlPos.FieldByName("packageName").AsString) & "},"
-                end if
-                Json.Add ("{" & _
-                  """id"":""" & ibsqlPos.FieldByName("id").AsString & ""","  & _
-                  """weight"":" & ibsqlPos.FieldByName("quantity").AsString & ","  & _
-                  package & _
-                  """good"":" & _
-                  "{""id"":" & web_JSonString(ibsqlPos.FieldByName("goodKey").AsString) & "," & _
-                  """name"":" & web_JSonString(ibsqlPos.FieldByName("goodName").AsString) & "}" )
-                ibsqlPos.Next
-                if not ibsqlPos.EOF then
-                  Json.Add ("},")
-                else
-                  Json.Add ("}")
-                end if
-              wend
-              Json.Add ("]")
-              ibsql.Next
-              if not ibsql.EOF then
-                 Json.Add ("},")
-              else
-                 Json.Add ("}")
+                Json.Add ("}")
               end if
             wend
-            ibsqldepart.Next
-            if not  ibsqldepart.EOF then
-              Json.Add (",")
+            Json.Add ("]")
+            ibsql.Next
+            if not ibsql.EOF then
+               Json.Add ("},")
+            else
+               Json.Add ("}")
             end if
           wend
+        
          ' 'Пока для формирования файла, потом убрать
         '  Dim fs, f, LocalPath, JSONFileName
         '  LocalPath = "c:\d\"

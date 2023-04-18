@@ -1,0 +1,1226 @@
+%YAML 1.1
+--- 
+StructureVersion: "1.0"
+Properties: 
+  RUID: 1529090537_2075031366
+  Name: "Экспрот в адресный склад"
+  Caption: "Экспрот в адресный склад"
+  Version: "1.0.0.2"
+  Optional: False
+  Internal: True
+  MD5: 5422B6EF50437F6F6E56BDC641039078
+Uses: 
+  - "147753351_73094925 GS.Общие.Метаданные.Домены"
+Objects: 
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 472283412_1716733059
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 1529090532_2075031366
+    Fields: 
+      NAME: "SHCODE_CURRE"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2012-01-25T17:42:51+03:00
+      DISPLAYSCRIPT: | 
+        SHCODE_CURRE
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QDAAAATlVNAwAAAE5VTQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNURkxQUg==
+      SCRIPT: | 
+        Option Explicit
+        function SHCODE_CURRE(num)
+           dim pos,  temp
+            Pos = InStr(num,",")
+            if pos > 0 then
+              temp = num
+              SHCODE_CURRE = left(temp,pos - 1) & "." & Mid(num, Pos + 1, Len(num) - pos)
+            else
+              SHCODE_CURRE = num
+            end if
+        End function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1529090532_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "SHCODE_ORDERS_NEW"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-04-15T19:10:44+03:00
+      DISPLAYSCRIPT: | 
+        SHCODE_ORDERS_NEW
+        SHCODE_ORDERS_NEW_ROLLBACK
+        EXPORT_ORDER_TO_ASX
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QGAAAAT05EQVRFDgAAAMTg8uAg7vLj8PPn6ug6AAAAAAAAAAAAAAAAAgAAAAAAAAAA
+        AAAAAEZOU1RQUlNUDgAAAFBBVEhUT1BVVExPQ0FMDgAAAFBBVEhUT1BVVExPQ0FMAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUDwAAAFBBVEhUT1BVVExPQ0FMMg8AAABQQVRIVE9QVVRM
+        T0NBTDIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        '#include SHCODE_CURRE
+        Option Explicit
+        Function SHCODE_ORDERS_NEW(ondate, pathtoputlocal, pathtoputlocal2)
+          dim Creator, Transaction, UserDocument,  gdcUserDocument, gdcUserDocumentLine, UpdateOrder, _
+            selectStr, ORD_NO, SGood, ibsqlDetail, fso, ibsqldepart, doc_no, IdOriginal, OriginalDat, _
+            ibsqldivide, ibsqlnd, exTransaction, exDatabase, gdcConst, Path, ibsqlGetID, ibsqlGetNextID, _
+            ibsqlInsertCompany, ibsqlInsertDepart, ibsqlSearchGood, ibsqlInsertROAD, ibsqlInsertOrder, _
+            ibsqlInsertOrderLine
+            
+            
+          set Creator = new TCreator
+          set Transaction = Creator.GetObject(nil, "TIBTransaction", "")
+          Transaction.DefaultDatabase = IBLogin.Database
+          Transaction.Params.Add("read_committed")
+          Transaction.Params.Add("rec_version")
+          Transaction.Params.Add("nowait")
+          if not Transaction.InTransaction  then
+            Transaction.StartTransaction
+          end if
+          
+          set gdcConst = Creator.GetObject(null, "TgdcConst", "")
+        
+          Path = gdcConst.QGetValueByID(gdcBaseManager.GetIDByRUIDString("1529089701_2075031366"))
+        
+          set exDatabase = Creator.GetObject(NULL, "TIBDatabase", "")
+          exDatabase.DatabaseName = Path
+        
+          exDatabase.LoginPrompt = False
+          exDatabase.Params.Add("user_name=SYSDBA")
+          exDatabase.Params.Add("password=masterkey")
+          exDatabase.Params.Add("lc_ctype=WIN1251")
+        
+          on error resume next
+          exDatabase.Connected = True
+          on error goto 0
+        
+          if Err.Description <> "" then
+            if not isSilent then
+              call Application.MessageBox("Ошибка при подключении к базе адресного хранения!!!", "Внимание", vbOkOnly + vbSystemModal)
+            else
+              call gdcBaseManager.ExecSingleQuery("insert into USR$ASX_LOG_ERROR (usr$comment) VALUES ('Ошибка при подключении к базе адресного хранения:" & Err.Description & "')", _
+                Transaction)
+            end if
+            Transaction.Commit
+            exit function
+          end if
+        
+          set exTransaction = Creator.GetObject(NULL, "TIBTransaction", "")
+          exTransaction.DefaultDatabase = exDatabase
+          exTransaction.Params.Add("read_committed")
+          exTransaction.Params.Add("rec_version")
+          exTransaction.Params.Add("nowait")
+        
+          exTransaction.StartTransaction
+          
+          set ibsqlGetID = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlGetID.Transaction = exTransaction
+          ibsqlGetID.SQL.Text = "select id from gd_ruid where xid = :xid and dbid = :dbid"
+        
+          set ibsqlGetNextID = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlGetNextID.Transaction = exTransaction
+          ibsqlGetNextID.SQL.Text = "execute block (xid DFOREIGNKEY = :xid, dbid DFOREIGNKEY = :dbid) " & _
+          "  RETURNS (ID DINTKEY) " & _
+          " AS " & _
+          " BEGIN " & _
+          "   if (xid = 650010) then " & _
+          "     select companykey from gd_ourcompany into :id; " & _
+          "   else " & _
+          "   begin " & _
+          "     EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :id;  " & _
+          "     INSERT INTO GD_RUID (ID, XID, DBID, MODIFIED, EDITORKEY) VALUES (:ID, :XID, :DBID, CURRENT_TIMESTAMP, 650002); " & _
+          "   end " & _
+          "   SUSPEND; " & _
+          " END "
+        
+          set ibsqlInsertCompany = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertCompany.Transaction = exTransaction
+          ibsqlInsertCompany.SQL.Text = "EXECUTE BLOCK (ID DINTKEY = :ID, name VARCHAR(60) = :name, fullname VARCHAR(120) = :fullname) " & _
+          " AS " & _
+          " BEGIN " & _
+          "   INSERT INTO GD_CONTACT (ID, PARENT, NAME, CONTACTTYPE) VALUES (:ID, 650001, :name, 3); " & _
+          "   INSERT INTO GD_COMPANY (CONTACTKEY, FULLNAME) VALUES (:ID, :fullname); " & _
+          " END "
+        
+          set ibsqlSearchGood = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlSearchGood.Transaction = exTransaction
+          ibsqlSearchGood.SQL.Text = "select id from gd_good where usr$shcode = :code"
+        
+          set ibsqlInsertDepart = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertDepart.Transaction = exTransaction
+          ibsqlInsertDepart.SQL.Text = "EXECUTE BLOCK (ID DINTKEY = :ID, PARENT DFOREIGNKEY = :PARENT, name VARCHAR(60) = :name) " & _
+          " AS " & _
+          " BEGIN " & _
+          "   INSERT INTO GD_CONTACT (ID, PARENT, NAME, CONTACTTYPE) VALUES (:ID, :parent, :name, 4); " & _
+          " END "
+        
+          set ibsqlInsertROAD = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertROAD.Transaction = exTransaction
+          ibsqlInsertROAD.SQL.Text = "INSERT INTO USR$VMK_ROAD (ID, USR$ROAD_NAME) VALUES (:ID, :NAME)"
+        
+          set ibsqlInsertOrder = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertOrder.Transaction = exTransaction
+          ibsqlInsertOrder.SQL.Text = "execute block (number VARCHAR(20) = :number, documentdate DDATE = :documentdate, ondate DDATE = :ondate, customerkey DFOREIGNKEY = :customerkey, " & vbCrLf & _
+            "   departkey DFOREIGNKEY = :departkey, roadkey DFOREIGNKEY = :roadkey, original_id DFOREIGNKEY = :original_id) " & vbCrLf & _
+            "  RETURNS (ID DFOREIGNKEY) " & _
+            "as " & vbCrLf & _
+            "  declare documenttypekey dintkey; " & vbCrLf & _
+            "  declare companykey dintkey; " & vbCrLf & _
+            "   " & vbCrLf & _
+            "begin " & vbCrLf & _
+            "  EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :id; " & vbCrLf & _
+            "  select companykey from gd_ourcompany " & vbCrLf & _
+            "  into :companykey; " & vbCrLf & _
+            "   " & vbCrLf & _
+            "  select id from gd_documenttype " & vbCrLf & _
+            "  where ruid = '195454846_468602752' " & vbCrLf & _
+            "  into :documenttypekey; " & vbCrLf & _
+            "   " & vbCrLf & _
+            "  INSERT INTO gd_document (ID, CREATORKEY, EDITORKEY, NUMBER, DOCUMENTDATE, DOCUMENTTYPEKEY, COMPANYKEY) " & vbCrLf & _
+            "    VALUES (:id, 650002, 650002, :number, :documentdate, :documenttypekey, :companykey); " & vbCrLf & _
+            "     " & vbCrLf & _
+            "  INSERT INTO usr$ber_claim (DOCUMENTKEY, USR$HEADCOMPANYKEY, USR$CONTACTKEY, USR$ROADKEY, USR$ORIGINAL_ID, USR$ONDATE) " & vbCrLf & _
+            "    VALUES (:id, :customerkey, :departkey, :roadkey, :original_id, :ondate); " & vbCrLf & _
+            " " & vbCrLf & _
+            "  SUSPEND;" & vbCrLf & _
+            "end "
+        
+          set ibsqlInsertOrderLine = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertOrderLine.Transaction = exTransaction
+          ibsqlInsertOrderLine.SQL.Text = "execute block (parent DFOREIGNKEY = :parent, goodkey DFOREIGNKEY = :goodkey, quantity DQUANTITY = :quantity, quantity_mest DQUANTITY = :quantity_mest) " & vbCrLf & _
+            "  RETURNS (ID DFOREIGNKEY) " & _
+            "as " & vbCrLf & _
+            "  declare documenttypekey dintkey; " & vbCrLf & _
+            "  declare companykey dintkey; " & vbCrLf & _
+            "   " & vbCrLf & _
+            "begin " & vbCrLf & _
+            "  EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :id; " & vbCrLf & _
+            "  INSERT INTO gd_document (ID, PARENT, CREATORKEY, EDITORKEY, NUMBER, DOCUMENTDATE, DOCUMENTTYPEKEY, COMPANYKEY) " & _
+            "    SELECT :id, :parent, creatorkey, editorkey, number, documentdate, documenttypekey, companykey from " & _
+            "      gd_document where id = :parent; " & _
+            "  INSERT INTO usr$ber_claimline (DOCUMENTKEY, MASTERKEY, USR$GOODKEY, USR$QUANTITY, USR$QUANTITY_MEST) " & vbCrLf & _
+            "    VALUES (:id, :parent, :GOODKEY, :QUANTITY, :QUANTITY_MEST); " & vbCrLf & _
+            " " & vbCrLf & _
+            "  SUSPEND;" & vbCrLf & _
+            "end "
+        
+        
+          set UpdateOrder = Creator.GetObject(nil, "TIBSQL", "")
+          UpdateOrder.Transaction = Transaction
+          UpdateOrder.SQL.Text = _
+            "update USR$BER_CLAIM u set u.USR$SH_MOVED = 1 where u.documentkey = :documentkey "
+          set ibsqlDetail = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqlDetail.Transaction = Transaction
+          ibsqlDetail.SQL.Text = _
+            "select " & _
+            "  g.USR$SHCODE, g.name, " & _
+            "  sum(cl.USR$QUANTITY) as USR$QUANTITY, SUM(cl.USR$QUANTITY_MEST) as USR$QUANTITY_MEST " & _
+            "from usr$ber_claimline cl " & _
+            "  left join gd_good g on g.ID = cl.USR$GOODKEY " & _
+            "   LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+            "   LEFT JOIN GD_CONTACT con ON gg.usr$vbpf_departkey = con.id " & _
+            "where cl.MASTERKEY = :MASTERKEY and (con.id = :deptkey or con.parent = :deptkey) " & _
+            "  and coalesce(cl.USR$QUANTITY, 0) > 0 " & _
+            "group by 1, 2 "
+        
+          set ibsqldepart  = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqldepart.Transaction = Transaction
+          ibsqldepart.SQL.Text = _
+            "select distinct " & _
+            "  gg.usr$vbpf_departkey, con.USR$SHCODE, con.name " & _
+            "from usr$ber_claimline cl " & _
+            "  left join gd_good g on g.ID = cl.USR$GOODKEY " & _
+            "  LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+            "   LEFT JOIN GD_CONTACT con ON gg.usr$vbpf_departkey = con.id " & _
+            "where cl.MASTERKEY = :MASTERKEY " & _
+            "  and coalesce(cl.USR$QUANTITY, 0) > 0 "
+            
+          set ibsqldivide  = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqldivide.Transaction = Transaction
+          ibsqldivide.SQL.Text = _
+            "select " & _
+            "  cl.DOCUMENTKEY, gg.usr$vbpf_departkey " & _
+            "from usr$ber_claimline cl " & _
+            "  left join gd_good g on g.ID = cl.USR$GOODKEY " & _
+            "  LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+            "where cl.MASTERKEY = :MASTERKEY " & _
+            "  and coalesce(cl.USR$QUANTITY, 0) > 0 " & _
+            "  and gg.USR$GLOBALGROUPKEY in(:gg1, :gg2, :gg3, :gg4) "
+          ibsqldivide.ParamByName("gg1").AsInteger =  gdcBaseManager.GetIDByRUIDString("147109789_930312631")
+          ibsqldivide.ParamByName("gg2").AsInteger =  gdcBaseManager.GetIDByRUIDString("147057896_912108414")
+          ibsqldivide.ParamByName("gg3").AsInteger =  gdcBaseManager.GetIDByRUIDString("1057651518_1691301355")
+          ibsqldivide.ParamByName("gg4").AsInteger =  gdcBaseManager.GetIDByRUIDString("708648809_1913435101")
+        
+          set ibsqlnd  = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqlnd.Transaction = Transaction
+          ibsqlnd.SQL.Text = _
+            "select " & _
+            "  count(cl.DOCUMENTKEY) as n " & _
+            "from usr$ber_claimline cl " & _
+            "  left join gd_good g on g.ID = cl.USR$GOODKEY " & _
+            "  LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+            "where cl.MASTERKEY = :MASTERKEY " & _
+            "  and coalesce(cl.USR$QUANTITY, 0) > 0 " & _
+            "  and not gg.USR$GLOBALGROUPKEY in(:gg1, :gg2, :gg3, :gg4) "
+          ibsqlnd.ParamByName("gg1").AsInteger =  gdcBaseManager.GetIDByRUIDString("147109789_930312631")
+          ibsqlnd.ParamByName("gg2").AsInteger =  gdcBaseManager.GetIDByRUIDString("147057896_912108414")
+          ibsqlnd.ParamByName("gg3").AsInteger =  gdcBaseManager.GetIDByRUIDString("1057651518_1691301355")
+          ibsqlnd.ParamByName("gg4").AsInteger =  gdcBaseManager.GetIDByRUIDString("708648809_1913435101")
+          set SGood = Creator.GetObject(nil, "TStringList", "")
+          Except SHCODE_ORDERS_NEW_rollback(transaction)
+          set UserDocument = new TVBUserDocument
+          call UserDocument.InitDocument("195454846_468602752", Transaction, Transaction)
+          set gdcUserDocument = UserDocument.gdcUserDocument
+          selectStr = _
+            " coalesce(U.USR$SH_MOVED, 0) = 0  and (coalesce(U.USR$ISSKLAD, 0) = 0 or (coalesce(U.USR$ISSKLAD, 0) = 1 and coalesce(U.USR$ISSUM, 0) = 1)) and u.usr$ondate = '" & ondate & "' "
+          'call gdcUserDocument.ChooseOrderItemsSelf(False, "", "",selectStr)
+          if  gdcUserDocument.ChooseOrderItemsSelf(False, "", "",selectStr)    then
+            if gdcUserDocument.SelectedId.Count = 0 then
+              Exit Function
+            end if
+          else
+            Exit Function
+          end if
+          gdcUserDocument.Close
+          gdcUserDocument.SubSet = "OnlySelected"
+          gdcUserDocument.Open
+          gdcUserDocument.First
+          dim d, m, ibsqlUpdate
+          set ibsqlUpdate = Creator.GetObject(nil, "TIBSQL", "")
+          ibsqlUpdate.Transaction = Transaction
+          while not gdcUserDocument.EOF
+            IdOriginal = gdcUserDocument.FieldByName("DOCUMENTKEY").AsInteger
+            dim company, headcompany, tovaroved, road, ondate1, billdate, IDPosition,  OriginalDate, issum
+            OriginalDate = gdcUserDocument.FieldByName("Documentdate").AsDateTime
+            company = gdcUserDocument.FieldByName("USR$CONTACTKEY").AsInteger
+            headcompany = gdcUserDocument.FieldByName("USR$HEADCOMPANYKEY").AsInteger
+            tovaroved = gdcUserDocument.FieldByName("USR$TOVAROVED").AsInteger
+            road = gdcUserDocument.FieldByName("USR$ROADKEY").AsInteger
+            ondate1 = gdcUserDocument.FieldByName("usr$ondate").AsDateTime
+            billdate  = gdcUserDocument.FieldByName("usr$vbpf_billdate").AsDateTime
+            issum = gdcUserDocument.FieldByName("USR$ISSUM").AsInteger
+            ' охлажденные в отдельную заявку
+            ibsqldivide.Close
+            ibsqldivide.ParamByName("masterkey").AsInteger = gdcUserDocument.FieldByName("DOCUMENTKEY").AsInteger
+            ibsqldivide.ExecQuery
+            ibsqlnd.Close
+            ibsqlnd.ParamByName("masterkey").AsInteger = IdOriginal
+            ibsqlnd.ExecQuery
+            if ibsqldivide.RecordCount > 0  and ibsqlnd.FieldByName("n").AsInteger > 0  then
+              gdcUserDocument.Insert
+              gdcUserDocument.FieldByName("USR$CONTACTKEY").AsInteger = company
+              gdcUserDocument.FieldByName("USR$HEADCOMPANYKEY").AsInteger = headcompany
+              gdcUserDocument.FieldByName("USR$TOVAROVED").AsInteger = tovaroved
+              gdcUserDocument.FieldByName("USR$ROADKEY").AsInteger = road
+              gdcUserDocument.FieldByName("USR$ORIGINAL_ID").AsInteger = IdOriginal
+              gdcUserDocument.FieldByName("USR$FORTRIGGER").AsInteger = 1
+              gdcUserDocument.FieldByName("Documentdate").AsDateTime = OriginalDate
+              gdcUserDocument.FieldByName("usr$ondate").AsDateTime = ondate1
+              gdcUserDocument.FieldByName("usr$vbpf_billdate").AsDateTime = billdate
+              gdcUserDocument.FieldByName("USR$ISSUM").AsInteger = issum
+              gdcUserDocument.FieldByName("USR$VBPF_DEPARTMENT").AsVariant = ibsqldivide.FieldByName("usr$vbpf_departkey").AsVariant
+              gdcUserDocument.Post
+              while  not ibsqldivide.EOF
+                IDPosition = ibsqldivide.FieldByName("DOCUMENTKEY").AsInteger
+                ibsqlUpdate.Close
+                ibsqlUpdate.SQL.Text = " update gd_document doc " &_
+                  " set doc.parent = " &  gdcUserDocument.FieldbyName("id").AsInteger  & _
+                  " where doc.id = " & IDPosition
+                ibsqlUpdate.ExecQuery
+                ibsqlUpdate.Close
+                ibsqlUpdate.SQL.Text = " update usr$ber_claimline b " &_
+                  " set b.masterkey = " &  gdcUserDocument.FieldbyName("id").AsInteger  & _
+                  " where b.documentkey = " & IDPosition
+                ibsqlUpdate.ExecQuery
+                ibsqldivide.Next
+              wend
+            end if
+            if len(CStr(day(ondate))) > 1 then
+              d = CStr(day(ondate))
+            else
+              d = "0" & CStr(day(ondate))
+            end if
+            if len(CStr(month(ondate))) > 1 then
+              m = CStr(month(ondate))
+            else
+              m = "0" & CStr(month(ondate))
+            end if
+            ORD_NO = "cl" & d & m & CStr(year(ondate))
+            doc_no = gdcUserDocument.FieldByName("NUMBER").AsString
+            ' Определяем склады на которые будем разбивать заявку на части
+            ibsqlDepart.Close
+            ibsqlDepart.ParamByName("masterkey").AsInteger = gdcUserDocument.FieldByName("DOCUMENTKEY").AsInteger
+            ibsqlDepart.ExecQuery
+            while not ibsqlDepart.EOF
+              if not ibsqlDepart.FieldByName("USR$SHCODE").IsNull then
+                dim depcode, p
+                depcode = ibsqlDepart.FieldByName("USR$SHCODE").AsString
+                p = len(depcode)
+                while (p < 3)
+                  depcode = "0" & depcode
+                  p = p + 1
+                wend
+                '______________________________________________________________________________________________
+                'Записываем позиции заявок
+                '______________________________________________________________________________________________
+        
+                ibsqlDetail.Close
+                ibsqlDetail.ParamByName("masterkey").AsInteger = gdcUserDocument.FieldByName("DOCUMENTKEY").AsInteger
+                ibsqlDetail.ParamByName("deptkey").AsInteger =  ibsqlDepart.FieldByName("usr$vbpf_departkey").AsInteger
+                ibsqlDetail.ExecQuery
+                dim code, k
+                while not ibsqlDetail.EOF
+                  if not ibsqlDetail.FieldByName("USR$SHCODE").IsNull then
+                    code = ibsqlDetail.FieldByName("USR$SHCODE").AsString
+                    k = len(code)
+                    while (k < 4)
+                      code = "0" & code
+                      k = k + 1
+                    wend
+                    SGood.Add(";" & code & "=" & CSTR(SHCODE_CURRE(ibsqlDetail.FieldByName("USR$QUANTITY").AsCurrency)) & ";")
+                  else
+                    call Application.MessageBox("У товара " & ibsqlDetail.FieldByName("name").AsString & " нет кода! он не будет передан!!!", "Внимание", vbSystemModal + vbInformation)
+                  end if
+                  ibsqlDetail.Next
+                wend
+                set fso = CreateObject("Scripting.FileSystemObject")
+                if  (depcode <> "002" and depcode <> "013" and depcode <> "001"  and depcode <> "009")  then
+        '          if FSO.FileExists(pathtoputlocal & ORD_NO & depcode & doc_no & ".txt") then FSO.DeleteFile(pathtoputlocal & ORD_NO & depcode & doc_no & ".txt")
+        '          SGood.SaveToFile(pathtoputlocal & ORD_NO & depcode & doc_no & ".txt")
+                else
+                  if (depcode = "013") then
+                    ibsqlDetail.Close
+                    ibsqlDetail.ExecQuery
+                    call EXPORT_ORDER_TO_ASX(gdcUserDocument, ibsqlDetail, Transaction, exTransaction, ibsqlGetID, ibsqlGetNextID, _
+                       ibsqlInsertCompany, ibsqlInsertDepart, ibsqlSearchGood, ibsqlInsertROAD, ibsqlInsertOrder,  ibsqlInsertOrderLine)
+                  else
+        '            if FSO.FileExists(pathtoputlocal2 & ORD_NO & depcode & doc_no & ".txt") then FSO.DeleteFile(pathtoputlocal2 & ORD_NO & depcode & doc_no & ".txt")
+        '            SGood.SaveToFile(pathtoputlocal2 & ORD_NO & depcode & doc_no & ".txt")
+                  end if
+                end if
+                SGood.Clear
+              else
+                call Application.MessageBox("У подразделения  " & ibsqlDepart.FieldByName("name").AsString & " нет кода! Заявка по этому подразделению не будет передана!!!", "Внимание", vbSystemModal + vbInformation)
+              end if
+              ibsqlDepart.Next
+            wend
+            'Апдейтим заявку что она уже импортировалась
+            UpdateOrder.Close
+            UpdateOrder.ParamByName("documentkey").AsInteger = gdcUserDocument.FieldByName("DOCUMENTKEY").AsInteger
+            UpdateOrder.ExecQuery
+            gdcUserDocument.Next
+          wend
+          if Transaction.InTransaction  then
+            Transaction.Commit
+          end if
+          exTransaction.Commit
+          exDatabase.Connected = False
+          call Application.MessageBox("Экспорт заявок закончен!", "Внимание", vbSystemModal + vbInformation)
+        End function
+        
+        sub SHCODE_ORDERS_NEW_rollback(transaction)
+          if Transaction.InTransaction  then
+            Transaction.RollBack
+          end if
+        end sub
+        
+        sub EXPORT_ORDER_TO_ASX(gdcUserDocument, ibsqlDetail, Transaction, exTransaction, ibsqlGetID, ibsqlGetNextID, _
+                       ibsqlInsertCompany, ibsqlInsertDepart, ibsqlSearchGood, ibsqlInsertROAD, ibsqlInsertOrder,  ibsqlInsertOrderLine)
+          dim Res(), CompanyKey, DepartKey, RoadKey, OrderKey, GoodKey
+          
+          call gdcBaseManager.ExecSingleQueryResult("select xid, dbid from gd_p_getruid(:id)", gdcUserDocument.FieldByName("USR$HEADCOMPANYKEY").AsInteger, Res, _
+            Transaction)
+            
+          CompanyKey = -1
+          ibsqlGetID.Close
+          ibsqlGetID.ParamByName("xid").AsInteger = Res(0, 0)
+          ibsqlGetID.ParamByName("dbid").AsInteger = Res(1, 0)
+          ibsqlGetID.ExecQuery
+          if ibsqlGetID.FieldByName("id").AsInteger > 0 then
+            CompanyKey = ibsqlGetID.FieldByName("id").AsInteger
+          else
+            ibsqlGetNextID.Close
+            ibsqlGetNextID.ParamByName("xid").AsInteger = Res(0, 0)
+            ibsqlGetNextID.ParamByName("dbid").AsInteger = Res(1, 0)
+            ibsqlGetNextID.ExecQuery
+            CompanyKey = ibsqlGetNextID.FieldByName("id").AsInteger
+            
+            if Res(0, 0) > 147000000 then
+              ibsqlInsertCompany.Close
+              ibsqlInsertCompany.ParamByName("id").AsInteger = CompanyKey
+              ibsqlInsertCompany.ParamByName("name").AsString = gdcUserDocument.FieldByName("U_USR$HEADCOMPANYKEY_NAME").AsString
+              ibsqlInsertCompany.ParamByName("fullname").AsString = gdcUserDocument.FieldByName("U_USR$HEADCOMPANYKEY_NAME").AsString
+              ibsqlInsertCompany.ExecQuery
+            end if
+          end if
+          
+          call gdcBaseManager.ExecSingleQueryResult("select xid, dbid from gd_p_getruid(:id)", gdcUserDocument.FieldByName("USR$CONTACTKEY").AsInteger, Res, _
+            Transaction)
+        
+          DepartKey = -1
+          ibsqlGetID.Close
+          ibsqlGetID.ParamByName("xid").AsInteger = Res(0, 0)
+          ibsqlGetID.ParamByName("dbid").AsInteger = Res(1, 0)
+          ibsqlGetID.ExecQuery
+          if ibsqlGetID.FieldByName("id").AsInteger > 0 then
+            DepartKey = ibsqlGetID.FieldByName("id").AsInteger
+          else
+            ibsqlGetNextID.Close
+            ibsqlGetNextID.ParamByName("xid").AsInteger = Res(0, 0)
+            ibsqlGetNextID.ParamByName("dbid").AsInteger = Res(1, 0)
+            ibsqlGetNextID.ExecQuery
+            DepartKey = ibsqlGetNextID.FieldByName("id").AsInteger
+        
+            ibsqlInsertDepart.Close
+            ibsqlInsertDepart.ParamByName("id").AsInteger = DepartKey
+            ibsqlInsertDepart.ParamByName("parent").AsInteger = CompanyKey
+            ibsqlInsertDepart.ParamByName("name").AsString = gdcUserDocument.FieldByName("U_USR$CONTACTKEY_NAME").AsString
+            ibsqlInsertDepart.ExecQuery
+          end if
+        
+          call gdcBaseManager.ExecSingleQueryResult("select xid, dbid from gd_p_getruid(:id)", gdcUserDocument.FieldByName("USR$ROADKEY").AsInteger, Res, _
+            Transaction)
+        
+          RoadKey = -1
+          ibsqlGetID.Close
+          ibsqlGetID.ParamByName("xid").AsInteger = Res(0, 0)
+          ibsqlGetID.ParamByName("dbid").AsInteger = Res(1, 0)
+          ibsqlGetID.ExecQuery
+          if ibsqlGetID.FieldByName("id").AsInteger > 0 then
+            RoadKey = ibsqlGetID.FieldByName("id").AsInteger
+          else
+            ibsqlGetNextID.Close
+            ibsqlGetNextID.ParamByName("xid").AsInteger = Res(0, 0)
+            ibsqlGetNextID.ParamByName("dbid").AsInteger = Res(1, 0)
+            ibsqlGetNextID.ExecQuery
+            RoadKey = ibsqlGetNextID.FieldByName("id").AsInteger
+        
+            ibsqlInsertROAD.Close
+            ibsqlInsertROAD.ParamByName("id").AsInteger = RoadKey
+            ibsqlInsertROAD.ParamByName("name").AsString = gdcUserDocument.FieldByName("U_USR$ROADKEY_USR$ROAD_NAME").AsString
+            ibsqlInsertROAD.ExecQuery
+          end if
+        
+          ibsqlInsertOrder.Close
+          ibsqlInsertOrder.ParamByName("number").AsString = gdcUserDocument.FieldByName("number").AsString
+          ibsqlInsertOrder.ParamByName("documentdate").AsDateTime = gdcUserDocument.FieldByName("documentdate").AsDateTime
+          ibsqlInsertOrder.ParamByName("ondate").AsDateTime = gdcUserDocument.FieldByName("usr$ondate").AsDateTime
+          ibsqlInsertOrder.ParamByName("customerkey").AsInteger = CompanyKey
+          ibsqlInsertOrder.ParamByName("departkey").AsInteger = DepartKey
+          ibsqlInsertOrder.ParamByName("roadkey").AsInteger = RoadKey
+          ibsqlInsertOrder.ParamByName("original_id").AsInteger = gdcUserDocument.FieldByName("usr$original_id").AsInteger
+          ibsqlInsertOrder.ExecQuery
+          OrderKey = ibsqlInsertOrder.FieldByName("id").AsInteger
+          
+          while not ibsqlDetail.EOF
+            ibsqlSearchGood.Close
+            ibsqlSearchGood.ParamByName("code").AsString = ibsqlDetail.FieldByName("USR$SHCODE").AsString
+            ibsqlSearchGood.ExecQuery
+            if not ibsqlSearchGood.EOF then
+            
+              ibsqlInsertOrderLine.Close
+              ibsqlInsertOrderLine.ParamByName("parent").AsInteger = OrderKey
+              ibsqlInsertOrderLine.ParamByName("goodkey").AsInteger = ibsqlSearchGood.FieldByName("id").AsInteger
+              ibsqlInsertOrderLine.ParamByName("quantity").AsCurrency = ibsqlDetail.FieldByName("USR$QUANTITY").AsCurrency
+              ibsqlInsertOrderLine.ParamByName("quantity_mest").AsCurrency = ibsqlDetail.FieldByName("USR$QUANTITY_MEST").AsCurrency
+              ibsqlInsertOrderLine.ExecQuery
+        
+            end if
+            ibsqlDetail.Next
+          wend
+            
+        
+        end sub
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "472283412_1716733059 SHCODE_CURRE"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1529089703_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "asx_export_good"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-04-15T18:49:26+03:00
+      DISPLAYSCRIPT: | 
+        ASX_EXPORT_GOOD
+        INSERTGROUP
+        INSERTVALUE
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QIAAAASVNTSUxFTlQIAAAASVNTSUxFTlQAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QFAAAASVNBTEwFAAAASVNBTEwAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAARk5TVEZM
+        UFI=
+      SCRIPT: | 
+        Option Explicit
+        Function asx_export_good(IsSilent, IsAll)
+          dim Creator, Database, exTransaction, inTransaction, gdcConst, Path
+          dim ibsqlSearchGood, ibsqlSearchValue, ibsqlSearchGroup
+          dim ibsqlInsertGood, ibsqlInsertValue, ibsqlInsertGroup
+          dim ibsql, sqlText, Res(), ibsqlGetID, GroupKey, ValueKey, ibsqlGetNextID
+          
+          set Creator = new TCreator
+          
+          set inTransaction = Creator.GetObject(NULL, "TIBTransaction", "")
+          inTransaction.DefaultDatabase = IBLogin.Database
+          inTransaction.Params.Add("nowait")
+          inTransaction.StartTransaction
+          
+          set gdcConst = Creator.GetObject(null, "TgdcConst", "")
+          
+          Path = gdcConst.QGetValueByID(gdcBaseManager.GetIDByRUIDString("1529089701_2075031366"))
+          
+          set Database = Creator.GetObject(NULL, "TIBDatabase", "")
+          Database.DatabaseName = Path
+        
+          Database.LoginPrompt = False
+          Database.Params.Add("user_name=SYSDBA")
+          Database.Params.Add("password=masterkey")
+          Database.Params.Add("lc_ctype=WIN1251")
+        
+          on error resume next
+          Database.Connected = True
+          on error goto 0
+        
+          if Err.Description <> "" then
+            if not isSilent then
+              call Application.MessageBox("Ошибка при подключении к базе адресного хранения!!!", "Внимание", vbOkOnly + vbSystemModal)
+            else
+              call gdcBaseManager.ExecSingleQuery("insert into USR$ASX_LOG_ERROR (usr$comment) VALUES ('Ошибка при подключении к базе адресного хранения:" & Err.Description & "')", _
+                inTransaction)
+            end if
+            inTransaction.Commit
+            exit function
+          end if
+          
+          set exTransaction = Creator.GetObject(NULL, "TIBTransaction", "")
+          exTransaction.DefaultDatabase = Database
+          exTransaction.Params.Add("read_committed")
+          exTransaction.Params.Add("rec_version")
+          exTransaction.Params.Add("nowait")
+          
+          exTransaction.StartTransaction
+          
+          set ibsqlSearchGood = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlSearchGood.Transaction = exTransaction
+          ibsqlSearchGood.SQL.Text = "select id from gd_good where USR$SHCODE = :code"
+        
+          set ibsqlGetID = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlGetID.Transaction = exTransaction
+          ibsqlGetID.SQL.Text = "select id from gd_ruid where xid = :xid and dbid = :dbid"
+          
+        
+          set ibsqlGetNextID = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlGetNextID.Transaction = exTransaction
+          ibsqlGetNextID.SQL.Text = "execute block (xid DFOREIGNKEY = :xid, dbid DFOREIGNKEY = :dbid) " & _
+          "  RETURNS (ID DINTKEY) " & _
+          " AS " & _
+          " BEGIN " & _
+          "   EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :id;  " & _
+          "   INSERT INTO GD_RUID (ID, XID, DBID, MODIFIED, EDITORKEY) VALUES (:ID, :XID, :DBID, CURRENT_TIMESTAMP, 650002); " & _
+          "   SUSPEND; " & _
+          " END "
+          
+          set ibsqlInsertGood = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertGood.Transaction = exTransaction
+          ibsqlInsertGood.SQL.Text = "INSERT INTO gd_good (name, valuekey, groupkey, usr$inv_weight, usr$shcode) " & _
+            " VALUES (:name, :valuekey, :groupkey, :weight, :code) "
+        
+          set ibsqlInsertGroup = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertGroup.Transaction = exTransaction
+          ibsqlInsertGroup.SQL.Text = "INSERT INTO gd_goodgroup (ID, PARENT, NAME) VALUES (:ID, :PARENT, :NAME) "
+        
+          set ibsqlInsertValue = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertValue.Transaction = exTransaction
+          ibsqlInsertValue.SQL.Text = "INSERT INTO gd_value (ID, NAME) VALUES (:ID, :NAME) "
+        
+          if isAll then
+            sqlText = "select g.name, gr_ruid.xid as gr_xid, gr_ruid.dbid as gr_dbid, val_ruid.XID as val_XID, val_ruid.DBID as val_DBID, " & _
+            " g.usr$inv_weight, g.USR$SHCODE, g.groupkey, g.valuekey from gd_good g " & _
+            " LEFT JOIN gd_p_getruid(groupkey) gr_ruid ON 1 = 1 " & _
+            " LEFT JOIN gd_p_getruid(valuekey) val_ruid ON 1 = 1 " & _
+            " where USR$SHCODE is not null"
+          else
+            sqlText = "select g.name, gr_ruid.xid as gr_xid, gr_ruid.dbid as gr_dbid, val_ruid.XID as val_XID, val_ruid.DBID as val_DBID, " & _
+            " g.usr$inv_weight, g.USR$SHCODE, g.groupkey, g.valuekey from " & _
+            "  USR$ASX_LOG l join gd_good g ON l.usr$key = g.id " & _
+            " LEFT JOIN gd_p_getruid(groupkey) gr_ruid ON 1 = 1 " & _
+            " LEFT JOIN gd_p_getruid(valuekey) val_ruid ON 1 = 1 " & _
+            " where l.USR$RELATIONNAME = 'GD_GOOD' and g.USR$SHCODE is not null "
+          end if
+          
+          set ibsql = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsql.Transaction = inTransaction
+          ibsql.SQL.Text = sqlText
+          ibsql.ExecQuery
+          
+        
+          while not ibsql.EOF
+            ibsqlSearchGood.Close
+            ibsqlSearchGood.ParamByName("code").AsString = ibsql.FieldByName("usr$shcode").AsString
+            ibsqlSearchGood.ExecQuery
+            if ibsqlSearchGood.EOF then
+              GroupKey = InsertGroup(ibsql.FieldByName("groupkey").AsInteger, ibsql.FieldByName("gr_XID").AsInteger, ibsql.FieldByName("gr_DBID").AsInteger, ibsqlGetNextID, ibsqlGetID, ibsqlInsertGroup)
+              
+              ValueKey = InsertValue(ibsql.FieldByName("valuekey").AsInteger, ibsql.FieldByName("val_XID").AsInteger, ibsql.FieldByName("val_DBID").AsInteger, ibsqlGetNextID, ibsqlGetID, ibsqlInsertValue)
+              
+              ibsqlInsertGood.Close
+              ibsqlInsertGood.ParamByName("name").AsString = ibsql.FieldByName("name").AsString
+              ibsqlInsertGood.ParamByName("groupkey").AsInteger = GroupKey
+              ibsqlInsertGood.ParamByName("valuekey").AsInteger = ValueKey
+              ibsqlInsertGood.ParamByName("weight").AsCurrency = ibsql.FieldByName("usr$inv_weight").AsCurrency
+              ibsqlInsertGood.ParamByName("code").AsString = ibsql.FieldByName("usr$shcode").AsString
+              ibsqlInsertGood.ExecQuery
+            end if
+            
+            ibsql.Next
+          wend
+          
+          exTransaction.Commit
+          inTransaction.Commit
+          Database.Connected = False
+          
+        End Function
+        
+        function InsertGroup(oldid, xid, dbid, ibsqlGetNextID, ibsqlGetID, ibsqlInsertGroup)
+          dim Res1(), Parent, ID
+          
+          ibsqlGetID.Close
+          ibsqlGetID.ParamByName("XID").AsInteger = xid
+          ibsqlGetID.ParamByName("DBID").AsInteger = dbid
+          ibsqlGetID.ExecQuery
+          if ibsqlGetID.FieldByName("id").AsInteger > 0 then
+            ID = ibsqlGetID.FieldByName("id").AsInteger
+          else
+            ibsqlGetNextID.Close
+            ibsqlGetNextID.ParamByName("XID").AsInteger = xid
+            ibsqlGetNextID.ParamByName("DBID").AsInteger = dbid
+            ibsqlGetNextID.ExecQuery
+            ID = ibsqlGetNextID.FieldByName("ID").AsInteger
+            
+            call gdcBaseManager.ExecSingleQueryResult("select name, parent, ruid.xid, ruid.dbid from gd_goodgroup gr " & _
+            " left join gd_p_getruid(parent) ruid ON 1= 1 where gr.id = :id", oldid, res1, _
+              gdcBaseManager.ReadTransaction)
+            if IsNull(Res1(1, 0)) then
+              ibsqlInsertGroup.Close
+              ibsqlInsertGroup.ParamByName("id").AsInteger = ID
+              ibsqlInsertGroup.ParamByName("name").AsString = Res1(0, 0)
+              ibsqlInsertGroup.ParamByName("parent").AsVariant = null
+              ibsqlInsertGroup.ExecQuery
+            else
+              Parent = InsertGroup(Res1(1, 0), Res1(2, 0), Res1(3, 0), ibsqlGetNextID, ibsqlGetID, ibsqlInsertGroup)
+              ibsqlInsertGroup.Close
+              ibsqlInsertGroup.ParamByName("id").AsInteger = ID
+              ibsqlInsertGroup.ParamByName("name").AsString = Res1(0, 0)
+              ibsqlInsertGroup.ParamByName("parent").AsVariant = Parent
+              ibsqlInsertGroup.ExecQuery
+            end if
+              
+          end if
+          InsertGroup = ID
+        
+        end function
+        
+        function InsertValue(oldid, xid, dbid, ibsqlGetNextID, ibsqlGetID, ibsqlInsertValue)
+          dim ID, Res1()
+          if oldid = 1 or oldid = 2 then
+            ID = 3000000 + oldid
+          else
+            ibsqlGetID.Close
+            ibsqlGetID.ParamByName("XID").AsInteger = xid
+            ibsqlGetID.ParamByName("DBID").AsInteger = dbid
+            ibsqlGetID.ExecQuery
+            if ibsqlGetID.FieldByName("id").AsInteger > 0 then
+              ID = ibsqlGetID.FieldByName("id").AsInteger
+            else
+              if oldid > 147000000 then
+                ibsqlGetNextID.Close
+                ibsqlGetNextID.ParamByName("XID").AsInteger = xid
+                ibsqlGetNextID.ParamByName("DBID").AsInteger = dbid
+                ibsqlGetNextID.ExecQuery
+                ID = ibsqlGetNextID.FieldByName("ID").AsInteger
+                call gdcBaseManager.ExecSingleQueryResult("select name from gd_value " & _
+                " where id = :id", oldid, res1, gdcBaseManager.ReadTransaction)
+                ibsqlInsertValue.Close
+                ibsqlInsertValue.ParamByName("id").AsInteger = ID
+                ibsqlInsertValue.ParamByName("name").AsString = Res1(0, 0)
+                ibsqlInsertValue.ExecQuery
+              else
+                ID = oldid
+              end if
+            end if
+          end if
+          InsertValue = ID
+        
+        end function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 1529090528_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "asx_export_empl_depart"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-04-15T18:49:34+03:00
+      DISPLAYSCRIPT: | 
+        ASX_EXPORT_EMPL_DEPART
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QIAAAASVNTSUxFTlQIAAAASVNTSUxFTlQAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QFAAAASVNBTEwFAAAASVNBTEwAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAARk5TVEZM
+        UFI=
+      SCRIPT: | 
+        Option Explicit
+        Function asx_export_empl_depart(IsSilent, IsAll)
+          dim Creator, Database, exTransaction, inTransaction, gdcConst, Path
+          dim ibsqlSearchEmployee, ibsqlSearchDepartment
+          dim ibsqlInsertEmployee, ibsqlInsertDepartment
+          dim ibsql, sqlText, Res(), ibsqlGetID, DepartmentKey, ibsqlGetNextID
+          
+          set Creator = new TCreator
+          
+          set inTransaction = Creator.GetObject(NULL, "TIBTransaction", "")
+          inTransaction.DefaultDatabase = IBLogin.Database
+          inTransaction.Params.Add("nowait")
+          inTransaction.StartTransaction
+          
+          set gdcConst = Creator.GetObject(null, "TgdcConst", "")
+          
+          Path = gdcConst.QGetValueByID(gdcBaseManager.GetIDByRUIDString("1529089701_2075031366"))
+          
+          set Database = Creator.GetObject(NULL, "TIBDatabase", "")
+          Database.DatabaseName = Path
+        
+          Database.LoginPrompt = False
+          Database.Params.Add("user_name=SYSDBA")
+          Database.Params.Add("password=masterkey")
+          Database.Params.Add("lc_ctype=WIN1251")
+        
+          on error resume next
+          Database.Connected = True
+          on error goto 0
+        
+          if Err.Description <> "" then
+            if not isSilent then
+              call Application.MessageBox("Ошибка при подключении к базе адресного хранения!!!", "Внимание", vbOkOnly + vbSystemModal)
+            else
+              call gdcBaseManager.ExecSingleQuery("insert into USR$ASX_LOG_ERROR (usr$comment) VALUES ('Ошибка при подключении к базе адресного хранения:" & Err.Description & "')", _
+                inTransaction)
+            end if
+            inTransaction.Commit
+            exit function
+          end if
+          
+          set exTransaction = Creator.GetObject(NULL, "TIBTransaction", "")
+          exTransaction.DefaultDatabase = Database
+          exTransaction.Params.Add("read_committed")
+          exTransaction.Params.Add("rec_version")
+          exTransaction.Params.Add("nowait")
+          
+          exTransaction.StartTransaction
+          
+          set ibsqlSearchEmployee = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlSearchEmployee.Transaction = exTransaction
+          ibsqlSearchEmployee.SQL.Text = "select id from gd_contact where USR$SHCODE = :code and contacttype = 2"
+          
+        
+          set ibsqlSearchDepartment = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlSearchDepartment.Transaction = exTransaction
+          ibsqlSearchDepartment.SQL.Text = "select id from gd_contact where USR$SHCODE = :code and contacttype = 4"
+        
+          set ibsqlGetID = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlGetID.Transaction = exTransaction
+          ibsqlGetID.SQL.Text = "select id from gd_ruid where xid = :xid and dbid = :dbid"
+          
+        
+          set ibsqlGetNextID = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlGetNextID.Transaction = exTransaction
+          ibsqlGetNextID.SQL.Text = "execute block (xid DFOREIGNKEY = :xid, dbid DFOREIGNKEY = :dbid) " & _
+          "  RETURNS (ID DINTKEY) " & _
+          " AS " & _
+          " BEGIN " & _
+          "   EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :id;  " & _
+          "   INSERT INTO GD_RUID (ID, XID, DBID, MODIFIED, EDITORKEY) VALUES (:ID, :XID, :DBID, CURRENT_TIMESTAMP, 650002); " & _
+          "   SUSPEND; " & _
+          " END "
+          
+          set ibsqlInsertEmployee = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertEmployee.Transaction = exTransaction
+          ibsqlInsertEmployee.SQL.Text = " EXECUTE BLOCK (name VARCHAR(60) = :name, code VARCHAR(10) = :code, firstname VARCHAR(20) = :firstname, middlename VARCHAR(20) = :middlename, surname VARCHAR(20) = :surname) " & _
+          " AS "  & _
+          "   declare parent dforeignkey; " & _
+          "   declare id dforeignkey; " & _
+          " BEGIN " & _
+          "   select id from gd_ruid where xid = 147003962 and dbid = 2052219121 " & _
+          "   into :parent; " & _
+          "   EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :id; " & _
+          "   INSERT INTO gd_contact (id, name, parent, usr$shcode, contacttype) " & _
+          "    VALUES (:id, :name, :parent, :code, 2); "  & _
+          "   INSERT INTO gd_people (contactkey, firstname, middlename, surname) " & _
+          "    VALUES (:id, :firstname, :middlename, :surname); " & _
+          "   INSERT INTO gd_employee (contactkey) " & _
+          "    VALUES (:id); " & _
+          " END "
+        
+          set ibsqlInsertDepartment = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsqlInsertDepartment.Transaction = exTransaction
+          ibsqlInsertDepartment.SQL.Text = " EXECUTE BLOCK (name VARCHAR(60) = :name, code VARCHAR(10) = :code) " & _
+          " AS "  & _
+          "   declare parent dforeignkey; " & _
+          "   declare id dforeignkey; " & _
+          " BEGIN " & _
+          "   select companykey from gd_ourcompany  " & _
+          "   into :parent; " & _
+          "   INSERT INTO gd_contact (name, parent, usr$shcode, contacttype) " & _
+          "    VALUES (:name, :parent, :code, 4); " & _
+          " END "
+        
+          if isAll then
+            sqlText = "select con.name, " & _
+            " p.surname, p.middlename, p.firstname, con.contacttype, con.USR$SHCODE from gd_contact con " & _
+            "  left join gd_people p ON  con.id = p.contactkey " & _
+            " where USR$SHCODE is not null"
+          else
+            sqlText = "select con.name, " & _
+            " p.surname, p.middlename, p.firstname, con.contacttype, con.USR$SHCODE from USR$ASX_LOG l join gd_contact con ON l.usr$key = con.id " & _
+            "  left join gd_people p ON  con.id = p.contactkey " & _
+            " where l.USR$RELATIONNAME = 'GD_CONTACT' and USR$SHCODE is not null"
+          end if
+          
+          set ibsql = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsql.Transaction = inTransaction
+          ibsql.SQL.Text = sqlText
+          ibsql.ExecQuery
+          
+        
+          while not ibsql.EOF
+            if ibsql.FieldByName("contacttype").AsInteger = 2 then
+              ibsqlSearchEmployee.Close
+              ibsqlSearchEmployee.ParamByName("code").AsString = ibsql.FieldByName("usr$shcode").AsString
+              ibsqlSearchEmployee.ExecQuery
+              if ibsqlSearchEmployee.EOF then
+                ibsqlInsertEmployee.Close
+                ibsqlInsertEmployee.ParamByName("name").AsString = ibsql.FieldByName("name").AsString
+                ibsqlInsertEmployee.ParamByName("firstname").AsString = ibsql.FieldByName("firstname").AsString
+                ibsqlInsertEmployee.ParamByName("surname").AsString = ibsql.FieldByName("surname").AsString
+                ibsqlInsertEmployee.ParamByName("middlename").AsString = ibsql.FieldByName("middlename").AsString
+                ibsqlInsertEmployee.ParamByName("code").AsString = ibsql.FieldByName("usr$shcode").AsString
+                ibsqlInsertEmployee.ExecQuery
+              end if
+            else
+              ibsqlSearchDepartment.Close
+              ibsqlSearchDepartment.ParamByName("code").AsString = ibsql.FieldByName("usr$shcode").AsString
+              ibsqlSearchDepartment.ExecQuery
+              if ibsqlSearchDepartment.EOF then
+                ibsqlInsertDepartment.Close
+                ibsqlInsertDepartment.ParamByName("name").AsString = ibsql.FieldByName("name").AsString
+                ibsqlInsertDepartment.ParamByName("code").AsString = ibsql.FieldByName("usr$shcode").AsString
+                ibsqlInsertDepartment.ExecQuery
+              end if
+        
+            end if
+            
+            ibsql.Next
+          wend
+          
+          exTransaction.Commit
+          inTransaction.Commit
+          Database.Connected = False
+          
+        End Function
+        
+        
+  - 
+    Properties: 
+      Class: "TgdcConst"
+      RUID: 1529089701_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "Путь к базе адресного хранения"
+      COMMENT: ~
+      CONSTTYPE: 0
+      DATATYPE: "S"
+      EDITIONDATE: 2023-04-13T09:48:23+03:00
+  - 
+    Properties: 
+      Class: "TgdcPrimeTable"
+      RUID: 1529089709_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      BRANCHKEY: ~
+      DESCRIPTION: "Лог ошибок при синхронизации"
+      EXTENDEDFIELDS: ~
+      GENERATORNAME: ~
+      LISTFIELD: ~
+      LNAME: "Лог ошибок при синхронизации"
+      LSHORTNAME: "Лог ошибок при синхронизации"
+      REFERENCEKEY: ~
+      RELATIONNAME: "USR$ASX_LOG_ERROR"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      EDITIONDATE: 2023-04-13T10:12:43+03:00
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 1529089710_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 1529089709_2075031366
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Ошибка"
+      FIELDNAME: "USR$COMMENT"
+      FIELDSOURCE: "DTEXT255"
+      FIELDSOURCEKEY: "147000118_31587988 Текст (255), DTEXT255"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Ошибка"
+      LSHORTNAME: "Ошибка"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "1529089709_2075031366 Лог ошибок при синхронизации, USR$ASX_LOG_ERROR"
+      RELATIONNAME: "USR$ASX_LOG_ERROR"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 255
+      VISIBLE: 1
+      EDITIONDATE: 2023-04-13T10:13:27+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcExplorer"
+      RUID: 1529089705_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 1529089704_2075031366
+    Fields: 
+      PARENT: "710000_17 Исследователь"
+      NAME: "Склад адресного хранения"
+      CLASSNAME: ~
+      CMD: "1529089705_2075031366"
+      CMDTYPE: 0
+      HOTKEY: ~
+      IMGINDEX: 0
+      ORDR: ~
+      SUBTYPE: ~
+      EDITIONDATE: 2023-04-13T09:55:19+03:00
+      DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcExplorer"
+      RUID: 1529089706_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 1529089704_2075031366
+    Fields: 
+      PARENT: "1529089705_2075031366 Исследователь\\Склад адресного хранения"
+      NAME: "Лог изменений"
+      CLASSNAME: "TgdcAttrUserDefined"
+      CMD: ~
+      CMDTYPE: 0
+      HOTKEY: ~
+      IMGINDEX: 0
+      ORDR: ~
+      SUBTYPE: "USR$ASX_LOG"
+      EDITIONDATE: 2023-04-13T09:55:41+03:00
+      DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcPrimeTable"
+      RUID: 1529089704_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      BRANCHKEY: "1529089706_2075031366 Исследователь\\Склад адресного хранения\\Лог изменений"
+      DESCRIPTION: "Лог изменений"
+      EXTENDEDFIELDS: ~
+      GENERATORNAME: ~
+      LISTFIELD: ~
+      LNAME: "Лог изменений"
+      LSHORTNAME: "Лог изменений"
+      REFERENCEKEY: ~
+      RELATIONNAME: "USR$ASX_LOG"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      EDITIONDATE: 2023-04-13T09:54:05+03:00
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 1529089708_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 1529089704_2075031366
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Ссылка на изменяемый элемент"
+      FIELDNAME: "USR$KEY"
+      FIELDSOURCE: "DFOREIGNKEY"
+      FIELDSOURCEKEY: "147000091_31587988 Ссылка, DFOREIGNKEY"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Ссылка на изменяемый элемент"
+      LSHORTNAME: "Ссылка на изменяемый"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "1529089704_2075031366 Лог изменений, USR$ASX_LOG"
+      RELATIONNAME: "USR$ASX_LOG"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-04-13T09:56:17+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 1529089707_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 1529089704_2075031366
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Наименование таблицы"
+      FIELDNAME: "USR$RELATIONNAME"
+      FIELDSOURCE: "DTEXT60"
+      FIELDSOURCEKEY: "147000112_486813904 Текст (60), DTEXT60"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Наименование таблицы"
+      LSHORTNAME: "Наименование таблицы"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "1529089704_2075031366 Лог изменений, USR$ASX_LOG"
+      RELATIONNAME: "USR$ASX_LOG"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 60
+      VISIBLE: 1
+      EDITIONDATE: 2023-04-13T09:55:53+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
