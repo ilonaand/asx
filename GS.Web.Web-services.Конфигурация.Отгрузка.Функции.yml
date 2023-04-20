@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.23"
+  Version: "1.0.0.24"
   Optional: False
   Internal: True
-  MD5: B4BF72FC4A47E2DDCE1CC617259E695D
+  MD5: 06ADB37876D0D3510AF5883C699CC46D
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -1635,7 +1635,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-11T19:32:03+03:00
+      EDITIONDATE: 2023-04-20T17:29:23+03:00
       DISPLAYSCRIPT: | 
         WEB_CREATEOTVESASX
         FINALIZATIONOTVESASX
@@ -1651,7 +1651,7 @@ Objects:
         Function web_CreateOtvesAsx(msgParams, userkey, transaction)
           dim documentdate, headCompanykey, outletKey, deportKey, onDate, contactkey
           dim Creator, ibsql,  errorMessage, orderId, orderBarcode
-          dim otherHead, typeError
+          dim otherHead, typeError, orderkey
           errorMessage = ""
           otherHead = ""
           typeError = 0
@@ -1663,9 +1663,12 @@ Objects:
           orderId = msgParams.Value("head").SimpleValue("orderId", "")
           if orderId <> "" then
             orderBarcode = msgParams.Value("head").SimpleValue("barcode", "")
+            orderkey = CDbl(msgParams.Value("head").SimpleValue("orderId", ""))
           else
             orderBarcode = msgParams.SimpleValue("id", "")
+            orderkey = 0
           end if
+          
           if Assigned(msgParams.Value("head").Value("depart")) then
             deportKey = CDbl(msgParams.Value("head").Value("depart").SimpleValue("id", ""))
           else
@@ -1675,16 +1678,18 @@ Objects:
           if Assigned(msgParams.Value("head").Value("outlet")) then
             outletKey = CDbl(msgParams.Value("head").Value("outlet").SimpleValue("id", ""))
           else
-            outletKey = 0
+            outletKey = gdcBaseManager.GetIDByRUIDString("472307400_1716733059")
           end if
           
           if Assigned(msgParams.Value("head").Value("contact")) then
             headCompanykey = CDbl(msgParams.Value("head").Value("contact").SimpleValue("id", ""))
           else
-            headCompanykey = 0
+            headCompanykey = gdcBaseManager.GetIDByRUIDString("472307398_1716733059")
           end if
-          dim documenttypeKey
-          documenttypeKey = CDbl(msgParams.Value("documentType").SimpleValue("id", ""))
+          
+          dim documentTypeKey, documentTypeName
+          documentTypeKey = CDbl(msgParams.Value("documentType").SimpleValue("id", ""))
+          documentTypeName = trim(msgParams.Value("documentType").SimpleValue("name", ""))
         
           set Creator = new TCreator
           set ibsql = Creator.GetObject(nil, "TIBSQL", "")
@@ -1751,7 +1756,6 @@ Objects:
                 errorMessage = " Ошибка при создании шапки документа. Отсутствует подразделение-склад"
                 web_CreateOtvesAsx = finalizationOtvesAsx(errorMessage, typeError, otherHead)
                 exit function
-                ' deportKey = 147023737
               end if
               gdcInvDocument.Insert
               gdcInvDocument.FieldByName("DOCUMENTDATE").AsDateTime = ondate
@@ -1760,6 +1764,14 @@ Objects:
               gdcInvDocument.FieldByName("USR$SHOPKEY").AsVariant = outletKey
               gdcInvDocument.FieldByName("USR$TERMINALCODE").AsVariant = orderBarcode
               gdcInvDocument.FieldByName("USR$STOREKEEPER").AsVariant = contactkey
+              if documentTypeName = "currShipment" then
+                gdcInvDocument.FieldByName("USR$ISCURR").AsVariant = 1
+              else
+                gdcInvDocument.FieldByName("USR$ISCURR").AsVariant = 0
+              end if
+              if orderkey > 0 then
+                gdcInvDocument.FieldByName("USR$CLAIMKEY").AsVariant = orderkey
+              end if
               gdcInvDocument.Post
               if Err.Number <> 0 then
                 typeError = 2

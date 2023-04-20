@@ -5,10 +5,10 @@ Properties:
   RUID: 147023432_2053483706
   Name: "asx.справочники"
   Caption: "asx.справочники"
-  Version: "1.0.0.2"
+  Version: "1.0.0.3"
   Optional: False
   Internal: True
-  MD5: 6DCB1321D0D6E53DBCAA4D3AB32EA24D
+  MD5: EAE4080DB50F3D965D65D0C4206099F4
 Uses: 
   - "147016562_2053437193 asx.возврат от покупателя"
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
@@ -572,9 +572,11 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-03-22T18:29:20+03:00
+      EDITIONDATE: 2023-04-20T17:48:22+03:00
       BLOB_DATA: | 
         object gdc_dlgAttrUserDefinedUSR_ASX_CELLS: Tgdc_dlgAttrUserDefined
+          Left = 395
+          Top = 337
           ActiveControl = nil
           PixelsPerInch = 96
           TextHeight = 13
@@ -648,11 +650,19 @@ Objects:
                 TabVisible = True
                 object usrat_DBEdit_USR_NAME_Label: TLabel
                 end
+                object usrat_gsIBLookupComboBox_USR_GOODKEY_Label: TLabel
+                  Top = 33
+                end
                 object usrat_DBEdit_USR_NAME: TDBEdit
                   Width = 220
                 end
                 object usrat_DBCheckBox_USR_BLOCKED: TDBCheckBox
-                  Top = 36
+                  Left = -11
+                  Top = 56
+                end
+                object usrat_gsIBLookupComboBox_USR_GOODKEY: TgsIBLookupComboBox
+                  Top = 29
+                  Width = 221
                 end
               end
               object usrg_USR_ASX_CELLS_TabSheet2: TTabSheet
@@ -677,6 +687,7 @@ Objects:
                 object atAttributes: TatContainer
                   Width = 467
                   Height = 93
+                  VertScrollBar.Position = 0
                   object usrat_gsIBLookupComboBox_USR_DEPTKEY_Label: TLabel
                     Top = 9
                   end
@@ -1375,6 +1386,48 @@ Objects:
       STRINGLENGTH: ~
       VISIBLE: 1
       EDITIONDATE: 2023-03-22T18:20:18+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147054721_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: "RESTRICT"
+      DESCRIPTION: "Предпочтительный товар"
+      FIELDNAME: "USR$GOODKEY"
+      FIELDSOURCE: "USR$GS_DGOOD"
+      FIELDSOURCEKEY: "147035009_9802323 Товар, USR$GS_DGOOD"
+      FORMAT: ~
+      GDCLASSNAME: "TgdcGood"
+      GDSUBTYPE: ~
+      LNAME: "Предпочтительный товар"
+      LSHORTNAME: "Предпочтительный тов"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: "NAME"
+      REFRELATIONNAME: "GD_GOOD"
+      RELATIONKEY: "147023307_2053483706 Места хранения(ячейки), USR$ASX_CELLS"
+      RELATIONNAME: "USR$ASX_CELLS"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-04-20T17:45:34+03:00
       COMPUTED_VALUE: ~
       DEFSOURCE: ~
       OBJECTS: ~
