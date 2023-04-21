@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.24"
+  Version: "1.0.0.25"
   Optional: False
   Internal: True
-  MD5: 06ADB37876D0D3510AF5883C699CC46D
+  MD5: 596824B897E90DA6CC6E2D026F755370
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -2095,3 +2095,103 @@ Objects:
             ADDFUNCTIONKEY: "241111139_1971205439 web_process_error_ref_2_0_0"
           - 
             ADDFUNCTIONKEY: "241111152_1971205439 web_process_ready_ref_2_0_0"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 472283445_1716733059
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "SHCODE_GET_GOODINFO_BYBARCODE"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2022-03-23T14:42:20+03:00
+      DISPLAYSCRIPT: | 
+        SHCODE_GET_GOODINFO_BYBARCODE
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QEAAAAQ09ERQQAAABDT0RFAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAEZOU1RQUlNU
+        BwAAAEdPT0RLRVkHAAAAR09PREtFWQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNUUFJTVAYA
+        AABXRUlHSFQGAAAAV0VJR0hUAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAEZOU1RQUlNUCAAAAERB
+        VEVXT1JLCAAAAERBVEVXT1JLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUCAAAAFRJ
+        TUVXT1JLCAAAAFRJTUVXT1JLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUBAAAAFRO
+        VU0EAAAAVE5VTQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNUUFJTVAUAAABOUEFSVAUAAABO
+        UEFSVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNURkxQUg==
+      SCRIPT: | 
+        Option Explicit
+        function SHCODE_GET_GOODINFO_BYBARCODE(byVal code, ByRef goodkey, ByRef weight, ByRef datework, ByRef timework, ByRef tnum, ByRef NPart)
+          dim   Creator, ibsql, tempcode, i, tempweight, tempday, tempmonth, tempyear, temhour, tempminute, tempsek, tnum23, tnum24
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = gdcbaseManager.ReadTransaction
+          if right(code, 1) = ";" then
+            code = left(code, len(code) - 1)
+          end if
+          tempcode = mid(code, 17, 4)
+          tempday = mid(code, 7, 2)
+          tempmonth = mid(code, 9, 2)
+          tempyear = "20" & mid(code, 11, 2)
+          temhour =  mid(code, 13, 2)
+          tempminute = mid(code, 15, 2)
+          tempsek = "00"
+          datework = DateSerial(tempyear, tempmonth, tempday)
+          timework = TimeSerial(temhour, tempminute, tempsek)
+            tnum23 = CInt(mid(code, 21, 3))
+            if len(code) > 24 then
+              tnum24 = CInt(mid(code, 21, 4))
+            else
+              tnum24 = CInt(mid(code, 21, 3))
+            end if
+            if tnum23 > 0  then
+              tnum =  tnum23
+            else
+              tnum =  tnum24
+            end if
+            for i = 1 to 4
+            if left(tempcode, 1) = "0" then
+              tempcode = right(tempcode, len(tempcode) - 1)
+            end if
+          next
+          if len(tempcode) >= 1 then
+            ibsql.Close
+            ibsql.SQL.Text = _
+              "select id from gd_good g where g.USR$SHCODE = :code "
+            ibsql.ParamByName("code").Asstring = tempcode
+            ibsql.ExecQuery
+            if ibsql.RecordCount > 0 then
+              goodkey = ibsql.FieldByName("id").AsInteger
+            else
+              if  round(tempweight /1000, 3) > 0 then
+                'неизвестный товар
+                goodkey = gdcBasemanager.GetIDByRUIDString("713845650_1871619887")
+              else
+                goodkey = 0
+              end if
+            end if
+            tempweight = mid(code, 1, 6)
+            weight = round(tempweight /1000, 3)
+            if len(code) >= 28 then
+              NPart = CCur(mid(code, 25, len(code) - 24))
+            else
+              NPart = 0
+            end if
+          else
+            goodkey = 0
+            weight = 0
+          end if
+        End function
+        
