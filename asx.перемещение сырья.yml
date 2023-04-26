@@ -5,10 +5,10 @@ Properties:
   RUID: 147016602_2053437193
   Name: "asx.перемещение сырья"
   Caption: "asx.перемещение сырья"
-  Version: "1.0.0.6"
+  Version: "1.0.0.7"
   Optional: False
   Internal: True
-  MD5: EF9AFDD068F61E723A6853EC07BAA1FF
+  MD5: 297A957676A03034E2149AFB71826BD7
 Uses: 
   - "147016562_2053437193 asx.возврат от покупателя"
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
@@ -439,7 +439,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-03-21T18:58:43+03:00
+      EDITIONDATE: 2023-04-26T16:07:12+03:00
       BLOB_DATA: !!binary > 
         VFBGMAYNR1JJRF9TVFJFQU1fNAEGBlRhaG9tYQYMY2xXaW5kb3dUZXh0AvUAAggAAgEABghjbFdp
         bmRvdwEGBlRhaG9tYQYPY2xIaWdobGlnaHRUZXh0AvUAAggAAgEABgtjbEhpZ2hsaWdodAEGBlRh
@@ -452,122 +452,127 @@ Objects:
         ZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgrK7ust4u4g0szWBVdpZHRoAmgHVmlzaWJsZQkJ
         VG90YWxUeXBlBwV0dFN1bQABCEV4cGFuZGVkCAlGaWVsZE5hbWUGGUZST01fVVNSJEFTWF9OVU1C
         RVJfUExBQ0UIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlv
-        bgYVze7s5fAg//fl6eroICju8urz5OApBVdpZHRoA4IAB1Zpc2libGUJAAEIRXhwYW5kZWQICUZp
-        ZWxkTmFtZQYXVE9fVVNSJEFTWF9OVU1CRVJfUExBQ0UIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVu
-        dAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYTze7s5fAg//fl6eroICjq8+TgKQVXaWR0aAOCAAdW
-        aXNpYmxlCQABCEV4cGFuZGVkCAlGaWVsZE5hbWUGFlRPX1VTUiRBU1hfTlVNQkVSX1BBUlQIUmVh
-        ZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYNze7s5fAg7+Dw
-        8ujoLgVXaWR0aAOCAAdWaXNpYmxlCQABCEV4cGFuZGVkCAlGaWVsZE5hbWUGGEZST01fVVNSJEFT
-        WF9OVU1CRVJfUEFSVAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5D
-        YXB0aW9uBgzN7uzl8CDv4PDy6OgFV2lkdGgCfAdWaXNpYmxlCQABCEV4cGFuZGVkCAlGaWVsZE5h
-        bWUGCERJU0FCTEVECFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNh
-        cHRpb24GCERJU0FCTEVEBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgxM
-        SU5FRElTQUJMRUQPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgnO8urr
-        /vfl7e4FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDENIRUNLUkVNQUlO
-        UwhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhHK7u3y
-        8O7r/CDu8fLg8uru4gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYJRElT
-        QUJMRUQxD1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYyzvLq6/735e3u
-        ICjP5fDl7OX55e3o5SDv8O7k8+r26Ogg6CDx+/D8/yjv7ufo9uj/KSkFV2lkdGgC/wdWaXNpYmxl
-        CAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGB1JFTUFJTlMPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRl
-        cg1UaXRsZS5DYXB0aW9uBgfO8fLg8u7qBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
-        bGROYW1lBg5VU1IkU09SVE5VTUJFUghSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRl
-        cg1UaXRsZS5DYXB0aW9uBhTN7uzl8CDk6/8g8e7w8ujw7uLq6AVXaWR0aAL/B1Zpc2libGUIAAEI
-        RXhwYW5kZWQICUZpZWxkTmFtZQYOVVNSJElOVl9XRUlHSFQIUmVhZE9ubHkID1RpdGxlLkFsaWdu
-        bWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYKwuXxIPLu4uDw4AVXaWR0aAL/B1Zpc2libGUI
-        AAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLVVNSJENPTlRFTlQIUmVhZE9ubHkID1RpdGxlLkFsaWdu
-        bWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYG0e7x8uDiBVdpZHRoAv8HVmlzaWJsZQgAAQhF
-        eHBhbmRlZAgJRmllbGROYW1lBhBVU1IkVk1LX01BSU5HT09ECFJlYWRPbmx5CA9UaXRsZS5BbGln
-        bm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GFc7x7e7i7e7lIO3g6Ozl7e7i4O3o5QVXaWR0
-        aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYXR19VU1IkVk1LX01BSU5HT09EX05B
-        TUUIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYdzeDo
-        7OXt7uLg7ejlICjR7/Dg4u737ejqINLM1ikFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlG
-        aWVsZE5hbWUGE1VTUiRWTUtfTUFJTkdPT0RfUEQIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcI
-        dGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYOzvHt7uLt7ukg8u7i4PAFV2lkdGgC/wdWaXNpYmxlCAAB
-        CEV4cGFuZGVkCAlGaWVsZE5hbWUGGkdfVVNSJFZNS19NQUlOR09PRF9QRF9OQU1FCFJlYWRPbmx5
-        CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GHc3g6Ozl7e7i4O3o5SAo
-        0e/w4OLu9+3o6iDSzNYpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBghV
-        U1IkQ09ERQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9u
-        BgPK7uQFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDVVTUiRFVFROX0NP
-        REUIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYRzOXm
-        5PPt4PDu5O376SDq7uQFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGAklE
-        CFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GBMrr/vcF
-        V2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGBlBBUkVOVAhSZWFkT25seQgP
-        VGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgjQ7uTo8uXr/AVXaWR0aAL/
-        B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYPRE9DVU1FTlRUWVBFS0VZCFJlYWRPbmx5
-        CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDdLo7yDk7urz7OXt8uAF
-        V2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCVRSVFlQRUtFWQhSZWFkT25s
-        eQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBg7S6O8g8vDg7efg6vbo
-        6AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYOVFJBTlNBQ1RJT05LRVkI
-        UmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYK0vDg7efg
-        6vbo/wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYGTlVNQkVSCFJlYWRP
-        bmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GBc3u7OXwBVdpZHRo
-        Av8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgxET0NVTUVOVERBVEUIUmVhZE9ubHkI
-        D1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYExODy4AVXaWR0aAL/B1Zp
-        c2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLREVTQ1JJUFRJT04IUmVhZE9ubHkID1RpdGxl
-        LkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYIzu/o8eDt6OUFV2lkdGgC/wdWaXNp
-        YmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGBlNVTU5DVQhSZWFkT25seQgPVGl0bGUuQWxpZ25t
-        ZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgvR8+zs4CDiIM3ExQVXaWR0aAL/B1Zpc2libGUI
-        AAEIRXhwYW5kZWQICUZpZWxkTmFtZQYHU1VNQ1VSUghSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50
-        Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBg7R8+zs4CDiIOLg6/7y5QVXaWR0aAL/B1Zpc2libGUI
-        AAEIRXhwYW5kZWQICUZpZWxkTmFtZQYFU1VNRVEIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcI
-        dGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYT0fPs7OAg4iD96uLo4uDr5e3y5QVXaWR0aAL/B1Zpc2li
-        bGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYHREVMQVlFRAhSZWFkT25seQgPVGl0bGUuQWxpZ25t
-        ZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgrO8uvu5uXt7fvpBVdpZHRoAv8HVmlzaWJsZQgA
-        AQhFeHBhbmRlZAgJRmllbGROYW1lBgdDVVJSS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQH
-        CHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GBsLg6/7y4AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
-        ZWQICUZpZWxkTmFtZQYKQ09NUEFOWUtFWQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNl
-        bnRlcg1UaXRsZS5DYXB0aW9uBgjK7uzv4O3o/wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQI
-        CUZpZWxkTmFtZQYKQ1JFQVRPUktFWQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRl
-        cg1UaXRsZS5DYXB0aW9uBgrK8u4g8e7n5ODrBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBgxDUkVBVElPTkRBVEUIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50
-        ZXINVGl0bGUuQ2FwdGlvbgYNxODy4CDx7ufk4O3o/wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
-        ZWQICUZpZWxkTmFtZQYJRURJVE9SS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2Vu
-        dGVyDVRpdGxlLkNhcHRpb24GDMry7iDo8e/w4OLo6wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
-        ZWQICUZpZWxkTmFtZQYLRURJVElPTkRBVEUIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFD
-        ZW50ZXINVGl0bGUuQ2FwdGlvbgYOxODy4CDo5+zl7eXt6P8FV2lkdGgC/wdWaXNpYmxlCAABCEV4
-        cGFuZGVkCAlGaWVsZE5hbWUGCVBSSU5UREFURQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0
-        YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgvE4PLgIO/l9+Dy6AVXaWR0aAL/B1Zpc2libGUIAAEIRXhw
-        YW5kZWQICUZpZWxkTmFtZQYIUkVTRVJWRUQIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFD
-        ZW50ZXINVGl0bGUuQ2FwdGlvbgYPx+Dw5efl8OLo8O7i4O3uBVdpZHRoAv8HVmlzaWJsZQgAAQhF
-        eHBhbmRlZAgJRmllbGROYW1lBglHT09EQUxJQVMIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcI
-        dGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYI2Oj08CDSzNYFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFu
-        ZGVkCAlGaWVsZE5hbWUGCFZBTFVFS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2Vu
-        dGVyDVRpdGxlLkNhcHRpb24GCMXkLiDo5+wuBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBghHUk9VUEtFWQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1U
-        aXRsZS5DYXB0aW9uBgbD8PPv7+AFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
-        bWUGC0RPQ1VNRU5US0VZD1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYN
-        yOTl7fLo9Ojq4PLu8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLRlJP
-        TUNBUkRLRVkPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgvI5yDq4PDy
-        7vfq6AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYJTUFTVEVSS0VZD1Rp
-        dGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYx0O7k6PLl6/wgKM/l8OXs5fnl
-        7ejlIO/w7uTz6vbo6CDoIPH78Pz/KO/u5+j26P8pKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
-        ZWQICUZpZWxkTmFtZQYJUkVTRVJWRUQxD1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUu
-        Q2FwdGlvbgY4x+Dw5efl8OLo8O7i4O3uICjP5fDl7OX55e3o5SDv8O7k8+r26Ogg6CDx+/D8/yjv
-        7ufo9uj/KSkFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCVRPQ0FSREtF
-        WQ9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCsIg6uDw8u736vMFV2lk
-        dGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGB0dPT0RLRVkIUmVhZE9ubHkID1Rp
-        dGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYF0u7i4PAFV2lkdGgC/wdWaXNp
-        YmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGGEdfVVNSJFZNS19NQUlOR09PRF9BTElBUwhSZWFk
-        T25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhnY6PTwINLM1iAo
-        0e/w4OLu9+3o6iDSzNYpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhpH
-        X1VTUiRWTUtfTUFJTkdPT0RfQkFSQ09ERQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNl
-        bnRlcg1UaXRsZS5DYXB0aW9uBgnY8vDo9SDq7uQFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVk
-        CAlGaWVsZE5hbWUGG0dfVVNSJFZNS19NQUlOR09PRF9QRF9BTElBUwhSZWFkT25seQgPVGl0bGUu
-        QWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhnY6PTwINLM1iAo0e/w4OLu9+3o6iDS
-        zNYpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBh1HX1VTUiRWTUtfTUFJ
-        TkdPT0RfUERfQkFSQ09ERQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRs
-        ZS5DYXB0aW9uBhrY8vDo9SDq7uQgKNHv8ODi7vft6Oog0szWKQVXaWR0aAL/B1Zpc2libGUIAAEI
-        RXhwYW5kZWQICUZpZWxkTmFtZQYYRlJPTV9VU1IkQVNYX1BPRERPTl9DT0RFCFJlYWRPbmx5CA1U
-        aXRsZS5DYXB0aW9uBgvK7uQg7+7k5O7t4AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
-        ZWxkTmFtZQYWVE9fVVNSJEFTWF9QT0RET05fQ09ERQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYL
-        yu7kIO/u5OTu7eAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGClVTUiRT
-        SENPREUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GEsru5CDk6/8g8uXw7Ojt4Ovu4gVXaWR0aAL/
-        B1Zpc2libGUIAAEJQWxpZ25tZW50Bw50YVJpZ2h0SnVzdGlmeQhFeHBhbmRlZAgJRmllbGROYW1l
-        BgVBRlVMTA1UaXRsZS5DYXB0aW9uBg3P7uvt++kg5O7x8vPvBVdpZHRoAv8HVmlzaWJsZQgAAQlB
-        bGlnbm1lbnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFDSEFHDVRpdGxl
-        LkNhcHRpb24GGc/w7vHs7vLwIOgg8OXk4Ory6PDu4uDt6OUFV2lkdGgC/wdWaXNpYmxlCAABCUFs
-        aWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQVZJRVcNVGl0bGUu
-        Q2FwdGlvbgYP0u7r/OruIO/w7vHs7vLwBVdpZHRoAv8HVmlzaWJsZQgAAAgItB4JCA==
+        bgYVze7s5fAg//fl6eroICju8urz5OApBVdpZHRoAmAHVmlzaWJsZQkAAQhFeHBhbmRlZAgJRmll
+        bGROYW1lBhdUT19VU1IkQVNYX05VTUJFUl9QTEFDRQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50
+        Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhPN7uzl8CD/9+Xp6uggKOrz5OApBVdpZHRoAlYHVmlz
+        aWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1lBhZUT19VU1IkQVNYX05VTUJFUl9QQVJUCFJlYWRP
+        bmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDc3u7OXwIO/g8PLo
+        6C4FV2lkdGgDggAHVmlzaWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1lBhhGUk9NX1VTUiRBU1hf
+        TlVNQkVSX1BBUlQIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2Fw
+        dGlvbgYMze7s5fAg7+Dw8ujoBVdpZHRoAnwHVmlzaWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1l
+        BhlGUk9NX1VTUiRBU1hfREFURVJFQ0VJVkVECFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBhDE4PLg
+        IO/u8fLz7+vl7ej/BVdpZHRoAmIHVmlzaWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1lBhdUT19V
+        U1IkQVNYX0RBVEVSRUNFSVZFRAhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYQxODy4CDv7vHy8+/r
+        5e3o/wVXaWR0aAJiB1Zpc2libGUJAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYIRElTQUJMRUQIUmVh
+        ZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYIRElTQUJMRUQF
+        V2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDExJTkVESVNBQkxFRA9UaXRs
+        ZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCc7y6uv+9+Xt7gVXaWR0aAL/B1Zp
+        c2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYMQ0hFQ0tSRU1BSU5TCFJlYWRPbmx5CA9UaXRs
+        ZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GEcru7fLw7uv8IO7x8uDy6u7iBVdp
+        ZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglESVNBQkxFRDEPVGl0bGUuQWxp
+        Z25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBjLO8urr/vfl7e4gKM/l8OXs5fnl7ejlIO/w
+        7uTz6vbo6CDoIPH78Pz/KO/u5+j26P8pKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
+        ZWxkTmFtZQYHUkVNQUlOUw9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24G
+        B87x8uDy7uoFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDlVTUiRTT1JU
+        TlVNQkVSCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24G
+        FM3u7OXwIOTr/yDx7vDy6PDu4uroBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGRO
+        YW1lBg5VU1IkSU5WX1dFSUdIVAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1U
+        aXRsZS5DYXB0aW9uBgrC5fEg8u7i4PDgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
+        bGROYW1lBgtVU1IkQ09OVEVOVAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1U
+        aXRsZS5DYXB0aW9uBgbR7vHy4OIFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
+        bWUGEFVTUiRWTUtfTUFJTkdPT0QIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXIN
+        VGl0bGUuQ2FwdGlvbgYVzvHt7uLt7uUg7eDo7OXt7uLg7ejlBVdpZHRoAv8HVmlzaWJsZQgAAQhF
+        eHBhbmRlZAgJRmllbGROYW1lBhdHX1VTUiRWTUtfTUFJTkdPT0RfTkFNRQhSZWFkT25seQgPVGl0
+        bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBh3N4Ojs5e3u4uDt6OUgKNHv8ODi
+        7vft6Oog0szWKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYTVVNSJFZN
+        S19NQUlOR09PRF9QRAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5D
+        YXB0aW9uBg7O8e3u4u3u6SDy7uLg8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxk
+        TmFtZQYaR19VU1IkVk1LX01BSU5HT09EX1BEX05BTUUIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVu
+        dAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYdzeDo7OXt7uLg7ejlICjR7/Dg4u737ejqINLM1ikF
+        V2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCFVTUiRDT0RFCFJlYWRPbmx5
+        CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GA8ru5AVXaWR0aAL/B1Zp
+        c2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYNVVNSJEVUVE5fQ09ERQhSZWFkT25seQgPVGl0
+        bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhHM5ebk8+3g8O7k7fvpIOru5AVX
+        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYCSUQIUmVhZE9ubHkID1RpdGxl
+        LkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYEyuv+9wVXaWR0aAL/B1Zpc2libGUI
+        AAEIRXhwYW5kZWQICUZpZWxkTmFtZQYGUEFSRU5UCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQH
+        CHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCNDu5Ojy5ev8BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBh
+        bmRlZAgJRmllbGROYW1lBg9ET0NVTUVOVFRZUEVLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVu
+        dAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYN0ujvIOTu6vPs5e3y4AVXaWR0aAL/B1Zpc2libGUI
+        AAEIRXhwYW5kZWQICUZpZWxkTmFtZQYJVFJUWVBFS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1l
+        bnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDtLo7yDy8ODt5+Dq9ujoBVdpZHRoAv8HVmlzaWJs
+        ZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBg5UUkFOU0FDVElPTktFWQhSZWFkT25seQgPVGl0bGUu
+        QWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgrS8ODt5+Dq9uj/BVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgZOVU1CRVIIUmVhZE9ubHkID1RpdGxlLkFsaWdu
+        bWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYFze7s5fAFV2lkdGgC/wdWaXNpYmxlCAABCEV4
+        cGFuZGVkCAlGaWVsZE5hbWUGDERPQ1VNRU5UREFURQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50
+        Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgTE4PLgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRl
+        ZAgJRmllbGROYW1lBgtERVNDUklQVElPTghSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNl
+        bnRlcg1UaXRsZS5DYXB0aW9uBgjO7+jx4O3o5QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQI
+        CUZpZWxkTmFtZQYGU1VNTkNVCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRp
+        dGxlLkNhcHRpb24GC9Hz7OzgIOIgzcTFBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
+        bGROYW1lBgdTVU1DVVJSCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxl
+        LkNhcHRpb24GDtHz7OzgIOIg4uDr/vLlBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
+        bGROYW1lBgVTVU1FUQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5D
+        YXB0aW9uBhPR8+zs4CDiIP3q4uji4Ovl7fLlBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
+        RmllbGROYW1lBgdERUxBWUVECFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRp
+        dGxlLkNhcHRpb24GCs7y6+7m5e3t++kFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVs
+        ZE5hbWUGB0NVUlJLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUu
+        Q2FwdGlvbgYGwuDr/vLgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgpD
+        T01QQU5ZS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRp
+        b24GCMru7O/g7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgpDUkVB
+        VE9SS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24G
+        Csry7iDx7ufk4OsFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDENSRUFU
+        SU9OREFURQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9u
+        Bg3E4PLgIPHu5+Tg7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglF
+        RElUT1JLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlv
+        bgYMyvLuIOjx7/Dg4ujrBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtF
+        RElUSU9OREFURQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0
+        aW9uBg7E4PLgIOjn7OXt5e3o/wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFt
+        ZQYJUFJJTlREQVRFCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNh
+        cHRpb24GC8Tg8uAg7+X34PLoBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1l
+        BghSRVNFUlZFRAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0
+        aW9uBg/H4PDl5+Xw4ujw7uLg7e4FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
+        bWUGCUdPT0RBTElBUwhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5D
+        YXB0aW9uBgjY6PTwINLM1gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYI
+        VkFMVUVLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlv
+        bgYIxeQuIOjn7C4FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCEdST1VQ
+        S0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GBsPw
+        8+/v4AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLRE9DVU1FTlRLRVkP
+        VGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBg3I5OXt8uj06Org8u7wBVdp
+        ZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtGUk9NQ0FSREtFWQ9UaXRsZS5B
+        bGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GC8jnIOrg8PLu9+roBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglNQVNURVJLRVkPVGl0bGUuQWxpZ25tZW50Bwh0
+        YUNlbnRlcg1UaXRsZS5DYXB0aW9uBjHQ7uTo8uXr/CAoz+Xw5ezl+eXt6OUg7/Du5PPq9ujoIOgg
+        8fvw/P8o7+7n6Pbo/ykpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglS
+        RVNFUlZFRDEPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBjjH4PDl5+Xw
+        4ujw7uLg7e4gKM/l8OXs5fnl7ejlIO/w7uTz6vbo6CDoIPH78Pz/KO/u5+j26P8pKQVXaWR0aAL/
+        B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYJVE9DQVJES0VZD1RpdGxlLkFsaWdubWVu
+        dAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYKwiDq4PDy7vfq8wVXaWR0aAL/B1Zpc2libGUIAAEI
+        RXhwYW5kZWQICUZpZWxkTmFtZQYHR09PREtFWQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0
+        YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgXS7uLg8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQI
+        CUZpZWxkTmFtZQYYR19VU1IkVk1LX01BSU5HT09EX0FMSUFTCFJlYWRPbmx5CA9UaXRsZS5BbGln
+        bm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GGdjo9PAg0szWICjR7/Dg4u737ejqINLM1ikF
+        V2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGGkdfVVNSJFZNS19NQUlOR09P
+        RF9CQVJDT0RFCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRp
+        b24GCdjy8Oj1IOru5AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYbR19V
+        U1IkVk1LX01BSU5HT09EX1BEX0FMSUFTCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2Vu
+        dGVyDVRpdGxlLkNhcHRpb24GGdjo9PAg0szWICjR7/Dg4u737ejqINLM1ikFV2lkdGgC/wdWaXNp
+        YmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGHUdfVVNSJFZNS19NQUlOR09PRF9QRF9CQVJDT0RF
+        CFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GGtjy8Oj1
+        IOru5CAo0e/w4OLu9+3o6iDSzNYpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGRO
+        YW1lBhhGUk9NX1VTUiRBU1hfUE9ERE9OX0NPREUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GC8ru
+        5CDv7uTk7u3gBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhZUT19VU1Ik
+        QVNYX1BPRERPTl9DT0RFCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgvK7uQg7+7k5O7t4AVXaWR0
+        aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYKVVNSJFNIQ09ERQhSZWFkT25seQgN
+        VGl0bGUuQ2FwdGlvbgYSyu7kIOTr/yDy5fDs6O3g6+7iBVdpZHRoAv8HVmlzaWJsZQgAAQlBbGln
+        bm1lbnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFGVUxMCFJlYWRPbmx5
+        CA1UaXRsZS5DYXB0aW9uBg3P7uvt++kg5O7x8vPvBVdpZHRoAv8HVmlzaWJsZQgAAQlBbGlnbm1l
+        bnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFDSEFHCFJlYWRPbmx5CA1U
+        aXRsZS5DYXB0aW9uBhnP8O7x7O7y8CDoIPDl5ODq8ujw7uLg7ejlBVdpZHRoAv8HVmlzaWJsZQgA
+        AQlBbGlnbm1lbnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFWSUVXCFJl
+        YWRPbmx5CA1UaXRsZS5DYXB0aW9uBg/S7uv86u4g7/Du8ezu8vAFV2lkdGgC/wdWaXNpYmxlCAAA
+        CAi0HgkI
   - 
     Properties: 
       Class: "TgdcStorageValue"
@@ -1876,7 +1881,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-26T16:38:13+03:00
+      EDITIONDATE: 2023-04-26T18:10:26+03:00
       DISPLAYSCRIPT: | 
         TGDCINVDOCUMENTLINE147016233_2053437193DOBEFOREPOST
         
@@ -1890,37 +1895,39 @@ Objects:
           Call Inherited(Self, "DoBeforePost", Array(Self))
         '***               Конец кода поддержки gdc-класса.                  ***
           dim gdcObject, gdcDetailObject, Creator, ibsql
-          set gdcObject = Self.OwnerForm.gdcObject
-          set gdcDetailObject = Self
-          ' Если склад USR$TOCONTACTKEY не типа "Склад адресного хранения",
-          ' в  признак ячейка обнуляется toCard
-          set Creator = new TCreator
-          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
-          ibsql.Transaction = gdcBaseManager.ReadTransaction
-          ibsql.SQL.Text = _
-            "select c.id, c.USR$INV_TYPEDEPART from gd_contact c where c.id = :id  "
-          ibsql.ParamByName("id").AsInteger = gdcObject.FieldByName("USR$TOCONTACTKEY").AsInteger
-          ibsql.ExecQuery
-          if ibsql.RecordCount > 0  then
-            if ibsql.FieldByName("USR$INV_TYPEDEPART").AsInteger <> gdcBaseManager.GetIDByRUIDString("147057228_2053483706") then
-              Self.FieldByName("TO_USR$ASX_NUMBER_PLACE").AsVariant = null
-            else
-              'Если USR$TOCONTACTKEY  типа "Склад адресного хранения" проверяем, чтобы признак "Номер ячейки" был заполнен
-              if  Self.FieldByName("TO_USR$ASX_NUMBER_PLACE").IsNull then
-                call Exception.Raise("Exception", "Заполните номер ячейки-приемника!")
-                Self.Cancel
+          if Assigned(Self.OwnerForm) then
+            set gdcObject = Self.OwnerForm.gdcObject
+            set gdcDetailObject = Self
+            ' Если склад USR$TOCONTACTKEY не типа "Склад адресного хранения",
+            ' в  признак ячейка обнуляется toCard
+            set Creator = new TCreator
+            set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+            ibsql.Transaction = gdcBaseManager.ReadTransaction
+            ibsql.SQL.Text = _
+              "select c.id, c.USR$INV_TYPEDEPART from gd_contact c where c.id = :id  "
+            ibsql.ParamByName("id").AsInteger = gdcObject.FieldByName("USR$TOCONTACTKEY").AsInteger
+            ibsql.ExecQuery
+            if ibsql.RecordCount > 0  then
+              if ibsql.FieldByName("USR$INV_TYPEDEPART").AsInteger <> gdcBaseManager.GetIDByRUIDString("147057228_2053483706") then
+                Self.FieldByName("TO_USR$ASX_NUMBER_PLACE").AsVariant = null
+              else
+                'Если USR$TOCONTACTKEY  типа "Склад адресного хранения" проверяем, чтобы признак "Номер ячейки" был заполнен
+                if  Self.FieldByName("TO_USR$ASX_NUMBER_PLACE").IsNull then
+                  call Exception.Raise("Exception", "Заполните номер ячейки-приемника!")
+                  Self.Cancel
+                end if
               end if
             end if
-          end if
-          ibsql.Close
-          ibsql.ParamByName("id").AsInteger = gdcObject.FieldByName("USR$FROMCONTACTKEY").AsInteger
-          ibsql.ExecQuery
-          if ibsql.RecordCount > 0  then
-            if ibsql.FieldByName("USR$INV_TYPEDEPART").AsInteger = gdcBaseManager.GetIDByRUIDString("147057228_2053483706") then
-              'Если USR$FROMCONTACTKEY  типа "Склад адресного хранения" проверяем, чтобы признак "Номер ячейки" был заполнен
-              if  Self.FieldByName("FROM_USR$ASX_NUMBER_PLACE").IsNull then
-                call Exception.Raise("Exception", "Заполните номер ячейки-источника!")
-                Self.Cancel
+            ibsql.Close
+            ibsql.ParamByName("id").AsInteger = gdcObject.FieldByName("USR$FROMCONTACTKEY").AsInteger
+            ibsql.ExecQuery
+            if ibsql.RecordCount > 0  then
+              if ibsql.FieldByName("USR$INV_TYPEDEPART").AsInteger = gdcBaseManager.GetIDByRUIDString("147057228_2053483706") then
+                'Если USR$FROMCONTACTKEY  типа "Склад адресного хранения" проверяем, чтобы признак "Номер ячейки" был заполнен
+                if  Self.FieldByName("FROM_USR$ASX_NUMBER_PLACE").IsNull then
+                  call Exception.Raise("Exception", "Заполните номер ячейки-источника!")
+                  Self.Cancel
+                end if
               end if
             end if
           end if
@@ -1941,4 +1948,4 @@ Objects:
       OBJECTKEY: "147057231_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine\\TgdcInvDocumentLine147016233_2053437193"
       OBJECTNAME: "TgdcInvDocumentLine147016233_2053437193"
       PARENTNAME: "TgdcInvDocumentLine"
-      EDITIONDATE: 2023-04-26T16:38:13+03:00
+      EDITIONDATE: 2023-04-26T18:10:26+03:00
