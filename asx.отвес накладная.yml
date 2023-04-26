@@ -5,10 +5,10 @@ Properties:
   RUID: 147016667_2053437193
   Name: "asx.отвес накладная"
   Caption: "asx.отвес накладная"
-  Version: "1.0.0.7"
+  Version: "1.0.0.8"
   Optional: False
   Internal: True
-  MD5: 02CEE46947835753F49C6D14ABED6FBB
+  MD5: 35982B843C41DA15B59158364904E849
 Uses: 
   - "147016562_2053437193 asx.возврат от покупателя"
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
@@ -46,7 +46,7 @@ Objects:
       IMGINDEX: 0
       ORDR: ~
       SUBTYPE: "147016267_2053437193"
-      EDITIONDATE: 2023-03-24T13:53:46+03:00
+      EDITIONDATE: 2023-04-24T18:59:43+03:00
       DISABLED: 0
   - 
     Properties: 
@@ -333,16 +333,50 @@ Objects:
       MASK: "\"NUMBER\""
       REPORTGROUPKEY: "147016275_2053437193 Складской учет\\Отвес накладная"
       RUID: "147016267_2053437193"
-      EDITIONDATE: 2023-03-24T13:53:46+03:00
+      EDITIONDATE: 2023-04-24T18:59:43+03:00
       DISABLED: 0
       HEADERFUNCTIONTEMPLATE: ~
       LINEFUNCTIONTEMPLATE: ~
       OPTIONS: !!binary > 
         BgZJRFYzLjAGDVVTUiRBU1hfT1RWRVMGEVVTUiRBU1hfT1RWRVNMSU5FBFNKwwgGDVVTUiRBU1hf
         T1RWRVMGC1VTUiRTSE9QS0VZBgAGAAMBAAEABg1VU1IkQVNYX09UVkVTBhBVU1IkTUFJTkRFUE9U
-        S0VZBgAGAAIBAAEAAQYUVVNSJEFTWF9EQVRFUkVDRUlWRUQGE1VTUiRBU1hfUE9ERE9OX0NPREUG
-        E1VTUiRBU1hfTlVNQkVSX1BBUlQGFFVTUiRBU1hfTlVNQkVSX1BMQUNFAAEAAwAICAkICAEACAgJ
+        S0VZBgAGAAIBAAEAAQYUVVNSJEFTWF9OVU1CRVJfUExBQ0UGE1VTUiRBU1hfTlVNQkVSX1BBUlQG
+        E1VTUiRBU1hfUE9ERE9OX0NPREUGFFVTUiRBU1hfREFURVJFQ0VJVkVEAAEAAwAICAkICAEACQkJ
         CAgI
+  - 
+    Properties: 
+      Class: "TgdcInvDocumentTypeOptions"
+      RUID: 147056848_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016267_2053437193
+    Fields: 
+      BOOL_VALUE: 1
+      CONTACTKEY: ~
+      CURRKEY: ~
+      DTKEY: "147016267_2053437193 Складские документы\\ASX.Склад\\Отвес накладная"
+      OPTION_NAME: "ChangeCardValue"
+      RELATIONFIELDKEY: ~
+      EDITIONDATE: 2023-04-24T18:55:49+03:00
+      DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcInvDocumentTypeOptions"
+      RUID: 147056849_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016267_2053437193
+    Fields: 
+      BOOL_VALUE: 1
+      CONTACTKEY: ~
+      CURRKEY: ~
+      DTKEY: "147016267_2053437193 Складские документы\\ASX.Склад\\Отвес накладная"
+      OPTION_NAME: "AppendCardValue"
+      RELATIONFIELDKEY: ~
+      EDITIONDATE: 2023-04-24T18:55:49+03:00
+      DISABLED: 0
   - 
     Properties: 
       Class: "TgdcInvDocumentTypeOptions"

@@ -5,10 +5,10 @@ Properties:
   RUID: 1529090537_2075031366
   Name: "Экспрот в адресный склад"
   Caption: "Экспрот в адресный склад"
-  Version: "1.0.0.2"
+  Version: "1.0.0.4"
   Optional: False
   Internal: True
-  MD5: 5422B6EF50437F6F6E56BDC641039078
+  MD5: 2770FB52E4C3216131F9F99692279119
 Uses: 
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
 Objects: 
@@ -80,7 +80,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-15T19:10:44+03:00
+      EDITIONDATE: 2023-04-20T13:28:54+03:00
       DISPLAYSCRIPT: | 
         SHCODE_ORDERS_NEW
         SHCODE_ORDERS_NEW_ROLLBACK
@@ -195,7 +195,7 @@ Objects:
           set ibsqlInsertOrder = Creator.GetObject(NULL, "TIBSQL", "")
           ibsqlInsertOrder.Transaction = exTransaction
           ibsqlInsertOrder.SQL.Text = "execute block (number VARCHAR(20) = :number, documentdate DDATE = :documentdate, ondate DDATE = :ondate, customerkey DFOREIGNKEY = :customerkey, " & vbCrLf & _
-            "   departkey DFOREIGNKEY = :departkey, roadkey DFOREIGNKEY = :roadkey, original_id DFOREIGNKEY = :original_id) " & vbCrLf & _
+            "   departkey DFOREIGNKEY = :departkey, roadkey DFOREIGNKEY = :roadkey, original_id DFOREIGNKEY = :original_id, depcode VARCHAR(10) = :depcode) " & vbCrLf & _
             "  RETURNS (ID DFOREIGNKEY) " & _
             "as " & vbCrLf & _
             "  declare documenttypekey dintkey; " & vbCrLf & _
@@ -213,8 +213,8 @@ Objects:
             "  INSERT INTO gd_document (ID, CREATORKEY, EDITORKEY, NUMBER, DOCUMENTDATE, DOCUMENTTYPEKEY, COMPANYKEY) " & vbCrLf & _
             "    VALUES (:id, 650002, 650002, :number, :documentdate, :documenttypekey, :companykey); " & vbCrLf & _
             "     " & vbCrLf & _
-            "  INSERT INTO usr$ber_claim (DOCUMENTKEY, USR$HEADCOMPANYKEY, USR$CONTACTKEY, USR$ROADKEY, USR$ORIGINAL_ID, USR$ONDATE) " & vbCrLf & _
-            "    VALUES (:id, :customerkey, :departkey, :roadkey, :original_id, :ondate); " & vbCrLf & _
+            "  INSERT INTO usr$ber_claim (DOCUMENTKEY, USR$HEADCOMPANYKEY, USR$CONTACTKEY, USR$ROADKEY, USR$ORIGINAL_ID, USR$ONDATE, USR$SHCODE) " & vbCrLf & _
+            "    VALUES (:id, :customerkey, :departkey, :roadkey, :original_id, :ondate, :depcode); " & vbCrLf & _
             " " & vbCrLf & _
             "  SUSPEND;" & vbCrLf & _
             "end "
@@ -426,7 +426,7 @@ Objects:
                     ibsqlDetail.Close
                     ibsqlDetail.ExecQuery
                     call EXPORT_ORDER_TO_ASX(gdcUserDocument, ibsqlDetail, Transaction, exTransaction, ibsqlGetID, ibsqlGetNextID, _
-                       ibsqlInsertCompany, ibsqlInsertDepart, ibsqlSearchGood, ibsqlInsertROAD, ibsqlInsertOrder,  ibsqlInsertOrderLine)
+                       ibsqlInsertCompany, ibsqlInsertDepart, ibsqlSearchGood, ibsqlInsertROAD, ibsqlInsertOrder,  ibsqlInsertOrderLine, depcode)
                   else
         '            if FSO.FileExists(pathtoputlocal2 & ORD_NO & depcode & doc_no & ".txt") then FSO.DeleteFile(pathtoputlocal2 & ORD_NO & depcode & doc_no & ".txt")
         '            SGood.SaveToFile(pathtoputlocal2 & ORD_NO & depcode & doc_no & ".txt")
@@ -459,7 +459,7 @@ Objects:
         end sub
         
         sub EXPORT_ORDER_TO_ASX(gdcUserDocument, ibsqlDetail, Transaction, exTransaction, ibsqlGetID, ibsqlGetNextID, _
-                       ibsqlInsertCompany, ibsqlInsertDepart, ibsqlSearchGood, ibsqlInsertROAD, ibsqlInsertOrder,  ibsqlInsertOrderLine)
+                       ibsqlInsertCompany, ibsqlInsertDepart, ibsqlSearchGood, ibsqlInsertROAD, ibsqlInsertOrder,  ibsqlInsertOrderLine, depcode)
           dim Res(), CompanyKey, DepartKey, RoadKey, OrderKey, GoodKey
           
           call gdcBaseManager.ExecSingleQueryResult("select xid, dbid from gd_p_getruid(:id)", gdcUserDocument.FieldByName("USR$HEADCOMPANYKEY").AsInteger, Res, _
@@ -543,6 +543,7 @@ Objects:
           ibsqlInsertOrder.ParamByName("departkey").AsInteger = DepartKey
           ibsqlInsertOrder.ParamByName("roadkey").AsInteger = RoadKey
           ibsqlInsertOrder.ParamByName("original_id").AsInteger = gdcUserDocument.FieldByName("usr$original_id").AsInteger
+          ibsqlInsertOrder.ParamByName("depcode").AsString = depcode
           ibsqlInsertOrder.ExecQuery
           OrderKey = ibsqlInsertOrder.FieldByName("id").AsInteger
           

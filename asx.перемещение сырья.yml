@@ -5,10 +5,10 @@ Properties:
   RUID: 147016602_2053437193
   Name: "asx.перемещение сырья"
   Caption: "asx.перемещение сырья"
-  Version: "1.0.0.5"
+  Version: "1.0.0.6"
   Optional: False
   Internal: True
-  MD5: 94CCAB7B04183E8A399AD2F629D52C62
+  MD5: EF9AFDD068F61E723A6853EC07BAA1FF
 Uses: 
   - "147016562_2053437193 asx.возврат от покупателя"
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
@@ -332,7 +332,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-02-26T15:44:23+03:00
+      EDITIONDATE: 2023-04-10T19:06:03+03:00
       BLOB_DATA: !!binary > 
         VFBGMAYNR1JJRF9TVFJFQU1fNAEGBlRhaG9tYQYMY2xXaW5kb3dUZXh0AvUAAggAAgEABghjbFdp
         bmRvdwEGBlRhaG9tYQYPY2xIaWdobGlnaHRUZXh0AvUAAggAAgEABgtjbEhpZ2hsaWdodAEGBlRh
@@ -399,11 +399,12 @@ Objects:
         ZWQICUZpZWxkTmFtZQYJUkVTRVJWRUQxD1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUu
         Q2FwdGlvbgYvx+Dw5efl8OLo8O7i4O3uICjP5fDl7OX55e3o5SDv8O7k8+r26Ogg6CDx+/D8/ykF
         V2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZp
-        ZWxkTmFtZQYFQUZVTEwNVGl0bGUuQ2FwdGlvbgYNz+7r7fvpIOTu8fLz7wVXaWR0aAL/B1Zpc2li
-        bGUIAAEJQWxpZ25tZW50Bw50YVJpZ2h0SnVzdGlmeQhFeHBhbmRlZAgJRmllbGROYW1lBgVBQ0hB
-        Rw1UaXRsZS5DYXB0aW9uBhnP8O7x7O7y8CDoIPDl5ODq8ujw7uLg7ejlBVdpZHRoAv8HVmlzaWJs
-        ZQgAAQlBbGlnbm1lbnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFWSUVX
-        DVRpdGxlLkNhcHRpb24GD9Lu6/zq7iDv8O7x7O7y8AVXaWR0aAL/B1Zpc2libGUIAAAICLQeCQg=
+        ZWxkTmFtZQYFQUZVTEwIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDc/u6+376SDk7vHy8+8FV2lk
+        dGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZpZWxk
+        TmFtZQYFQUNIQUcIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GGc/w7vHs7vLwIOgg8OXk4Ory6PDu
+        4uDt6OUFV2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5k
+        ZWQICUZpZWxkTmFtZQYFQVZJRVcIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GD9Lu6/zq7iDv8O7x
+        7O7y8AVXaWR0aAL/B1Zpc2libGUIAAAICLQeCQg=
   - 
     Properties: 
       Class: "TgdcStorageFolder"
@@ -1831,3 +1832,113 @@ Objects:
       RELATIONFIELDKEY: ~
       EDITIONDATE: 2023-02-26T14:15:23+03:00
       DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcDelphiObject"
+      RUID: 147057231_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147057232_2053483706
+    Fields: 
+      PARENT: "147093919_486813904 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine"
+      NAME: "TgdcInvDocumentLine147016233_2053437193"
+      CLASSNAME: "TgdcInvDocumentLine"
+      DESCRIPTION: ~
+      MACROSGROUPKEY: ~
+      OBJECTNAME: ""
+      OBJECTTYPE: 1
+      REPORTGROUPKEY: ~
+      SUBTYPE: "147016233_2053437193"
+      EDITIONDATE: 2023-04-26T15:23:01+03:00
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147057234_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147057232_2053483706
+    Fields: 
+      NAME: "TgdcInvDocumentLine147016233_2053437193DoBeforePost"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "METHOD"
+      MODULECODE: "147057231_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine\\TgdcInvDocumentLine147016233_2053437193"
+      OBJECTNAME: "TgdcInvDocumentLine147016233_2053437193"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-04-26T16:38:13+03:00
+      DISPLAYSCRIPT: | 
+        TGDCINVDOCUMENTLINE147016233_2053437193DOBEFOREPOST
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QEAAAAU0VMRgQAAABTRUxGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RGTFBS
+      SCRIPT: | 
+        Option Explicit
+        Sub TgdcInvDocumentLine147016233_2053437193DoBeforePost(Self)
+        '*** Данный код необходим для вызова кода определенного в gdc-классе.***
+        '*** При его удаления  возможно нарушение  правильной работы системы.***
+          Call Inherited(Self, "DoBeforePost", Array(Self))
+        '***               Конец кода поддержки gdc-класса.                  ***
+          dim gdcObject, gdcDetailObject, Creator, ibsql
+          set gdcObject = Self.OwnerForm.gdcObject
+          set gdcDetailObject = Self
+          ' Если склад USR$TOCONTACTKEY не типа "Склад адресного хранения",
+          ' в  признак ячейка обнуляется toCard
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = gdcBaseManager.ReadTransaction
+          ibsql.SQL.Text = _
+            "select c.id, c.USR$INV_TYPEDEPART from gd_contact c where c.id = :id  "
+          ibsql.ParamByName("id").AsInteger = gdcObject.FieldByName("USR$TOCONTACTKEY").AsInteger
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0  then
+            if ibsql.FieldByName("USR$INV_TYPEDEPART").AsInteger <> gdcBaseManager.GetIDByRUIDString("147057228_2053483706") then
+              Self.FieldByName("TO_USR$ASX_NUMBER_PLACE").AsVariant = null
+            else
+              'Если USR$TOCONTACTKEY  типа "Склад адресного хранения" проверяем, чтобы признак "Номер ячейки" был заполнен
+              if  Self.FieldByName("TO_USR$ASX_NUMBER_PLACE").IsNull then
+                call Exception.Raise("Exception", "Заполните номер ячейки-приемника!")
+                Self.Cancel
+              end if
+            end if
+          end if
+          ibsql.Close
+          ibsql.ParamByName("id").AsInteger = gdcObject.FieldByName("USR$FROMCONTACTKEY").AsInteger
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0  then
+            if ibsql.FieldByName("USR$INV_TYPEDEPART").AsInteger = gdcBaseManager.GetIDByRUIDString("147057228_2053483706") then
+              'Если USR$FROMCONTACTKEY  типа "Склад адресного хранения" проверяем, чтобы признак "Номер ячейки" был заполнен
+              if  Self.FieldByName("FROM_USR$ASX_NUMBER_PLACE").IsNull then
+                call Exception.Raise("Exception", "Заполните номер ячейки-источника!")
+                Self.Cancel
+              end if
+            end if
+          end if
+          
+        End Sub
+        
+  - 
+    Properties: 
+      Class: "TgdcEvent"
+      RUID: 147057232_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      DISABLE: 0
+      EVENTNAME: "DOBEFOREPOST"
+      FUNCTIONKEY: "147057234_2053483706 TgdcInvDocumentLine147016233_2053437193DoBeforePost"
+      OBJECTKEY: "147057231_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine\\TgdcInvDocumentLine147016233_2053437193"
+      OBJECTNAME: "TgdcInvDocumentLine147016233_2053437193"
+      PARENTNAME: "TgdcInvDocumentLine"
+      EDITIONDATE: 2023-04-26T16:38:13+03:00
