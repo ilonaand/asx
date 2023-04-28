@@ -5,10 +5,10 @@ Properties:
   RUID: 147023432_2053483706
   Name: "asx.справочники"
   Caption: "asx.справочники"
-  Version: "1.0.0.4"
+  Version: "1.0.0.5"
   Optional: False
   Internal: True
-  MD5: 86AD400630663A537934F2EC1A57173E
+  MD5: 4FE3E5E668470413873AC328DF81428B
 Uses: 
   - "147016562_2053437193 asx.возврат от покупателя"
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
@@ -215,7 +215,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-03-22T18:30:36+03:00
+      EDITIONDATE: 2023-04-28T15:29:57+03:00
       DISPLAYSCRIPT: | 
         MACROS147023443_2053483706
         
@@ -277,19 +277,20 @@ Objects:
           dim numSort
           numSort = 0
           for i = 1 to row
-            for j = 1 to tier
-              for k = 1 to  place
+            for j = 0 to tier - 1
+              for k = 1 to place
                 if len(i) < 2 then
                   rowName = "0" & i
                 else
                   rowName = i
                 end if
-                str = nameCamera & "-" & rowName & "-" & j & "-" & k
+                str = nameCamera & "-" & rowName & "-" & CStr(j * place + k)
                 gdcObject.Insert
                 gdcObject.FieldByName("USR$NAME").AsString = str
                 gdcObject.FieldByName("USR$BLOCKED").AsInteger = 0
                 gdcObject.FieldByName("USR$DEPTKEY").AsInteger = deptkey(0)
                 gdcObject.FieldByName("USR$NUMBERSORT").AsInteger = numSort
+                gdcObject.FieldByName("USR$TIER").AsInteger = j + 1
                 gdcObject.Post
                 numSort = numSort + 1
               next
@@ -315,7 +316,7 @@ Objects:
       OBJECTNAME: "gdc_frmAttrUserDefinedUSR_ASX_CELLS"
       SERVERKEY: ~
       SHORTCUT: 0
-      EDITIONDATE: 2023-03-22T18:30:36+03:00
+      EDITIONDATE: 2023-04-28T15:29:57+03:00
   - 
     Properties: 
       Class: "TgdcFunction"
@@ -572,7 +573,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-04-21T17:38:00+03:00
+      EDITIONDATE: 2023-04-28T15:07:18+03:00
       BLOB_DATA: | 
         object gdc_dlgAttrUserDefinedUSR_ASX_CELLS: Tgdc_dlgAttrUserDefined
           Left = 522
@@ -650,20 +651,34 @@ Objects:
                 TabVisible = True
                 object usrat_DBEdit_USR_NAME_Label: TLabel
                 end
-                object usrat_gsIBLookupComboBox_USR_GOODKEY_Label: TLabel
+                object usrat_gsIBLookupComboBox_USR_GROUPKEY_Label: TLabel
+                  Left = 8
                   Top = 33
                 end
+                object usrat_DBEdit_USR_TIER_Label: TLabel
+                  Left = 316
+                  Top = 9
+                end
                 object usrat_DBEdit_USR_NAME: TDBEdit
-                  Width = 220
+                  Top = 4
+                  Width = 79
                 end
                 object usrat_DBCheckBox_USR_BLOCKED: TDBCheckBox
                   Left = 5
                   Top = 56
                   Width = 103
                 end
-                object usrat_gsIBLookupComboBox_USR_GOODKEY: TgsIBLookupComboBox
+                object usrat_gsIBLookupComboBox_USR_GROUPKEY: TgsIBLookupComboBox
+                  Left = 197
                   Top = 29
                   Width = 221
+                end
+                object usrat_DBEdit_USR_TIER: TxDBCalculatorEdit
+                  Left = 355
+                  Top = 4
+                  Width = 63
+                  Cursor = crIBeam
+                  TabOrder = 3
                 end
               end
               object usrg_USR_ASX_CELLS_TabSheet2: TTabSheet
@@ -688,19 +703,24 @@ Objects:
                 object atAttributes: TatContainer
                   Width = 467
                   Height = 93
+                  HorzScrollBar.Position = 3
                   VertScrollBar.Position = 0
                   object usrat_gsIBLookupComboBox_USR_DEPTKEY_Label: TLabel
+                    Left = 2
                     Top = 9
                   end
                   object usrat_DBEdit_USR_NUMBERSORT_Label: TLabel
+                    Left = 2
                     Top = 34
                   end
                   object usrat_gsIBLookupComboBox_USR_DEPTKEY: TgsIBLookupComboBox
+                    Left = 191
                     Top = 5
                     Width = 276
                     TabOrder = 0
                   end
                   object usrat_DBEdit_USR_NUMBERSORT: TxDBCalculatorEdit
+                    Left = 191
                     Top = 30
                     Cursor = crIBeam
                   end
@@ -751,7 +771,7 @@ Objects:
             Top = 31
           end
           object pm_dlgG: TPopupMenu
-            Left = 411
+            Left = 427
             Top = 29
             object actSecurity1: TMenuItem
             end
@@ -1393,7 +1413,7 @@ Objects:
   - 
     Properties: 
       Class: "TgdcTableField"
-      RUID: 147054721_2053483706
+      RUID: 147057545_2053483706
       AlwaysOverwrite: False
       DontRemove: False
       IncludeSiblings: False
@@ -1405,20 +1425,20 @@ Objects:
       CROSSTABLE: ~
       CROSSTABLEKEY: ~
       DELETERULE: "RESTRICT"
-      DESCRIPTION: "Предпочтительный товар"
-      FIELDNAME: "USR$GOODKEY"
-      FIELDSOURCE: "USR$GS_DGOOD"
-      FIELDSOURCEKEY: "147035009_9802323 Товар, USR$GS_DGOOD"
+      DESCRIPTION: "Предпочтительная группа товаров"
+      FIELDNAME: "USR$GROUPKEY"
+      FIELDSOURCE: "USR$INV_D_GOODGROUP"
+      FIELDSOURCEKEY: "147016216_119091725 Группа ТМЦ, USR$INV_D_GOODGROUP"
       FORMAT: ~
-      GDCLASSNAME: "TgdcGood"
+      GDCLASSNAME: ~
       GDSUBTYPE: ~
-      LNAME: "Предпочтительный товар"
-      LSHORTNAME: "Предпочтительный тов"
+      LNAME: "Предпочтительная группа товаров"
+      LSHORTNAME: "Группа товаров"
       NULLFLAG: ~
       READONLY: 0
       REFCROSSRELATION: ~
       REFLISTFIELD: "NAME"
-      REFRELATIONNAME: "GD_GOOD"
+      REFRELATIONNAME: "GD_GOODGROUP"
       RELATIONKEY: "147023307_2053483706 Места хранения(ячейки), USR$ASX_CELLS"
       RELATIONNAME: "USR$ASX_CELLS"
       RELATIONTYPE: "T"
@@ -1428,7 +1448,49 @@ Objects:
       SOURCENULLFLAG: ~
       STRINGLENGTH: ~
       VISIBLE: 1
-      EDITIONDATE: 2023-04-20T17:45:34+03:00
+      EDITIONDATE: 2023-04-28T14:56:55+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147057651_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Ярус"
+      FIELDNAME: "USR$TIER"
+      FIELDSOURCE: "DSMALLINT"
+      FIELDSOURCEKEY: "147000168_31587988 Целое число, DSMALLINT"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Ярус"
+      LSHORTNAME: "Ярус"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147023307_2053483706 Места хранения(ячейки), USR$ASX_CELLS"
+      RELATIONNAME: "USR$ASX_CELLS"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-04-28T15:03:05+03:00
       COMPUTED_VALUE: ~
       DEFSOURCE: ~
       OBJECTS: ~
