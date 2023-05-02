@@ -5,10 +5,10 @@ Properties:
   RUID: 147054214_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Отчеты"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Отчеты"
-  Version: "1.0.0.5"
+  Version: "1.0.0.6"
   Optional: False
   Internal: True
-  MD5: 4C2AD87CA59220CD0B0268F8A371A3AE
+  MD5: 92E9665CADDAB6E2BFA43E57526A928B
 Uses: 
   - "472939156_1549072347 GS.Отдел сбыта. Заявка1 (организация)"
   - "1368996857_1691301355 GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
@@ -161,7 +161,7 @@ Objects:
       NAME: "web. Места хранения в заданном ряду"
       DESCRIPTION: ~
       TEMPLATETYPE: "FR4"
-      EDITIONDATE: 2023-04-28T19:09:01+03:00
+      EDITIONDATE: 2023-05-02T11:54:44+03:00
       TEMPLATEDATA: | 
         <?xml version="1.0" encoding="utf-8"?>
         <Tgs_fr4SingleReport Version="4.15.13" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="По умолчанию" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45037,7423931713" ReportOptions.Description.Text="" ReportOptions.LastChange="45037,7423931713" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." PropData="08446174617365747301010C2200000020446174615365743D22444154412220446174615365744E616D653D22444154412200010C2600000020446174615365743D224D41535445522220446174615365744E616D653D224D41535445522200010C1C00000020446174615365743D22512220446174615365744E616D653D22512200010C1E00000020446174615365743D2251312220446174615365744E616D653D2251312200010C2400000020446174615365743D2251474F4F442220446174615365744E616D653D2251474F4F442200010C2400000020446174615365743D225449544C452220446174615365744E616D653D225449544C45220000095661726961626C65730100055374796C650100">
@@ -170,10 +170,10 @@ Objects:
             <TfrxReportTitle Name="ReportTitle1" Height="45,35436" Left="0" Top="18,89765" Width="718,1107">
               <TfrxMemoView Name="Memo5" Align="baWidth" Left="0" Top="21" Width="718,1107" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="РњРµСЃС‚Р° С…СЂР°РЅРµРЅРёСЏ РљР°РјРµСЂР°: [TITLE.&#34;NAMECAMERA&#34;] Р СЏРґ: [TITLE.&#34;ROWNAME&#34;] Р”Р°С‚Р°: [date] [time]"/>
             </TfrxReportTitle>
-            <TfrxMasterData Name="MasterData1" Height="26,45671" Left="0" Top="166,29932" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSetName="MASTER" RowCount="0" Stretched="True">
-              <TfrxMemoView Name="Memo6" Left="94,48818898" Top="0" Width="113,3859" Height="26,45671" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-8" Font.Name="Arial" Font.Style="0" Frame.Typ="7" Highlight.Font.Charset="1" Highlight.Font.Color="-1" Highlight.Font.Height="-8" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;defaultGroup&#34;]"/>
-              <TfrxMemoView Name="Memo3" Left="68,03154" Top="25,67718" Width="139,84261" Height="0" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="0" Frame.Typ="11" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-9" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="13555436" Highlight.Condition="&#60;DATA.&#34;good&#34;&#62; &#60;&#62; ''" ParentFont="False" Text="[DATA.&#34;good&#34;]"/>
-              <TfrxMemoView Name="Memo7" Left="68,03154" Top="0" Width="26,45671" Height="26,45671" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="7" ParentFont="False" Text="[DATA.&#34;place&#34;]"/>
+            <TfrxMasterData Name="MasterData1" Height="37,7953" Left="0" Top="166,29932" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSetName="MASTER" RowCount="0" Stretched="True">
+              <TfrxMemoView Name="Memo6" Left="94,48818898" Top="0" Width="113,3859" Height="37,7953" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-8" Font.Name="Arial" Font.Style="0" Frame.Typ="7" Highlight.Font.Charset="1" Highlight.Font.Color="-1" Highlight.Font.Height="-8" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;defaultGroup&#34;]"/>
+              <TfrxMemoView Name="Memo3" Left="68,03154" Top="37,67718" Width="139,84261" Height="0" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="0" Frame.Typ="11" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-9" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="13555436" Highlight.Condition="&#60;DATA.&#34;good&#34;&#62; &#60;&#62; ''" ParentFont="False" Text="[DATA.&#34;good&#34;]"/>
+              <TfrxMemoView Name="Memo7" Left="68,03154" Top="0" Width="26,45671" Height="37,7953" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="7" ParentFont="False" Text="[DATA.&#34;place&#34;]"/>
             </TfrxMasterData>
             <TfrxMasterData Name="MasterData2" Height="1046,92981" Left="68,03154" Top="0" Vertical="True" Width="139,84261" ColumnWidth="0" ColumnGap="0" DataSetName="DATA" RowCount="0"/>
             <TfrxHeader Name="Header1" Height="18,89765" Left="0" Top="124,72449" Width="718,1107">
@@ -207,7 +207,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-28T19:09:02+03:00
+      EDITIONDATE: 2023-05-02T11:54:45+03:00
       DISPLAYSCRIPT: | 
         RP_MAIN147054732_2053483706
         
@@ -496,7 +496,7 @@ Objects:
       REPORTGROUPKEY: "147023440_2053483706 Места хранения(ячейки)"
       SERVERKEY: ~
       TEMPLATEKEY: "147055551_2053483706 web. Места хранения в заданном ряду"
-      EDITIONDATE: 2023-04-28T19:09:02+03:00
+      EDITIONDATE: 2023-05-02T12:20:18+03:00
   - 
     Properties: 
       Class: "TgdcTemplate"
@@ -566,7 +566,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-29T19:01:47+03:00
+      EDITIONDATE: 2023-05-02T12:19:56+03:00
       DISPLAYSCRIPT: | 
         RP_MAIN147054732_2053483706_1
         
@@ -818,4 +818,299 @@ Objects:
       REPORTGROUPKEY: "147023440_2053483706 Места хранения(ячейки)"
       SERVERKEY: ~
       TEMPLATEKEY: "147063682_2053483706 web. Места хранения в заданном ряду147063682_2053483706"
-      EDITIONDATE: 2023-04-29T19:01:47+03:00
+      EDITIONDATE: 2023-05-02T12:19:56+03:00
+  - 
+    Properties: 
+      Class: "TgdcTemplate"
+      RUID: 147064106_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147064096_2053483706
+    Fields: 
+      NAME: "web. Места хранения в заданном ряду14706147064106_2053483706"
+      DESCRIPTION: ~
+      TEMPLATETYPE: "FR4"
+      EDITIONDATE: 2023-05-02T13:33:14+03:00
+      TEMPLATEDATA: | 
+        <?xml version="1.0" encoding="utf-8"?>
+        <Tgs_fr4SingleReport Version="4.15.13" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="По умолчанию" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45037,7423931713" ReportOptions.Description.Text="" ReportOptions.LastChange="45037,7423931713" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." PropData="08446174617365747301010C2200000020446174615365743D22444154412220446174615365744E616D653D22444154412200010C1C00000020446174615365743D22512220446174615365744E616D653D22512200010C2400000020446174615365743D2251474F4F442220446174615365744E616D653D2251474F4F442200010C2400000020446174615365743D225449544C452220446174615365744E616D653D225449544C45220000095661726961626C65730100055374796C650100">
+          <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+          <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+            <TfrxReportTitle Name="ReportTitle1" Height="60,47248" Left="0" Top="18,89765" Width="718,1107" Stretched="True">
+              <TfrxMemoView Name="Memo5" Align="baWidth" Left="0" Top="21" Width="718,1107" Height="18,89765" ShowHint="False" StretchMode="smActualHeight" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="РњРµСЃС‚Р° С…СЂР°РЅРµРЅРёСЏ РљР°РјРµСЂР°: [TITLE.&#34;NAMECAMERA&#34;]  Р”Р°С‚Р°: [date] [time]&#13;&#10;РџРѕ С‚РѕРІР°СЂСѓ: [TITLE.&#34;GOODNAME&#34;]"/>
+            </TfrxReportTitle>
+            <TfrxMasterData Name="MasterData1" Height="18,89765" Left="0" Top="200,31509" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="DATA" DataSetName="DATA" RowCount="0" Stretched="True">
+              <TfrxMemoView Name="Memo10" Align="baLeft" Left="0" Top="0" Width="68,03154" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;place&#34;]"/>
+              <TfrxMemoView Name="Memo12" Align="baLeft" Left="68,03154" Top="0" Width="238,11039" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;poddonCode&#34;]"/>
+              <TfrxMemoView Name="Memo14" Align="baLeft" Left="306,14193" Top="0" Width="49,13389" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haRight" HideZeros="True" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;weight&#34;]"/>
+              <TfrxMemoView Name="Memo15" Align="baLeft" Left="355,27582" Top="0" Width="52,91342" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;nPart&#34;]"/>
+              <TfrxMemoView Name="Memo16" Align="baLeft" Left="408,18924" Top="0" Width="68,03154" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;datework&#34;]"/>
+              <TfrxMemoView Name="Memo13" Align="baLeft" Left="476,22078" Top="0" Width="34,01577" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataField="row" DataSet="DATA" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;row&#34;]"/>
+              <TfrxMemoView Name="Memo17" Align="baLeft" Left="510,23655" Top="0" Width="34,01577" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;yarus&#34;]"/>
+              <TfrxMemoView Name="Memo11" Align="baLeft" Left="544,25232" Top="0" Width="173,85838" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" DataSetName="DATA" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="15" Highlight.Font.Charset="1" Highlight.Font.Color="0" Highlight.Font.Height="-11" Highlight.Font.Name="Arial" Highlight.Font.Style="0" Highlight.Color="16744448" Highlight.Condition="&#60;DATA.&#34;blocked&#34;&#62; = 1" ParentFont="False" Text="[DATA.&#34;defaultGroup&#34;]"/>
+            </TfrxMasterData>
+            <TfrxHeader Name="Header1" Height="37,7953" Left="0" Top="139,84261" Width="718,1107" Stretched="True">
+              <TfrxMemoView Name="Memo1" Align="baLeft" Left="0" Top="19" Width="68,03154" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="РЇС‡РµР№РєР°"/>
+              <TfrxMemoView Name="Memo3" Align="baLeft" Left="68,03154" Top="19" Width="238,11039" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="РљРѕРґ РїРѕРґРґРѕРЅР°"/>
+              <TfrxMemoView Name="Memo6" Align="baLeft" Left="306,14193" Top="19" Width="49,13389" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="Р’РµСЃ"/>
+              <TfrxMemoView Name="Memo7" Align="baLeft" Left="355,27582" Top="19" Width="52,91342" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="РџР°СЂС‚РёСЏ"/>
+              <TfrxMemoView Name="Memo8" Align="baLeft" Left="408,18924" Top="19" Width="68,03154" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="Р”Р°С‚Р° РїСЂ-РІР°"/>
+              <TfrxMemoView Name="Memo4" Align="baLeft" Left="476,22078" Top="19" Width="34,01577" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="Р СЏРґ"/>
+              <TfrxMemoView Name="Memo9" Align="baLeft" Left="510,23655" Top="19" Width="34,01577" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="РЇСЂСѓСЃ"/>
+              <TfrxMemoView Name="Memo2" Align="baLeft" Left="544,25232" Top="19" Width="173,85838" Height="18,89765" ShowHint="False" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="Arial" Font.Style="1" Frame.Typ="15" HAlign="haCenter" ParentFont="False" Text="Р“СЂСѓРїРїР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ"/>
+            </TfrxHeader>
+          </TfrxReportPage>
+        </Tgs_fr4SingleReport>
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147064097_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147064096_2053483706
+    Fields: 
+      NAME: "rp_Main147054732_2053483706_1147064097_2053483706"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "REPORTMAIN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-02T13:33:32+03:00
+      DISPLAYSCRIPT: | 
+        RP_MAIN147054732_2053483706_1147064097_2053483706
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAAREVQQVJUS0VZDgAAAM/u5PDg5+Tl6+Xt6OU6QgAAAGdkX2NvbnRhY3QgYyBK
+        T0lOIGdkX2NvbnRhY3QgY3AgT04gY3AuTEIgPD0gYy5sYiBBTkQgY3AuUkIgPj0gYy5yYgQAAABu
+        YW1lAgAAAGlkBy0AAABjLmNvbnRhY3R0eXBlID0gNCAgYW5kIGNwLmlkID0gPENPTVBBTllLRVkv
+        PiAAAAAAAgAAAF5SRk5TVFBSU1QGAAAAQ0FNRVJBDQAAAMrg7OXw4CAoQS1aKToAAAAAAAAAAAAA
+        AAAFAAAAAAAAAAARAAAAy+Dy6O3x6uD/IOHz6uLgXlJGTlNUUFJTVAcAAABHT09ES0VZCgAAAM/u
+        IPLu4uDw8zoHAAAAZ2RfZ29vZAQAAABuYW1lAgAAAGlkBwAAAAAAAAAAAAAAAEZOU1RGTFBS
+      SCRIPT: | 
+        '#include SHCODE_GET_GOODINFO_BYBARCODE
+        Option Explicit
+        Function rp_Main147054732_2053483706_1147064097_2053483706(departkey, camera, goodkey)
+          BaseQueryList.Clear
+          nameCamera = UCase(left(camera, 1))
+          if not (asc(nameCamera) >= 65 and asc(nameCamera) <= 90) then
+            call Application.MessageBox("Имя камеры должно быть латинской буквой!", "Внимание", vbOkOnly + vbInformation + vbSystemModal)
+            exit function
+          end if
+          Dim q, mask, nameCamera, title
+        
+          mask = nameCamera
+          Set title = BaseQueryList.Query(BaseQueryList.Add("title", 0))
+          title.SQL = "SELECT con.Name, p.Name as PeopleName, " & _
+            "'" & nameCamera & "' as nameCamera, "  & _
+            " g.name as goodName "  & _
+            " FROM gd_contact con " & _
+            " JOIN gd_contact P ON con.ID = " & IBLogin.CompanyKey & _
+            " AND p.ID = " & IBLogin.ContactKey & _
+            " LEFT JOIN gd_good g ON g.id = "  & goodkey(0)
+          title.Open
+          Set q = BaseQueryList.Query(BaseQueryList.Add("q", 0))
+          q.SQL = _
+            "execute block(DepartmentKey dForeignkey = :mainkey, goodkey dForeignkey = :goodkey) " & vbCrLf & _
+            "returns " & vbCrLf & _
+            "  ( NUMBER_PLACE varchar(40), " & vbCrLf & _
+            "    PODDON_CODE varchar(40), " & vbCrLf & _
+            "    NUMBERSORT integer, " & vbCrLf & _
+            "    DEFAULTGROUP varchar(120), " & vbCrLf & _
+            "    BLOCKED integer, " & vbCrLf & _
+            "    TIER integer) " & vbCrLf & _
+            "as " & vbCrLf & _
+            "  declare variable companykey DINTKEY; " & vbCrLf & _
+            "begin " & vbCrLf & _
+            "  select companykey from GD_OURCOMPANY into :companykey; " & vbCrLf & _
+            "  for " & vbCrLf & _
+            "  WITH RECURSIVE " & vbCrLf & _
+            "    remains AS ( " & vbCrLf & _
+            "   SELECT " & vbCrLf & _
+            "    MIN ( M.CARDKEY ) AS ID, " & vbCrLf & _
+            "    G.ID AS GOODKEY, " & vbCrLf & _
+            "    SUM ( M.BALANCE ) AS REMAINS, " & vbCrLf & _
+            "    C.USR$ASX_NUMBER_PLACE, " & vbCrLf & _
+            "    C.USR$ASX_PODDON_CODE " & vbCrLf & _
+            "  FROM " & vbCrLf & _
+            "    ( SELECT " & vbCrLf & _
+            "      M.CARDKEY, " & vbCrLf & _
+            "      M.CONTACTKEY, " & vbCrLf & _
+            "      M.BALANCE " & vbCrLf & _
+            "    FROM " & vbCrLf & _
+            "      INV_BALANCE M " & vbCrLf & _
+            "        JOIN " & vbCrLf & _
+            "          GD_GOOD G " & vbCrLf & _
+            "        ON " & vbCrLf & _
+            "          ( G.ID  =  M.GOODKEY ) " & vbCrLf & _
+            "        LEFT JOIN " & vbCrLf & _
+            "          GD_GOODGROUP GG " & vbCrLf & _
+            "        ON " & vbCrLf & _
+            "          ( G.GROUPKEY  =  GG.ID ) " & vbCrLf & _
+            "    WHERE " & vbCrLf & _
+            "      M.BALANCE  <>  0 " & vbCrLf & _
+            "         AND " & vbCrLf & _
+            "      ( G.ID = :goodkey ) " & vbCrLf & _
+            "         AND " & vbCrLf & _
+            "      M.CONTACTKEY  =  :DepartmentKey " & vbCrLf & _
+            "  UNION ALL " & vbCrLf & _
+            "  SELECT " & vbCrLf & _
+            "      M.CARDKEY, " & vbCrLf & _
+            "      M.CONTACTKEY, " & vbCrLf & _
+            "      SUM ( M.CREDIT - M.DEBIT ) AS BALANCE " & vbCrLf & _
+            "    FROM " & vbCrLf & _
+            "      INV_MOVEMENT M " & vbCrLf & _
+            "        JOIN " & vbCrLf & _
+            "          GD_CONTACT CON " & vbCrLf & _
+            "        ON " & vbCrLf & _
+            "          M.CONTACTKEY  =  CON.ID " & vbCrLf & _
+            "        JOIN " & vbCrLf & _
+            "          GD_GOOD G " & vbCrLf & _
+            "        ON " & vbCrLf & _
+            "          ( G.ID  =  M.GOODKEY ) " & vbCrLf & _
+            "    WHERE " & vbCrLf & _
+            "      M.DISABLED  =  0 " & vbCrLf & _
+            "         AND " & vbCrLf & _
+            "      M.MOVEMENTDATE  >  CURRENT_DATE " & vbCrLf & _
+            "         AND " & vbCrLf & _
+            "      ( G.ID = :goodkey ) " & vbCrLf & _
+            "         AND " & vbCrLf & _
+            "      M.CONTACTKEY  =  :DepartmentKey " & vbCrLf & _
+            "  GROUP BY " & vbCrLf & _
+            "    1, " & vbCrLf & _
+            "    2 ) M " & vbCrLf & _
+            "      LEFT JOIN " & vbCrLf & _
+            "        INV_CARD C " & vbCrLf & _
+            "      ON " & vbCrLf & _
+            "        C.ID  =  M.CARDKEY " & vbCrLf & _
+            "      LEFT JOIN " & vbCrLf & _
+            "        GD_GOOD G " & vbCrLf & _
+            "      ON " & vbCrLf & _
+            "        ( G.ID  =  C.GOODKEY ) " & vbCrLf & _
+            "      LEFT JOIN " & vbCrLf & _
+            "        GD_VALUE V " & vbCrLf & _
+            "      ON " & vbCrLf & _
+            "        G.VALUEKEY  =  V.ID " & vbCrLf & _
+            "  WHERE " & vbCrLf & _
+            "          C.COMPANYKEY + 0 = :companykey " & vbCrLf & _
+            "       AND " & vbCrLf & _
+            "    M.BALANCE  <>  0 " & vbCrLf & _
+            "       AND " & vbCrLf & _
+            "     ( G.ID = :goodkey ) " & vbCrLf & _
+            " " & vbCrLf & _
+            "  GROUP BY 2, 4, 5 " & vbCrLf & _
+            "  HAVING " & vbCrLf & _
+            "    SUM ( M.BALANCE )  >  0   ) " & vbCrLf & _
+            "      select " & vbCrLf & _
+            "        cell.USR$NUMBERSORT, " & vbCrLf & _
+            "        d.USR$ASX_NUMBER_PLACE, " & vbCrLf & _
+            "        d.USR$ASX_PODDON_CODE, " & vbCrLf & _
+            "        gg.NAME, " & vbCrLf & _
+            "        coalesce(cell.USR$BLOCKED, 0) as BLOCKED, " & vbCrLf & _
+            "        cell.USR$TIER " & vbCrLf & _
+            "      from remains d " & vbCrLf & _
+            "        join  USR$ASX_CELLS cell on cell.USR$NAME = d.USR$ASX_NUMBER_PLACE " & vbCrLf & _
+            "          and cell.USR$DEPTKEY = :DepartmentKey " & vbCrLf & _
+            "        left join gd_goodgroup gg on gg.ID = cell.USR$GROUPKEY " & vbCrLf & _
+            "      where coalesce(d.USR$ASX_NUMBER_PLACE, '') like '" & mask & "%' " & vbCrLf & _
+            "    into :NUMBERSORT, :NUMBER_PLACE, :PODDON_CODE, :DEFAULTGROUP, :BLOCKED, :TIER  do " & vbCrLf & _
+            "    suspend; " & vbCrLf & _
+            "end "
+          q.ParamByName("goodkey").AsInteger = goodkey(0)
+          q.ParamByName("mainkey").AsInteger = departkey(0)
+          q.Open
+          dim  weight, datework, timework, tnum, NPart, code, data
+          Set data = BaseQueryList.Query(BaseQueryList.Add("data", 1))
+          call data.AddField("yarus", "ftInteger", 0, 0)
+          call data.AddField("place", "ftString", 10, 0)
+          call data.AddField("row", "ftInteger", 0, 0)
+          call data.AddField("poddonCode", "ftString", 40, 0)
+          call data.AddField("defaultGroup", "ftString", 120, 0)
+          call data.AddField("numberSort", "ftInteger", 0, 0)
+          call data.AddField("goodname", "ftString", 120, 0)
+          call data.AddField("nPart", "ftString", 10, 0)
+          call data.AddField("weight", "ftFloat", 0, 0)
+          call data.AddField("datework", "ftString", 10, 0)
+          call data.AddField("blocked", "ftInteger", 0, 0)
+          data.Open
+          dim qGood, number, a
+          set qGood = BaseQueryList.Query(BaseQueryList.Add("qGood", 0))
+          qGood.SQL = _
+            "select name from gd_good g where g.id = :goodkey "
+          while not q.EOF
+            a = split(q.FieldByName("NUMBER_PLACE").AsString, "-")
+            data.Insert
+            if q.FieldByName("defaultGroup").AsString <> "" then
+              data.FieldByName("defaultGroup").AsString = q.FieldByName("defaultGroup").AsString
+            end if
+            if q.FieldByName("blocked").AsInteger > 0 then
+              data.FieldByName("defaultGroup").AsString = "Не используется"
+            end if
+            data.FieldByName("yarus").AsInteger = q.FieldByName("tier").AsInteger
+            data.FieldByName("row").AsInteger = CInt(a(1))
+            data.FieldByName("place").AsString = q.FieldByName("NUMBER_PLACE").AsString
+            data.FieldByName("numberSort").AsInteger = q.FieldByName("numberSort").AsInteger
+            data.FieldByName("blocked").AsInteger = q.FieldByName("blocked").AsInteger
+            code = q.FieldByName("PODDON_CODE").AsString
+            if code <> "" then
+              call SHCODE_GET_GOODINFO_BYBARCODE(code, goodkey(0), weight, datework, timework, tnum, NPart)
+              qGood.Close
+              qGood.ParamByName("goodkey").AsInteger = goodkey(0)
+              qGood.Open
+              data.FieldByName("poddonCode").AsString = code
+              data.FieldByName("goodname").AsString = qGood.FieldByName("name").AsString
+              data.FieldByName("weight").AsCurrency =  weight
+              data.FieldByName("NPart").AsString = NPart
+              data.FieldByName("datework").AsString = datework
+            end if
+            data.Post
+            q.Next
+          wend
+          data.IndexFields = "numberSort"
+        
+          Set rp_Main147054732_2053483706_1147064097_2053483706 = BaseQueryList
+        End Function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "472283445_1716733059 SHCODE_GET_GOODINFO_BYBARCODE"
+  - 
+    Properties: 
+      Class: "TgdcReport"
+      RUID: 147064096_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "Места хранения по товару"
+      DESCRIPTION: ~
+      DISPLAYINMENU: 1
+      EVENTFORMULAKEY: ~
+      FOLDERKEY: ~
+      FRQREFRESH: 1
+      GLOBALREPORTKEY: ~
+      ISLOCALEXECUTE: 1
+      ISREBUILD: 1
+      MAINFORMULAKEY: "147064097_2053483706 rp_Main147054732_2053483706_1147064097_2053483706"
+      MODALPREVIEW: 0
+      PARAMFORMULAKEY: ~
+      PREVIEW: 1
+      REPORTGROUPKEY: "147023440_2053483706 Места хранения(ячейки)"
+      SERVERKEY: ~
+      TEMPLATEKEY: "147064106_2053483706 web. Места хранения в заданном ряду14706147064106_2053483706"
+      EDITIONDATE: 2023-05-02T13:33:32+03:00
