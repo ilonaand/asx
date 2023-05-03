@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.26"
+  Version: "1.0.0.28"
   Optional: False
   Internal: True
-  MD5: 19527D3ECBEF483E617B8D219A3A53D1
+  MD5: 6A7182650B384FD944103EA2FDA2E6C9
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -2219,7 +2219,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-05-02T19:05:47+03:00
+      EDITIONDATE: 2023-05-03T18:21:58+03:00
       DISPLAYSCRIPT: | 
         WEB_CREATEINVENTASX
         FINALIZATIONINVENTASX
@@ -2282,7 +2282,6 @@ Objects:
           countList = objLines.ObjectItemsCount
           set ibsql = Creator.GetObject(nil,"TIBSQL","")
           ibsql.Transaction = gdcBaseManager.ReadTransaction
-          dim contactkey
           
           if  toDepartKey <> 0 then
             on error resume next
@@ -2357,7 +2356,7 @@ Objects:
                     else
                       gdcDetail.Insert
                       gdcDetail.FieldByName("USR$GOODKEY").AsInteger = goodkey
-                      gdcDetail.FieldByName("USR$QUANTITY").AsVariant = q
+                      gdcDetail.FieldByName("USR$WEIGHT").AsVariant = q
                       gdcDetail.FieldByName("USR$NUMRECEIVE").AsVariant = numReceived
                       gdcDetail.FieldByName("USR$DATERECEIVE").AsVariant = workDate
                       gdcDetail.Post
@@ -2365,7 +2364,7 @@ Objects:
                   else
                     gdcDetail.Insert
                     gdcDetail.FieldByName("USR$GOODKEY").AsInteger = goodkey
-                    gdcDetail.FieldByName("USR$QUANTITY").AsVariant = q
+                    gdcDetail.FieldByName("USR$WEIGHT").AsVariant = q
                     gdcDetail.FieldByName("USR$NUMRECEIVE").AsVariant = numReceived
                     gdcDetail.FieldByName("USR$DATERECEIVE").AsVariant = workDate
                     ' Если в ячейку
