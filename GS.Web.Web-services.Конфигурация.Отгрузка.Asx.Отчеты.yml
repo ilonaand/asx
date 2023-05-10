@@ -5,10 +5,10 @@ Properties:
   RUID: 147054214_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Отчеты"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Отчеты"
-  Version: "1.0.0.7"
+  Version: "1.0.0.9"
   Optional: False
   Internal: True
-  MD5: E09C5560FBF1CFDB72979C6AA01F0F7A
+  MD5: BC7F572358B20AB70DEEA681052DC9A2
 Uses: 
   - "472939156_1549072347 GS.Отдел сбыта. Заявка1 (организация)"
   - "1368996857_1691301355 GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
@@ -85,7 +85,7 @@ Objects:
       REPORTGROUPKEY: "147033365_1987734250 Банк и касса\\05. Заявка1 (организация)"
       SERVERKEY: ~
       TEMPLATEKEY: "964993303_1987734250 а на выбраные маршруты в разрезе магазин47964993303_76642256"
-      EDITIONDATE: 2023-04-18T18:21:44+03:00
+      EDITIONDATE: 2023-05-05T15:01:31+03:00
   - 
     Properties: 
       Class: "TgdcTemplate"
@@ -148,7 +148,7 @@ Objects:
       REPORTGROUPKEY: "147033365_1987734250 Банк и касса\\05. Заявка1 (организация)"
       SERVERKEY: ~
       TEMPLATEKEY: "512971410_1987734250 а на выбраные маршруты в разрезе магазин472313372_1716733059"
-      EDITIONDATE: 2023-04-18T19:07:48+03:00
+      EDITIONDATE: 2023-05-05T15:01:24+03:00
   - 
     Properties: 
       Class: "TgdcTemplate"
@@ -1367,3 +1367,329 @@ Objects:
       SERVERKEY: ~
       TEMPLATEKEY: "147064760_2053483706 web. Места хранения в заданном ряду14706147064760_2053483706"
       EDITIONDATE: 2023-05-03T16:49:33+03:00
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 964993294_1987734250
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "rp_Main147092325_920254862472313363_171673964993294_76642256"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "REPORTMAIN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-05T15:01:31+03:00
+      DISPLAYSCRIPT: | 
+        RP_MAIN147092325_920254862472313363_171673964993294_76642256
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QGAAAAREFURVRPDgAAAMTg8uAg7vLj8PPn6ug6AAAAAAAAAAAAAAAAAgAAAAAAAAAA
+        AgAAAF5SRk5TVFBSU1QEAAAAUk9BRAgAAADM4PD48PPyOgwAAAB1c3Ikdm1rX3JvYWQNAAAAdXNy
+        JHJvYWRfbmFtZQIAAABpZAgAAAAAAAAAAAQAAABeUl5BRk5TVEZMUFI=
+      SCRIPT: | 
+        option explicit
+        function rp_Main147092325_920254862472313363_171673964993294_76642256(DateTo, Road)
+          dim  globalSTR, Claim, Claim1, RoadStr, RN, _
+          str, q, q1, q2, Data, sum, i, sumWeight, qnum, comm, detail, cdetail, quantity_mest
+          dim Creator, ibsql
+            set Creator = new TCreator
+            set ibsql = Creator.GetObject(nil,"TIBSQL","")
+            ibsql.Transaction = gdcBaseManager.ReadTransaction
+            if IsArray(Road) then
+              RoadStr = "(" + Join(Road, ",") + ") "
+            else
+              RoadStr = "(" + Str(Road) + ") "
+            end if
+        
+            BaseQueryList.Clear
+            ' спиок маршрутов
+            set RN = BaseQueryList.Query(BaseQueryList.Add("rn",0))
+            RN.SQL = _
+            " select  rn.usr$road_name " &_
+            " from USR$VMK_ROAD rn " &_
+            " where rn.id in " &  RoadStr
+            RN.Open
+        
+            set Claim1 = BaseQueryList.Query(BaseQueryList.Add("Claim1", 0))
+            set Claim = BaseQueryList.Query(BaseQueryList.Add("Claim", 1))
+            call Claim.AddField("depname", "ftString", 100, 0)
+            call Claim.AddField("number", "ftString", 20, 0)
+            call Claim.AddField("daten", "ftString", 10, 0)
+            call Claim.AddField("code", "ftString", 30, 0)
+            call Claim.AddField("mag", "ftString", 120, 0)
+            call Claim.AddField("address", "ftString", 120, 0)
+            call Claim.AddField("documentkey", "ftString", 30, 0)
+            call Claim.AddField("rn",  "ftString", 60, 0)
+            Claim.Open
+            set detail = BaseQueryList.Query(BaseQueryList.Add("detail1", 0))
+            set Cdetail = BaseQueryList.Query(BaseQueryList.Add("Cdetail", 1))
+            call Cdetail.AddField("goodname", "ftString", 100, 0)
+            call Cdetail.AddField("grname", "ftString", 100, 0)
+            call Cdetail.AddField("quantity", "ftFloat", 0, 0)
+            call Cdetail.AddField("documentkey", "ftString", 30, 0)
+            call Cdetail.AddField("pakname", "ftString", 30, 0)
+            Cdetail.Open
+            dim ondate, d, m, ORD_NO
+            ondate = DateTo
+            if len(CStr(day(ondate))) > 1 then
+              d = CStr(day(ondate))
+            else
+              d = "0" & CStr(day(ondate))
+            end if
+            if len(CStr(month(ondate))) > 1 then
+              m = CStr(month(ondate))
+            else
+              m = "0" & CStr(month(ondate))
+            end if
+            ORD_NO =  d & m & CStr(year(ondate))
+        
+            dim depcode, p
+        
+            ' список заявок
+            Claim1.Close
+            Claim1.SQL = _
+              " select distinct con1.name as depname, " & vbCrLf & _
+              "   doc.number, " & vbCrLf & _
+              "   '" & CStr(DateTo) & "' as daten, " & vbCrLf & _
+              "   cl.USR$SHCODE, " & vbCrLf & _
+              "   con.name as mag, " & vbCrLf & _
+              "   con.address as address, cl.documentkey, rn.usr$road_name " & vbCrLf & _
+              " from usr$ber_claim cl " & vbCrLf & _
+              "   join gd_document doc on doc.id = cl.documentkey and cl.usr$ondate = :datecur " & vbCrLf & _
+              "   join usr$ber_claimline cll on cll.MASTERKEY = cl.DOCUMENTKEY and cll.USR$QUANTITY > 0 " & vbCrLf & _
+              "   left join gd_good g on g.ID = cll.USR$GOODKEY " & vbCrLf & _
+              "   left join gd_contact con on con.id = cl.usr$contactkey " & vbCrLf & _
+              "   left join gd_contact con1 on cast(cl.USR$SHCODE as integer) = cast(con1.USR$SHCODE as integer) " & vbCrLf & _
+              "   left join USR$VMK_ROAD rn on rn.id =  cl.USR$ROADKEY " & vbCrLf & _
+              " where   cl.USR$PARENTCLAIM is null  and cl.USR$ROADKEY  in  " & RoadStr & vbCrLf & _
+              " order by 1, 7, 2 "
+            Claim1.ParamByName("datecur").AsDateTime = DateTo
+            Claim1.Open
+            while not  Claim1.EOF
+              depcode = Claim1.FieldByName("USR$SHCODE").AsString
+              p = len(depcode)
+              while (p < 3)
+                depcode = "0" & depcode
+                p = p + 1
+              wend
+              claim.Append
+              Claim.FieldByName("depname").AsString = Claim1.FieldByName("depname").AsString
+              Claim.FieldByName("number").AsString = Claim1.FieldByName("number").AsString
+              Claim.FieldByName("daten").AsString = Claim1.FieldByName("daten").AsString
+              Claim.FieldByName("code").AsString = ORD_NO & depcode & Claim1.FieldByName("number").AsString
+              Claim.FieldByName("mag").AsString = Claim1.FieldByName("mag").AsString
+              Claim.FieldByName("address").AsString = Claim1.FieldByName("address").AsString
+              Claim.FieldByName("documentkey").AsString = Claim1.FieldByName("documentkey").AsString
+              Claim.FieldByName("rn").AsString =  Claim1.FieldByName("usr$road_name").AsString
+              Claim.Post
+              detail.Close
+              detail.SQL = _
+                " SELECT " & _
+                "   gg.NAME as grname, " & _
+                "   g.NAME, " & _
+                "   g.id as goodkey, " & _
+                "   cll.USR$QUANTITY,  " & _
+                "   p.USR$NAME as pakname, " & _
+                "   cll.USR$PACKAGETYPE " & _
+                " FROM usr$ber_claim cl " & _
+                "   JOIN gd_document doc ON doc.id = cl.documentkey " & _
+                "   join usr$ber_claimline cll on cll.MASTERKEY = cl.DOCUMENTKEY and cll.USR$QUANTITY > 0 " & _
+                "   LEFT JOIN USR$SB_PACKAGETYPE p ON p.ID  =  cll.USR$PACKAGETYPE " & _
+                "   left join gd_good g on g.ID = cll.USR$GOODKEY " & _
+                "   LEFT JOIN GD_GOODGROUP gg ON g.groupkey = gg.id " & _
+                "   LEFT JOIN gd_contact con ON con.id = cl.usr$contactkey " & _
+                " WHERE  cl.DOCUMENTKEY = :documentkey " & _
+                " order by 1, 2 "
+              detail.ParamByName("documentkey").AsInteger = Claim1.FieldByName("documentkey").AsInteger
+              detail.Open
+              while not  detail.EOF
+                if detail.FieldByName("USR$PACKAGETYPE").AsInteger = 0 then
+                  ibsql.Close
+                  ibsql.SQL.Text = " SELECT first(1) good_v.scale as scale " & _
+                    "FROM gd_goodvalue good_v " & _
+                    "  LEFT JOIN gd_value v ON good_v.valuekey = v.id " & _
+                    "WHERE good_v.goodkey = :goodkey and v.ispack = 1 "
+                  ibsql.ParamByName("goodkey").AsInteger = detail.FieldByName("goodkey").AsInteger
+                  ibsql.ExecQuery
+                  if not (ibsql.FieldbyName("scale").AsCurrency = 0 )  then
+                    quantity_mest = _
+                      detail.FieldByName("USR$QUANTITY").AsCurrency / ibsql.FieldbyName("scale").AsCurrency
+                   else
+                    quantity_mest = _
+                      detail.FieldByName("USR$QUANTITY").AsCurrency
+                  end if
+                else
+                  ibsql.Close
+                  ibsql.SQL.Text = _
+                    "SELECT " & _
+                    "  Z.USR$KOEF " & _
+                    "FROM " & _
+                    "  USR$SB_PACKAGE_GOOD Z " & _
+                    "where Z.USR$PACKAGETYPE  = :pt " & _
+                    "  and  Z.USR$GOODKEY  = :goodkey "
+                  ibsql.ParamByName("goodkey").AsInteger = detail.FieldByName("goodkey").AsInteger
+                  ibsql.ParamByName("pt").AsInteger = detail.FieldByName("USR$PACKAGETYPE").AsInteger
+                  ibsql.ExecQuery
+                  if not (ibsql.FieldbyName("USR$KOEF").AsCurrency = 0 )  then
+                    quantity_mest = _
+                      detail.FieldByName("USR$QUANTITY").AsCurrency / ibsql.FieldbyName("USR$KOEF").AsCurrency
+                   else
+                    quantity_mest = _
+                      detail.FieldByName("USR$QUANTITY").AsCurrency
+                  end if
+                end if
+                cdetail.Append
+                Cdetail.FieldByName("grname").AsString = detail.FieldByName("grname").AsString
+                Cdetail.FieldByName("goodname").AsString = detail.FieldByName("name").AsString
+                Cdetail.FieldByName("quantity").AsCurrency = quantity_mest
+                Cdetail.FieldByName("documentkey").AsString = Claim1.FieldByName("documentkey").AsString
+                Cdetail.FieldByName("pakname").AsString = detail.FieldByName("pakname").AsString
+                Cdetail.Post
+                detail.Next
+              wend
+              Claim1.Next
+            wend
+        
+          BaseQueryList.AddMasterDetail "claim", "documentkey", "cdetail", "documentkey;grname;goodname"
+        
+          set rp_Main147092325_920254862472313363_171673964993294_76642256 = BaseQueryList
+        end function
+        
+        
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 512971409_1987734250
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "rp_Main147092325_920254862472313363_1716733059"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "REPORTMAIN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-05T15:01:24+03:00
+      DISPLAYSCRIPT: | 
+        RP_MAIN147092325_920254862472313363_1716733059
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QGAAAAREFURVRPDgAAAMTg8uAg7vLj8PPn6ug6AAAAAAAAAAAAAAAAAgAAAAAAAAAA
+        AgAAAF5SRk5TVFBSU1QEAAAAUk9BRAgAAADM4PD48PPyOgwAAAB1c3Ikdm1rX3JvYWQNAAAAdXNy
+        JHJvYWRfbmFtZQIAAABpZAgAAAAAAAAAAAQAAABeUl5BRk5TVEZMUFI=
+      SCRIPT: | 
+        option explicit
+        function rp_Main147092325_920254862472313363_1716733059(DateTo, Road)
+          dim  globalSTR, Claim, Claim1, RoadStr, RN, _
+          str, q, q1, q2, Data, sum, i, sumWeight, qnum, comm
+            if IsArray(Road) then
+              RoadStr = "(" + Join(Road, ",") + ") "
+            else
+              RoadStr = "(" + Str(Road) + ") "
+            end if
+        
+            BaseQueryList.Clear
+            ' спиок маршрутов
+            set RN = BaseQueryList.Query(BaseQueryList.Add("rn",0))
+            RN.SQL = _
+            " select  rn.usr$road_name " &_
+            " from USR$VMK_ROAD rn " &_
+            " where rn.id in " &  RoadStr
+            RN.Open
+            dim Creator, ibsqldepart
+            set Creator = new TCreator
+        
+            set Claim1 = BaseQueryList.Query(BaseQueryList.Add("Claim1", 0))
+            set Claim = BaseQueryList.Query(BaseQueryList.Add("Claim", 1))
+            call Claim.AddField("depname", "ftString", 100, 0)
+            call Claim.AddField("number", "ftString", 20, 0)
+            call Claim.AddField("daten", "ftString", 10, 0)
+            call Claim.AddField("code", "ftString", 30, 0)
+            call Claim.AddField("mag", "ftString", 120, 0)
+            call Claim.AddField("address", "ftString", 120, 0)
+            Claim.Open
+            dim ondate, d, m, ORD_NO
+            ondate = DateTo
+            if len(CStr(day(ondate))) > 1 then
+              d = CStr(day(ondate))
+            else
+              d = "0" & CStr(day(ondate))
+            end if
+            if len(CStr(month(ondate))) > 1 then
+              m = CStr(month(ondate))
+            else
+              m = "0" & CStr(month(ondate))
+            end if
+            ORD_NO =  d & m & CStr(year(ondate))
+        
+            dim depcode, p
+            ' список заявок
+            Claim1.Close
+            Claim1.SQL = _
+              " select distinct con1.name as depname, " & vbCrLf & _
+              "   doc.number, " & vbCrLf & _
+              "   '" & CStr(DateTo) & "' as daten, " & vbCrLf & _
+              "   cl.USR$SHCODE, " & vbCrLf & _
+              "   con.name as mag, " & vbCrLf & _
+              "   con.address as address, cl.documentkey, rn.usr$road_name " & vbCrLf & _
+              " from usr$ber_claim cl " & vbCrLf & _
+              "   join gd_document doc on doc.id = cl.documentkey and cl.usr$ondate = :datecur " & vbCrLf & _
+              "   join usr$ber_claimline cll on cll.MASTERKEY = cl.DOCUMENTKEY and cll.USR$QUANTITY > 0 " & vbCrLf & _
+              "   left join gd_good g on g.ID = cll.USR$GOODKEY " & vbCrLf & _
+              "   left join gd_contact con on con.id = cl.usr$contactkey " & vbCrLf & _
+              "   left join gd_contact con1 on cast(cl.USR$SHCODE as integer) = cast(con1.USR$SHCODE as integer) " & vbCrLf & _
+              "   left join USR$VMK_ROAD rn on rn.id =  cl.USR$ROADKEY " & vbCrLf & _
+              " where   cl.USR$PARENTCLAIM is null  and cl.USR$ROADKEY  in  " & RoadStr & vbCrLf & _
+              " order by 1, 7, 2 "
+            Claim1.ParamByName("datecur").AsDateTime = DateTo
+            Claim1.Open
+            while not  Claim1.EOF
+              depcode = Claim1.FieldByName("USR$SHCODE").AsString
+              p = len(depcode)
+              while (p < 3)
+                depcode = "0" & depcode
+                p = p + 1
+              wend
+              claim.Append
+              Claim.FieldByName("depname").AsString = Claim1.FieldByName("depname").AsString
+              Claim.FieldByName("number").AsString = Claim1.FieldByName("number").AsString
+              Claim.FieldByName("daten").AsString = Claim1.FieldByName("daten").AsString
+              Claim.FieldByName("code").AsString =  ORD_NO & depcode & Claim1.FieldByName("number").AsString
+              Claim.FieldByName("mag").AsString = Claim1.FieldByName("mag").AsString
+              Claim.FieldByName("address").AsString = Claim1.FieldByName("address").AsString
+              Claim.Post
+              Claim1.Next
+            wend
+        
+        
+        
+          set rp_Main147092325_920254862472313363_1716733059 = BaseQueryList
+        end function
+        
+        
+        

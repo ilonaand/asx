@@ -5,10 +5,10 @@ Properties:
   RUID: 147030622_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
-  Version: "1.0.0.12"
+  Version: "1.0.0.13"
   Optional: False
   Internal: True
-  MD5: 46E702A479590D3E92AC4A4C8CE05C50
+  MD5: 11DC711B22E29CE323264C499824DC14
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "147024092_1677413867 GS.Web.Web-services.Конфигурация.Данные"
@@ -105,12 +105,12 @@ Objects:
       USR$MOBILENAME: "documentType"
       USR$NOTACTIVE: 0
       USR$SET_FUNCTION: ~
-      USR$SQLQUERY: "SELECT DISTINCT cast(DT.ID as varchar(20)) as id,\x0D\x0A DOC.USR$MOBILEALIAS  as name,\x0D\x0A (case when  DT.ID = <RUID XID = \"\"147016267\"\" DbID = \"\"2053437193\"\"/>\x0D\x0A    and  DOC.USR$MOBILEALIAS = 'currShipment' then 'Реализация ГП (валюта)'\x0D\x0A    when DT.ID = <RUID XID = \"\"147016267\"\" DbID = \"\"2053437193\"\"/>  and  DOC.USR$MOBILEALIAS <> 'currShipment'\x0D\x0A    then 'Реализация ГП'\x0D\x0A    else DT.NAME end)  as description,\x0D\x0A  (case when DT.ID IN (\x0D\x0A  <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>) then cast('movement' as varchar(8))\x0D\x0A    when DT.ID IN (\x0D\x0A  <RUID XID = \"\"147016485\"\" DbID = \"\"2053437193\"\"/>) then cast('return' as varchar(6))\x0D\x0A     when DT.ID IN (\x0D\x0A  <RUID XID = \"\"195454846\"\" DbID = \"\"468602752\"\"/>) then cast('order' as varchar(5))\x0D\x0A     when DT.ID IN (\x0D\x0A  <RUID XID = \"\"147064352\"\" DbID = \"\"2053483706\"\"/>) then cast('inventory' as varchar(9))\x0D\x0A    else cast('shipment' as varchar(8)) end) as subtype\x0D\x0AFROM GD_DOCUMENTTYPE DT\x0D\x0A  LEFT JOIN USR$GDMN_DOCUMENTS DOC  ON DOC.USR$DOCUMENTTYPE = DT.ID\x0D\x0AWHERE DT.ID IN ( <RUID XID = \"\"195454846\"\" DbID = \"\"468602752\"\"/>,\x0D\x0A <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>,\x0D\x0A <RUID XID = \"\"147016267\"\" DbID = \"\"2053437193\"\"/>,\x0D\x0A <RUID XID = \"\"147016485\"\" DbID = \"\"2053437193\"\"/>,\x0D\x0A <RUID XID = \"\"147064352\"\" DbID = \"\"2053483706\"\"/>)"
+      USR$SQLQUERY: "SELECT DISTINCT cast(DT.ID as varchar(20)) as id,\x0D\x0A DOC.USR$MOBILEALIAS  as name,\x0D\x0A (case when  DT.ID = <RUID XID = \"\"147016267\"\" DbID = \"\"2053437193\"\"/>\x0D\x0A    and  DOC.USR$MOBILEALIAS = 'currShipment' then 'Реализация ГП (валюта)'\x0D\x0A    when DT.ID = <RUID XID = \"\"147016267\"\" DbID = \"\"2053437193\"\"/>  and  DOC.USR$MOBILEALIAS <> 'currShipment'\x0D\x0A    then 'Реализация ГП'\x0D\x0A    when DT.ID = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/> and  DOC.USR$MOBILEALIAS = 'laboratory'\x0D\x0A    then 'Лаборатория'\x0D\x0A    else DT.NAME end)  as description,\x0D\x0A  (case when DT.ID IN (\x0D\x0A  <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>) then cast('movement' as varchar(8))\x0D\x0A    when DT.ID IN (\x0D\x0A  <RUID XID = \"\"147016485\"\" DbID = \"\"2053437193\"\"/>) then cast('return' as varchar(6))\x0D\x0A     when DT.ID IN (\x0D\x0A  <RUID XID = \"\"195454846\"\" DbID = \"\"468602752\"\"/>) then cast('order' as varchar(5))\x0D\x0A     when DT.ID IN (\x0D\x0A  <RUID XID = \"\"147064352\"\" DbID = \"\"2053483706\"\"/>) then cast('inventory' as varchar(9))\x0D\x0A    else cast('shipment' as varchar(8)) end) as subtype\x0D\x0AFROM GD_DOCUMENTTYPE DT\x0D\x0A  LEFT JOIN USR$GDMN_DOCUMENTS DOC  ON DOC.USR$DOCUMENTTYPE = DT.ID\x0D\x0AWHERE DT.ID IN ( <RUID XID = \"\"195454846\"\" DbID = \"\"468602752\"\"/>,\x0D\x0A <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>,\x0D\x0A <RUID XID = \"\"147016267\"\" DbID = \"\"2053437193\"\"/>,\x0D\x0A <RUID XID = \"\"147016485\"\" DbID = \"\"2053437193\"\"/>,\x0D\x0A <RUID XID = \"\"147064352\"\" DbID = \"\"2053483706\"\"/>)"
       USR$SUB_OBJECT: ~
       USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
       Z_USR$SET_FUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
-      EDITIONDATE: 2023-05-03T12:46:06+03:00
+      EDITIONDATE: 2023-05-10T12:57:42+03:00
       DISABLED: 0
   - 
     Properties: 
@@ -413,12 +413,12 @@ Objects:
       USR$MOBILENAME: "documentSubtype"
       USR$NOTACTIVE: 0
       USR$SET_FUNCTION: ~
-      USR$SQLQUERY: "SELECT\x0D\x0A  cast('internalMovement' as varchar(16)) as id,\x0D\x0A  cast('Внутреннее перемещение' as varchar(22))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>\x0D\x0AUNION\x0D\x0ASELECT\x0D\x0A  cast('movement' as varchar(8)) as id,\x0D\x0A  cast('Снять с хранения' as varchar(16))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>\x0D\x0AUNION\x0D\x0ASELECT\x0D\x0A  cast('prihod' as varchar(6)) as id,\x0D\x0A  cast('Приход' as varchar(6))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>\x0D\x0AUNION\x0D\x0ASELECT\x0D\x0A  cast('cellMovement' as varchar(12)) as id,\x0D\x0A  cast('Смена ячеек' as varchar(11))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>\x0D\x0AUNION\x0D\x0ASELECT\x0D\x0A  cast('invent' as varchar(12)) as id,\x0D\x0A  cast('Инвентаризация' as varchar(14))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147064352\"\" DbID = \"\"2053483706\"\"/>"
+      USR$SQLQUERY: "SELECT\x0D\x0A  cast('internalMovement' as varchar(16)) as id,\x0D\x0A  cast('На хранение' as varchar(11))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>\x0D\x0AUNION\x0D\x0ASELECT\x0D\x0A  cast('movement' as varchar(8)) as id,\x0D\x0A  cast('С хранения' as varchar(10))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>\x0D\x0AUNION\x0D\x0ASELECT\x0D\x0A  cast('cellMovement' as varchar(12)) as id,\x0D\x0A  cast('Смена ячеек' as varchar(11))  as name\x0D\x0AFROM  USR$GDMN_DOCUMENTS DOC\x0D\x0AWHERE DOC.USR$DOCUMENTTYPE = <RUID XID = \"\"147016233\"\" DbID = \"\"2053437193\"\"/>"
       USR$SUB_OBJECT: ~
       USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
       Z_USR$SET_FUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
-      EDITIONDATE: 2023-05-02T19:12:50+03:00
+      EDITIONDATE: 2023-05-10T12:45:50+03:00
       DISABLED: 0
   - 
     Properties: 
