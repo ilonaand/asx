@@ -5,10 +5,10 @@ Properties:
   RUID: 147030622_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
-  Version: "1.0.0.13"
+  Version: "1.0.0.14"
   Optional: False
   Internal: True
-  MD5: 11DC711B22E29CE323264C499824DC14
+  MD5: 921D831ECFDA95DD7F3DDDD01A914399
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "147024092_1677413867 GS.Web.Web-services.Конфигурация.Данные"
@@ -716,3 +716,56 @@ Objects:
       Z_USR$SENDFUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
       EDITIONDATE: 2023-05-03T12:45:36+03:00
+  - 
+    Properties: 
+      Class: "TgdcAttrUserDefined"
+      SubType: "USR$GDMN_REFERENCES"
+      RUID: 147065504_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      USR$NAME: "Остатки ТМЦ"
+      USR$CROSSQUERY: " SELECT DISTINCT C.ID\x0D\x0A  FROM GD_CONTACT MC\x0D\x0A    JOIN GD_CONTACT C ON C.LB >= MC.LB AND  C.RB <= MC.RB\x0D\x0A  WHERE C.CONTACTTYPE = 4  %DEPT%\x0D\x0AORDER BY 1"
+      USR$ISCROSS: 1
+      USR$LIST_JSON: "GOODKEY=goodId,DATERECEIVED=dateReceived,NUMRECEIVED=numReceived,REMAINS=q"
+      USR$MOBILENAME: "remains"
+      USR$NOTACTIVE: 0
+      USR$SET_FUNCTION: ~
+      USR$SQLQUERY: "EXECUTE BLOCK\x0D\x0A(MAINKEY DFOREIGNKEY = :MAINKEY)\x0D\x0ARETURNS (\x0D\x0A    GOODKEY VARCHAR(20),\x0D\x0A    GOODNAME VARCHAR(60),\x0D\x0A    DATERECEIVED DATE,\x0D\x0A    NUMRECEIVED VARCHAR(6),\x0D\x0A    REMAINS NUMERIC(15, 4))\x0D\x0AAS\x0D\x0A  DECLARE VARIABLE COMPANYKEY DINTKEY;\x0D\x0A  DECLARE VARIABLE GROUPKEY DINTKEY;\x0D\x0A  DECLARE VARIABLE LB INTEGER;\x0D\x0A  DECLARE VARIABLE RB INTEGER;\x0D\x0ABEGIN\x0D\x0A  SELECT COMPANYKEY FROM GD_OURCOMPANY INTO :COMPANYKEY;\x0D\x0A  SELECT  R.ID FROM GD_RUID R WHERE R.XID = 147005904 AND R.DBID = 63934951 INTO :GROUPKEY;\x0D\x0A  SELECT LB, RB FROM GD_GOODGROUP WHERE ID = :GROUPKEY INTO :LB, :RB;\x0D\x0A  FOR\x0D\x0A    EXECUTE STATEMENT\x0D\x0A     'SELECT\x0D\x0A             G.NAME AS GOODNAME,\x0D\x0A             C.GOODKEY,\x0D\x0A             C.USR$ASX_DATERECEIVED AS DATERECEIVED,\x0D\x0A             TRIM(C.USR$ASX_NUMBER_PART) AS NUMRECEIVE,\x0D\x0A             SUM (M.BALANCE) AS REMAINS\x0D\x0A    FROM\x0D\x0A  ( SELECT\x0D\x0A    M.CARDKEY,\x0D\x0A    M.CONTACTKEY,\x0D\x0A    M.BALANCE\x0D\x0A  FROM\x0D\x0A    INV_BALANCE M\x0D\x0A      JOIN\x0D\x0A        GD_GOOD G\x0D\x0A      ON\x0D\x0A        ( G.ID  =  M.GOODKEY )\x0D\x0A      LEFT JOIN\x0D\x0A        GD_GOODGROUP GG\x0D\x0A      ON\x0D\x0A        ( G.GROUPKEY  =  GG.ID )\x0D\x0A  WHERE\x0D\x0A    M.BALANCE  <>  0\x0D\x0A       AND\x0D\x0A    ( GG.LB  >= ' || :LB || ' AND     GG.RB  <=  ' || :RB || ')\x0D\x0A       AND\x0D\x0A    M.CONTACTKEY  = ' || :MAINKEY || ' ) M\x0D\x0A    LEFT JOIN INV_CARD C ON C.ID  =  M.CARDKEY\x0D\x0A    LEFT JOIN GD_GOOD G ON G.ID = C.GOODKEY\x0D\x0A    GROUP BY 1, 2, 3, 4\x0D\x0A    HAVING SUM ( M.BALANCE )  >  0\x0D\x0A    ORDER BY G.NAME'\x0D\x0A    INTO :GOODNAME, :GOODKEY, :DATERECEIVED, :NUMRECEIVED, :REMAINS\x0D\x0A    DO\x0D\x0A      SUSPEND;\x0D\x0AEND"
+      USR$SUB_OBJECT: ~
+      USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
+      Z_USR$SET_FUNCTION_NAME: ~
+      Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
+      EDITIONDATE: 2023-05-12T16:58:12+03:00
+      DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcAttrUserDefined"
+      SubType: "USR$GDMN_PARAMS"
+      RUID: 147065552_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      USR$NAME: "Склад адресного хранения"
+      USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
+      Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
+      EDITIONDATE: 2023-05-12T16:33:12+03:00
+  - 
+    Properties: 
+      Class: "TgdcAttrUserDefined"
+      SubType: "USR$GDMN_PARAMSLINE"
+      RUID: 147065553_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      USR$CLASSNAME: "TgdcBaseContact"
+      USR$MASTERKEY: "147065552_2053483706 Склад адресного хранения"
+      USR$PARAMCODE: "dept"
+      USR$PARAMNAME: "Подразделения"
+      USR$RELATIONNAME: ~
+      USR$VALUE: "MC.ID IN (147023737)   "
+      Z_USR$MASTERKEY_USR$NAME: "Склад адресного хранения"
+      EDITIONDATE: 2023-05-12T16:38:26+03:00
