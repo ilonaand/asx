@@ -5,10 +5,10 @@ Properties:
   RUID: 147030622_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
-  Version: "1.0.0.14"
+  Version: "1.0.0.15"
   Optional: False
   Internal: True
-  MD5: 921D831ECFDA95DD7F3DDDD01A914399
+  MD5: FB3CAA7D6FBC079EF70D8756DDA90023
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "147024092_1677413867 GS.Web.Web-services.Конфигурация.Данные"
@@ -728,7 +728,7 @@ Objects:
       USR$NAME: "Остатки ТМЦ"
       USR$CROSSQUERY: " SELECT DISTINCT C.ID\x0D\x0A  FROM GD_CONTACT MC\x0D\x0A    JOIN GD_CONTACT C ON C.LB >= MC.LB AND  C.RB <= MC.RB\x0D\x0A  WHERE C.CONTACTTYPE = 4  %DEPT%\x0D\x0AORDER BY 1"
       USR$ISCROSS: 1
-      USR$LIST_JSON: "GOODKEY=goodId,DATERECEIVED=dateReceived,NUMRECEIVED=numReceived,REMAINS=q"
+      USR$LIST_JSON: "GOODKEY=goodId,DATERECEIVED=workDate,NUMRECEIVED=numReceived,REMAINS=q"
       USR$MOBILENAME: "remains"
       USR$NOTACTIVE: 0
       USR$SET_FUNCTION: ~
@@ -737,7 +737,7 @@ Objects:
       USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
       Z_USR$SET_FUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
-      EDITIONDATE: 2023-05-12T16:58:12+03:00
+      EDITIONDATE: 2023-05-13T17:42:57+03:00
       DISABLED: 0
   - 
     Properties: 
