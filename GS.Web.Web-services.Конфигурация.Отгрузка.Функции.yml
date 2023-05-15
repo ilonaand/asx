@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.28"
+  Version: "1.0.0.29"
   Optional: False
   Internal: True
-  MD5: 6A7182650B384FD944103EA2FDA2E6C9
+  MD5: F6B943B96EC1F811B07964580FAC224A
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -1329,7 +1329,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-04-18T17:02:56+03:00
+      EDITIONDATE: 2023-05-15T17:43:41+03:00
       DISPLAYSCRIPT: | 
         WEB_GETORDERSASX
         
@@ -1385,7 +1385,7 @@ Objects:
            "  join usr$ber_claimline bl on bl.MASTERKEY = b.DOCUMENTKEY and bl.USR$QUANTITY > 0 " & vbCrLf & _
            "  left join gd_good g on g.ID = bl.USR$GOODKEY " & vbCrLf & _
            "  left join gd_goodgroup gg ON g.groupkey = gg.id " & vbCrLf & _
-           "  left join gd_contact con1 ON b.USR$SHCODE = con1.USR$SHCODE " & vbCrLf & _
+           "  left join gd_contact con1 ON cast(b.USR$SHCODE as integer) = cast(con1.USR$SHCODE as integer) " & vbCrLf & _
            "WHERE " & vbCrLf & _
            "  b.USR$ONDATE >= :datebegin " & vbCrLf & _
            "  and b.USR$ONDATE <= :dateend " & vbCrLf & _
