@@ -5,10 +5,10 @@ Properties:
   RUID: 147064611_2053483706
   Name: "asx. Сверка(инвентаризация)"
   Caption: "asx. Сверка(инвентаризация)"
-  Version: "1.0.0.3"
+  Version: "1.0.0.4"
   Optional: False
   Internal: True
-  MD5: 39281CD2524725DC5C8315656F12FA93
+  MD5: CAD20017F85DE1A2025B56BCCD7ADAEE
 Uses: 
   - "147755479_69526485 GS.Общие.EVT_OBJECT"
   - "147016562_2053437193 asx.возврат от покупателя"
@@ -673,72 +673,73 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-05-02T19:28:56+03:00
+      EDITIONDATE: 2023-05-17T16:10:44+03:00
       BLOB_DATA: !!binary > 
         VFBGMAYNR1JJRF9TVFJFQU1fNAEGBlRhaG9tYQYMY2xXaW5kb3dUZXh0AvUAAggAAgEABghjbFdp
         bmRvdwEGBlRhaG9tYQYPY2xIaWdobGlnaHRUZXh0AvUAAggAAgEABgtjbEhpZ2hsaWdodAEGBlRh
         aG9tYQYMY2xXaW5kb3dUZXh0AvUAAggAAgEABgljbEJ0bkZhY2UJBgkkMDBFN0YzRjcGCSQwMEQ2
         RTdFNw4ACAgOAAgOAQhFeHBhbmRlZAgJRmllbGROYW1lBhJVX1VTUiRHT09ES0VZX05BTUUIUmVh
-        ZE9ubHkIDVRpdGxlLkNhcHRpb24GDM3g6Ozl7e7i4O3o5QVXaWR0aAJBB1Zpc2libGUJAAEIRXhw
-        YW5kZWQICUZpZWxkTmFtZQYOVVNSJE5VTVJFQ0VJVkUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24G
-        DM3u7OXwIO/g8PLo6AVXaWR0aAOCAAdWaXNpYmxlCQABCEV4cGFuZGVkCAlGaWVsZE5hbWUGD1VT
-        UiREQVRFUkVDRUlWRQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYRxODy4CDv8O7o5+Lu5PHy4uAF
-        V2lkdGgDggAHVmlzaWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1lBglVU1IkUExBQ0UIUmVhZE9u
-        bHkIDVRpdGxlLkNhcHRpb24GDM3u7OXwIP/35enq6AVXaWR0aAOCAAdWaXNpYmxlCQABCEV4cGFu
-        ZGVkCAlGaWVsZE5hbWUGDFVTUiRRVUFOVElUWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYGyu7r
-        LeLuBVdpZHRoA4IAB1Zpc2libGUJAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYKVVNSJFdFSUdIVAhS
-        ZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYDwuXxBVdpZHRoA4IAB1Zpc2libGUJAAEIRXhwYW5kZWQI
-        CUZpZWxkTmFtZQYKVVNSJFNIQ09ERQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYPyu7kIPEg8uXw
-        7Ojt4OvgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgJJRAhSZWFkT25s
-        eQgNVGl0bGUuQ2FwdGlvbgYEyuv+9wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxk
-        TmFtZQYGUEFSRU5UCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgjQ7uTo8uXr/AVXaWR0aAL/B1Zp
-        c2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYPRE9DVU1FTlRUWVBFS0VZCFJlYWRPbmx5CA1U
-        aXRsZS5DYXB0aW9uBg3S6O8g5O7q8+zl7fLgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBglUUlRZUEVLRVkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDtLo7yDy8ODt5+Dq
-        9ujoBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBg5UUkFOU0FDVElPTktF
-        WQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYK0vDg7efg6vbo/wVXaWR0aAL/B1Zpc2libGUIAAEI
-        RXhwYW5kZWQICUZpZWxkTmFtZQYGTlVNQkVSCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgXN7uzl
-        8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYMRE9DVU1FTlREQVRFCFJl
-        YWRPbmx5CA1UaXRsZS5DYXB0aW9uBgTE4PLgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBgtERVNDUklQVElPTghSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYIzu/o8eDt6OUF
-        V2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGBlNVTU5DVQhSZWFkT25seQgN
-        VGl0bGUuQ2FwdGlvbgYL0fPs7OAg4iDNxMUFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlG
-        aWVsZE5hbWUGB1NVTUNVUlIIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDtHz7OzgIOIg4uDr/vLl
-        BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgVTVU1FUQhSZWFkT25seQgN
-        VGl0bGUuQ2FwdGlvbgYT0fPs7OAg4iD96uLo4uDr5e3y5QVXaWR0aAL/B1Zpc2libGUIAAEIRXhw
-        YW5kZWQICUZpZWxkTmFtZQYHREVMQVlFRAhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYKzvLr7ubl
-        7e376QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYHQ1VSUktFWQhSZWFk
-        T25seQgNVGl0bGUuQ2FwdGlvbgYGwuDr/vLgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBgpDT01QQU5ZS0VZCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgjK7uzv4O3o/wVX
-        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYKQ1JFQVRPUktFWQhSZWFkT25s
-        eQgNVGl0bGUuQ2FwdGlvbgYKyvLuIPHu5+Tg6wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQI
-        CUZpZWxkTmFtZQYMQ1JFQVRJT05EQVRFCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBg3E4PLgIPHu
-        5+Tg7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglFRElUT1JLRVkI
-        UmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDMry7iDo8e/w4OLo6wVXaWR0aAL/B1Zpc2libGUIAAEI
-        RXhwYW5kZWQICUZpZWxkTmFtZQYLRURJVElPTkRBVEUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24G
-        DsTg8uAg6Ofs5e3l7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglQ
-        UklOVERBVEUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GC8Tg8uAg7+X34PLoBVdpZHRoAv8HVmlz
-        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBghESVNBQkxFRAhSZWFkT25seQgNVGl0bGUuQ2Fw
-        dGlvbgYIRElTQUJMRUQFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCFJF
-        U0VSVkVECFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBg/H4PDl5+Xw4ujw7uLg7e4FV2lkdGgC/wdW
-        aXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGC0RPQ1VNRU5US0VZDVRpdGxlLkNhcHRpb24G
-        Dcjk5e3y6PTo6uDy7vAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCU1B
-        U1RFUktFWQ1UaXRsZS5DYXB0aW9uBivQ7uTo8uXr/CAo0eLl8OrgICjo7eLl7fLg8Ojn4Pbo/yko
-        7+7n6Pbo/ykpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglSRVNFUlZF
-        RDENVGl0bGUuQ2FwdGlvbgYyx+Dw5efl8OLo8O7i4O3uICjR4uXw6uAgKOjt4uXt8uDw6Ofg9uj/
-        KSjv7ufo9uj/KSkFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGC1VTUiRH
-        T09ES0VZCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgXS7uLg8AVXaWR0aAL/B1Zpc2libGUIAAEI
-        RXhwYW5kZWQICUZpZWxkTmFtZQYOVVNSJFNPUlROVU1CRVIIUmVhZE9ubHkIDVRpdGxlLkNhcHRp
-        b24GFM3u7OXwIOTr/yDx7vDy6PDu4uroBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
-        bGROYW1lBhNVX1VTUiRHT09ES0VZX0FMSUFTCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgjY6PTw
-        INLM1gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYVVV9VU1IkR09PREtF
-        WV9CQVJDT0RFCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgnY8vDo9SDq7uQFV2lkdGgC/wdWaXNp
-        YmxlCAABCUFsaWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQUZV
-        TEwNVGl0bGUuQ2FwdGlvbgYNz+7r7fvpIOTu8fLz7wVXaWR0aAL/B1Zpc2libGUIAAEJQWxpZ25t
-        ZW50Bw50YVJpZ2h0SnVzdGlmeQhFeHBhbmRlZAgJRmllbGROYW1lBgVBQ0hBRw1UaXRsZS5DYXB0
-        aW9uBhnP8O7x7O7y8CDoIPDl5ODq8ujw7uLg7ejlBVdpZHRoAv8HVmlzaWJsZQgAAQlBbGlnbm1l
-        bnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFWSUVXDVRpdGxlLkNhcHRp
-        b24GD9Lu6/zq7iDv8O7x7O7y8AVXaWR0aAL/B1Zpc2libGUIAAAICLQeCQg=
+        ZE9ubHkIDVRpdGxlLkNhcHRpb24GDM3g6Ozl7e7i4O3o5QVXaWR0aAOQAAdWaXNpYmxlCQABCEV4
+        cGFuZGVkCAlGaWVsZE5hbWUGDlVTUiROVU1SRUNFSVZFCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9u
+        BgzN7uzl8CDv4PDy6OgFV2lkdGgDggAHVmlzaWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1lBg9V
+        U1IkREFURVJFQ0VJVkUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GEcTg8uAg7/Du6Ofi7uTx8uLg
+        BVdpZHRoA4IAB1Zpc2libGUJAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYJVVNSJFBMQUNFCFJlYWRP
+        bmx5CA1UaXRsZS5DYXB0aW9uBgzN7uzl8CD/9+Xp6ugFV2lkdGgDggAHVmlzaWJsZQkAAQhFeHBh
+        bmRlZAgJRmllbGROYW1lBgxVU1IkUVVBTlRJVFkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GBsru
+        6y3i7gVXaWR0aAOCAAdWaXNpYmxlCQlUb3RhbFR5cGUHBXR0U3VtAAEIRXhwYW5kZWQICUZpZWxk
+        TmFtZQYKVVNSJFdFSUdIVAhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYDwuXxBVdpZHRoA4IAB1Zp
+        c2libGUJAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYKVVNSJFNIQ09ERQhSZWFkT25seQgNVGl0bGUu
+        Q2FwdGlvbgYPyu7kIPEg8uXw7Ojt4OvgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
+        bGROYW1lBgJJRAhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYEyuv+9wVXaWR0aAL/B1Zpc2libGUI
+        AAEIRXhwYW5kZWQICUZpZWxkTmFtZQYGUEFSRU5UCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgjQ
+        7uTo8uXr/AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYPRE9DVU1FTlRU
+        WVBFS0VZCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBg3S6O8g5O7q8+zl7fLgBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglUUlRZUEVLRVkIUmVhZE9ubHkIDVRpdGxlLkNh
+        cHRpb24GDtLo7yDy8ODt5+Dq9ujoBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGRO
+        YW1lBg5UUkFOU0FDVElPTktFWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYK0vDg7efg6vbo/wVX
+        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYGTlVNQkVSCFJlYWRPbmx5CA1U
+        aXRsZS5DYXB0aW9uBgXN7uzl8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFt
+        ZQYMRE9DVU1FTlREQVRFCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgTE4PLgBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtERVNDUklQVElPTghSZWFkT25seQgNVGl0bGUu
+        Q2FwdGlvbgYIzu/o8eDt6OUFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUG
+        BlNVTU5DVQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYL0fPs7OAg4iDNxMUFV2lkdGgC/wdWaXNp
+        YmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGB1NVTUNVUlIIUmVhZE9ubHkIDVRpdGxlLkNhcHRp
+        b24GDtHz7OzgIOIg4uDr/vLlBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1l
+        BgVTVU1FUQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYT0fPs7OAg4iD96uLo4uDr5e3y5QVXaWR0
+        aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYHREVMQVlFRAhSZWFkT25seQgNVGl0
+        bGUuQ2FwdGlvbgYKzvLr7ubl7e376QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxk
+        TmFtZQYHQ1VSUktFWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYGwuDr/vLgBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgpDT01QQU5ZS0VZCFJlYWRPbmx5CA1UaXRsZS5D
+        YXB0aW9uBgjK7uzv4O3o/wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYK
+        Q1JFQVRPUktFWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYKyvLuIPHu5+Tg6wVXaWR0aAL/B1Zp
+        c2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYMQ1JFQVRJT05EQVRFCFJlYWRPbmx5CA1UaXRs
+        ZS5DYXB0aW9uBg3E4PLgIPHu5+Tg7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
+        bGROYW1lBglFRElUT1JLRVkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDMry7iDo8e/w4OLo6wVX
+        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLRURJVElPTkRBVEUIUmVhZE9u
+        bHkIDVRpdGxlLkNhcHRpb24GDsTg8uAg6Ofs5e3l7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBh
+        bmRlZAgJRmllbGROYW1lBglQUklOVERBVEUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GC8Tg8uAg
+        7+X34PLoBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBghESVNBQkxFRAhS
+        ZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYIRElTQUJMRUQFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFu
+        ZGVkCAlGaWVsZE5hbWUGCFJFU0VSVkVECFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBg/H4PDl5+Xw
+        4ujw7uLg7e4FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGC0RPQ1VNRU5U
+        S0VZDVRpdGxlLkNhcHRpb24GDcjk5e3y6PTo6uDy7vAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFu
+        ZGVkCAlGaWVsZE5hbWUGCU1BU1RFUktFWQ1UaXRsZS5DYXB0aW9uBivQ7uTo8uXr/CAo0eLl8Org
+        ICjo7eLl7fLg8Ojn4Pbo/yko7+7n6Pbo/ykpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
+        RmllbGROYW1lBglSRVNFUlZFRDENVGl0bGUuQ2FwdGlvbgYyx+Dw5efl8OLo8O7i4O3uICjR4uXw
+        6uAgKOjt4uXt8uDw6Ofg9uj/KSjv7ufo9uj/KSkFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVk
+        CAlGaWVsZE5hbWUGC1VTUiRHT09ES0VZCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgXS7uLg8AVX
+        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYOVVNSJFNPUlROVU1CRVIIUmVh
+        ZE9ubHkIDVRpdGxlLkNhcHRpb24GFM3u7OXwIOTr/yDx7vDy6PDu4uroBVdpZHRoAv8HVmlzaWJs
+        ZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhNVX1VTUiRHT09ES0VZX0FMSUFTCFJlYWRPbmx5CA1U
+        aXRsZS5DYXB0aW9uBgjY6PTwINLM1gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxk
+        TmFtZQYVVV9VU1IkR09PREtFWV9CQVJDT0RFCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgnY8vDo
+        9SDq7uQFV2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5k
+        ZWQICUZpZWxkTmFtZQYFQUZVTEwNVGl0bGUuQ2FwdGlvbgYNz+7r7fvpIOTu8fLz7wVXaWR0aAL/
+        B1Zpc2libGUIAAEJQWxpZ25tZW50Bw50YVJpZ2h0SnVzdGlmeQhFeHBhbmRlZAgJRmllbGROYW1l
+        BgVBQ0hBRw1UaXRsZS5DYXB0aW9uBhnP8O7x7O7y8CDoIPDl5ODq8ujw7uLg7ejlBVdpZHRoAv8H
+        VmlzaWJsZQgAAQlBbGlnbm1lbnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUG
+        BUFWSUVXDVRpdGxlLkNhcHRpb24GD9Lu6/zq7iDv8O7x7O7y8AVXaWR0aAL/B1Zpc2libGUIAAAI
+        CLQeCQg=
   - 
     Properties: 
       Class: "TgdcStorageFolder"
@@ -848,7 +849,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-05-02T16:42:18+03:00
+      EDITIONDATE: 2023-05-17T12:45:57+03:00
       BLOB_DATA: | 
         object gdc_dlgUserComplexDocument147064352_2053483706: Tgdc_dlgUserComplexDocument
           ActiveControl = nil
@@ -933,8 +934,8 @@ Objects:
                     Expanded = False
                     FieldName = 'USR$SHCODE'
                     Title.Caption = 'Код с терминала'
-                    Width = 196
-                    Visible = True
+                    Width = -1
+                    Visible = False
                   end
                   item
                     Expanded = False
@@ -1186,6 +1187,18 @@ Objects:
                   end
                   object tbMacro: TTBItem
                   end
+                  object usrg_147064352_2053483706_TBItem1: TTBItem
+                    Tag = 0
+                    Action = usrg_actImportRemains
+                    AutoCheck = False
+                    DisplayMode = nbdmDefault
+                    GroupIndex = 0
+                    Images = nil
+                    InheritOptions = True
+                    MaskOptions = []
+                    Options = []
+                    RadioItem = False
+                  end
                 end
               end
               object tbdLeft: TTBDock
@@ -1283,7 +1296,7 @@ Objects:
                       'rb'
                     ListField = 'c.NAME'
                     KeyField = 'c.ID'
-                    Condition = 'c.contacttype = 4 AND cp.id = :ck'
+                    Condition = 'c.contacttype = 4 and cp.id = 147003960'
                     gdClassName = 'TgdcDepartment'
                   end
                   object usrat_gsIBLookupComboBox_USR_CONTACTKEY: TgsIBLookupComboBox
@@ -1393,6 +1406,18 @@ Objects:
             object actDetailMacro: TAction
             end
             object actDetailProp: TAction
+            end
+            object usrg_actImportRemains: TgsAction
+              Tag = 0
+              Category = ''
+              Caption = 'Перенести остатки из ячеек'
+              Checked = False
+              Enabled = True
+              HelpContext = 0
+              Hint = ''
+              ImageIndex = -1
+              ShortCut = 0
+              Visible = True
             end
           end
           object dsgdcBase: TDataSource
@@ -1885,3 +1910,201 @@ Objects:
       SERVERKEY: ~
       TEMPLATEKEY: "147064523_2053483706 asx. Сверка"
       EDITIONDATE: 2023-05-02T18:02:10+03:00
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147065814_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Экспортирован"
+      FIELDNAME: "USR$EXPORTED"
+      FIELDSOURCE: "DBOOLEAN"
+      FIELDSOURCEKEY: "147000135_486813904 Логическое, DBOOLEAN"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Экспортирован"
+      LSHORTNAME: "Экспортирован"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147064353_2053483706 Сверка (инвентаризация), USR$ASX_INVCHECK"
+      RELATIONNAME: "USR$ASX_INVCHECK"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T16:09:25+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: | 
+        DEFAULT 0
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147065734_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065732_2053483706
+    Fields: 
+      NAME: "usrg_actImportRemainsOnExecute"
+      COMMENT: ~
+      EVENT: "ONEXECUTE"
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "EVENTS"
+      MODULECODE: "147064375_2053483706 gdc_dlgUserComplexDocument147064352_2053483706"
+      OBJECTNAME: "gdc_dlgUserComplexDocument147064352_2053483706"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-17T13:25:21+03:00
+      DISPLAYSCRIPT: | 
+        USRG_ACTIMPORTREMAINSONEXECUTE
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QGAAAAU0VOREVSBgAAAFNFTkRFUgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNU
+        RkxQUg==
+      SCRIPT: | 
+        Option Explicit
+        Sub usrg_actImportRemainsOnExecute(ByVal Sender)
+        '*** Данный код необходим для вызова встроенного обработчика ***
+        '*** В случае его удаления возможно нарушение работы системы ***
+          Call   Inherited(Sender, "OnExecute", Array(Sender))
+        '*** конец кода поддержки встроенного обработчика            ***
+        
+          Dim Creator, ibsql, department, gdcObject, gdcDetailObject
+          set gdcObject = Sender.OwnerForm.gdcObject
+          set gdcDetailObject = Sender.OwnerForm.gdcDetailObject
+          department = gdcObject.FieldByName("USR$DEPTKEY").AsInteger
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = gdcBaseManager.ReadTransaction
+          ibsql.SQL.Text = _
+            "EXECUTE BLOCK " & vbCrLf & _
+            "(MAINKEY DFOREIGNKEY = :MAINKEY) " & vbCrLf & _
+            "RETURNS ( " & vbCrLf & _
+            "    GOODKEY VARCHAR(20), " & vbCrLf & _
+            "    DATERECEIVED DATE, " & vbCrLf & _
+            "    NUMRECEIVED VARCHAR(6), " & vbCrLf & _
+            "    NUMBER_PLACE VARCHAR(40), " & vbCrLf & _
+            "    PODDON_CODE VARCHAR(40), " & vbCrLf & _
+            "    REMAINS NUMERIC(15, 4)) " & vbCrLf & _
+            "AS " & vbCrLf & _
+            "  DECLARE VARIABLE COMPANYKEY DINTKEY; " & vbCrLf & _
+            "  DECLARE VARIABLE GROUPKEY DINTKEY; " & vbCrLf & _
+            "  DECLARE VARIABLE LB INTEGER; " & vbCrLf & _
+            "  DECLARE VARIABLE RB INTEGER; " & vbCrLf & _
+            "BEGIN " & vbCrLf & _
+            "  SELECT COMPANYKEY FROM GD_OURCOMPANY INTO :COMPANYKEY; " & vbCrLf & _
+            "  SELECT  R.ID FROM GD_RUID R WHERE R.XID = 147005904 AND R.DBID = 63934951 INTO :GROUPKEY; " & vbCrLf & _
+            "  SELECT LB, RB FROM GD_GOODGROUP WHERE ID = :GROUPKEY INTO :LB, :RB; " & vbCrLf & _
+            "  FOR " & vbCrLf & _
+            "    SELECT " & vbCrLf & _
+            "     C.GOODKEY, " & vbCrLf & _
+            "     C.USR$ASX_DATERECEIVED AS DATERECEIVED, " & vbCrLf & _
+            "     TRIM(C.USR$ASX_NUMBER_PART) AS NUMRECEIVE, " & vbCrLf & _
+            "     C.USR$ASX_NUMBER_PLACE, " & vbCrLf & _
+            "     C.USR$ASX_PODDON_CODE, " & vbCrLf & _
+            "     SUM (M.BALANCE) AS REMAINS " & vbCrLf & _
+            "    FROM " & vbCrLf & _
+            "    ( SELECT " & vbCrLf & _
+            "      M.CARDKEY, " & vbCrLf & _
+            "      M.CONTACTKEY, " & vbCrLf & _
+            "      M.BALANCE " & vbCrLf & _
+            "    FROM " & vbCrLf & _
+            "      INV_BALANCE M " & vbCrLf & _
+            "        JOIN " & vbCrLf & _
+            "          GD_GOOD G " & vbCrLf & _
+            "        ON " & vbCrLf & _
+            "          ( G.ID  =  M.GOODKEY ) " & vbCrLf & _
+            "        LEFT JOIN " & vbCrLf & _
+            "          GD_GOODGROUP GG " & vbCrLf & _
+            "        ON " & vbCrLf & _
+            "          ( G.GROUPKEY  =  GG.ID ) " & vbCrLf & _
+            "    WHERE " & vbCrLf & _
+            "      M.BALANCE  <>  0 " & vbCrLf & _
+            "         AND " & vbCrLf & _
+            "      ( GG.LB  >= :LB  AND     GG.RB  <=   :RB) " & vbCrLf & _
+            "         AND " & vbCrLf & _
+            "      M.CONTACTKEY  =  :MAINKEY ) M " & vbCrLf & _
+            "    LEFT JOIN INV_CARD C ON C.ID  =  M.CARDKEY " & vbCrLf & _
+            "    GROUP BY 1, 2, 3, 4, 5 " & vbCrLf & _
+            "    HAVING SUM ( M.BALANCE )  >  0 " & vbCrLf & _
+            "    ORDER BY 1 " & vbCrLf & _
+            "    INTO  :GOODKEY, :DATERECEIVED, :NUMRECEIVED, :NUMBER_PLACE, :PODDON_CODE, :REMAINS " & vbCrLf & _
+            "    DO " & vbCrLf & _
+            "      SUSPEND; " & vbCrLf & _
+            "END "
+          ibsql.ParamByName("mainkey").AsInteger =  department
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0 then
+            while not ibsql.EOF
+              gdcDetailObject.Insert
+              gdcDetailObject.FieldByName("USR$GOODKEY").AsVariant = ibsql.FieldByName("GOODKEY").AsVariant
+              gdcDetailObject.FieldByName("USR$NUMRECEIVE").AsVariant = ibsql.FieldByName("NUMRECEIVED").AsVariant
+              gdcDetailObject.FieldByName("USR$DATERECEIVE").AsVariant = ibsql.FieldByName("DATERECEIVED").AsVariant
+              gdcDetailObject.FieldByName("USR$PLACE").AsVariant = ibsql.FieldByName("NUMBER_PLACE").AsVariant
+              gdcDetailObject.FieldByName("USR$QUANTITY").AsVariant = ibsql.FieldByName("REMAINS").AsVariant
+              gdcDetailObject.FieldByName("USR$SHCODE").AsVariant = ibsql.FieldByName("PODDON_CODE").AsVariant
+              gdcDetailObject.Post
+              ibsql.Next
+            wend
+          end if
+          
+        End Sub
+        
+  - 
+    Properties: 
+      Class: "TgdcDelphiObject"
+      RUID: 147065731_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065732_2053483706
+    Fields: 
+      PARENT: "147064375_2053483706 gdc_dlgUserComplexDocument147064352_2053483706"
+      NAME: "usrg_actImportRemains"
+      CLASSNAME: ""
+      DESCRIPTION: ~
+      MACROSGROUPKEY: ~
+      OBJECTNAME: "usrg_actImportRemains"
+      OBJECTTYPE: 0
+      REPORTGROUPKEY: ~
+      SUBTYPE: ""
+      EDITIONDATE: 2023-05-17T12:45:52+03:00
+  - 
+    Properties: 
+      Class: "TgdcEvent"
+      RUID: 147065732_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      DISABLE: 0
+      EVENTNAME: "ONEXECUTE"
+      FUNCTIONKEY: "147065734_2053483706 usrg_actImportRemainsOnExecute"
+      OBJECTKEY: "147065731_2053483706 gdc_dlgUserComplexDocument147064352_2053483706\\usrg_actImportRemains"
+      OBJECTNAME: "usrg_actImportRemains"
+      PARENTNAME: "gdc_dlgUserComplexDocument147064352_2053483706"
+      EDITIONDATE: 2023-05-17T13:25:21+03:00
