@@ -5,10 +5,10 @@ Properties:
   RUID: 147064611_2053483706
   Name: "asx. Сверка(инвентаризация)"
   Caption: "asx. Сверка(инвентаризация)"
-  Version: "1.0.0.4"
+  Version: "1.0.0.6"
   Optional: False
   Internal: True
-  MD5: CAD20017F85DE1A2025B56BCCD7ADAEE
+  MD5: 2ADB90116B71E45311292789DEE0398C
 Uses: 
   - "147755479_69526485 GS.Общие.EVT_OBJECT"
   - "147016562_2053437193 asx.возврат от покупателя"
@@ -774,7 +774,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-05-02T16:40:00+03:00
+      EDITIONDATE: 2023-05-17T16:49:00+03:00
       BLOB_DATA: !!binary > 
         VFBGMAYNR1JJRF9TVFJFQU1fNAEGBlRhaG9tYQYMY2xXaW5kb3dUZXh0AvUAAggAAgEABghjbFdp
         bmRvdwEGBlRhaG9tYQYPY2xIaWdobGlnaHRUZXh0AvUAAggAAgEABgtjbEhpZ2hsaWdodAEGBlRh
@@ -786,53 +786,54 @@ Objects:
         bGUuQ2FwdGlvbgYMzeDo7OXt7uLg7ejlBVdpZHRoA2wBB1Zpc2libGUJAAEIRXhwYW5kZWQICUZp
         ZWxkTmFtZQYVVV9VU1IkQ09OVEFDVEtFWV9OQU1FCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBhfN
         4Ojs5e3u4uDt6OUgKMru7fLg6vL7KQVXaWR0aANsAQdWaXNpYmxlCQABCEV4cGFuZGVkCAlGaWVs
-        ZE5hbWUGAklECFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgTK6/73BVdpZHRoAv8HVmlzaWJsZQgA
-        AQhFeHBhbmRlZAgJRmllbGROYW1lBgZQQVJFTlQIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GCNDu
-        5Ojy5ev8BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBg9ET0NVTUVOVFRZ
-        UEVLRVkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDdLo7yDk7urz7OXt8uAFV2lkdGgC/wdWaXNp
-        YmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCVRSVFlQRUtFWQhSZWFkT25seQgNVGl0bGUuQ2Fw
-        dGlvbgYO0ujvIPLw4O3n4Or26OgFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
-        bWUGDlRSQU5TQUNUSU9OS0VZCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgrS8ODt5+Dq9uj/BVdp
-        ZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtERVNDUklQVElPTghSZWFkT25s
-        eQgNVGl0bGUuQ2FwdGlvbgYIzu/o8eDt6OUFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlG
-        aWVsZE5hbWUGBlNVTU5DVQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYL0fPs7OAg4iDNxMUFV2lk
-        dGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGB1NVTUNVUlIIUmVhZE9ubHkIDVRp
-        dGxlLkNhcHRpb24GDtHz7OzgIOIg4uDr/vLlBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBgVTVU1FUQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYT0fPs7OAg4iD96uLo4uDr
-        5e3y5QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYHREVMQVlFRAhSZWFk
-        T25seQgNVGl0bGUuQ2FwdGlvbgYKzvLr7ubl7e376QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
-        ZWQICUZpZWxkTmFtZQYHQ1VSUktFWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYGwuDr/vLgBVdp
-        ZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgpDT01QQU5ZS0VZCFJlYWRPbmx5
-        CA1UaXRsZS5DYXB0aW9uBgjK7uzv4O3o/wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
-        ZWxkTmFtZQYKQ1JFQVRPUktFWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYKyvLuIPHu5+Tg6wVX
-        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYMQ1JFQVRJT05EQVRFCFJlYWRP
-        bmx5CA1UaXRsZS5DYXB0aW9uBg3E4PLgIPHu5+Tg7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBh
-        bmRlZAgJRmllbGROYW1lBglFRElUT1JLRVkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDMry7iDo
-        8e/w4OLo6wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLRURJVElPTkRB
-        VEUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDsTg8uAg6Ofs5e3l7ej/BVdpZHRoAv8HVmlzaWJs
-        ZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglQUklOVERBVEUIUmVhZE9ubHkIDVRpdGxlLkNhcHRp
-        b24GC8Tg8uAg7+X34PLoBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBghE
-        SVNBQkxFRAhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYIRElTQUJMRUQFV2lkdGgC/wdWaXNpYmxl
-        CAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCFJFU0VSVkVECFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9u
-        Bg/H4PDl5+Xw4ujw7uLg7e4FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUG
-        C0RPQ1VNRU5US0VZDVRpdGxlLkNhcHRpb24GDcjk5e3y6PTo6uDy7vAFV2lkdGgC/wdWaXNpYmxl
-        CAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCVJFU0VSVkVEMQ1UaXRsZS5DYXB0aW9uBinH4PDl5+Xw
-        4ujw7uLg7e4gKNHi5fDq4CAo6O3i5e3y4PDo5+D26P8pKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhw
-        YW5kZWQICUZpZWxkTmFtZQYOVVNSJENPTlRBQ1RLRVkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24G
-        CdHu8vDz5O3o6gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLVVNSJERF
-        UFRLRVkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDc/u5PDg5+Tl6+Xt6OUFV2lkdGgC/wdWaXNp
-        YmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDlVTUiRTT1JUTlVNQkVSCFJlYWRPbmx5CA1UaXRs
-        ZS5DYXB0aW9uBhTN7uzl8CDk6/8g8e7w8ujw7uLq6AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
-        ZWQICUZpZWxkTmFtZQYVVV9VU1IkREVQVEtFWV9BRERSRVNTCFJlYWRPbmx5CA1UaXRsZS5DYXB0
-        aW9uBgXA5PDl8QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYYVV9VU1Ik
-        Q09OVEFDVEtFWV9BRERSRVNTCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBhDA5PDl8SAoyu7t8uDq
-        8vspBVdpZHRoAv8HVmlzaWJsZQgAAQlBbGlnbm1lbnQHDnRhUmlnaHRKdXN0aWZ5CEV4cGFuZGVk
-        CAlGaWVsZE5hbWUGBUFGVUxMDVRpdGxlLkNhcHRpb24GDc/u6+376SDk7vHy8+8FV2lkdGgC/wdW
-        aXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYF
-        QUNIQUcNVGl0bGUuQ2FwdGlvbgYZz/Du8ezu8vAg6CDw5eTg6vLo8O7i4O3o5QVXaWR0aAL/B1Zp
-        c2libGUIAAEJQWxpZ25tZW50Bw50YVJpZ2h0SnVzdGlmeQhFeHBhbmRlZAgJRmllbGROYW1lBgVB
-        VklFVw1UaXRsZS5DYXB0aW9uBg/S7uv86u4g7/Du8ezu8vAFV2lkdGgC/wdWaXNpYmxlCAAACAi0
-        HgkI
+        ZE5hbWUGDFVTUiRFWFBPUlRFRAhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYN3erx7+7w8ujw7uLg
+        7QVXaWR0aAJSB1Zpc2libGUJAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYCSUQIUmVhZE9ubHkIDVRp
+        dGxlLkNhcHRpb24GBMrr/vcFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUG
+        BlBBUkVOVAhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYI0O7k6PLl6/wFV2lkdGgC/wdWaXNpYmxl
+        CAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGD0RPQ1VNRU5UVFlQRUtFWQhSZWFkT25seQgNVGl0bGUu
+        Q2FwdGlvbgYN0ujvIOTu6vPs5e3y4AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxk
+        TmFtZQYJVFJUWVBFS0VZCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBg7S6O8g8vDg7efg6vbo6AVX
+        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYOVFJBTlNBQ1RJT05LRVkIUmVh
+        ZE9ubHkIDVRpdGxlLkNhcHRpb24GCtLw4O3n4Or26P8FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFu
+        ZGVkCAlGaWVsZE5hbWUGC0RFU0NSSVBUSU9OCFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgjO7+jx
+        4O3o5QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYGU1VNTkNVCFJlYWRP
+        bmx5CA1UaXRsZS5DYXB0aW9uBgvR8+zs4CDiIM3ExQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
+        ZWQICUZpZWxkTmFtZQYHU1VNQ1VSUghSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYO0fPs7OAg4iDi
+        4Ov+8uUFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGBVNVTUVRCFJlYWRP
+        bmx5CA1UaXRsZS5DYXB0aW9uBhPR8+zs4CDiIP3q4uji4Ovl7fLlBVdpZHRoAv8HVmlzaWJsZQgA
+        AQhFeHBhbmRlZAgJRmllbGROYW1lBgdERUxBWUVECFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgrO
+        8uvu5uXt7fvpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgdDVVJSS0VZ
+        CFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBgbC4Ov+8uAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFu
+        ZGVkCAlGaWVsZE5hbWUGCkNPTVBBTllLRVkIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GCMru7O/g
+        7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgpDUkVBVE9SS0VZCFJl
+        YWRPbmx5CA1UaXRsZS5DYXB0aW9uBgrK8u4g8e7n5ODrBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBh
+        bmRlZAgJRmllbGROYW1lBgxDUkVBVElPTkRBVEUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GDcTg
+        8uAg8e7n5ODt6P8FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCUVESVRP
+        UktFWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYMyvLuIOjx7/Dg4ujrBVdpZHRoAv8HVmlzaWJs
+        ZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtFRElUSU9OREFURQhSZWFkT25seQgNVGl0bGUuQ2Fw
+        dGlvbgYOxODy4CDo5+zl7eXt6P8FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
+        bWUGCVBSSU5UREFURQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYLxODy4CDv5ffg8ugFV2lkdGgC
+        /wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCERJU0FCTEVECFJlYWRPbmx5CA1UaXRs
+        ZS5DYXB0aW9uBghESVNBQkxFRAVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFt
+        ZQYIUkVTRVJWRUQIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GD8fg8OXn5fDi6PDu4uDt7gVXaWR0
+        aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYLRE9DVU1FTlRLRVkNVGl0bGUuQ2Fw
+        dGlvbgYNyOTl7fLo9Ojq4PLu8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFt
+        ZQYJUkVTRVJWRUQxDVRpdGxlLkNhcHRpb24GKcfg8OXn5fDi6PDu4uDt7iAo0eLl8OrgICjo7eLl
+        7fLg8Ojn4Pbo/ykpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBg5VU1Ik
+        Q09OVEFDVEtFWQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYJ0e7y8PPk7ejqBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtVU1IkREVQVEtFWQhSZWFkT25seQgNVGl0bGUu
+        Q2FwdGlvbgYNz+7k8ODn5OXr5e3o5QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxk
+        TmFtZQYOVVNSJFNPUlROVU1CRVIIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GFM3u7OXwIOTr/yDx
+        7vDy6PDu4uroBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhVVX1VTUiRE
+        RVBUS0VZX0FERFJFU1MIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GBcDk8OXxBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhhVX1VTUiRDT05UQUNUS0VZX0FERFJFU1MIUmVh
+        ZE9ubHkIDVRpdGxlLkNhcHRpb24GEMDk8OXxICjK7u3y4Ory+ykFV2lkdGgC/wdWaXNpYmxlCAAB
+        CUFsaWdubWVudAcOdGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQUZVTEwNVGl0
+        bGUuQ2FwdGlvbgYNz+7r7fvpIOTu8fLz7wVXaWR0aAL/B1Zpc2libGUIAAEJQWxpZ25tZW50Bw50
+        YVJpZ2h0SnVzdGlmeQhFeHBhbmRlZAgJRmllbGROYW1lBgVBQ0hBRw1UaXRsZS5DYXB0aW9uBhnP
+        8O7x7O7y8CDoIPDl5ODq8ujw7uLg7ejlBVdpZHRoAv8HVmlzaWJsZQgAAQlBbGlnbm1lbnQHDnRh
+        UmlnaHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFWSUVXDVRpdGxlLkNhcHRpb24GD9Lu
+        6/zq7iDv8O7x7O7y8AVXaWR0aAL/B1Zpc2libGUIAAAICLQeCQg=
   - 
     Properties: 
       Class: "TgdcStorageValue"
@@ -2108,3 +2109,1171 @@ Objects:
       OBJECTNAME: "usrg_actImportRemains"
       PARENTNAME: "gdc_dlgUserComplexDocument147064352_2053483706"
       EDITIONDATE: 2023-05-17T13:25:21+03:00
+  - 
+    Properties: 
+      Class: "TgdcStorageValue"
+      RUID: 147065799_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      PARENT: "147057842_1633690722 GLOBAL\\DFM\\Tgdc_frmUserComplexDocument"
+      NAME: "147064352_2053483706"
+      CURR_DATA: ~
+      DATA_TYPE: "B"
+      DATETIME_DATA: ~
+      INT_DATA: ~
+      STR_DATA: ~
+      EDITIONDATE: 2023-05-17T15:15:22+03:00
+      BLOB_DATA: | 
+        object gdc_frmUserComplexDocument147064352_2053483706: Tgdc_frmUserComplexDocument
+          ActiveControl = ibgrMain
+          PixelsPerInch = 96
+          TextHeight = 13
+          object sbMain: TStatusBar
+            Panels = <
+              item
+                Text = 'Нет фильтрации'
+                Width = 1161
+              end
+              item
+                Width = 160
+              end>
+          end
+          object TBDockTop: TTBDock
+            object tbMainToolbar: TTBToolbar
+              SavedAtRunTime = True
+              object tbiNew: TTBItem
+              end
+              object tbiEdit: TTBItem
+              end
+              object tbiDelete: TTBItem
+              end
+              object tbiDuplicate: TTBItem
+              end
+              object tbiReduction: TTBItem
+              end
+              object tbsiMainOne: TTBSeparatorItem
+              end
+              object tbiEditInGrid: TTBItem
+              end
+              object tbiCopy: TTBItem
+              end
+              object tbiCut: TTBItem
+              end
+              object tbiPaste: TTBItem
+              end
+              object tbsiMainOneAndHalf: TTBSeparatorItem
+              end
+              object tbiLoadFromFile: TTBItem
+              end
+              object tbiSaveToFile: TTBItem
+              end
+              object tbsiMainTwo: TTBSeparatorItem
+              end
+              object tbiFind: TTBItem
+              end
+              object tbiFilter: TTBItem
+              end
+              object tbiPrint: TTBItem
+              end
+              object tbiOnlySelected: TTBItem
+              end
+              object tbiLinkObject: TTBItem
+              end
+              object tbsiMainThreeAndAHalf: TTBSeparatorItem
+              end
+              object tbiHelp: TTBItem
+              end
+            end
+            object tbMainCustom: TTBToolbar
+              Visible = True
+              SavedAtRunTime = True
+              object usrg_147064352_2053483706_TBItem1: TTBItem
+                Tag = 0
+                Action = usrg_actExportToInvent
+                AutoCheck = False
+                DisplayMode = nbdmDefault
+                GroupIndex = 0
+                Images = nil
+                InheritOptions = True
+                MaskOptions = []
+                Options = []
+                RadioItem = False
+              end
+            end
+            object tbMainMenu: TTBToolbar
+              SavedAtRunTime = True
+              object tbsiMainMenuObject: TTBSubmenuItem
+                object tbi_mm_New: TTBItem
+                end
+                object tbi_mm_Edit: TTBItem
+                end
+                object tbi_mm_Delete: TTBItem
+                end
+                object tbi_mm_Duplicate: TTBItem
+                end
+                object tbi_mm_Reduction: TTBItem
+                end
+                object tbi_mm_sep1_1: TTBSeparatorItem
+                end
+                object tbi_mm_Copy: TTBItem
+                end
+                object tbi_mm_Cut: TTBItem
+                end
+                object tbi_mm_Paste: TTBItem
+                end
+                object tbi_mm_sep2_2_: TTBSeparatorItem
+                end
+                object tbi_mm_AddToSelected: TTBItem
+                end
+                object tbi_mm_RemoveFromSelected: TTBItem
+                end
+                object tbi_mm_sep2_1: TTBSeparatorItem
+                end
+                object tbi_mm_Load: TTBItem
+                end
+                object tbi_mm_Save: TTBItem
+                end
+                object tbi_mm_sep3_1: TTBSeparatorItem
+                end
+                object tbi_mm_Commit: TTBItem
+                end
+                object tbi_mm_Rollback: TTBItem
+                end
+                object tbi_mm_sep4_1: TTBSeparatorItem
+                end
+                object tbi_mm_Find: TTBItem
+                end
+                object tbi_mm_Filter: TTBItem
+                end
+                object tbi_mm_Print: TTBItem
+                end
+                object tbi_mm_Macro: TTBItem
+                end
+                object tbi_mm_OnlySelected: TTBItem
+                end
+                object tbi_mm_LinkObject: TTBItem
+                end
+                object tbi_mm_sep5_1: TTBSeparatorItem
+                end
+                object tbi_mm_MainToSetting: TTBItem
+                end
+                object tbi_mm_sep5_2_: TTBSeparatorItem
+                end
+                object tbi_mm_CopySettings: TTBItem
+                end
+                object tbiDistributeSettings: TTBItem
+                end
+                object tbiDontSaveSettings: TTBItem
+                end
+              end
+              object tbsiMainMenuDetailObject: TTBSubmenuItem
+                object tbi_mm_DetailNew: TTBItem
+                end
+                object tbi_mm_DetailEdit: TTBItem
+                end
+                object tbi_mm_DetailDelete: TTBItem
+                end
+                object tbi_mm_DetailDuplicate: TTBItem
+                end
+                object tbi_mm_DetailReduction: TTBItem
+                end
+                object tbi_mm_DetailSep1: TTBSeparatorItem
+                end
+                object tbi_mm_DetailCopy: TTBItem
+                end
+                object tbi_mm_DetailCut: TTBItem
+                end
+                object tbi_mm_DetailPaste: TTBItem
+                end
+                object tbi_mm_DetailSep2: TTBSeparatorItem
+                end
+                object m_DetailLoadFromFile: TTBItem
+                end
+                object m_DetailSaveToFile: TTBItem
+                end
+                object TBSeparatorItem1: TTBSeparatorItem
+                end
+                object tbi_mm_DetailFind: TTBItem
+                end
+                object tbi_mm_DetailFilter: TTBItem
+                end
+                object tbi_mm_DetailPrint: TTBItem
+                end
+                object tbiDetailMenuAddToSelected: TTBItem
+                end
+              end
+              object tbsiMainMenuHelp: TTBSubmenuItem
+                object tbiMainMenuHelp: TTBItem
+                end
+              end
+            end
+            object tbMainInvariant: TTBToolbar
+              SavedAtRunTime = True
+              object tbiCommit: TTBItem
+              end
+              object tbiRollback: TTBItem
+              end
+              object tbsiMainThree: TTBSeparatorItem
+              end
+              object tbiMacros: TTBItem
+              end
+              object TBItem1: TTBItem
+              end
+              object TBItem3: TTBItem
+              end
+            end
+            object tbChooseMain: TTBToolbar
+              SavedAtRunTime = True
+              object tbiSelectAll: TTBItem
+              end
+              object tbiUnSelectAll: TTBItem
+              end
+              object tbiClearSelection: TTBItem
+              end
+            end
+          end
+          object TBDockLeft: TTBDock
+          end
+          object TBDockRight: TTBDock
+          end
+          object TBDockBottom: TTBDock
+          end
+          object pnlWorkArea: TPanel
+            object sMasterDetail: TSplitter
+            end
+            object spChoose: TSplitter
+              Top = 624
+              Width = 1321
+            end
+            object pnlMain: TPanel
+              object pnlSearchMain: TPanel
+                object sbSearchMain: TScrollBox
+                end
+                object pnlSearchMainButton: TPanel
+                  object btnSearchMain: TButton
+                  end
+                  object btnSearchMainClose: TButton
+                  end
+                  object chbxFuzzyMatch: TCheckBox
+                  end
+                end
+              end
+              object ibgrMain: TgsIBGrid
+                Expands = <>
+                Conditions = <>
+                ColumnEditors = <>
+                Aliases = <>
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'NUMBER'
+                    ReadOnly = False
+                    Title.Caption = 'Номер'
+                    Width = 124
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DOCUMENTDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата'
+                    Width = 65
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'U_USR$DEPTKEY_NAME'
+                    ReadOnly = False
+                    Title.Caption = 'Наименование'
+                    Width = 364
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'U_USR$CONTACTKEY_NAME'
+                    ReadOnly = False
+                    Title.Caption = 'Наименование (Контакты)'
+                    Width = 364
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'ID'
+                    ReadOnly = False
+                    Title.Caption = 'Ключ'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'PARENT'
+                    ReadOnly = False
+                    Title.Caption = 'Родитель'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DOCUMENTTYPEKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Тип документа'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TRTYPEKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Тип транзакции'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TRANSACTIONKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Транзакция'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DESCRIPTION'
+                    ReadOnly = False
+                    Title.Caption = 'Описание'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'SUMNCU'
+                    ReadOnly = False
+                    Title.Caption = 'Сумма в НДЕ'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'SUMCURR'
+                    ReadOnly = False
+                    Title.Caption = 'Сумма в валюте'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'SUMEQ'
+                    ReadOnly = False
+                    Title.Caption = 'Сумма в эквиваленте'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DELAYED'
+                    ReadOnly = False
+                    Title.Caption = 'Отложенный'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CURRKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Валюта'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'COMPANYKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Компания'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CREATORKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Кто создал'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CREATIONDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата создания'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EDITORKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Кто исправил'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EDITIONDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата изменения'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'PRINTDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата печати'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DISABLED'
+                    ReadOnly = False
+                    Title.Caption = 'DISABLED'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'RESERVED'
+                    ReadOnly = False
+                    Title.Caption = 'Зарезервировано'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DOCUMENTKEY'
+                    Title.Caption = 'Идентификатор'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'RESERVED1'
+                    Title.Caption = 'Зарезервировано (Сверка (инвентаризация))'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$CONTACTKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Сотрудник'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$DEPTKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Подразделение'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$SORTNUMBER'
+                    ReadOnly = False
+                    Title.Caption = 'Номер для сортировки'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'U_USR$DEPTKEY_ADDRESS'
+                    ReadOnly = False
+                    Title.Caption = 'Адрес'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'U_USR$CONTACTKEY_ADDRESS'
+                    ReadOnly = False
+                    Title.Caption = 'Адрес (Контакты)'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Alignment = taRightJustify
+                    Expanded = False
+                    FieldName = 'AFULL'
+                    ReadOnly = False
+                    Title.Caption = 'Полный доступ'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Alignment = taRightJustify
+                    Expanded = False
+                    FieldName = 'ACHAG'
+                    ReadOnly = False
+                    Title.Caption = 'Просмотр и редактирование'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Alignment = taRightJustify
+                    Expanded = False
+                    FieldName = 'AVIEW'
+                    ReadOnly = False
+                    Title.Caption = 'Только просмотр'
+                    Width = -1
+                    Visible = False
+                  end>
+              end
+            end
+            object pnChoose: TPanel
+              Top = 531
+              Width = 1321
+              object pnButtonChoose: TPanel
+                Left = 1216
+                object btnCancelChoose: TButton
+                end
+                object btnOkChoose: TButton
+                end
+                object btnDeleteChoose: TButton
+                end
+              end
+              object ibgrChoose: TgsIBGrid
+                Width = 1216
+                Expands = <>
+                Conditions = <>
+                ColumnEditors = <>
+                Aliases = <>
+              end
+              object pnlChooseCaption: TPanel
+                Width = 1321
+              end
+            end
+            object pnlDetail: TPanel
+              object TBDockDetail: TTBDock
+                object tbDetailToolbar: TTBToolbar
+                  SavedAtRunTime = True
+                  object tbiDetailNew: TTBItem
+                  end
+                  object tbiDetailEdit: TTBItem
+                  end
+                  object tbiDetailDelete: TTBItem
+                  end
+                  object tbiDetailDublicate: TTBItem
+                  end
+                  object tbiDetailReduction: TTBItem
+                  end
+                  object tbsDetailOne: TTBSeparatorItem
+                  end
+                  object tbiDetailEditInGrid: TTBItem
+                  end
+                  object tbiDetailCopy: TTBItem
+                  end
+                  object tbiDetailCut: TTBItem
+                  end
+                  object tbiDetailPaste: TTBItem
+                  end
+                  object tbsDetailTwo: TTBSeparatorItem
+                  end
+                  object tbiDetailFind: TTBItem
+                  end
+                  object tbiDetailFilter: TTBItem
+                  end
+                  object tbiDetailPrint: TTBItem
+                  end
+                  object tbiDetailOnlySelected: TTBItem
+                  end
+                  object tbiDetailLinkObject: TTBItem
+                  end
+                  object TBItem2: TTBItem
+                  end
+                end
+                object tbDetailCustom: TTBToolbar
+                  DockPos = 298
+                  SavedAtRunTime = True
+                end
+              end
+              object pnlSearchDetail: TPanel
+                Height = 431
+                object sbSearchDetail: TScrollBox
+                  Height = 404
+                end
+                object pnlSearchDetailButton: TPanel
+                  object btnSearchDetail: TButton
+                  end
+                  object btnSearchDetailClose: TButton
+                  end
+                  object chbxFuzzyMatchDetail: TCheckBox
+                  end
+                end
+              end
+              object ibgrDetail: TgsIBGrid
+                Expands = <>
+                Conditions = <>
+                ColumnEditors = <>
+                Aliases = <>
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'U_USR$GOODKEY_NAME'
+                    ReadOnly = False
+                    Title.Caption = 'Наименование'
+                    Width = 144
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$NUMRECEIVE'
+                    ReadOnly = False
+                    Title.Caption = 'Номер партии'
+                    Width = 130
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$DATERECEIVE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата производства'
+                    Width = 130
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$PLACE'
+                    ReadOnly = False
+                    Title.Caption = 'Номер ячейки'
+                    Width = 130
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$QUANTITY'
+                    ReadOnly = False
+                    Title.Caption = 'Кол-во'
+                    Width = 130
+                    Visible = True
+                    TotalType = ttSum
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$WEIGHT'
+                    ReadOnly = False
+                    Title.Caption = 'Вес'
+                    Width = 130
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$SHCODE'
+                    ReadOnly = False
+                    Title.Caption = 'Код с терминала'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'ID'
+                    ReadOnly = False
+                    Title.Caption = 'Ключ'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'PARENT'
+                    ReadOnly = False
+                    Title.Caption = 'Родитель'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DOCUMENTTYPEKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Тип документа'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TRTYPEKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Тип транзакции'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TRANSACTIONKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Транзакция'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'NUMBER'
+                    ReadOnly = False
+                    Title.Caption = 'Номер'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DOCUMENTDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DESCRIPTION'
+                    ReadOnly = False
+                    Title.Caption = 'Описание'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'SUMNCU'
+                    ReadOnly = False
+                    Title.Caption = 'Сумма в НДЕ'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'SUMCURR'
+                    ReadOnly = False
+                    Title.Caption = 'Сумма в валюте'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'SUMEQ'
+                    ReadOnly = False
+                    Title.Caption = 'Сумма в эквиваленте'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DELAYED'
+                    ReadOnly = False
+                    Title.Caption = 'Отложенный'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CURRKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Валюта'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'COMPANYKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Компания'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CREATORKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Кто создал'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CREATIONDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата создания'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EDITORKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Кто исправил'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'EDITIONDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата изменения'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'PRINTDATE'
+                    ReadOnly = False
+                    Title.Caption = 'Дата печати'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DISABLED'
+                    ReadOnly = False
+                    Title.Caption = 'DISABLED'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'RESERVED'
+                    ReadOnly = False
+                    Title.Caption = 'Зарезервировано'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DOCUMENTKEY'
+                    Title.Caption = 'Идентификатор'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'MASTERKEY'
+                    Title.Caption = 'Родитель (Сверка (инвентаризация)(позиция))'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'RESERVED1'
+                    Title.Caption = 'Зарезервировано (Сверка (инвентаризация)(позиция))'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$GOODKEY'
+                    ReadOnly = False
+                    Title.Caption = 'Товар'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'USR$SORTNUMBER'
+                    ReadOnly = False
+                    Title.Caption = 'Номер для сортировки'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'U_USR$GOODKEY_ALIAS'
+                    ReadOnly = False
+                    Title.Caption = 'Шифр ТМЦ'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'U_USR$GOODKEY_BARCODE'
+                    ReadOnly = False
+                    Title.Caption = 'Штрих код'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Alignment = taRightJustify
+                    Expanded = False
+                    FieldName = 'AFULL'
+                    Title.Caption = 'Полный доступ'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Alignment = taRightJustify
+                    Expanded = False
+                    FieldName = 'ACHAG'
+                    Title.Caption = 'Просмотр и редактирование'
+                    Width = -1
+                    Visible = False
+                  end
+                  item
+                    Alignment = taRightJustify
+                    Expanded = False
+                    FieldName = 'AVIEW'
+                    Title.Caption = 'Только просмотр'
+                    Width = -1
+                    Visible = False
+                  end>
+              end
+            end
+          end
+          object alMain: TActionList
+            Left = 260
+            Top = 136
+            object actNew: TAction
+            end
+            object actEdit: TAction
+            end
+            object actDelete: TAction
+            end
+            object actDuplicate: TAction
+            end
+            object actHlp: TAction
+            end
+            object actPrint: TAction
+            end
+            object actCut: TAction
+            end
+            object actCopy: TAction
+            end
+            object actPaste: TAction
+            end
+            object actCommit: TAction
+            end
+            object actRollback: TAction
+            end
+            object actMacros: TAction
+            end
+            object actDetailNew: TAction
+            end
+            object actDetailEdit: TAction
+            end
+            object actDetailDelete: TAction
+            end
+            object actDetailDuplicate: TAction
+            end
+            object actDetailPrint: TAction
+            end
+            object actDetailCut: TAction
+            end
+            object actDetailCopy: TAction
+            end
+            object actDetailPaste: TAction
+            end
+            object actFind: TAction
+            end
+            object actMainReduction: TAction
+            end
+            object actDetailFind: TAction
+            end
+            object actDetailReduction: TAction
+            end
+            object actFilter: TAction
+            end
+            object actProperties: TAction
+            end
+            object actLoadFromFile: TAction
+            end
+            object actSaveToFile: TAction
+            end
+            object actSearchMain: TAction
+            end
+            object actSearchMainClose: TAction
+            end
+            object actDetailFilter: TAction
+            end
+            object actDetailProperties: TAction
+            end
+            object actOnlySelected: TAction
+            end
+            object actAddToSelected: TAction
+            end
+            object actRemoveFromSelected: TAction
+            end
+            object actQExport: TAction
+            end
+            object actMainToSetting: TAction
+            end
+            object actChooseOk: TAction
+            end
+            object actDeleteChoose: TAction
+            end
+            object actCopySettingsFromUser: TAction
+            end
+            object actSelectAll: TAction
+            end
+            object actSearchDetail: TAction
+            end
+            object actSearchdetailClose: TAction
+            end
+            object actDetailAddToSelected: TAction
+            end
+            object actDetailRemoveFromSelected: TAction
+            end
+            object actDetailOnlySelected: TAction
+            end
+            object actDetailQExport: TAction
+            end
+            object actDetailToSetting: TAction
+            end
+            object actDetailSaveToFile: TAction
+            end
+            object actDetailLoadFromFile: TAction
+            end
+            object actUnSelectAll: TAction
+            end
+            object actClearSelection: TAction
+            end
+            object actEditInGrid: TAction
+            end
+            object actLinkObject: TAction
+            end
+            object actDistributeSettings: TAction
+            end
+            object actDontSaveSettings: TAction
+            end
+            object actAddToSelectedFromClipboard: TAction
+            end
+            object actCopyMasterIDToClipboard: TAction
+            end
+            object actDetailEditInGrid: TAction
+            end
+            object actDetailLinkObject: TAction
+            end
+            object actCopyDetailIDToClipboard: TAction
+            end
+            object actCreateEntry: TAction
+            end
+            object actGotoEntry: TAction
+            end
+            object actMainGotoEntry: TAction
+            end
+            object usrg_actExportToInvent: TgsAction
+              Tag = 0
+              Category = ''
+              Caption = 'Экспортировать в документ Инвентаризация ГП'
+              Checked = False
+              Enabled = True
+              HelpContext = 0
+              Hint = ''
+              ImageIndex = -1
+              ShortCut = 0
+              Visible = True
+            end
+          end
+          object pmMain: TPopupMenu
+            Left = 292
+            Top = 164
+            object nNew_OLD: TMenuItem
+            end
+            object nEdit_OLD: TMenuItem
+            end
+            object nDel_OLD: TMenuItem
+            end
+            object nDublicate_OLD: TMenuItem
+            end
+            object nProperties_OLD: TMenuItem
+            end
+            object nQExport_OLD: TMenuItem
+            end
+            object nSeparator1_OLD: TMenuItem
+            end
+            object nCopyMasterIDToClipboard: TMenuItem
+            end
+            object actCopy1_OLD: TMenuItem
+            end
+            object actCut1_OLD: TMenuItem
+            end
+            object actPaste1_OLD: TMenuItem
+            end
+            object nSepartor2_OLD: TMenuItem
+            end
+            object nFind_OLD: TMenuItem
+            end
+            object nReduction_OLD: TMenuItem
+            end
+            object nSeparator3_OLD: TMenuItem
+            end
+            object actAddToSelected1: TMenuItem
+            end
+            object actAddToSelectedFromClipboard1: TMenuItem
+            end
+            object actRemoveFromSelected1: TMenuItem
+            end
+            object sprSetting: TMenuItem
+            end
+            object miMainToSetting: TMenuItem
+            end
+          end
+          object dsMain: TDataSource
+            Left = 260
+            Top = 164
+          end
+          object gdMacrosMenu: TgdMacrosMenu
+            Left = 249
+            Top = 95
+          end
+          object dsDetail: TDataSource
+            Left = 408
+            Top = 300
+          end
+          object pmDetail: TPopupMenu
+            Left = 464
+            Top = 304
+            object nDetailNew: TMenuItem
+            end
+            object nDetailEdit: TMenuItem
+            end
+            object nDetailDel: TMenuItem
+            end
+            object nDetailDup: TMenuItem
+            end
+            object nDetailProperties: TMenuItem
+            end
+            object nDetailQExport: TMenuItem
+            end
+            object nSepartor5: TMenuItem
+            end
+            object nCopyDetailIDToClipboard: TMenuItem
+            end
+            object nDetailFind: TMenuItem
+            end
+            object nDetailReduction: TMenuItem
+            end
+            object actDetailAddToSelected1: TMenuItem
+            end
+            object actDetailRemoveFromSelected1: TMenuItem
+            end
+            object sprDetailSetting: TMenuItem
+            end
+            object miDetailSetting: TMenuItem
+            end
+          end
+          object dsChoose: TDataSource
+            Left = 153
+            Top = 306
+          end
+          object pmFind: TPopupMenu
+            Left = 17
+            Top = 78
+            object miRemoveFromSearch: TMenuItem
+            end
+          end
+          object gdcUserDocumentLine: TgdcUserDocumentLine
+            Left = 409
+            Top = 332
+          end
+          object gdcUserDocument: TgdcUserDocument
+            Left = 177
+            Top = 145
+          end
+        end
+        
