@@ -5,10 +5,10 @@ Properties:
   RUID: 147016562_2053437193
   Name: "asx.возврат от покупателя"
   Caption: "asx.возврат от покупателя"
-  Version: "1.0.0.7"
+  Version: "1.0.0.8"
   Optional: False
   Internal: True
-  MD5: B8804C39B93D471FDE5E0CCB4EAA0395
+  MD5: B50063EE9ED0296A1DB0785897861009
 Uses: 
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
   - "147753353_73094925 GS.Общие.Метаданные.Таблицы"
@@ -2557,3 +2557,367 @@ Objects:
       OBJECTNAME: "TgdcInvDocumentLine147016485_2053437193"
       PARENTNAME: "TgdcInvDocumentLine"
       EDITIONDATE: 2023-05-18T16:03:48+03:00
+  - 
+    Properties: 
+      Class: "TgdcExplorer"
+      RUID: 147065967_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065958_2053483706
+    Fields: 
+      PARENT: "147016236_2053437193 Исследователь\\Склад адресного хранения"
+      NAME: "Справочники"
+      CLASSNAME: ~
+      CMD: "147065967_2053483706"
+      CMDTYPE: 0
+      HOTKEY: ~
+      IMGINDEX: 0
+      ORDR: ~
+      SUBTYPE: ~
+      EDITIONDATE: 2023-05-17T19:11:47+03:00
+      DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcExplorer"
+      RUID: 1601086415_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065958_2053483706
+    Fields: 
+      PARENT: "147065967_2053483706 Исследователь\\Склад адресного хранения\\Справочники"
+      NAME: "Дополнительные сведения"
+      CLASSNAME: "TgdcAttrUserDefined"
+      CMD: "1601086413_1320926323"
+      CMDTYPE: 0
+      HOTKEY: ~
+      IMGINDEX: 0
+      ORDR: ~
+      SUBTYPE: "USR$EVAT_DESCRIPTION"
+      EDITIONDATE: 2023-05-17T19:12:43+03:00
+      DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcSimpleTable"
+      RUID: 1601086413_1320926323
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065958_2053483706
+    Fields: 
+      BRANCHKEY: "1601086415_2075031366 Исследователь\\Склад адресного хранения\\Справочники\\Дополнительные сведения"
+      DESCRIPTION: "Дополнительные сведения"
+      EXTENDEDFIELDS: ~
+      GENERATORNAME: ~
+      LISTFIELD: ~
+      LNAME: "Дополнительные сведения"
+      LSHORTNAME: "Дополнительные сведения"
+      REFERENCEKEY: ~
+      RELATIONNAME: "USR$EVAT_DESCRIPTION"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      EDITIONDATE: 2020-06-08T15:34:38+03:00
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 1601086414_1320926323
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065958_2053483706
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Наименование"
+      FIELDNAME: "USR$NAME"
+      FIELDSOURCE: "DTEXT180"
+      FIELDSOURCEKEY: "147000116_31587988 Текст (180), DTEXT180"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Наименование"
+      LSHORTNAME: "Наименование"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "1601086413_1320926323 Дополнительные сведения, USR$EVAT_DESCRIPTION"
+      RELATIONNAME: "USR$EVAT_DESCRIPTION"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 180
+      VISIBLE: 1
+      EDITIONDATE: 2020-06-08T15:33:54+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcField"
+      RUID: 147065959_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065958_2053483706
+    Fields: 
+      ALIGNMENT: "L"
+      CHARSET: ~
+      COLLATION: ~
+      COLWIDTH: 20
+      DESCRIPTION: "USR$EVAT_D_DESCRIPTION"
+      FCHARLENGTH: ~
+      FFIELDTYPE: 8
+      FIELDNAME: "USR$EVAT_D_DESCRIPTION"
+      FLAG: ~
+      FLENGTH: 4
+      FORMAT: ~
+      FPRECISION: 0
+      FSCALE: 0
+      FSUBTYPE: 0
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Дополнительные сведения"
+      READONLY: 0
+      REFCONDITION: ~
+      REFLISTFIELD: "USR$NAME"
+      REFLISTLNAME: "Наименование"
+      REFLNAME: "Дополнительные сведения"
+      REFTABLE: "USR$EVAT_DESCRIPTION"
+      SEGLENGTH: ~
+      SETCONDITION: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SETLISTLNAME: ~
+      SETTABLE: ~
+      SETTABLEKEY: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T18:56:14+03:00
+      DISABLED: 0
+      CHECKSOURCE: ~
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      NUMERATION: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147065958_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: "RESTRICT"
+      DESCRIPTION: "Дополнительные сведения (для ЭСЧФ)"
+      FIELDNAME: "USR$DESCRIPTIONKEY"
+      FIELDSOURCE: "USR$EVAT_D_DESCRIPTION"
+      FIELDSOURCEKEY: "147065959_2053483706 Дополнительные сведения, USR$EVAT_D_DESCRIPTION"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Дополнительные сведения (для ЭСЧФ)"
+      LSHORTNAME: "Доп. свед.(для ЭСЧФ)"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: "USR$NAME"
+      REFRELATIONNAME: "USR$EVAT_DESCRIPTION"
+      RELATIONKEY: "147016486_2053437193 Возврат от покупателя, USR$ASX_RETCUST"
+      RELATIONNAME: "USR$ASX_RETCUST"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T18:54:59+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcExplorer"
+      RUID: 2004451600_2075031366
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065960_2053483706
+    Fields: 
+      PARENT: "147065967_2053483706 Исследователь\\Склад адресного хранения\\Справочники"
+      NAME: "Причины возвратов"
+      CLASSNAME: "TgdcAttrUserDefined"
+      CMD: ~
+      CMDTYPE: 0
+      HOTKEY: ~
+      IMGINDEX: 0
+      ORDR: ~
+      SUBTYPE: "USR$VBPF_REASON_RETURN"
+      EDITIONDATE: 2023-05-17T19:12:16+03:00
+      DISABLED: 0
+  - 
+    Properties: 
+      Class: "TgdcSimpleTable"
+      RUID: 2004450920_638679305
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065960_2053483706
+    Fields: 
+      BRANCHKEY: "2004451600_2075031366 Исследователь\\Склад адресного хранения\\Справочники\\Причины возвратов"
+      DESCRIPTION: "Причины возвратов"
+      EXTENDEDFIELDS: ~
+      GENERATORNAME: ~
+      LISTFIELD: ~
+      LNAME: "Причины возвратов"
+      LSHORTNAME: "Причины возвратов"
+      REFERENCEKEY: ~
+      RELATIONNAME: "USR$VBPF_REASON_RETURN"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      EDITIONDATE: 2017-12-10T21:01:40+03:00
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 2004453414_638679305
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065960_2053483706
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Наименование"
+      FIELDNAME: "USR$NAME"
+      FIELDSOURCE: "DTEXT120"
+      FIELDSOURCEKEY: "147000114_486813904 DTEXT120"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Наименование"
+      LSHORTNAME: "Наименование"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "2004450920_638679305 Причины возвратов, USR$VBPF_REASON_RETURN"
+      RELATIONNAME: "USR$VBPF_REASON_RETURN"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 120
+      VISIBLE: 1
+      EDITIONDATE: 2017-12-10T21:06:34+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcField"
+      RUID: 147065962_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147065960_2053483706
+    Fields: 
+      ALIGNMENT: "L"
+      CHARSET: ~
+      COLLATION: ~
+      COLWIDTH: 20
+      DESCRIPTION: "Причина возврата"
+      FCHARLENGTH: ~
+      FFIELDTYPE: 8
+      FIELDNAME: "USR$DVBPF_REASON_RETURN"
+      FLAG: ~
+      FLENGTH: 4
+      FORMAT: ~
+      FPRECISION: 0
+      FSCALE: 0
+      FSUBTYPE: 0
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Причина возврата"
+      READONLY: 0
+      REFCONDITION: ~
+      REFLISTFIELD: "USR$NAME"
+      REFLISTLNAME: "Наименование"
+      REFLNAME: "Причины возвратов"
+      REFTABLE: "USR$VBPF_REASON_RETURN"
+      SEGLENGTH: ~
+      SETCONDITION: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SETLISTLNAME: ~
+      SETTABLE: ~
+      SETTABLEKEY: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T18:59:44+03:00
+      DISABLED: 0
+      CHECKSOURCE: ~
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      NUMERATION: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147065960_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: "RESTRICT"
+      DESCRIPTION: "Причина возврата"
+      FIELDNAME: "USR$VBPF_REASON_RETURN"
+      FIELDSOURCE: "USR$DVBPF_REASON_RETURN"
+      FIELDSOURCEKEY: "147065962_2053483706 Причина возврата, USR$DVBPF_REASON_RETURN"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Причина возврата"
+      LSHORTNAME: "Причина возврата"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: "USR$NAME"
+      REFRELATIONNAME: "USR$VBPF_REASON_RETURN"
+      RELATIONKEY: "147016486_2053437193 Возврат от покупателя, USR$ASX_RETCUST"
+      RELATIONNAME: "USR$ASX_RETCUST"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T18:58:07+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~

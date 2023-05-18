@@ -5,10 +5,10 @@ Properties:
   RUID: 147030622_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
-  Version: "1.0.0.17"
+  Version: "1.0.0.18"
   Optional: False
   Internal: True
-  MD5: 863E8125E410F55AE3E4371324701D04
+  MD5: 9FA50B6B236B3C9A366F8F5C622174E1
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "147024092_1677413867 GS.Web.Web-services.Конфигурация.Данные"
@@ -769,3 +769,15 @@ Objects:
       USR$VALUE: "MC.ID IN (147023737)   "
       Z_USR$MASTERKEY_USR$NAME: "Склад адресного хранения"
       EDITIONDATE: 2023-05-12T16:38:26+03:00
+  - 
+    Properties: 
+      Class: "TgdcAttrUserDefined"
+      SubType: "USR$INV_DEPOTTYPE"
+      RUID: 147066030_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      USR$NAME: "Склад общий"
+      EDITIONDATE: 2023-05-17T19:03:05+03:00
+      DISABLED: 0
