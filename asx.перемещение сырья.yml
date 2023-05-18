@@ -5,10 +5,10 @@ Properties:
   RUID: 147016602_2053437193
   Name: "asx.перемещение сырья"
   Caption: "asx.перемещение сырья"
-  Version: "1.0.0.9"
+  Version: "1.0.0.10"
   Optional: False
   Internal: True
-  MD5: 8B32151B9912DC5628028402E0B078F0
+  MD5: 074788C8A5885FDF94F0FF850227CF03
 Uses: 
   - "147016562_2053437193 asx.возврат от покупателя"
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
@@ -56,7 +56,6 @@ Objects:
       AlwaysOverwrite: False
       DontRemove: False
       IncludeSiblings: False
-      HeadObject: 147016233_2053437193
     Fields: 
       BRANCHKEY: ~
       DESCRIPTION: "USR$ASX_MOVE"
@@ -70,6 +69,137 @@ Objects:
       RELATIONTYPE: "T"
       SEMCATEGORY: ~
       EDITIONDATE: 2023-02-26T14:12:37+03:00
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066037_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016237_2053437193
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Номер партии"
+      FIELDNAME: "USR$VBPF_NUMRECEIVE"
+      FIELDSOURCE: "USR$DTEXT20"
+      FIELDSOURCEKEY: "147038909_250635531 DTEXT20, USR$DTEXT20"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Номер партии"
+      LSHORTNAME: "Номер партии"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016237_2053437193 Перемещение продукции и сырья, USR$ASX_MOVE"
+      RELATIONNAME: "USR$ASX_MOVE"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 20
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T19:57:06+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066034_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016237_2053437193
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Документ создан из Innova"
+      FIELDNAME: "USR$VBPF_LOADING_INNOVA"
+      FIELDSOURCE: "DBOOLEAN"
+      FIELDSOURCEKEY: "147000135_486813904 Логическое, DBOOLEAN"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Документ создан из Innova"
+      LSHORTNAME: "Документ создан из I"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016237_2053437193 Перемещение продукции и сырья, USR$ASX_MOVE"
+      RELATIONNAME: "USR$ASX_MOVE"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T19:55:15+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: | 
+        DEFAULT 0
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066033_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016237_2053437193
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "USR$VBPF_CLOSED_INNOVA"
+      FIELDNAME: "USR$VBPF_CLOSED_INNOVA"
+      FIELDSOURCE: "DBOOLEAN"
+      FIELDSOURCEKEY: "147000135_486813904 Логическое, DBOOLEAN"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Закрыто для загрузки из Innova"
+      LSHORTNAME: "Закрыто для загрузки"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016237_2053437193 Перемещение продукции и сырья, USR$ASX_MOVE"
+      RELATIONNAME: "USR$ASX_MOVE"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T19:54:34+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: | 
+        DEFAULT 0
+      OBJECTS: ~
   - 
     Properties: 
       Class: "TgdcTableField"
@@ -163,7 +293,6 @@ Objects:
       AlwaysOverwrite: False
       DontRemove: False
       IncludeSiblings: False
-      HeadObject: 147016233_2053437193
     Fields: 
       BRANCHKEY: ~
       DESCRIPTION: "USR$ASX_MOVELINE"
@@ -177,6 +306,92 @@ Objects:
       RELATIONTYPE: "T"
       SEMCATEGORY: ~
       EDITIONDATE: 2023-02-26T14:12:42+03:00
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066046_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016242_2053437193
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Кол-во коробок"
+      FIELDNAME: "USR$QBOX"
+      FIELDSOURCE: "DQUANTITY"
+      FIELDSOURCEKEY: "147000132_486813904 Кол-во, DQUANTITY"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Кол-во коробок"
+      LSHORTNAME: "Кол-во коробок"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016242_2053437193 Перемещение продукции и сырья(позиция), USR$ASX_MOVELINE"
+      RELATIONNAME: "USR$ASX_MOVELINE"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T20:21:11+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066045_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016242_2053437193
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Оригинальное кол-во"
+      FIELDNAME: "USR$VBPF_ORIGINALQUANT"
+      FIELDSOURCE: "DQUANTITY"
+      FIELDSOURCEKEY: "147000132_486813904 Кол-во, DQUANTITY"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Оригинальное кол-во"
+      LSHORTNAME: "Оригинальное кол-во"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016242_2053437193 Перемещение продукции и сырья(позиция), USR$ASX_MOVELINE"
+      RELATIONNAME: "USR$ASX_MOVELINE"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-17T20:20:08+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
   - 
     Properties: 
       Class: "TgdcInvDocumentType"

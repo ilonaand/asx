@@ -5,10 +5,10 @@ Properties:
   RUID: 147030622_2053483706
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Данные"
-  Version: "1.0.0.16"
+  Version: "1.0.0.17"
   Optional: False
   Internal: True
-  MD5: B350EE6F375933B23BE7E16560618966
+  MD5: 863E8125E410F55AE3E4371324701D04
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "147024092_1677413867 GS.Web.Web-services.Конфигурация.Данные"
@@ -31,7 +31,7 @@ Objects:
     Fields: 
       USR$COUNTDAYS: 0
       USR$DOCUMENTTYPE: "147016485_2053437193 Складские документы\\ASX.Склад\\Возврат от покупателя"
-      USR$FUNCTIONKEY: ~
+      USR$FUNCTIONKEY: "147066563_2053483706 web_CreateReturnAsx"
       USR$MOBILEALIAS: "return"
       USR$SENDFUNCTION: ~
       USR$SYSTEMKEY: "1368993410_1691301355 Отгрузка"
@@ -39,10 +39,10 @@ Objects:
       USR$VERSION: 1
       USR$WITHRESPONSE: 1
       Z_USR$DOCUMENTTYPE_NAME: "Возврат от покупателя"
-      Z_USR$FUNCTIONKEY_NAME: ~
+      Z_USR$FUNCTIONKEY_NAME: "web_CreateReturnAsx"
       Z_USR$SENDFUNCTION_NAME: ~
       Z_USR$SYSTEMKEY_USR$NAME: "Отгрузка"
-      EDITIONDATE: 2023-03-07T14:05:25+03:00
+      EDITIONDATE: 2023-05-18T19:00:35+03:00
   - 
     Properties: 
       Class: "TgdcAttrUserDefined"

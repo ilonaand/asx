@@ -5,10 +5,10 @@ Properties:
   RUID: 147016562_2053437193
   Name: "asx.возврат от покупателя"
   Caption: "asx.возврат от покупателя"
-  Version: "1.0.0.5"
+  Version: "1.0.0.7"
   Optional: False
   Internal: True
-  MD5: ECF86E8EACF19415CB8ED40EB7F9369D
+  MD5: B8804C39B93D471FDE5E0CCB4EAA0395
 Uses: 
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
   - "147753353_73094925 GS.Общие.Метаданные.Таблицы"
@@ -149,15 +149,15 @@ Objects:
       CROSSTABLE: ~
       CROSSTABLEKEY: ~
       DELETERULE: "RESTRICT"
-      DESCRIPTION: "По наклданой"
+      DESCRIPTION: "По накладной"
       FIELDNAME: "USR$MAINBILLKEY"
       FIELDSOURCE: "USR$GS_DDOCUMENT"
       FIELDSOURCEKEY: "147035010_9802323 Документ, USR$GS_DDOCUMENT"
       FORMAT: ~
       GDCLASSNAME: "TgdcDocument"
       GDSUBTYPE: ~
-      LNAME: "По наклданой"
-      LSHORTNAME: "По наклданой"
+      LNAME: "По накладной"
+      LSHORTNAME: "По накладной"
       NULLFLAG: ~
       READONLY: 0
       REFCROSSRELATION: ~
@@ -172,7 +172,7 @@ Objects:
       SOURCENULLFLAG: ~
       STRINGLENGTH: ~
       VISIBLE: 1
-      EDITIONDATE: 2023-02-26T15:42:52+03:00
+      EDITIONDATE: 2023-05-17T18:37:12+03:00
       COMPUTED_VALUE: ~
       DEFSOURCE: ~
       OBJECTS: ~
@@ -413,7 +413,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-02-26T15:55:31+03:00
+      EDITIONDATE: 2023-05-18T16:12:49+03:00
       BLOB_DATA: !!binary > 
         VFBGMAYNR1JJRF9TVFJFQU1fNAEGBlRhaG9tYQYMY2xXaW5kb3dUZXh0AvUAAggAAgEABghjbFdp
         bmRvdwEGBlRhaG9tYQYPY2xIaWdobGlnaHRUZXh0AvUAAggAAgEABgtjbEhpZ2hsaWdodAEGBlRh
@@ -533,7 +533,11 @@ Objects:
         c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQUNIQUcIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24G
         Gc/w7vHs7vLwIOgg8OXk4Ory6PDu4uDt6OUFV2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcO
         dGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQVZJRVcIUmVhZE9ubHkIDVRpdGxl
-        LkNhcHRpb24GD9Lu6/zq7iDv8O7x7O7y8AVXaWR0aAL/B1Zpc2libGUIAAAICLQeCQg=
+        LkNhcHRpb24GD9Lu6/zq7iDv8O7x7O7y8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
+        ZWxkTmFtZQYWVE9fVVNSJEFTWF9QT0RET05fQ09ERQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYL
+        yu7kIO/u5OTu7eAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGClVTUiRT
+        SENPREUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GEsru5CDk6/8g8uXw7Ojt4Ovu4gVXaWR0aAL/
+        B1Zpc2libGUIAAAICLQeCQg=
   - 
     Properties: 
       Class: "TgdcStorageValue"
@@ -550,7 +554,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-02-26T15:55:29+03:00
+      EDITIONDATE: 2023-05-17T19:10:43+03:00
       BLOB_DATA: | 
         object dlgInvDocument147016485_2053437193: TdlgInvDocument
           ActiveControl = nil
@@ -559,13 +563,13 @@ Objects:
           object Bevel1: TBevel
             Left = 0
             Top = 0
-            Width = 1920
+            Width = 1536
             Align = alTop
             Anchors = [akLeft, akTop, akRight]
           end
           object pnlMain: TPanel
             Top = 2
-            Height = 984
+            Height = 758
             Align = alClient
             TabOrder = 0
             object sptMain: TSplitter
@@ -576,7 +580,7 @@ Objects:
                   Tag = 0
                   Left = 0
                   Top = 0
-                  Width = 1916
+                  Width = 1532
                   Height = 233
                   Cursor = crDefault
                   Hint = ''
@@ -633,7 +637,7 @@ Objects:
                       Top = 7
                     end
                     object usrat_xDateDBEdit_DOCUMENTDATE_Label: TLabel
-                      Left = 213
+                      Left = 134
                       Top = 7
                     end
                     object usrat_gsIBLookupComboBox_USR_CUSTOMERKEY_Label: TLabel
@@ -647,20 +651,26 @@ Objects:
                       Left = 329
                       Top = 7
                     end
+                    object usrat_gsIBLookupComboBox_USR_DESCRIPTIONKEY_Label: TLabel
+                      Top = 103
+                    end
+                    object usrat_gsIBLookupComboBox_USR_VBPF_REASON_RETURN_Label: TLabel
+                      Top = 126
+                    end
                     object usrat_DBEdit_NUMBER: TDBEdit
-                      Top = 3
+                      Left = 53
+                      Top = 4
                       Width = 70
                       TabOrder = 0
                     end
                     object usrat_xDateDBEdit_DOCUMENTDATE: TxDateDBEdit
-                      Left = 251
+                      Left = 172
                       Top = 3
                       TabOrder = 1
                     end
                     object usrat_gsIBLookupComboBox_USR_CUSTOMERKEY: TgsIBLookupComboBox
                       Width = 418
                       Condition = 'contacttype in (3, 5)'
-                      gdClassName = 'TgdcCustomer'
                       TabOrder = 2
                     end
                     object usrat_gsIBLookupComboBox_USR_SHOPKEY: TgsIBLookupComboBox
@@ -668,7 +678,7 @@ Objects:
                       ListTable = 
                         'GD_CONTACT dep JOIN gd_contact comp ON dep.LB >= comp.LB and dep' +
                         '.RB <= comp.Rb'
-                      Condition = 'dep.contacttype = 4 and comp.id = -1'
+                      Condition = 'dep.contacttype = 4 and comp.id = 0'
                       gdClassName = 'TgdcDepartment'
                       TabOrder = 3
                     end
@@ -685,8 +695,27 @@ Objects:
                       TabOrder = 5
                     end
                     object usrat_DBCheckBox_DELAYED: TDBCheckBox
-                      Left = 4
-                      Top = 109
+                      Left = 188
+                      Top = 162
+                    end
+                    object usrat_DBCheckBox_USR_READY: TDBCheckBox
+                      Top = 161
+                      TabOrder = 7
+                    end
+                    object usrat_DBCheckBox_USR_SENDED: TDBCheckBox
+                      Left = 77
+                      Top = 161
+                      TabOrder = 8
+                    end
+                    object usrat_gsIBLookupComboBox_USR_DESCRIPTIONKEY: TgsIBLookupComboBox
+                      Top = 99
+                      Width = 418
+                      TabOrder = 9
+                    end
+                    object usrat_gsIBLookupComboBox_USR_VBPF_REASON_RETURN: TgsIBLookupComboBox
+                      Top = 122
+                      Width = 418
+                      TabOrder = 10
                     end
                   end
                   object usrg_147016485_2053437193_TabSheet2: TTabSheet
@@ -709,7 +738,7 @@ Objects:
                     PopupMenu = nil
                     TabVisible = True
                     object atAttributes: TatContainer
-                      Width = 1908
+                      Width = 1524
                       Height = 205
                       object usrat_DBEdit_USR_SORTNUMBER_Label: TLabel
                         Visible = False
@@ -725,11 +754,11 @@ Objects:
               end
             end
             object pnlCommon: TPanel
-              Height = 741
+              Height = 515
               object pnlGrids: TPanel
-                Height = 715
+                Height = 489
                 object ibgrdTop: TgsIBGrid
-                  Height = 715
+                  Height = 489
                   Expands = <>
                   Conditions = <>
                   ColumnEditors = <
@@ -765,13 +794,6 @@ Objects:
                       EditorStyle = cesLookup
                       FieldName = 'GOODKEY'
                       DisplayField = 'GOODALIAS'
-                      DropDownCount = 8
-                    end
-                    item
-                      Lookup.Distinct = False
-                      EditorStyle = cesCalculator
-                      FieldName = 'TO_USR$ASX_NUMBER_PLACE'
-                      DisplayField = 'TO_USR$ASX_NUMBER_PLACE'
                       DropDownCount = 8
                     end
                     item
@@ -883,6 +905,7 @@ Objects:
                     item
                       Expanded = False
                       FieldName = 'FROM_USR$ASX_NUMBER_PART'
+                      ReadOnly = True
                       Title.Alignment = taCenter
                       Title.Caption = 'Номер партии'
                       Width = -1
@@ -1245,17 +1268,31 @@ Objects:
                       Title.Caption = 'Только просмотр'
                       Width = -1
                       Visible = False
+                    end
+                    item
+                      Expanded = False
+                      FieldName = 'USR$SHCODE'
+                      Title.Caption = 'Код для терминалов'
+                      Width = -1
+                      Visible = False
+                    end
+                    item
+                      Expanded = False
+                      FieldName = 'TO_USR$ASX_PODDON_CODE'
+                      Title.Caption = 'Код поддона'
+                      Width = -1
+                      Visible = False
                     end>
                 end
               end
               object TBDockLeft: TTBDock
-                Height = 715
+                Height = 489
               end
               object TBDockRight: TTBDock
-                Height = 715
+                Height = 489
               end
               object TBDockBottom: TTBDock
-                Top = 741
+                Top = 515
               end
               object TBDockTop: TTBDock
                 object tbDetailToolbar: TTBToolbar
@@ -1295,7 +1332,7 @@ Objects:
             end
           end
           object pnlHolding: TPanel
-            Width = 1920
+            Width = 1536
             TabOrder = 1
             object lblCompany: TLabel
             end
@@ -1305,8 +1342,8 @@ Objects:
           object usrg_147016485_2053437193_Panel1: TPanel
             Tag = 0
             Left = 0
-            Top = 986
-            Width = 1920
+            Top = 760
+            Width = 1536
             Height = 41
             Cursor = crDefault
             Hint = ''
@@ -1345,7 +1382,7 @@ Objects:
             Visible = True
             object usrg_147016485_2053437193_Panel2: TPanel
               Tag = 0
-              Left = 1734
+              Left = 1350
               Top = 1
               Width = 185
               Height = 39
@@ -1452,8 +1489,8 @@ Objects:
             Top = 65525
           end
           object pm_dlgG: TPopupMenu
-            Left = 152
-            Top = 216
+            Left = 736
+            Top = 48
             object actSecurity1: TMenuItem
             end
             object nCopyIDToClipboard: TMenuItem
@@ -1526,8 +1563,8 @@ Objects:
             end
           end
           object pmDetailMenu: TPopupMenu
-            Left = 184
-            Top = 208
+            Left = 704
+            Top = 40
             object N8: TMenuItem
             end
             object N6: TMenuItem
@@ -1538,12 +1575,12 @@ Objects:
             end
           end
           object gdMacrosMenu: TgdMacrosMenu
-            Left = 249
+            Left = 889
             Top = 111
           end
           object pmDetail2: TPopupMenu
-            Left = 264
-            Top = 224
+            Left = 800
+            Top = 40
             object MenuItem1: TMenuItem
             end
             object N3: TMenuItem
@@ -1682,7 +1719,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-02-26T15:55:13+03:00
+      EDITIONDATE: 2023-05-18T15:34:40+03:00
       DISPLAYSCRIPT: | 
         DLGINVDOCUMENT147016485_2053437193ONSETUPRECORD
         
@@ -1694,6 +1731,12 @@ Objects:
         Sub dlgInvDocument147016485_2053437193OnSetupRecord(ByVal Sender)
         '*** Данный код необходим для вызова встроенного обработчика ***
         '*** В случае его удаления возможно нарушение работы системы ***
+          if Sender.OwnerForm.gdcObject.FieldByName("usr$sended").AsInteger = 1 then
+            call Application.MessageBox("Нельзя изменять отправленную накладную !!! Накладная будет открыта в режиме просмотра", "Внимание", vbOkOnly + vbSystemModal)
+            Sender.LockDocument
+            Sender.GetComponent("pnlGrids").Enabled = False
+          end if
+        
           Call   Inherited(Sender, "OnSetupRecord", Array(Sender))
         '*** конец кода поддержки встроенного обработчика            ***
           Sender.GetComponent("usrat_gsIBLookupComboBox_USR_SHOPKEY").Condition = "dep.contacttype = 4 and comp.id = " & Sender.gdcObject.FieldByName("usr$customerkey").AsInteger
@@ -1714,7 +1757,7 @@ Objects:
       OBJECTKEY: "147016542_2053437193 dlgInvDocument147016485_2053437193"
       OBJECTNAME: "dlgInvDocument147016485_2053437193"
       PARENTNAME: ~
-      EDITIONDATE: 2023-02-26T15:55:13+03:00
+      EDITIONDATE: 2023-05-18T15:34:40+03:00
   - 
     Properties: 
       Class: "TgdcFunction"
@@ -2237,3 +2280,280 @@ Objects:
       COMPUTED_VALUE: ~
       DEFSOURCE: ~
       OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcDelphiObject"
+      RUID: 147066519_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147066520_2053483706
+    Fields: 
+      PARENT: "147094267_486813904 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocument"
+      NAME: "TgdcInvDocument147016485_2053437193"
+      CLASSNAME: "TgdcInvDocument"
+      DESCRIPTION: ~
+      MACROSGROUPKEY: ~
+      OBJECTNAME: ""
+      OBJECTTYPE: 1
+      REPORTGROUPKEY: ~
+      SUBTYPE: "147016485_2053437193"
+      EDITIONDATE: 2023-05-18T15:34:57+03:00
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066522_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147066520_2053483706
+    Fields: 
+      NAME: "TgdcInvDocument147016485_2053437193DoBeforeEdit"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "METHOD"
+      MODULECODE: "147066519_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocument\\TgdcInvDocument147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocument147016485_2053437193"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-18T15:38:18+03:00
+      DISPLAYSCRIPT: | 
+        TGDCINVDOCUMENT147016485_2053437193DOBEFOREEDIT
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QEAAAAU0VMRgQAAABTRUxGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RGTFBS
+      SCRIPT: | 
+        Option Explicit
+        Sub TgdcInvDocument147016485_2053437193DoBeforeEdit(Self)
+        '*** Данный код необходим для вызова кода определенного в gdc-классе.***
+        '*** При его удаления  возможно нарушение  правильной работы системы.***
+          Call Inherited(Self, "DoBeforeEdit", Array(Self))
+        '***               Конец кода поддержки gdc-класса.                  ***
+          if Self.FieldByName("usr$sended").AsInteger = 1 and not IBLogin.IsIBUserAdmin then
+            call Application.MessageBox("Накладная была отправлена. Изменение невозможно!", "Внимание", vbOkOnly + vbSystemModal)
+            Exception.Raise "EAbort", ""
+          end if
+        
+          Self.Refresh
+        End Sub
+        
+  - 
+    Properties: 
+      Class: "TgdcEvent"
+      RUID: 147066520_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      DISABLE: 0
+      EVENTNAME: "DOBEFOREEDIT"
+      FUNCTIONKEY: "147066522_2053483706 TgdcInvDocument147016485_2053437193DoBeforeEdit"
+      OBJECTKEY: "147066519_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocument\\TgdcInvDocument147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocument147016485_2053437193"
+      PARENTNAME: "TgdcInvDocument"
+      EDITIONDATE: 2023-05-18T15:38:18+03:00
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066525_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147066523_2053483706
+    Fields: 
+      NAME: "TgdcInvDocument147016485_2053437193DoBeforeDelete"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "METHOD"
+      MODULECODE: "147066519_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocument\\TgdcInvDocument147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocument147016485_2053437193"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-18T16:01:58+03:00
+      DISPLAYSCRIPT: | 
+        TGDCINVDOCUMENT147016485_2053437193DOBEFOREDELETE
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QEAAAAU0VMRgQAAABTRUxGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RGTFBS
+      SCRIPT: | 
+        Option Explicit
+        Sub TgdcInvDocument147016485_2053437193DoBeforeDelete(Self)
+        '*** Данный код необходим для вызова кода определенного в gdc-классе.***
+        '*** При его удаления  возможно нарушение  правильной работы системы.***
+          Call Inherited(Self, "DoBeforeDelete", Array(Self))
+        '***               Конец кода поддержки gdc-класса.                  ***
+          if Self.FieldByName("usr$sended").AsInteger = 1 and not IBLogin.IsIBUserAdmin then
+            call Application.MessageBox("Накладная была отправлена. Удаление невозможно!", "Внимание", vbOkOnly + vbSystemModal)
+            Exception.Raise "EAbort", ""
+          end if
+        
+        End Sub
+        
+  - 
+    Properties: 
+      Class: "TgdcEvent"
+      RUID: 147066523_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      DISABLE: 0
+      EVENTNAME: "DOBEFOREDELETE"
+      FUNCTIONKEY: "147066525_2053483706 TgdcInvDocument147016485_2053437193DoBeforeDelete"
+      OBJECTKEY: "147066519_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocument\\TgdcInvDocument147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocument147016485_2053437193"
+      PARENTNAME: "TgdcInvDocument"
+      EDITIONDATE: 2023-05-18T16:01:58+03:00
+  - 
+    Properties: 
+      Class: "TgdcDelphiObject"
+      RUID: 147066532_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147066533_2053483706
+    Fields: 
+      PARENT: "147093919_486813904 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine"
+      NAME: "TgdcInvDocumentLine147016485_2053437193"
+      CLASSNAME: "TgdcInvDocumentLine"
+      DESCRIPTION: ~
+      MACROSGROUPKEY: ~
+      OBJECTNAME: ""
+      OBJECTTYPE: 1
+      REPORTGROUPKEY: ~
+      SUBTYPE: "147016485_2053437193"
+      EDITIONDATE: 2023-05-18T16:01:07+03:00
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066535_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147066533_2053483706
+    Fields: 
+      NAME: "TgdcInvDocumentLine147016485_2053437193DoBeforeEdit"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "METHOD"
+      MODULECODE: "147066532_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine\\TgdcInvDocumentLine147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocumentLine147016485_2053437193"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-18T16:12:30+03:00
+      DISPLAYSCRIPT: | 
+        TGDCINVDOCUMENTLINE147016485_2053437193DOBEFOREEDIT
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QEAAAAU0VMRgQAAABTRUxGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RGTFBS
+      SCRIPT: | 
+        Option Explicit
+        Sub TgdcInvDocumentLine147016485_2053437193DoBeforeEdit(Self)
+        '*** Данный код необходим для вызова кода определенного в gdc-классе.***
+        '*** При его удаления  возможно нарушение  правильной работы системы.***
+          Call Inherited(Self, "DoBeforeEdit", Array(Self))
+        '***               Конец кода поддержки gdc-класса.                  ***
+          if Self.MasterSource.DataSet.FieldByName("usr$sended").AsInteger = 1 and not IBLogin.IsIBUserAdmin then
+            call Application.MessageBox("Накладная была отправлена. Изменение невозможно!", "Внимание", vbOkOnly + vbSystemModal)
+            Exception.Raise "EAbort", ""
+          end if
+        End Sub
+        
+  - 
+    Properties: 
+      Class: "TgdcEvent"
+      RUID: 147066533_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      DISABLE: 0
+      EVENTNAME: "DOBEFOREEDIT"
+      FUNCTIONKEY: "147066535_2053483706 TgdcInvDocumentLine147016485_2053437193DoBeforeEdit"
+      OBJECTKEY: "147066532_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine\\TgdcInvDocumentLine147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocumentLine147016485_2053437193"
+      PARENTNAME: "TgdcInvDocumentLine"
+      EDITIONDATE: 2023-05-18T16:12:30+03:00
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066538_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147066536_2053483706
+    Fields: 
+      NAME: "TgdcInvDocumentLine147016485_2053437193DoBeforeDelete"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "METHOD"
+      MODULECODE: "147066532_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine\\TgdcInvDocumentLine147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocumentLine147016485_2053437193"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-18T16:03:48+03:00
+      DISPLAYSCRIPT: | 
+        TGDCINVDOCUMENTLINE147016485_2053437193DOBEFOREDELETE
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QEAAAAU0VMRgQAAABTRUxGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RGTFBS
+      SCRIPT: | 
+        Option Explicit
+        Sub TgdcInvDocumentLine147016485_2053437193DoBeforeDelete(Self)
+        '*** Данный код необходим для вызова кода определенного в gdc-классе.***
+        '*** При его удаления  возможно нарушение  правильной работы системы.***
+          Call Inherited(Self, "DoBeforeDelete", Array(Self))
+        '***               Конец кода поддержки gdc-класса.                  ***
+           if Self.MasterSource.DataSet.FieldByName("usr$sended").AsInteger = 1 and not IBLogin.IsIBUserAdmin then
+            call Application.MessageBox("Накладная была отправлена. Удаление невозможно!", "Внимание", vbOkOnly + vbSystemModal)
+            Exception.Raise "EAbort", ""
+          end if
+        End Sub
+        
+  - 
+    Properties: 
+      Class: "TgdcEvent"
+      RUID: 147066536_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      DISABLE: 0
+      EVENTNAME: "DOBEFOREDELETE"
+      FUNCTIONKEY: "147066538_2053483706 TgdcInvDocumentLine147016485_2053437193DoBeforeDelete"
+      OBJECTKEY: "147066532_2053483706 TgdcBase\\TgdcTree\\TgdcDocument\\TgdcInvBaseDocument\\TgdcInvDocumentLine\\TgdcInvDocumentLine147016485_2053437193"
+      OBJECTNAME: "TgdcInvDocumentLine147016485_2053437193"
+      PARENTNAME: "TgdcInvDocumentLine"
+      EDITIONDATE: 2023-05-18T16:03:48+03:00
