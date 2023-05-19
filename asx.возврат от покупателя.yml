@@ -5,10 +5,10 @@ Properties:
   RUID: 147016562_2053437193
   Name: "asx.возврат от покупателя"
   Caption: "asx.возврат от покупателя"
-  Version: "1.0.0.9"
+  Version: "1.0.0.10"
   Optional: False
   Internal: True
-  MD5: 13AF146B6B6A029FE6768C04727282EB
+  MD5: 17E27C42C3DC13BC2734902292E482A4
 Uses: 
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
   - "147753353_73094925 GS.Общие.Метаданные.Таблицы"
@@ -82,7 +82,7 @@ Objects:
       IMGINDEX: 0
       ORDR: ~
       SUBTYPE: "147016485_2053437193"
-      EDITIONDATE: 2023-03-17T17:13:56+03:00
+      EDITIONDATE: 2023-05-19T18:22:57+03:00
       DISABLED: 0
   - 
     Properties: 
@@ -351,16 +351,15 @@ Objects:
       MASK: "\"NUMBER\""
       REPORTGROUPKEY: "147016492_2053437193 Складской учет\\Возврат от покупателя"
       RUID: "147016485_2053437193"
-      EDITIONDATE: 2023-03-17T17:13:56+03:00
+      EDITIONDATE: 2023-05-19T18:22:57+03:00
       DISABLED: 0
       HEADERFUNCTIONTEMPLATE: ~
       LINEFUNCTIONTEMPLATE: ~
       OPTIONS: !!binary > 
         BgZJRFYzLjAGD1VTUiRBU1hfUkVUQ1VTVAYTVVNSJEFTWF9SRVRDVVNUTElORQQsS8MIBg9VU1Ik
         QVNYX1JFVENVU1QGEFVTUiRNQUlOREVQT1RLRVkGAAYAAgEAAQAGD1VTUiRBU1hfUkVUQ1VTVAYL
-        VVNSJFNIT1BLRVkGAAYAAwEAAQABBhNVU1IkQVNYX05VTUJFUl9QQVJUAAEGE1VTUiRBU1hfUE9E
-        RE9OX0NPREUGE1VTUiRBU1hfTlVNQkVSX1BBUlQGFFVTUiRBU1hfTlVNQkVSX1BMQUNFAAMACAgJ
-        CAgBAAgICAgICA==
+        VVNSJFNIT1BLRVkGAAYAAwEAAQABBhNVU1IkQVNYX05VTUJFUl9QQVJUAAEGE1VTUiRBU1hfTlVN
+        QkVSX1BBUlQGFFVTUiRBU1hfREFURVJFQ0VJVkVEAAMACAgJCAgBAAgICAgICA==
   - 
     Properties: 
       Class: "TgdcStorageFolder"
@@ -1916,23 +1915,6 @@ Objects:
       OBJECTS: ~
   - 
     Properties: 
-      Class: "TgdcInvDocumentTypeOptions"
-      RUID: 147016510_2053437193
-      AlwaysOverwrite: False
-      DontRemove: False
-      IncludeSiblings: False
-      HeadObject: 147016485_2053437193
-    Fields: 
-      BOOL_VALUE: ~
-      CONTACTKEY: ~
-      CURRKEY: ~
-      DTKEY: "147016485_2053437193 Складские документы\\ASX.Склад\\Возврат от покупателя"
-      OPTION_NAME: "DF"
-      RELATIONFIELDKEY: "147016259_2053437193 Номер ячейки, INV_CARD.USR$ASX_NUMBER_PLACE"
-      EDITIONDATE: 2023-02-26T15:44:03+03:00
-      DISABLED: 0
-  - 
-    Properties: 
       Class: "TgdcTableField"
       RUID: 147016260_2053437193
       AlwaysOverwrite: False
@@ -2223,23 +2205,6 @@ Objects:
       OBJECTS: ~
   - 
     Properties: 
-      Class: "TgdcInvDocumentTypeOptions"
-      RUID: 147024182_2053483706
-      AlwaysOverwrite: False
-      DontRemove: False
-      IncludeSiblings: False
-      HeadObject: 147016485_2053437193
-    Fields: 
-      BOOL_VALUE: ~
-      CONTACTKEY: ~
-      CURRKEY: ~
-      DTKEY: "147016485_2053437193 Складские документы\\ASX.Склад\\Возврат от покупателя"
-      OPTION_NAME: "DF"
-      RELATIONFIELDKEY: "147023422_2053483706 Код поддона, INV_CARD.USR$ASX_PODDON_CODE"
-      EDITIONDATE: 2023-03-17T17:10:18+03:00
-      DISABLED: 0
-  - 
-    Properties: 
       Class: "TgdcTableField"
       RUID: 147037268_2053483706
       AlwaysOverwrite: False
@@ -2280,6 +2245,23 @@ Objects:
       COMPUTED_VALUE: ~
       DEFSOURCE: ~
       OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcInvDocumentTypeOptions"
+      RUID: 147066717_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147016485_2053437193
+    Fields: 
+      BOOL_VALUE: ~
+      CONTACTKEY: ~
+      CURRKEY: ~
+      DTKEY: "147016485_2053437193 Складские документы\\ASX.Склад\\Возврат от покупателя"
+      OPTION_NAME: "DF"
+      RELATIONFIELDKEY: "147037268_2053483706 Дата поступления, INV_CARD.USR$ASX_DATERECEIVED"
+      EDITIONDATE: 2023-05-19T17:49:27+03:00
+      DISABLED: 0
   - 
     Properties: 
       Class: "TgdcDelphiObject"

@@ -1,0 +1,614 @@
+%YAML 1.1
+--- 
+StructureVersion: "1.0"
+Properties: 
+  RUID: 147066056_2053483706
+  Name: "Импорт из Иннова"
+  Caption: "Импорт из Иннова"
+  Version: "1.0.0.3"
+  Optional: False
+  Internal: True
+  MD5: C2C3BBFB23BA135AAD7ED60A7EFBC8B6
+Objects: 
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066028_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+      HeadObject: 147066027_2053483706
+    Fields: 
+      NAME: "asx_import_innova_csv"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-17T20:18:33+03:00
+      DISPLAYSCRIPT: | 
+        ASX_IMPORT_INNOVA_CSV
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QFAAAAQUZJTEUFAAAAQUZJTEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVFBS
+        U1QIAAAAREVQX1JBWkQIAAAAREVQX1JBWkQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVFBS
+        U1QIAAAAREVQX1BPTFUIAAAAREVQX1BPTFUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARk5TVFBS
+        U1QHAAAAVE9ERVBPVAcAAABUT0RFUE9UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNU
+        BQAAAFZCRE9DBQAAAFZCRE9DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUCwAAAFRS
+        QU5TQUNUSU9OCwAAAFRSQU5TQUNUSU9OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNU
+        BwAAAERBVEVET0MHAAAAREFURURPQwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGTlNUUFJTVA0A
+        AABUT0NPTlRBQ1ROQU1FDQAAAFRPQ09OVEFDVE5BTUUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QJAAAAVEFCTEVOQU1FCQAAAFRBQkxFTkFNRQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABDT0xQQVJUBwAAAENPTFBBUlQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QIAAAATkFNRVBBUlQIAAAATkFNRVBBUlQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QOAAAAUVVBTlRQQUNLRklFTEQOAAAAUVVBTlRQQUNLRklFTEQAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAARk5TVFBSU1QKAAAAUVVBTlRWQUxVRQoAAABRVUFOVFZBTFVFAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAEZOU1RQUlNUAwAAAElEUwMAAABJRFMAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVFBSU1QHAAAAQ09VTlRJRAcAAABDT1VOVElEAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAEZOU1RQUlNUDQAAAENPTFFVQU5UUExBQ0UNAAAAQ09MUVVBTlRQTEFDRQAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAABGTlNUUFJTVAcAAABFUlJMSVNUBwAAAEVSUkxJU1QAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAARk5TVFBSU1QFAAAASUJTUUwFAAAASUJTUUwAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        Function asx_import_innova_csv (AFile, dep_Razd, dep_Polu, ToDepot, vbDoc, Transaction, DateDoc, ToContactName, TableName, ColPart, NamePart, QuantPackField, QuantValue, ByRef IDs, ByRef CountID, ColQuantPlace, ByRef ErrList, ibsql)
+        
+          dim tso, str, res(), sqlText, sqlText1, ID, recArr, quantity, NumPart, GoodKey, GoodCode, isadd, DepKey, isFirst, isError
+          dim NumBox, isContinue, OldFromDepot, QuantPlace, groupkey, OldDate, OldPart, Weight, OrQuant, oldstr, FromDepot
+        
+          FromDepot = dep_Razd
+        
+          if not Transaction.InTransaction then
+            Transaction.StartTransaction
+          end if
+        
+          isAdd = 0
+        
+          QuantPlace = 0
+        
+          isError = False
+          asx_import_innova_csv = isError
+        
+          sqlText = "execute block (parent dforeignkey = :parent, documentdate ddate = :documentdate, goodkey dforeignkey = :goodkey, quantity dquantity = :quantity, " & vbCrLf & _
+            "  numpart dtext20 = :numpart, doctypekey dforeignkey = :doctypekey, number dtext20 = :number, " & vbCrLf & _
+            "  fromdepkey dforeignkey = :fromdepkey, todepkey dforeignkey = :todepkey, OrQuant dquantity = :OrQuant) " & vbCrLf & _
+            "as " & vbCrLf & _
+            "  declare movekey dforeignkey; " & vbCrLf & _
+            "  declare dockey dforeignkey; " & vbCrLf & _
+            "  declare fromcardkey dforeignkey; " & vbCrLf & _
+            "  declare tocardkey dforeignkey; " & vbCrLf & _
+            "  declare creatorkey dforeignkey; " & vbCrLf & _
+            "  declare t_q dcurrency; " & vbCrLf & _
+            "  declare t_p dcurrency; " & vbCrLf & _
+            "begin " & vbCrLf & _
+            "  creatorkey = " & IBLogin.ContactKey & "; " & vbCrLf & _
+            "  rdb$set_context('USER_TRANSACTION', 'CONTROLREMAINS', 0); " & vbCrLf & _
+            "  dockey = null; " & vbCrLf & _
+            "  if (numpart <> '' or numpart is null) then " & _
+            "  select FIRST(1) l.documentkey from " & vbCrLf & _
+            "    " & TableName & "LINE l " & vbCrLf & _
+            "      left join inv_card c ON l.FROMCARDKEY = c.id " & vbCrLf & _
+            "  where " & vbCrLf & _
+            "    l.MASTERKEY = :parent and c.USR$ASX_NUMBER_PART = :numpart and c.GOODKEY = :goodkey " & vbCrLf & _
+            "  into :dockey; " & vbCrLf & _
+            "  else " & _
+            "  select FIRST(1) l.documentkey from " & vbCrLf & _
+            "    " & TableName & "LINE l " & vbCrLf & _
+            "      left join inv_card c ON l.FROMCARDKEY = c.id " & vbCrLf & _
+            "  where " & vbCrLf & _
+            "    l.MASTERKEY = :parent and c.USR$ASX_NUMBER_PART is null and c.GOODKEY = :goodkey " & vbCrLf & _
+            "  into :dockey; " & vbCrLf & _
+            "  if (dockey is not null) then " & vbCrLf & _
+            "  begin " & vbCrLf & _
+            "    select first(1) movementkey from inv_movement where documentkey = :dockey " & vbCrLf & _
+            "    into :movekey; " & vbCrLf & _
+            "    update inv_movement set debit = coalesce(debit, 0) + :quantity where " & vbCrLf & _
+            "      documentkey = :dockey and movementkey = :movekey and debit > 0; " & vbCrLf & _
+            "    update inv_movement set credit = coalesce(credit, 0) + :quantity where " & vbCrLf & _
+            "      documentkey = :dockey and movementkey = :movekey and credit > 0; " & vbCrLf & _
+            "    update " & TableName & "LINE set quantity = coalesce(quantity, 0) + :quantity, USR$VBPF_ORIGINALQUANT = coalesce(USR$VBPF_ORIGINALQUANT, 0) + :OrQuant, USR$QBOX = USR$QBOX + " & QuantValue & vbCrLf & _
+            "    where documentkey = :dockey; " & vbCrLf & _
+            "    select quantity, USR$QBOX from " & TableName & "LINE" & vbCrLf & _
+            "     where documentkey = :dockey " & vbCrLf & _
+            "    into :t_q, :t_p; " & vbCrLf & _
+            "    UPDATE gd_document SET editiondate = CURRENT_TIMESTAMP where id = :dockey; " & _
+            "    /*UPDATE USR$VBPF_DATEPRODUCT set usr$quantity = :t_q, USR$QUANTPACK = :t_p WHERE usr$documentkey = :dockey; */" & vbCrLf & _
+            "  end " & vbCrLf & _
+            "  else " & vbCrLf & _
+            "  begin " & vbCrLf & _
+            "   " & vbCrLf & _
+            "    EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :dockey; " & vbCrLf & _
+            "    INSERT INTO GD_DOCUMENT( " & vbCrLf & _
+            "      ID, DOCUMENTTYPEKEY, PARENT, COMPANYKEY, AFULL, ACHAG, AVIEW, " & vbCrLf & _
+            "      CREATORKEY, CREATIONDATE, EDITORKEY, EDITIONDATE, " & vbCrLf & _
+            "      NUMBER, DOCUMENTDATE) " & vbCrLf & _
+            "    VALUES ( " & vbCrLf & _
+            "      :dockey, :doctypekey, :PARENT, <COMPANYKEY/>, -1, -1, -1, " & vbCrLf & _
+            "      :creatorkey, CURRENT_TIMESTAMP, :creatorkey, CURRENT_TIMESTAMP, " & vbCrLf & _
+            "      :number, :DOCUMENTDATE); " & vbCrLf & _
+            " " & vbCrLf & _
+            "    EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :fromcardkey; " & vbCrLf & _
+            "    INSERT INTO INV_CARD (ID, PARENT, GOODKEY, DOCUMENTKEY, COMPANYKEY, FIRSTDOCUMENTKEY, FIRSTDATE, USR$ASX_NUMBER_PART, USR$ASX_DATERECEIVED) " & vbCrLf & _
+            "      VALUES (:fromcardkey, null, :goodkey, :dockey, <companykey/>, :dockey, :documentdate, :numpart, :documentdate); " & vbCrLf & _
+            "    EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :tocardkey; " & vbCrLf & _
+            "    INSERT INTO INV_CARD (ID, PARENT, GOODKEY, DOCUMENTKEY, COMPANYKEY, FIRSTDOCUMENTKEY, FIRSTDATE, USR$ASX_NUMBER_PART, USR$ASX_DATERECEIVED) " & vbCrLf & _
+            "        VALUES (:tocardkey, :fromcardkey, :goodkey, :dockey, <companykey/>, :dockey, :documentdate, :numpart, :documentdate); " & vbCrLf & _
+            "    EXECUTE PROCEDURE gd_p_getnextid_ex RETURNING_VALUES :movekey; " & vbCrLf & _
+            "    INSERT INTO INV_MOVEMENT ( " & vbCrLf & _
+            "      MOVEMENTKEY, MOVEMENTDATE, DOCUMENTKEY, " & vbCrLf & _
+            "      CONTACTKEY, CARDKEY, DEBIT, CREDIT, DISABLED) " & vbCrLf & _
+            "    VALUES (:movekey, :documentdate, :dockey, :fromdepkey, :fromcardkey, 0, :quantity, 0); " & vbCrLf & _
+            "    INSERT INTO INV_MOVEMENT ( " & vbCrLf & _
+            "      MOVEMENTKEY, MOVEMENTDATE, DOCUMENTKEY, " & vbCrLf & _
+            "      CONTACTKEY, CARDKEY, DEBIT, CREDIT, DISABLED) " & vbCrLf & _
+            "    VALUES (:movekey, :documentdate, :dockey, :todepkey, :tocardkey, :quantity, 0, 0); " & vbCrLf & _
+            "     " & vbCrLf & _
+            "    INSERT INTO " & TableName & "LINE (documentkey, masterkey, fromcardkey, tocardkey, quantity, USR$QBOX, USR$VBPF_ORIGINALQUANT) " & vbCrLf & _
+            "        VALUES (:dockey, :parent, :fromcardkey, :tocardkey, :quantity, " & QuantValue & ", :OrQuant); " & vbCrLf & _
+            "  /*  INSERT INTO USR$VBPF_DATEPRODUCT (USR$DATEBILL,USR$DATEWORK1,EDITIONDATE,USR$CREATEDATE,USR$QUANTPACK,USR$QUANTITY,EDITORKEY,USR$DOCUMENTKEY,DISABLED,USR$VMK_NUMRECEIVE,USR$PARENT,USR$GOODKEY) " & vbCrLf & _
+            "    VALUES (:documentdate,:documentdate,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP," & QuantValue & ",:QUANTITY,:creatorkey,:dockey,0,:numpart,:PARENT,:GOODKEY);*/ " & vbCrLf & _
+            "  end " & vbCrLf & _
+            "  UPDATE gd_document SET editiondate = CURRENT_TIMESTAMP where id = :parent; " & vbCrLf & _
+            "end "
+        
+          OldFromDepot = FromDepot
+          OldDate = DateDoc
+          OldPart = ""
+          isFirst = True
+          set tso = AFile.OpenAsTextStream(1, -2)
+          Do While not tso.AtEndOfStream
+            str = tso.ReadLine
+            oldstr = str
+            if asc(left(str, 1)) = 239 then
+              str = mid(str, 4, 255)
+            end if
+            recArr = split(str, ";")
+            isContinue = True
+            if isContinue then
+              GoodCode = recArr(0)
+              DateDoc = CDate(Replace(recArr(2), "/", "."))
+              while left(GoodCode, 1) = "0"
+                GoodCode = mid(GoodCode, 2, 255)
+              wend
+              call gdcBaseManager.ExecSingleQueryResult("select id, groupkey, usr$inv_weight, name from gd_good where USR$SHCODE = :sh", _
+                GoodCode, Res, gdcBaseManager.ReadTransaction)
+              GoodKey = -1
+              Weight  = 1
+              if not isEmpty(Res) then
+                if not isNull(Res(0, 0)) then
+                  GoodKey = Res(0, 0)
+                  GroupKey = Res(1, 0)
+                  if not isNull(Res(2, 0)) then
+                    Weight = Res(2, 0)
+                  end if
+                end if
+              end if
+              isError = False
+        
+              if DateDoc < Date - 2 then
+                call gdcBaseManager.ExecSingleQuery(" insert into USR$VBPF_INNOVA_LOG_ERROR (usr$description) VALUES ('Позиция из файла " & _
+                  AFile.Name & " не загружена, т.к. дата отличается от текущей больше чем на 2 дня. " & str & " " & Res(3, 0) & "')", Transaction)
+              else
+        
+                Quantity = CCur(Replace(recArr(1), ".", ","))
+                OrQuant = Quantity
+                if Weight > 0 and Weight < 1 then
+                  Quantity = gs.MulDiv(Quantity, 1, Weight, 1, 0)
+                end if
+                NumPart = recArr(ColPart)
+                if Len(NumPart) = 10 then NumPart = mid(NumPart, 5, 2) & right(NumPart, 2)
+                if UBound(recArr) > ColPart then
+                  if (GroupKey = gdcBaseManager.GetIDByRUIDString("631044824_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044825_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044826_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044827_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044828_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044829_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044831_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044832_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044833_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044822_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044823_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044834_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044835_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044836_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044837_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("1049138729_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("1049138728_1913435101") or _
+                     GroupKey = gdcBaseManager.GetIDByRUIDString("631044830_1913435101")) then
+        
+                    FromDepot = dep_Polu
+        
+                  else
+        
+                     FromDepot = dep_Razd
+        
+                  end if
+                end if
+        
+                if isFirst or (OldFromDepot <> FromDepot) or (OldDate <> DateDoc) or (OldPart <> NumPart) then
+                  OldFromDepot = FromDepot
+                  sqlText1 = "select FIRST(1) d.id from " & vbCrLf & _
+                    "  gd_document d " & vbCrLf & _
+                    "    left join " & TableName & " m ON d.id = m.documentkey " & vbCrLf & _
+                    "where " & vbCrLf & _
+                    "  d.documentdate = :ondate and d.documenttypekey = :dt and d.parent + 0 is null and " & vbCrLf & _
+                    "  m.USR$FROMCONTACTKEY = :fc and m." & ToContactName & " = :tc and m.USR$VBPF_CLOSED_INNOVA = 0 and m.USR$VBPF_LOADING_INNOVA = 1 and " & _
+                    "  m.USR$VBPF_NUMRECEIVE = :numpart "
+        
+        
+                  ID = -1
+                  call gdcBaseManager.ExecSingleQueryResult(sqlTExt1, Array(DateDoc, gdcBaseManager.GetIDByRUIDString(vbDoc.gdcInvDocument.SubType), _
+                    FromDepot, ToDepot, NumPart), Res, Transaction)
+                  if not isEmpty(Res) then
+                    if not isNull(Res(0, 0)) then
+                      ID = Res(0, 0)
+                    end if
+                  end if
+                  if id <> -1 then
+                    if vbDoc.gdcInvDocument.Active and vbDoc.gdcInvDocument.ID <> ID then
+                      vbDoc.gdcInvDocument.Close
+                      vbDoc.gdcInvDocument.ID = ID
+                    else
+                      if not vbDoc.gdcInvDocument.Active then
+                        vbDoc.gdcInvDocument.ID = ID
+                      end if
+                    end if
+                    vbDoc.gdcInvDocument.Open
+          '          if vbDoc.gdcInvDocument.FieldByName("USR$VBPF_LOADING_INNOVA").AsInteger <> 1 then
+          '            vbDoc.gdcInvDocument.Edit
+          '            vbDoc.gdcInvDocument.FieldByName("USR$VBPF_LOADING_INNOVA").AsInteger = 1
+          '            vbDoc.gdcInvDocument.Post
+          '          end if
+                  else
+                    vbDoc.gdcInvDocument.Open
+                    on error resume next
+                    vbDoc.gdcInvDocument.Insert
+                    vbDoc.gdcInvDocument.FieldByName("description").AsString = AFile.Name
+                    vbDoc.gdcInvDocument.FieldByName("documentdate").AsDateTime = DateDoc
+                    vbDoc.gdcInvDocument.FieldByName("usr$fromcontactkey").AsInteger = FromDepot
+                    vbDoc.gdcInvDocument.FieldByName(ToContactName).AsInteger = ToDepot
+                    vbDoc.gdcInvDocument.FieldByName("number").AsString = "in" & DateDoc & "_" & NumPart
+                    vbDoc.gdcInvDocument.FieldByName("USR$VBPF_CLOSED_INNOVA").AsInteger = 0
+                    vbDoc.gdcInvDocument.FieldByName("USR$VBPF_LOADING_INNOVA").AsInteger = 1
+                    vbDoc.gdcInvDocument.FieldByName("USR$VBPF_NUMRECEIVE").AsString = NumPart
+                    vbDoc.gdcInvDocument.Post
+                    if Err.Description <> "" then
+                      ErrList.Add(Err.Description & " header")
+                      isError = True
+          '            NsgBox Err.Description
+                    else
+                      ID = vbDoc.gdcInvDocument.ID
+                    end if
+                    on error goto 0
+        
+                  end if
+                  Redim Preserve IDs(CountID )
+                  IDs(CountID) = vbDoc.gdcInvDocument.ID
+                  CountID = CountID + 1
+        
+                  isFirst = False
+                end if
+                if not isError then
+                  on error resume next
+          '        call gdcBaseManager.ExecSingleQueryParam(sqlText, _
+          '          array(vbDoc.gdcInvDocument.id, vbdoc.gdcInvDocument.FieldByName("documentdate").AsDateTime, GoodKey, _
+          '                quantity, numpart, transactionkey, vbdoc.gdcInvDocument.FieldByName("documenttypekey").AsInteger, _
+          '                vbdoc.gdcInvDocument.FieldByName("number").AsString, FromDepot, ToDepot, isAdd, QuantPlace), _
+          '                Transaction)
+                  ibsql.Close
+                  ibsql.SQL.Text = sqlText
+                  ibsql.ParamByName("parent").AsInteger = vbDoc.gdcInvDocument.id
+                  ibsql.ParamByName("documentdate").AsDateTime = vbdoc.gdcInvDocument.FieldByName("documentdate").AsDateTime
+                  ibsql.ParamByName("goodkey").AsInteger = GoodKey
+                  ibsql.ParamByName("quantity").AsCurrency = quantity
+                  ibsql.ParamByName("numpart").AsString = numpart
+                  ibsql.ParamByName("doctypekey").AsInteger = vbdoc.gdcInvDocument.FieldByName("documenttypekey").AsInteger
+                  ibsql.ParamByName("number").AsString = vbdoc.gdcInvDocument.FieldByName("number").AsString
+                  ibsql.ParamByName("fromdepkey").AsInteger = FromDepot
+                  ibsql.ParamByName("todepkey").AsInteger = ToDepot
+                  ibsql.ParamByName("OrQuant").AsCurrency = OrQuant
+                  ibsql.ExecQuery
+                  if Err.Description <> "" then
+          '          MsgBox Err.Description
+                    ErrList.Add(Err.Description & " line " & AFile.Name)
+                    isError = True
+                    exit do
+                  end if
+                  on error goto 0
+                else
+                  exit do
+                end if
+              end if
+            end if
+          Loop
+          asx_import_innova_csv = isError
+        
+        End Function
+        
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066027_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "asx_import_innova"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-17T20:14:49+03:00
+      DISPLAYSCRIPT: | 
+        ASX_IMPORT_INNOVA
+        
+      ENTEREDPARAMS: ~
+      SCRIPT: | 
+        '#include ASX_IMPORT_INNOVA_CSV
+        Option Explicit
+        Function asx_import_innova
+          dim Creator, fso, File, Folder, gdcConst, Path, NumOper, vbMoveMat, vbAddGood, vbSellBill
+          dim vbDoc, FromDepot, ToDepot, SubType, sYear, sMonth, sDay, s, DateDoc, ToContactName
+          dim TableName, ColPart, NamePart, Transaction, TransactionKey, Times, QuantPackField
+          dim isError, IDs(), CountID, i, isFindBox, QuantValue, ColQuantPlace, ErrList, ibsql, Res()
+          dim dep_Polu, dep_Razd
+          
+          
+          call gdcBaseManager.ExecSingleQueryResult("select id from gd_contact where USR$INV_TYPEDEPART = :id", _
+            gdcBaseManager.GetIDByRUIDString("147066030_2053483706"), Res, gdcBaseManager.ReadTransaction)
+            
+          ToDepot = -1
+          if not isEmpty(Res) then
+            if not isNull(Res(0, 0)) then
+              ToDepot = Res(0, 0)
+            end if
+          end if
+          
+          if ToDepot = -1 then
+            call Application.MessageBox("Нет склада отгрузки. Проверьте правильность типа подразделения", "Внимание", vbOkOnly + vbSystemModal)
+            exit function
+          end if
+          
+          call gdcBaseManager.ExecSingleQueryResult("select id from gd_contact where usr$shcode = '050' and contacttype = 4", _
+            null, Res, gdcBaseManager.ReadTransaction)
+        
+          dep_Polu = -1
+          if not isEmpty(Res) then
+            if not isNull(Res(0, 0)) then
+              dep_Polu = Res(0, 0)
+            end if
+          end if
+        
+          if dep_Polu = -1 then
+            call Application.MessageBox("Нет подразделения полуфабрикатов.", "Внимание", vbOkOnly + vbSystemModal)
+            exit function
+          end if
+          
+          call gdcBaseManager.ExecSingleQueryResult("select id from gd_contact where usr$shcode = '070' and contacttype = 4", _
+            null, Res, gdcBaseManager.ReadTransaction)
+        
+          dep_Razd = -1
+          if not isEmpty(Res) then
+            if not isNull(Res(0, 0)) then
+              dep_Razd = Res(0, 0)
+            end if
+          end if
+        
+          if dep_Razd = -1 then
+            call Application.MessageBox("Нет подразделения разделки.", "Внимание", vbOkOnly + vbSystemModal)
+            exit function
+          end if
+        
+          
+          set Creator = new TCreator
+          set gdcConst = Creator.GetObject(NULL, "TgdcConst", "")
+        
+          set Transaction = Creator.GetObject(NULL, "TIBTransaction", "")
+          Transaction.DefaultDatabase = IBLogin.Database
+          Transaction.Params.Add("read_committed")
+          Transaction.Params.Add("rec_version")
+          Transaction.Params.Add("nowait")
+        
+          set ibsql = Creator.GetObject(NULL, "TIBSQL", "")
+          ibsql.Transaction = Transaction
+        
+          set ErrList = Creator.GetObject(null, "TStringList", "")
+        
+          set vbMoveMat = new TvbInvDocument_asx
+          call vbMoveMat.InitDocument("147016233_2053437193", Transaction, Transaction)
+          vbMoveMat.gdcInvDocument.SubSet = "ByID"
+        
+          Path = gdcConst.QGetValueByID(gdcBaseManager.GetIDByRUIDString("147066029_2053483706"))
+        
+          set fso = CreateObject("Scripting.FileSystemObject")
+          Set Folder = FSO.GetFolder(path)
+          CountID = 0
+          For Each File In Folder.Files
+            isError = False
+            if FSO.GetExtensionName(File.path) = "csv" then
+              NumOper = Left(File.Name, 2)
+              if InStr(File.Name, "-") <= 0 then
+                s = mid(File.Name, 9, 8)
+                sYear = Left(s, 4)
+                sMonth = mid(s, 5, 2)
+                sDay = Right(s, 2)
+              else
+                s = mid(File.Name, 9, 10)
+                sYear = Left(s, 4)
+                sMonth = mid(s, 6, 2)
+                sDay = Right(s, 2)
+              end if
+              DateDoc = DateSerial(Cint(sYear), Cint(sMonth), Cint(sDay))
+              if NumOper <> "12" then
+                QuantPackField = "USR$QBOX"
+                QuantValue = 1
+                ColQuantPlace = -1
+                isFindBox = False
+                select case NumOper
+                  case "05"
+                    ToContactName = "USR$TOCONTACTKEY"
+                    TableName = "USR$ASX_MOVE"
+                    set vbDoc = vbMoveMat
+                    colPart = 4
+                    namePart = "USR$NUMRECEIVE"
+                    TransactionKey = gdcBaseManager.GetIDByRUIDString("651109963_1871619887")
+                end select
+        
+                isError = asx_import_innova_csv(File, dep_Razd, dep_Polu, ToDepot, vbDoc, Transaction, DateDoc, ToContactName, TableName, ColPart, NamePart, QuantPackField, QuantValue, IDs, CountID, ColQuantPlace, ErrList, ibsql)
+        
+                Times = Timer - Times
+        
+                if not isError then
+                  on error resume next
+                  if Transaction.InTransaction then
+                    Transaction.Commit
+                  end if
+                  isError = Err.Description <> ""  or Transaction.InTransaction
+                  on error goto 0
+        
+                  if not isError  then
+                    fso.MoveFile path & File.Name, System.GedeminPath &  "innova\" & File.Name
+        
+                  else
+                    if Transaction.InTransaction then
+                      Transaction.Rollback
+                    end if
+                  end if
+                else
+                  if Transaction.InTransaction then
+                    Transaction.Rollback
+                  end if
+                end if
+              end if
+            end if
+        
+          next
+        
+          if ErrList.Count > 0 then
+            ErrList.SaveToFile System.GedeminPath & "innova_err" & Replace(CStr(Date), ".", "_") & "_" & Replace(CStr(Time), ":", "_") & ".txt"
+          end if
+        
+        
+        End Function
+        
+    Set: 
+      - 
+        Table: "RP_ADDITIONALFUNCTION"
+        Items: 
+          - 
+            ADDFUNCTIONKEY: "147066028_2053483706 asx_import_innova_csv"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066041_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "TVBInvDocument_asx"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "VBCLASSES"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-17T20:14:29+03:00
+      DISPLAYSCRIPT: ~
+      ENTEREDPARAMS: ~
+      SCRIPT: | 
+        Class TVBInvDocument_asx
+        
+          public gdcInvDocument
+          public gdcInvDocumentLine
+          public dsMaster
+          public dsDetail
+        
+          public sub InitDocument(SubType, Transaction, ReadTransaction)
+            gdcInvDocument.Close
+            gdcInvDocumentLine.Close
+        
+            if Assigned(ReadTransaction) then
+              gdcInvDocument.ReadTransaction = ReadTransaction
+            end if
+            if Assigned(Transaction) then
+              gdcInvDocument.Transaction = Transaction
+            end if
+        
+            gdcInvDocument.SubType = SubType
+            gdcInvDocumentLine.SubType = SubType
+        
+            gdcInvDocumentLine.MasterSource = dsMaster
+          end sub
+        
+          Private Sub Class_Initialize
+          'Setup Initialize event.
+        
+            set gdcInvDocument = Designer.CreateObject(Application, "TgdcInvDocument", "")
+            set gdcInvDocumentLine = Designer.CreateObject(Application, "TgdcInvDocumentLine", "")
+            set dsMaster = Designer.CreateObject(Application, "TDataSource", "")
+            set dsDetail = Designer.CreateObject(Application, "TDataSource", "")
+        
+            gdcInvDocumentLine.MasterField = "ID"
+            gdcInvDocumentLine.DetailField = "PARENT"
+            gdcInvDocumentLine.SubSet = "ByParent"
+        
+            dsMaster.DataSet = gdcInvDocument
+            dsDetail.DataSet = gdcInvDocumentLine
+        
+          End Sub
+        
+          Private Sub Class_Terminate
+          'Setup Terminate event.
+        
+            Designer.DestroyObject(gdcInvDocument)
+            Designer.DestroyObject(gdcInvDocumentLine)
+            Designer.DestroyObject(dsMaster)
+            Designer.DestroyObject(dsDetail)
+        
+          End Sub
+        End Class
+        
+  - 
+    Properties: 
+      Class: "TgdcConst"
+      RUID: 147066029_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "Путь к базе INOVA"
+      COMMENT: ~
+      CONSTTYPE: 0
+      DATATYPE: "S"
+      EDITIONDATE: 2023-05-17T18:49:36+03:00

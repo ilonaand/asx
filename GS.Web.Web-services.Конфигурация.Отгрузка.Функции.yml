@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.30"
+  Version: "1.0.0.31"
   Optional: False
   Internal: True
-  MD5: 21506F730964EC00DECEE9ACEE4B16BD
+  MD5: F5E13AED5CDF7F13F46273E93A6F0D0A
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -2442,7 +2442,7 @@ Objects:
       PUBLICFUNCTION: 1
       SHORTCUT: ~
       USEDEBUGINFO: 0
-      EDITIONDATE: 2023-05-18T18:22:07+03:00
+      EDITIONDATE: 2023-05-19T17:53:03+03:00
       DISPLAYSCRIPT: | 
         WEB_CREATERETURNASX
         FINALIZATIONRETURNASX
@@ -2616,7 +2616,7 @@ Objects:
                     Array(goodkey, numReceived, workDate) ,"") then
                     gdcInvDocumentLine.Edit
                     gdcInvDocumentLine.FieldByName("quantity").AsCurrency = _
-                      gdcDetail.FieldByName("quantity").AsCurrency + qw
+                      gdcInvDocumentLine.FieldByName("quantity").AsCurrency + qw
                     gdcInvDocumentLine.Post
                   else
                     gdcInvDocumentLine.Insert
