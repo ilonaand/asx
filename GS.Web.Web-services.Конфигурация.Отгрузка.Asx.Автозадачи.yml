@@ -1,0 +1,115 @@
+%YAML 1.1
+--- 
+StructureVersion: "1.0"
+Properties: 
+  RUID: 147066964_2053483706
+  Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Автозадачи"
+  Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Asx.Автозадачи"
+  Version: "1.0.0.1"
+  Optional: False
+  Internal: True
+  MD5: 3CF2700BF2248B67D041D63ADAF8FD73
+Objects: 
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147066727_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_callAutoGetMessageFromServer_asx"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-22T13:30:03+03:00
+      DISPLAYSCRIPT: | 
+        WEB_CALLAUTOGETMESSAGEFROMSERVER_ASX
+        
+      ENTEREDPARAMS: ~
+      SCRIPT: | 
+        Option Explicit
+        Function web_callAutoGetMessageFromServer_asx
+          dim AppSystem
+          AppSystem = gdcBaseManager.GetIDByRUIDString("1368993410_1691301355")
+          set web_service = (New TVB_Web_Service)(AppSystem)
+          dim Creator, ibsql, functionkey, FuncParamArray, flag, period, web_service
+          flag = true
+          period = time
+          on error resume next
+          set Creator = new TCreator
+          set ibsql = Creator.GetObject(nil, "TIBSQL", "")
+          ibsql.Transaction = gdcBaseManager.ReadTransaction
+          ibsql.SQL.Text = _
+            "SELECT " & _
+            "  v.USR$MESSAGEFROMSERVER " & _
+            "FROM " & _
+            "  USR$GDMN_SYSTEMS b " & _
+            "  LEFT JOIN USR$GDMN_VERSIONS v  ON v.ID = b.USR$GDMN_VERSION " & _
+            "WHERE b.ID = :systemkey "
+          ibsql.ParamByName("systemkey").AsVariant = AppSystem
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0 then
+            functionkey = ibsql.FieldByName("USR$MESSAGEFROMSERVER").AsInteger
+          else
+            functionkey = 0
+          end if
+          if functionkey > 0  then
+            FuncParamArray = Array(true, AppSystem, web_service)
+            while (flag) and (dateDiff("s", period, time) <= 600)
+              flag = System.ExecuteScriptFunction(functionkey, FuncParamArray)
+            wend
+          end if
+          if err.Number <> 0 then
+             hasError = true
+             AError = "Ошибка в автозадаче! " & err.Description
+            exit function
+          end if
+        End Function
+        
+  - 
+    Properties: 
+      Class: "TgdcAutoTask"
+      RUID: 147066729_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "Обработка запросов"
+      ATSTARTUP: ~
+      AUTOTRKEY: ~
+      BACKUPFILE: ~
+      CMDLINE: ~
+      COMPUTER: "169.254.208.101"
+      DAILY: 1
+      DESCRIPTION: ~
+      EMAILEXPORTTYPE: ~
+      EMAILGROUPKEY: ~
+      EMAILRECIPIENTS: ~
+      EMAILSMTPKEY: ~
+      ENDTIME: ~
+      EXACTDATE: ~
+      FUNCTIONKEY: "147066727_2053483706 web_callAutoGetMessageFromServer_asx"
+      MONTHLY: ~
+      PRIORITY: 0
+      PULSE: 180
+      RELOAD: 0
+      REPORTKEY: ~
+      STARTTIME: ~
+      USERKEY: "150001_17 Administrator"
+      WEEKLY: ~
+      CREATIONDATE: 2023-05-22T13:30:11+03:00
+      EDITIONDATE: 2023-05-22T13:30:11+03:00
+      DISABLED: 0

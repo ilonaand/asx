@@ -5,10 +5,10 @@ Properties:
   RUID: 147016562_2053437193
   Name: "asx.возврат от покупателя"
   Caption: "asx.возврат от покупателя"
-  Version: "1.0.0.10"
+  Version: "1.0.0.11"
   Optional: False
   Internal: True
-  MD5: 17E27C42C3DC13BC2734902292E482A4
+  MD5: 39683D6D022D83BA1A12F6A6ACE188EA
 Uses: 
   - "147753351_73094925 GS.Общие.Метаданные.Домены"
   - "147753353_73094925 GS.Общие.Метаданные.Таблицы"
@@ -412,7 +412,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-05-18T16:12:49+03:00
+      EDITIONDATE: 2023-05-19T18:38:23+03:00
       BLOB_DATA: !!binary > 
         VFBGMAYNR1JJRF9TVFJFQU1fNAEGBlRhaG9tYQYMY2xXaW5kb3dUZXh0AvUAAggAAgEABghjbFdp
         bmRvdwEGBlRhaG9tYQYPY2xIaWdobGlnaHRUZXh0AvUAAggAAgEABgtjbEhpZ2hsaWdodAEGBlRh
@@ -425,118 +425,119 @@ Objects:
         ZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgrK7ust4u4g0szWBVdpZHRoAmgHVmlzaWJsZQkA
         AQhFeHBhbmRlZAgJRmllbGROYW1lBhZUT19VU1IkQVNYX05VTUJFUl9QQVJUCFJlYWRPbmx5CA9U
         aXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDM3u7OXwIO/g8PLo6AVXaWR0
-        aAOCAAdWaXNpYmxlCQABCEV4cGFuZGVkCAlGaWVsZE5hbWUGF1RPX1VTUiRBU1hfTlVNQkVSX1BM
-        QUNFCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDM3u
-        7OXwIP/35enq6AVXaWR0aAOCAAdWaXNpYmxlCQABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDlVTUiRJ
-        TlZfV0VJR0hUCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRp
-        b24GCsLl8SDy7uLg8OAFV2lkdGgDggAHVmlzaWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1lBghE
-        SVNBQkxFRAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9u
-        BghESVNBQkxFRAVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYMTElORURJ
-        U0FCTEVED1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYJzvLq6/735e3u
-        BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgxDSEVDS1JFTUFJTlMIUmVh
-        ZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYRyu7t8vDu6/wg
-        7vHy4PLq7uIFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCURJU0FCTEVE
-        MQ9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GKs7y6uv+9+Xt7iAowu7n
-        4vDg8iDu8iDv7urz7+Dy5ev/KO/u5+j26P8pKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQI
-        CUZpZWxkTmFtZQYHUkVNQUlOUw9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRp
-        b24GB87x8uDy7uoFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGGEZST01f
-        VVNSJEFTWF9OVU1CRVJfUEFSVAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1U
-        aXRsZS5DYXB0aW9uBgzN7uzl8CDv4PDy6OgFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlG
-        aWVsZE5hbWUGDlVTUiRTT1JUTlVNQkVSCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2Vu
-        dGVyDVRpdGxlLkNhcHRpb24GFM3u7OXwIOTr/yDx7vDy6PDu4uroBVdpZHRoAv8HVmlzaWJsZQgA
-        AQhFeHBhbmRlZAgJRmllbGROYW1lBgtVU1IkQ09OVEVOVAhSZWFkT25seQgPVGl0bGUuQWxpZ25t
-        ZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgbR7vHy4OIFV2lkdGgC/wdWaXNpYmxlCAABCEV4
-        cGFuZGVkCAlGaWVsZE5hbWUGEFVTUiRWTUtfTUFJTkdPT0QIUmVhZE9ubHkID1RpdGxlLkFsaWdu
-        bWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYVzvHt7uLt7uUg7eDo7OXt7uLg7ejlBVdpZHRo
-        Av8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhdHX1VTUiRWTUtfTUFJTkdPT0RfTkFN
-        RQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBh3N4Ojs
-        5e3u4uDt6OUgKNHv8ODi7vft6Oog0szWKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
-        ZWxkTmFtZQYTVVNSJFZNS19NQUlOR09PRF9QRAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0
-        YUNlbnRlcg1UaXRsZS5DYXB0aW9uBg7O8e3u4u3u6SDy7uLg8AVXaWR0aAL/B1Zpc2libGUIAAEI
-        RXhwYW5kZWQICUZpZWxkTmFtZQYaR19VU1IkVk1LX01BSU5HT09EX1BEX05BTUUIUmVhZE9ubHkI
-        D1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYdzeDo7OXt7uLg7ejlICjR
-        7/Dg4u737ejqINLM1ikFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCFVT
-        UiRDT0RFCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24G
-        A8ru5AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYNVVNSJEVUVE5fQ09E
-        RQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhHM5ebk
-        8+3g8O7k7fvpIOru5AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYCSUQI
-        UmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYEyuv+9wVX
-        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYGUEFSRU5UCFJlYWRPbmx5CA9U
-        aXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCNDu5Ojy5ev8BVdpZHRoAv8H
-        VmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBg9ET0NVTUVOVFRZUEVLRVkIUmVhZE9ubHkI
-        D1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYN0ujvIOTu6vPs5e3y4AVX
-        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYJVFJUWVBFS0VZCFJlYWRPbmx5
-        CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDtLo7yDy8ODt5+Dq9ujo
-        BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBg5UUkFOU0FDVElPTktFWQhS
-        ZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgrS8ODt5+Dq
-        9uj/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgZOVU1CRVIIUmVhZE9u
-        bHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYFze7s5fAFV2lkdGgC
-        /wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDERPQ1VNRU5UREFURQhSZWFkT25seQgP
-        VGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgTE4PLgBVdpZHRoAv8HVmlz
-        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtERVNDUklQVElPTghSZWFkT25seQgPVGl0bGUu
-        QWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgjO7+jx4O3o5QVXaWR0aAL/B1Zpc2li
-        bGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYGU1VNTkNVCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1l
-        bnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GC9Hz7OzgIOIgzcTFBVdpZHRoAv8HVmlzaWJsZQgA
-        AQhFeHBhbmRlZAgJRmllbGROYW1lBgdTVU1DVVJSCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQH
-        CHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDtHz7OzgIOIg4uDr/vLlBVdpZHRoAv8HVmlzaWJsZQgA
-        AQhFeHBhbmRlZAgJRmllbGROYW1lBgVTVU1FUQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0
-        YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhPR8+zs4CDiIP3q4uji4Ovl7fLlBVdpZHRoAv8HVmlzaWJs
-        ZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgdERUxBWUVECFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1l
-        bnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCs7y6+7m5e3t++kFV2lkdGgC/wdWaXNpYmxlCAAB
-        CEV4cGFuZGVkCAlGaWVsZE5hbWUGB0NVUlJLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcI
-        dGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYGwuDr/vLgBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRl
-        ZAgJRmllbGROYW1lBgpDT01QQU5ZS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2Vu
-        dGVyDVRpdGxlLkNhcHRpb24GCMru7O/g7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBgpDUkVBVE9SS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVy
-        DVRpdGxlLkNhcHRpb24GCsry7iDx7ufk4OsFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlG
-        aWVsZE5hbWUGDENSRUFUSU9OREFURQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRl
-        cg1UaXRsZS5DYXB0aW9uBg3E4PLgIPHu5+Tg7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRl
-        ZAgJRmllbGROYW1lBglFRElUT1JLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50
-        ZXINVGl0bGUuQ2FwdGlvbgYMyvLuIOjx7/Dg4ujrBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRl
-        ZAgJRmllbGROYW1lBgtFRElUSU9OREFURQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNl
-        bnRlcg1UaXRsZS5DYXB0aW9uBg7E4PLgIOjn7OXt5e3o/wVXaWR0aAL/B1Zpc2libGUIAAEIRXhw
-        YW5kZWQICUZpZWxkTmFtZQYJUFJJTlREQVRFCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRh
-        Q2VudGVyDVRpdGxlLkNhcHRpb24GC8Tg8uAg7+X34PLoBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBh
-        bmRlZAgJRmllbGROYW1lBghSRVNFUlZFRAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNl
-        bnRlcg1UaXRsZS5DYXB0aW9uBg/H4PDl5+Xw4ujw7uLg7e4FV2lkdGgC/wdWaXNpYmxlCAABCEV4
-        cGFuZGVkCAlGaWVsZE5hbWUGCUdPT0RBTElBUwhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0
-        YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgjY6PTwINLM1gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5k
-        ZWQICUZpZWxkTmFtZQYIVkFMVUVLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50
-        ZXINVGl0bGUuQ2FwdGlvbgYIxeQuIOjn7C4FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlG
-        aWVsZE5hbWUGCEdST1VQS0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRp
-        dGxlLkNhcHRpb24GBsPw8+/v4AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFt
-        ZQYLRE9DVU1FTlRLRVkPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBg3I
-        5OXt8uj06Org8u7wBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtGUk9N
-        Q0FSREtFWQ9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GC8jnIOrg8PLu
-        9+roBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglNQVNURVJLRVkPVGl0
-        bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBinQ7uTo8uXr/CAowu7n4vDg8iDu
-        8iDv7urz7+Dy5ev/KO/u5+j26P8pKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxk
-        TmFtZQYJUkVTRVJWRUQxD1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYw
-        x+Dw5efl8OLo8O7i4O3uICjC7ufi8ODyIO7yIO/u6vPv4PLl6/8o7+7n6Pbo/ykpBVdpZHRoAv8H
-        VmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglUT0NBUkRLRVkPVGl0bGUuQWxpZ25tZW50
-        Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgrCIOrg8PLu9+rzBVdpZHRoAv8HVmlzaWJsZQgAAQhF
-        eHBhbmRlZAgJRmllbGROYW1lBgdHT09ES0VZCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRh
-        Q2VudGVyDVRpdGxlLkNhcHRpb24GBdLu4uDwBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
-        RmllbGROYW1lBhhHX1VTUiRWTUtfTUFJTkdPT0RfQUxJQVMIUmVhZE9ubHkID1RpdGxlLkFsaWdu
-        bWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYZ2Oj08CDSzNYgKNHv8ODi7vft6Oog0szWKQVX
-        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYaR19VU1IkVk1LX01BSU5HT09E
-        X0JBUkNPREUIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlv
-        bgYJ2PLw6PUg6u7kBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhtHX1VT
-        UiRWTUtfTUFJTkdPT0RfUERfQUxJQVMIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50
-        ZXINVGl0bGUuQ2FwdGlvbgYZ2Oj08CDSzNYgKNHv8ODi7vft6Oog0szWKQVXaWR0aAL/B1Zpc2li
-        bGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYdR19VU1IkVk1LX01BSU5HT09EX1BEX0JBUkNPREUI
-        UmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYa2PLw6PUg
-        6u7kICjR7/Dg4u737ejqINLM1ikFV2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdo
-        dEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQUZVTEwIUmVhZE9ubHkIDVRpdGxlLkNhcHRp
-        b24GDc/u6+376SDk7vHy8+8FV2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdodEp1
-        c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQUNIQUcIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24G
-        Gc/w7vHs7vLwIOgg8OXk4Ory6PDu4uDt6OUFV2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcO
-        dGFSaWdodEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQVZJRVcIUmVhZE9ubHkIDVRpdGxl
-        LkNhcHRpb24GD9Lu6/zq7iDv8O7x7O7y8AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
-        ZWxkTmFtZQYWVE9fVVNSJEFTWF9QT0RET05fQ09ERQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYL
-        yu7kIO/u5OTu7eAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGClVTUiRT
-        SENPREUIUmVhZE9ubHkIDVRpdGxlLkNhcHRpb24GEsru5CDk6/8g8uXw7Ojt4Ovu4gVXaWR0aAL/
-        B1Zpc2libGUIAAAICLQeCQg=
+        aAOCAAdWaXNpYmxlCQABCEV4cGFuZGVkCAlGaWVsZE5hbWUGF1RPX1VTUiRBU1hfREFURVJFQ0VJ
+        VkVECFJlYWRPbmx5CA1UaXRsZS5DYXB0aW9uBhDE4PLgIO/u8fLz7+vl7ej/BVdpZHRoAmIHVmlz
+        aWJsZQkAAQhFeHBhbmRlZAgJRmllbGROYW1lBg5VU1IkSU5WX1dFSUdIVAhSZWFkT25seQgPVGl0
+        bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgrC5fEg8u7i4PDgBVdpZHRoAv8H
+        VmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhdUT19VU1IkQVNYX05VTUJFUl9QTEFDRQhS
+        ZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgzN7uzl8CD/
+        9+Xp6ugFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCERJU0FCTEVECFJl
+        YWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCERJU0FCTEVE
+        BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgxMSU5FRElTQUJMRUQPVGl0
+        bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgnO8urr/vfl7e4FV2lkdGgC/wdW
+        aXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDENIRUNLUkVNQUlOUwhSZWFkT25seQgPVGl0
+        bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhHK7u3y8O7r/CDu8fLg8uru4gVX
+        aWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYJRElTQUJMRUQxD1RpdGxlLkFs
+        aWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYqzvLq6/735e3uICjC7ufi8ODyIO7yIO/u
+        6vPv4PLl6/8o7+7n6Pbo/ykpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1l
+        BgdSRU1BSU5TD1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYHzvHy4PLu
+        6gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYYRlJPTV9VU1IkQVNYX05V
+        TUJFUl9QQVJUCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRp
+        b24GDM3u7OXwIO/g8PLo6AVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYO
+        VVNSJFNPUlROVU1CRVIIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUu
+        Q2FwdGlvbgYUze7s5fAg5Ov/IPHu8PLo8O7i6ugFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVk
+        CAlGaWVsZE5hbWUGC1VTUiRDT05URU5UCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2Vu
+        dGVyDVRpdGxlLkNhcHRpb24GBtHu8fLg4gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
+        ZWxkTmFtZQYQVVNSJFZNS19NQUlOR09PRAhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNl
+        bnRlcg1UaXRsZS5DYXB0aW9uBhXO8e3u4u3u5SDt4Ojs5e3u4uDt6OUFV2lkdGgC/wdWaXNpYmxl
+        CAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGF0dfVVNSJFZNS19NQUlOR09PRF9OQU1FCFJlYWRPbmx5
+        CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GHc3g6Ozl7e7i4O3o5SAo
+        0e/w4OLu9+3o6iDSzNYpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhNV
+        U1IkVk1LX01BSU5HT09EX1BECFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRp
+        dGxlLkNhcHRpb24GDs7x7e7i7e7pIPLu4uDwBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJ
+        RmllbGROYW1lBhpHX1VTUiRWTUtfTUFJTkdPT0RfUERfTkFNRQhSZWFkT25seQgPVGl0bGUuQWxp
+        Z25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBh3N4Ojs5e3u4uDt6OUgKNHv8ODi7vft6Oog
+        0szWKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYIVVNSJENPREUIUmVh
+        ZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYDyu7kBVdpZHRo
+        Av8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBg1VU1IkRVRUTl9DT0RFCFJlYWRPbmx5
+        CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GEczl5uTz7eDw7uTt++kg
+        6u7kBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgJJRAhSZWFkT25seQgP
+        VGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgTK6/73BVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgZQQVJFTlQIUmVhZE9ubHkID1RpdGxlLkFsaWdu
+        bWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYI0O7k6PLl6/wFV2lkdGgC/wdWaXNpYmxlCAAB
+        CEV4cGFuZGVkCAlGaWVsZE5hbWUGD0RPQ1VNRU5UVFlQRUtFWQhSZWFkT25seQgPVGl0bGUuQWxp
+        Z25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBg3S6O8g5O7q8+zl7fLgBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglUUlRZUEVLRVkIUmVhZE9ubHkID1RpdGxlLkFs
+        aWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYO0ujvIPLw4O3n4Or26OgFV2lkdGgC/wdW
+        aXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGDlRSQU5TQUNUSU9OS0VZCFJlYWRPbmx5CA9U
+        aXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCtLw4O3n4Or26P8FV2lkdGgC
+        /wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGBk5VTUJFUghSZWFkT25seQgPVGl0bGUu
+        QWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgXN7uzl8AVXaWR0aAL/B1Zpc2libGUI
+        AAEIRXhwYW5kZWQICUZpZWxkTmFtZQYMRE9DVU1FTlREQVRFCFJlYWRPbmx5CA9UaXRsZS5BbGln
+        bm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GBMTg8uAFV2lkdGgC/wdWaXNpYmxlCAABCEV4
+        cGFuZGVkCAlGaWVsZE5hbWUGC0RFU0NSSVBUSU9OCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQH
+        CHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GCM7v6PHg7ejlBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBh
+        bmRlZAgJRmllbGROYW1lBgZTVU1OQ1UIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50
+        ZXINVGl0bGUuQ2FwdGlvbgYL0fPs7OAg4iDNxMUFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVk
+        CAlGaWVsZE5hbWUGB1NVTUNVUlIIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXIN
+        VGl0bGUuQ2FwdGlvbgYO0fPs7OAg4iDi4Ov+8uUFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVk
+        CAlGaWVsZE5hbWUGBVNVTUVRCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRp
+        dGxlLkNhcHRpb24GE9Hz7OzgIOIg/eri6OLg6+Xt8uUFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFu
+        ZGVkCAlGaWVsZE5hbWUGB0RFTEFZRUQIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50
+        ZXINVGl0bGUuQ2FwdGlvbgYKzvLr7ubl7e376QVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQI
+        CUZpZWxkTmFtZQYHQ1VSUktFWQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1U
+        aXRsZS5DYXB0aW9uBgbC4Ov+8uAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
+        bWUGCkNPTVBBTllLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUu
+        Q2FwdGlvbgYIyu7s7+Dt6P8FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUG
+        CkNSRUFUT1JLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2Fw
+        dGlvbgYKyvLuIPHu5+Tg6wVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYM
+        Q1JFQVRJT05EQVRFCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNh
+        cHRpb24GDcTg8uAg8e7n5ODt6P8FV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
+        bWUGCUVESVRPUktFWQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5D
+        YXB0aW9uBgzK8u4g6PHv8ODi6OsFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5h
+        bWUGC0VESVRJT05EQVRFCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxl
+        LkNhcHRpb24GDsTg8uAg6Ofs5e3l7ej/BVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmll
+        bGROYW1lBglQUklOVERBVEUIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0
+        bGUuQ2FwdGlvbgYLxODy4CDv5ffg8ugFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVs
+        ZE5hbWUGCFJFU0VSVkVECFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxl
+        LkNhcHRpb24GD8fg8OXn5fDi6PDu4uDt7gVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZp
+        ZWxkTmFtZQYJR09PREFMSUFTCFJlYWRPbmx5CA9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRp
+        dGxlLkNhcHRpb24GCNjo9PAg0szWBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGRO
+        YW1lBghWQUxVRUtFWQhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5D
+        YXB0aW9uBgjF5C4g6OfsLgVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYI
+        R1JPVVBLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlv
+        bgYGw/Dz7+/gBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBgtET0NVTUVO
+        VEtFWQ9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GDcjk5e3y6PTo6uDy
+        7vAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGC0ZST01DQVJES0VZD1Rp
+        dGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0bGUuQ2FwdGlvbgYLyOcg6uDw8u736ugFV2lkdGgC
+        /wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGCU1BU1RFUktFWQ9UaXRsZS5BbGlnbm1l
+        bnQHCHRhQ2VudGVyDVRpdGxlLkNhcHRpb24GKdDu5Ojy5ev8ICjC7ufi8ODyIO7yIO/u6vPv4PLl
+        6/8o7+7n6Pbo/ykpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBglSRVNF
+        UlZFRDEPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBjDH4PDl5+Xw4ujw
+        7uLg7e4gKMLu5+Lw4PIg7vIg7+7q8+/g8uXr/yjv7ufo9uj/KSkFV2lkdGgC/wdWaXNpYmxlCAAB
+        CEV4cGFuZGVkCAlGaWVsZE5hbWUGCVRPQ0FSREtFWQ9UaXRsZS5BbGlnbm1lbnQHCHRhQ2VudGVy
+        DVRpdGxlLkNhcHRpb24GCsIg6uDw8u736vMFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlG
+        aWVsZE5hbWUGB0dPT0RLRVkIUmVhZE9ubHkID1RpdGxlLkFsaWdubWVudAcIdGFDZW50ZXINVGl0
+        bGUuQ2FwdGlvbgYF0u7i4PAFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUG
+        GEdfVVNSJFZNS19NQUlOR09PRF9BTElBUwhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNl
+        bnRlcg1UaXRsZS5DYXB0aW9uBhnY6PTwINLM1iAo0e/w4OLu9+3o6iDSzNYpBVdpZHRoAv8HVmlz
+        aWJsZQgAAQhFeHBhbmRlZAgJRmllbGROYW1lBhpHX1VTUiRWTUtfTUFJTkdPT0RfQkFSQ09ERQhS
+        ZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBgnY8vDo9SDq
+        7uQFV2lkdGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGG0dfVVNSJFZNS19NQUlO
+        R09PRF9QRF9BTElBUwhSZWFkT25seQgPVGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5D
+        YXB0aW9uBhnY6PTwINLM1iAo0e/w4OLu9+3o6iDSzNYpBVdpZHRoAv8HVmlzaWJsZQgAAQhFeHBh
+        bmRlZAgJRmllbGROYW1lBh1HX1VTUiRWTUtfTUFJTkdPT0RfUERfQkFSQ09ERQhSZWFkT25seQgP
+        VGl0bGUuQWxpZ25tZW50Bwh0YUNlbnRlcg1UaXRsZS5DYXB0aW9uBhrY8vDo9SDq7uQgKNHv8ODi
+        7vft6Oog0szWKQVXaWR0aAL/B1Zpc2libGUIAAEIRXhwYW5kZWQICUZpZWxkTmFtZQYWVE9fVVNS
+        JEFTWF9QT0RET05fQ09ERQhSZWFkT25seQgNVGl0bGUuQ2FwdGlvbgYLyu7kIO/u5OTu7eAFV2lk
+        dGgC/wdWaXNpYmxlCAABCEV4cGFuZGVkCAlGaWVsZE5hbWUGClVTUiRTSENPREUIUmVhZE9ubHkI
+        DVRpdGxlLkNhcHRpb24GEsru5CDk6/8g8uXw7Ojt4Ovu4gVXaWR0aAL/B1Zpc2libGUIAAEJQWxp
+        Z25tZW50Bw50YVJpZ2h0SnVzdGlmeQhFeHBhbmRlZAgJRmllbGROYW1lBgVBRlVMTA1UaXRsZS5D
+        YXB0aW9uBg3P7uvt++kg5O7x8vPvBVdpZHRoAv8HVmlzaWJsZQgAAQlBbGlnbm1lbnQHDnRhUmln
+        aHRKdXN0aWZ5CEV4cGFuZGVkCAlGaWVsZE5hbWUGBUFDSEFHDVRpdGxlLkNhcHRpb24GGc/w7vHs
+        7vLwIOgg8OXk4Ory6PDu4uDt6OUFV2lkdGgC/wdWaXNpYmxlCAABCUFsaWdubWVudAcOdGFSaWdo
+        dEp1c3RpZnkIRXhwYW5kZWQICUZpZWxkTmFtZQYFQVZJRVcNVGl0bGUuQ2FwdGlvbgYP0u7r/Oru
+        IO/w7vHs7vLwBVdpZHRoAv8HVmlzaWJsZQgAAAgItB4JCA==
   - 
     Properties: 
       Class: "TgdcStorageValue"
@@ -553,7 +554,7 @@ Objects:
       DATETIME_DATA: ~
       INT_DATA: ~
       STR_DATA: ~
-      EDITIONDATE: 2023-05-17T19:10:43+03:00
+      EDITIONDATE: 2023-05-22T16:28:12+03:00
       BLOB_DATA: | 
         object dlgInvDocument147016485_2053437193: TdlgInvDocument
           ActiveControl = nil
@@ -636,7 +637,7 @@ Objects:
                       Top = 7
                     end
                     object usrat_xDateDBEdit_DOCUMENTDATE_Label: TLabel
-                      Left = 134
+                      Left = 182
                       Top = 7
                     end
                     object usrat_gsIBLookupComboBox_USR_CUSTOMERKEY_Label: TLabel
@@ -646,15 +647,78 @@ Objects:
                     object usrat_gsIBLookupComboBox_USR_MAINDEPOTKEY_Label: TLabel
                       Top = 79
                     end
-                    object usrat_gsIBLookupComboBox_USR_MAINBILLKEY_Label: TLabel
-                      Left = 329
-                      Top = 7
-                    end
                     object usrat_gsIBLookupComboBox_USR_DESCRIPTIONKEY_Label: TLabel
                       Top = 103
                     end
                     object usrat_gsIBLookupComboBox_USR_VBPF_REASON_RETURN_Label: TLabel
                       Top = 126
+                    end
+                    object usrg_MainGroupBox: TGroupBox
+                      Tag = 0
+                      Left = 565
+                      Top = 24
+                      Width = 289
+                      Height = 77
+                      Cursor = crDefault
+                      Hint = ''
+                      HelpContext = 0
+                      Align = alNone
+                      Anchors = [akLeft, akTop]
+                      Caption = 'Базовая накладная:'
+                      Constraints.MaxHeight = 0
+                      Constraints.MaxWidth = 0
+                      Constraints.MinHeight = 0
+                      Constraints.MinWidth = 0
+                      DockSite = False
+                      DragCursor = crDrag
+                      DragKind = dkDrag
+                      DragMode = dmManual
+                      Enabled = True
+                      ParentBiDiMode = True
+                      ParentColor = True
+                      ParentCtl3D = True
+                      ParentFont = True
+                      ParentShowHint = True
+                      PopupMenu = nil
+                      TabOrder = 10
+                      TabStop = False
+                      Visible = True
+                      object usrat_DBEdit_USR_MAIN_SERIA_Label: TLabel
+                        Left = 22
+                        Top = 26
+                        Width = 35
+                        Caption = 'Серия:'
+                      end
+                      object usrat_xDateDBEdit_USR_DATE_MAIN_Label: TLabel
+                        Left = 23
+                        Top = 51
+                        Width = 30
+                        Caption = 'Дата:'
+                      end
+                      object usrat_DBEdit_USR_MAIN_NUMBER_Label: TLabel
+                        Left = 144
+                        Top = 26
+                        Width = 35
+                        Caption = 'Номер:'
+                      end
+                      object usrat_DBEdit_USR_MAIN_SERIA: TDBEdit
+                        Left = 67
+                        Top = 22
+                        Width = 67
+                        TabOrder = 0
+                      end
+                      object usrat_xDateDBEdit_USR_DATE_MAIN: TxDateDBEdit
+                        Left = 67
+                        Top = 46
+                        Width = 67
+                        TabOrder = 1
+                      end
+                      object usrat_DBEdit_USR_MAIN_NUMBER: TDBEdit
+                        Left = 188
+                        Top = 22
+                        Width = 88
+                        TabOrder = 2
+                      end
                     end
                     object usrat_DBEdit_NUMBER: TDBEdit
                       Left = 53
@@ -663,58 +727,54 @@ Objects:
                       TabOrder = 0
                     end
                     object usrat_xDateDBEdit_DOCUMENTDATE: TxDateDBEdit
-                      Left = 172
+                      Left = 220
                       Top = 3
                       TabOrder = 1
                     end
                     object usrat_gsIBLookupComboBox_USR_CUSTOMERKEY: TgsIBLookupComboBox
-                      Width = 418
+                      Width = 321
                       Condition = 'contacttype in (3, 5)'
                       TabOrder = 2
                     end
                     object usrat_gsIBLookupComboBox_USR_SHOPKEY: TgsIBLookupComboBox
-                      Width = 418
+                      Width = 321
                       ListTable = 
                         'GD_CONTACT dep JOIN gd_contact comp ON dep.LB >= comp.LB and dep' +
                         '.RB <= comp.Rb'
-                      Condition = 'dep.contacttype = 4 and comp.id = 0'
+                      Condition = 'dep.contacttype = 4 and comp.id = 147045320'
                       gdClassName = 'TgdcDepartment'
                       TabOrder = 3
                     end
                     object usrat_gsIBLookupComboBox_USR_MAINDEPOTKEY: TgsIBLookupComboBox
                       Top = 75
-                      Width = 418
+                      Width = 321
                       Condition = 'c.contacttype = 4 AND cp.id = :ck'
                       gdClassName = 'TgdcDepartment'
                       TabOrder = 4
                     end
-                    object usrat_gsIBLookupComboBox_USR_MAINBILLKEY: TgsIBLookupComboBox
-                      Left = 412
-                      Top = 3
-                      TabOrder = 5
-                    end
                     object usrat_DBCheckBox_DELAYED: TDBCheckBox
                       Left = 188
-                      Top = 162
+                      Top = 161
+                      TabOrder = 5
                     end
                     object usrat_DBCheckBox_USR_READY: TDBCheckBox
                       Top = 161
-                      TabOrder = 7
+                      TabOrder = 6
                     end
                     object usrat_DBCheckBox_USR_SENDED: TDBCheckBox
                       Left = 77
                       Top = 161
-                      TabOrder = 8
+                      TabOrder = 7
                     end
                     object usrat_gsIBLookupComboBox_USR_DESCRIPTIONKEY: TgsIBLookupComboBox
                       Top = 99
-                      Width = 418
-                      TabOrder = 9
+                      Width = 321
+                      TabOrder = 8
                     end
                     object usrat_gsIBLookupComboBox_USR_VBPF_REASON_RETURN: TgsIBLookupComboBox
                       Top = 122
-                      Width = 418
-                      TabOrder = 10
+                      Width = 321
+                      TabOrder = 9
                     end
                   end
                   object usrg_147016485_2053437193_TabSheet2: TTabSheet
@@ -739,7 +799,18 @@ Objects:
                     object atAttributes: TatContainer
                       Width = 1524
                       Height = 205
+                      object usrat_gsIBLookupComboBox_USR_MAINBILLKEY_Label: TLabel
+                        Left = 10
+                        Top = 67
+                        Visible = False
+                      end
                       object usrat_DBEdit_USR_SORTNUMBER_Label: TLabel
+                        Visible = False
+                      end
+                      object usrat_gsIBLookupComboBox_USR_MAINBILLKEY: TgsIBLookupComboBox
+                        Left = 93
+                        Top = 63
+                        TabOrder = 1
                         Visible = False
                       end
                       object usrat_DBEdit_USR_SORTNUMBER: TxDBCalculatorEdit
@@ -797,6 +868,13 @@ Objects:
                     end
                     item
                       Lookup.Distinct = False
+                      EditorStyle = cesDate
+                      FieldName = 'USR$ASX_DATERECEIVED'
+                      DisplayField = 'USR$ASX_DATERECEIVED'
+                      DropDownCount = 8
+                    end
+                    item
+                      Lookup.Distinct = False
                       EditorStyle = cesCalculator
                       FieldName = 'USR$SORTNUMBER'
                       DisplayField = 'USR$SORTNUMBER'
@@ -840,14 +918,6 @@ Objects:
                       FieldName = 'TO_USR$ASX_NUMBER_PART'
                       Title.Alignment = taCenter
                       Title.Caption = 'Номер партии'
-                      Width = 130
-                      Visible = True
-                    end
-                    item
-                      Expanded = False
-                      FieldName = 'TO_USR$ASX_NUMBER_PLACE'
-                      Title.Alignment = taCenter
-                      Title.Caption = 'Номер ячейки'
                       Width = 130
                       Visible = True
                     end
@@ -1277,8 +1347,8 @@ Objects:
                     end
                     item
                       Expanded = False
-                      FieldName = 'TO_USR$ASX_PODDON_CODE'
-                      Title.Caption = 'Код поддона'
+                      FieldName = 'TO_USR$ASX_DATERECEIVED'
+                      Title.Caption = 'Дата поступления'
                       Width = -1
                       Visible = False
                     end>
@@ -1489,7 +1559,7 @@ Objects:
           end
           object pm_dlgG: TPopupMenu
             Left = 736
-            Top = 48
+            Top = 8
             object actSecurity1: TMenuItem
             end
             object nCopyIDToClipboard: TMenuItem
@@ -1563,7 +1633,7 @@ Objects:
           end
           object pmDetailMenu: TPopupMenu
             Left = 704
-            Top = 40
+            Top = 8
             object N8: TMenuItem
             end
             object N6: TMenuItem
@@ -1574,12 +1644,12 @@ Objects:
             end
           end
           object gdMacrosMenu: TgdMacrosMenu
-            Left = 889
-            Top = 111
+            Left = 825
+            Top = 7
           end
           object pmDetail2: TPopupMenu
-            Left = 800
-            Top = 40
+            Left = 776
+            Top = 8
             object MenuItem1: TMenuItem
             end
             object N3: TMenuItem
@@ -2988,4 +3058,130 @@ Objects:
       COMPUTED_VALUE: ~
       DEFSOURCE: | 
         DEFAULT 0
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066953_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Номер базовой накладной"
+      FIELDNAME: "USR$MAIN_NUMBER"
+      FIELDSOURCE: "DTEXT40"
+      FIELDSOURCEKEY: "147000109_486813904 Текст (40), DTEXT40"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Номер базовой накладной"
+      LSHORTNAME: "Номер базовой наклад"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016486_2053437193 Возврат от покупателя, USR$ASX_RETCUST"
+      RELATIONNAME: "USR$ASX_RETCUST"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 40
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-22T16:10:34+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066954_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Дата базовой накладной"
+      FIELDNAME: "USR$DATE_MAIN"
+      FIELDSOURCE: "DDATE"
+      FIELDSOURCEKEY: "147000160_486813904 Дата, DDATE"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Дата базовой накладной"
+      LSHORTNAME: "Дата базовой накладн"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016486_2053437193 Возврат от покупателя, USR$ASX_RETCUST"
+      RELATIONNAME: "USR$ASX_RETCUST"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: ~
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-22T16:11:25+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
+      OBJECTS: ~
+  - 
+    Properties: 
+      Class: "TgdcTableField"
+      RUID: 147066955_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      ALIGNMENT: "L"
+      COLWIDTH: 20
+      CROSSFIELD: ~
+      CROSSFIELDKEY: ~
+      CROSSTABLE: ~
+      CROSSTABLEKEY: ~
+      DELETERULE: ~
+      DESCRIPTION: "Серия базовой накладной"
+      FIELDNAME: "USR$MAIN_SERIA"
+      FIELDSOURCE: "DTEXT10"
+      FIELDSOURCEKEY: "147000107_486813904 Текст (10), DTEXT10"
+      FORMAT: ~
+      GDCLASSNAME: ~
+      GDSUBTYPE: ~
+      LNAME: "Серия базовой накладной"
+      LSHORTNAME: "Серия базовой наклад"
+      NULLFLAG: ~
+      READONLY: 0
+      REFCROSSRELATION: ~
+      REFLISTFIELD: ~
+      REFRELATIONNAME: ~
+      RELATIONKEY: "147016486_2053437193 Возврат от покупателя, USR$ASX_RETCUST"
+      RELATIONNAME: "USR$ASX_RETCUST"
+      RELATIONTYPE: "T"
+      SEMCATEGORY: ~
+      SETLISTFIELD: ~
+      SETLISTFIELDKEY: ~
+      SOURCENULLFLAG: ~
+      STRINGLENGTH: 10
+      VISIBLE: 1
+      EDITIONDATE: 2023-05-22T16:18:28+03:00
+      COMPUTED_VALUE: ~
+      DEFSOURCE: ~
       OBJECTS: ~
