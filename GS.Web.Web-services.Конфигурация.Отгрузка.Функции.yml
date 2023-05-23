@@ -5,10 +5,10 @@ Properties:
   RUID: 1368996857_1691301355
   Name: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
   Caption: "GS.Web.Web-services.Конфигурация.Отгрузка.Функции"
-  Version: "1.0.0.31"
+  Version: "1.0.0.32"
   Optional: False
   Internal: True
-  MD5: F5E13AED5CDF7F13F46273E93A6F0D0A
+  MD5: 70AA7D3F5349D3DED15D128D9ECCB006
 Uses: 
   - "148998542_1521203129 GS.Web.Web-services.Конфигурация.Функции"
   - "148998636_1521203129 GS.Web.Web-services.Конфигурация.Исследователь"
@@ -2664,3 +2664,198 @@ Objects:
         Items: 
           - 
             ADDFUNCTIONKEY: "147037247_2053483706 ASX_IS_EXISTS"
+  - 
+    Properties: 
+      Class: "TgdcFunction"
+      RUID: 147069540_2053483706
+      AlwaysOverwrite: False
+      DontRemove: False
+      IncludeSiblings: False
+    Fields: 
+      NAME: "web_CreateLabAsx"
+      COMMENT: ~
+      EVENT: ~
+      FUNCTIONTYPE: ~
+      GROUPNAME: ~
+      INHERITEDRULE: 0
+      LANGUAGE: "VBScript"
+      LOCALNAME: ~
+      MODIFYDATE: ~
+      MODULE: "UNKNOWN"
+      MODULECODE: "1010001_17 APPLICATION"
+      OBJECTNAME: "APPLICATION"
+      OWNERNAME: ~
+      PUBLICFUNCTION: 1
+      SHORTCUT: ~
+      USEDEBUGINFO: 0
+      EDITIONDATE: 2023-05-23T18:34:52+03:00
+      DISPLAYSCRIPT: | 
+        WEB_CREATELABASX
+        FINALIZATIONLABASX
+        
+      ENTEREDPARAMS: !!binary > 
+        U0xQUlBSU1QJAAAATVNHUEFSQU1TCQAAAE1TR1BBUkFNUwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABGTlNUUFJTVAcAAABVU0VSS0VZBwAAAFVTRVJLRVkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        Rk5TVFBSU1QLAAAAVFJBTlNBQ1RJT04LAAAAVFJBTlNBQ1RJT04AAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAARk5TVEZMUFI=
+      SCRIPT: | 
+        Option Explicit
+        Function web_CreateLabAsx(msgParams, userkey, transaction)
+          dim departKey, documentdate, contactkey, labDepartKey
+          dim Creator, ibsql, isSklad, errorMessage, takenOrder
+          dim otherHead, typeError, terminalCode
+          dim barcode, fromCell, toCell
+          errorMessage = ""
+          otherHead = ""
+          typeError = 0
+           'объект для работы с типами данных
+          dim Enc
+          set Enc = new TVB_xml_EncodingFunctions
+        
+          documentdate = Enc.DecodeDate(msgParams.SimpleValue("documentDate", ""))
+          terminalCode = msgParams.SimpleValue("id", "")
+          if Assigned(msgParams.Value("head").Value("depart")) then
+            departKey = CDbl(msgParams.Value("head").Value("depart").SimpleValue("id", ""))
+          else
+            departKey = 0
+          end if
+        
+          set Creator = new TCreator
+        
+          dim gdcObject
+          set gdcObject = Creator.GetObject(nil, "TgdcInvDocument", "")
+          gdcObject.SubType = "147016233_2053437193"
+          gdcObject.Transaction = Transaction
+          gdcObject.ExtraConditions.Clear
+          gdcObject.ExtraConditions.Add("Z.DOCUMENTDATE = '" & documentdate & "'")
+          gdcObject.Open
+        
+          dim Master
+          set Master = Creator.GetObject(nil, "TDataSource", "")
+          Master.DataSet = gdcObject
+        
+          dim gdcDetail, countList, k, q, goodkey, workDate, numReceived, qw, qPack, quantPack
+          set gdcDetail = Creator.GetObject(nil, "TgdcInvDocumentLine", "")
+          gdcDetail.SubType = "147016233_2053437193"
+          gdcDetail.DetailField = "parent"
+          gdcDetail.MasterField = "id"
+          gdcDetail.MasterSource = Master
+          gdcDetail.SubSet = "ByParent"
+          gdcDetail.Transaction = gdcObject.Transaction
+          gdcDetail.Open
+          
+          dim objLines
+          set objLines = msgParams.Value("lines")
+           'кол-во записей
+          countList = objLines.ObjectItemsCount
+          on error resume next
+          set ibsql = Creator.GetObject(nil,"TIBSQL","")
+          ibsql.Transaction = gdcBaseManager.ReadTransaction
+          ibsql.Close
+          ibsql.SQL.Text = _
+            "select first 1 " & vbCrLf & _
+            "  c.id " & vbCrLf & _
+            "from gd_contact c " & vbCrLf & _
+            "where c.USR$INV_TYPEDEPART = :lab "
+          ibsql.ParamByName("lab").AsInteger = gdcBaseManager.GetIDByRUIDString("311897766_1570490304")
+          ibsql.ExecQuery
+          if ibsql.RecordCount > 0 then
+            labDepartKey = ibsql.FieldByName("id").AsInteger
+          else
+            labDepartKey = 0
+          end if
+        
+          if departKey <> 0 and labDepartKey > 0 then
+        
+            'Лаборатория   тип склада
+            'RUID = 311897766_1570490304
+        
+            gdcObject.Insert
+            gdcObject.FieldByName("DOCUMENTDATE").AsDateTime = documentdate
+            gdcObject.FieldByName("USR$FROMCONTACTKEY").AsVariant = departKey
+            gdcObject.FieldByName("USR$TOCONTACTKEY").AsVariant = labDepartKey
+            gdcObject.FieldByName("DESCRIPTION").AsVariant = terminalCode
+            gdcObject.Post
+            if Err.Number <> 0 then
+              typeError = 2
+              errorMessage = " Ошибка при создании шапки документа Перемещение продукции и сырья"
+              web_CreateLabAsx = finalizationLabAsx(errorMessage, typeError, otherHead)
+              exit function
+            end if
+            on error goto 0
+            'Позиции
+            for k = 0 to countList - 1
+              q = Replace(objLines.ObjectItem(k).simpleValue("weight", 0), ".", Application.DecimalSeparatorSys)
+        
+              if  Assigned(objLines.ObjectItem(k).Value("good")) then
+                goodkey = CDbl(objLines.ObjectItem(k).Value("good").simpleValue("id", ""))
+                numReceived = trim(objLines.ObjectItem(k).simpleValue("numReceived", ""))
+                if (objLines.ObjectItem(k).simpleValue("workDate", "")) <> "" then
+                  workDate = Enc.DecodeDate(objLines.ObjectItem(k).simpleValue("workDate", ""))
+                else
+                  workDate = date
+                end if
+                barcode = trim(objLines.ObjectItem(k).simpleValue("barcode", ""))
+        
+                if q > 0 then
+                  if numReceived = "" then
+                    typeError = 1
+                    errorMessage = " Ошибка при создании позиции документа - не указан номер партии"
+                    web_CreateLabAsx = finalizationLabAsx(errorMessage, typeError, otherHead)
+                    exit function
+                  end if
+                  on error resume next
+                  qw = q
+                  ibsql.Close
+                  ibsql.SQL.Text = _
+                    " select g.VALUEKEY, coalesce(g.usr$inv_weight, 1) as scale " & _
+                    " from gd_good g " & _
+                    " where g.id = "  & goodkey
+                  ibsql.ExecQuery
+                  if  (ibsql.FieldByName("VALUEKEY").AsVariant <> 2) and (ibsql.FieldByName("scale").AsVariant > 0) then
+                    qw = q / ibsql.FieldByName("scale").AsCurrency
+                  end if
+                  qPack = 1
+                  dim isFromRemains
+                  isFromRemains = false
+        
+                    if gdcDetail.Locate("GOODKEY;FROM_USR$ASX_NUMBER_PART;FROM_USR$ASX_DATERECEIVED", _
+                      Array(goodkey, numReceived, workDate) ,"") and toCell = ""  then
+                      gdcDetail.Edit
+                      gdcDetail.FieldByName("quantity").AsCurrency = _
+                        gdcDetail.FieldByName("quantity").AsCurrency + qw
+                      gdcDetail.Post
+                    else
+                      gdcDetail.Insert
+                      gdcDetail.FieldByName("GOODKEY").AsInteger = goodkey
+                      gdcDetail.FieldByName("QUANTITY").AsVariant = qw
+                      gdcDetail.FieldByName("USR$QBOX").AsVariant = qPack
+                      gdcDetail.FieldByName("FROM_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                      gdcDetail.FieldByName("TO_USR$ASX_NUMBER_PART").AsVariant = numReceived
+                      gdcDetail.FieldByName("FROM_USR$ASX_DATERECEIVED").AsVariant = workDate
+                      gdcDetail.FieldByName("TO_USR$ASX_DATERECEIVED").AsVariant = workDate
+                      gdcDetail.Post
+                    end if
+                  if Err.Number <> 0 then
+                    typeError = 2
+                    errorMessage = " Ошибка при создании позиций документа Перемещение продукции и сырья"
+                    web_CreateLabAsx = finalizationLabAsx(errorMessage, typeError, otherHead)
+                    exit function
+                  end if
+                  on error goto 0
+                end if
+              end if
+            next
+          end if
+          web_CreateLabAsx = finalizationLabAsx(errorMessage, typeError, otherHead)
+        End Function
+        
+        
+        function finalizationLabAsx(errorMessage, typeError, otherHead)
+          dim a(2)
+          a(0) = errorMessage
+          a(1) = typeError
+          a(2) = otherHead
+          finalizationLabAsx = a
+        end function
+        
